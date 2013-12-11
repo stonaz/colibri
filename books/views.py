@@ -31,7 +31,7 @@ def add_book(request):
 
             # Now call the index() view.
             # The user will be shown the homepage.
-            return books(request)
+            return HttpResponseRedirect('/books')
         else:
             # The supplied form contained errors - just print them to the terminal.
             print form.errors
