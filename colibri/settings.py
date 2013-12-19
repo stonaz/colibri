@@ -61,6 +61,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'rest_framework',
+    
     'books',
 )
 
@@ -104,7 +106,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_URL = '/'
+LOGIN_URL = '/login/'
 
 ## Static files (CSS, JavaScript, Images)
 ## https://docs.djangoproject.com/en/1.6/howto/static-files/

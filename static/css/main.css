@@ -366,8 +366,8 @@ nav a:hover {
     nav {
         float: right;
         width: 38%;
-        visibility: hidden;
-    }
+/*        visibility: hidden;
+*/    }
 
 /* ============
     WIDE: Main

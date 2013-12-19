@@ -2,18 +2,130 @@
 
 {% load static %}
 
-<html>
 
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
-        <title>Rango</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
         <link rel="stylesheet" href="{% static "css/normalize.css" %}" /> <!-- CSS -->
         <link rel="stylesheet" href="{% static "css/main.css" %}" /> <!-- CSS -->
-        <script src="{% static "js/vendor/jquery-1.10.1.min.js" %}"></script> <!-- JavaScript -->
+
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
-
     <body>
-        <h1>Including Static Media</h1>
-        <img src="{% static "rango.jpg" %}" alt="Picture of Rango" /> <!-- Images -->
-    </body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
 
+        <div class="header-container">
+            <header class="wrapper clearfix">
+                <h1 class="title">CoLibri</h1>
+              <nav>
+                    <ul>
+                        <li><a href="/logout/">Logout</a></li>
+                        
+                       
+
+                        
+                    </ul>
+                </nav>
+            </header>
+        </div>
+
+        <div class="main-container">
+            <div class="main wrapper clearfix">
+
+                <article>
+                    <header>
+                        <div id="Search">
+                            <div class="searchIntest">
+                       <strong>Autore</strong>    <br>
+                           <input id ="authorSearch" type="text"><br>
+                            </div>
+                            <div class="searchIntest">
+                         <strong>Titolo</strong>  <br> <input id ="titleSearch" type="text"><br>
+                            </div>
+                            
+                            <div class="searchIntest">
+                                <br>
+                           <button onclick=getBooks()>Cerca</button>
+                            </div>
+                        </div>
+                      <div style="clear: both;" id="Intestazione">  </div>
+                      
+                        <div class="bookIntest">Autore</div>
+<div class="bookIntest">Titolo</div>
+<div class="bookIntest">Dove sta</div>
+<div id="BooksContainer">
+    <div id="Books">    </div>
+    <div style="clear: both;"   </div>
+</div>
+                  
+                    </header>
+                    <section>
+                         <h3>
+
+    
+</h3>
+                    </section>
+
+                    <footer>
+                        <h3></h3>
+                    </footer>
+                </article>
+
+                <aside id="insertBook">
+                    
+                        <a name="insert_book">
+                           <p class="formText"><strong>Inserisci un libro:</strong></p>
+                           Titolo<br> <input id ="title" type="text"><br>
+                           Autore<br> <input id ="author" type="text"><br>
+                           Dove sta<br> <input id ="where_is" type="text"><br>
+                           <button onclick=postBook()>Ok</button>
+                           <div class="formText" id ="formError"></div>
+                        </a>
+                </aside>
+
+            </div> <!-- #main -->
+        </div> <!-- #main-container -->
+
+        <div class="footer-container">
+            <footer class="wrapper">
+                
+            </footer>
+        </div>
+<script id="templateBooksCounter" type="text/template">
+<strong><%= item %>  </strong><%= count %>
+</script>
+<script id="templateBook" type="text/template">
+<div class="book" >
+<div class="bookField"><%= book.author %></div>
+<div class="bookField"><%= book.title %></div>
+<div class="bookWhereIs"><input id="where_is_<%= book.id %>" style="width: 90%" type=text value="<%= book.where_is %>"></div>     
+<div class="bookUpdate"> <button class="updateBookButton" id="<%= book.id %>">Cambia</button> </div> 
+</div>
+
+</script>
+        <script src="{% static "js/vendor/jquery-1.10.1.min.js" %}"></script>
+        <script src="{% static "js/vendor/underscore.js" %}"></script>
+        <script src="{% static "js/main.js" %}"></script>
+        <script type="text/javascript">
+$( document ).ready(function() {
+
+ getBooks();
+
+                          
+
+});
+        </script>
+    </body>
 </html>
