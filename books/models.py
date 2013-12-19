@@ -23,3 +23,15 @@ class Book( TimeStamped_Model):
     
     def __unicode__(self):
         return self.title
+
+class UserProfile(models.Model):
+    # This line is required. Links UserProfile to a User model instance.
+    user = models.OneToOneField(User)
+
+    # The additional attributes we wish to include.
+    address = models.CharField( _("Indirizzo"),max_length=100)
+    phone = models.CharField( _("Tel"),max_length=15)
+    picture = models.ImageField(upload_to='profile_images', blank=True)
+    # Override the __unicode__() method to return out something meaningful!
+    def __unicode__(self):
+        return self.user.username
