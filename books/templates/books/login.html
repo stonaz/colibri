@@ -39,29 +39,18 @@
             <div class="main wrapper clearfix">
 
                 <article>
-                              <h1>Register with ColiBri</h1>
-
-        {% if registered %}
-        ColiBri says: <strong>thank you for registering!</strong>
-        <a href="/home/">Return to the homepage.</a><br />
-        {% else %}
-        Rango says: <strong>register here!</strong><br />
-
-        <form id="user_form" method="post" action="/register/"
-                enctype="multipart/form-data">
-
+                              <form id="login_form" method="post" action="/">
             {% csrf_token %}
+            Username: <input type="text" name="username" value="" size="50" />
+            <br />
+            Password: <input type="password" name="password" value="" size="50" />
+            <br />
 
-            <!-- Display each form. The as_p method wraps each element in a paragraph
-                 (<p>) element. This ensures each element appears on a new line,
-                 making everything look neater. -->
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
-
-            <!-- Provide a button to click to submit the form. -->
-            <input type="submit" name="submit" value="Register" />
+            <input type="submit" value="submit" />
         </form>
-        {% endif %}
+        <br>
+            <a href="/register/">Registrati adesso</a>
+                              
                 </article>
 
 

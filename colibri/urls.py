@@ -8,11 +8,13 @@ from books import views
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^home/$', views.index,name='index'),
-    url(r'^books/$', views.BookList.as_view(),name='books'),
+    url(r'^$', views.user_login, name='login'),
+    url(r'^books/$', views.book_list,name='books'),
     url(r'^add_book/$', views.add_book, name='add_book'), 
     # url(r'^blog/', include('blog.urls')),
     url(r'^register/$', views.register, name='register'),
+    url(r'^login/$', views.user_login, name='login'),
+    url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^admin/', include(admin.site.urls)),
 )
 
