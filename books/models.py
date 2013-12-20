@@ -17,9 +17,10 @@ class TimeStamped_Model(models.Model):
 
 
 class Book( TimeStamped_Model):
-    user= models.ForeignKey(User)
+    user= models.ForeignKey(User,related_name="sharer")
     title = models.CharField( _("Titolo"),max_length=100)
     author = models.CharField( _("Autore"),max_length=100)
+    where_is = models.ForeignKey(User,related_name="where_is")
     
     def __unicode__(self):
         return self.title
@@ -29,8 +30,8 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
 
     # The additional attributes we wish to include.
-    address = models.CharField( _("Indirizzo"),max_length=100)
-    phone = models.CharField( _("Tel"),max_length=15)
+    address = models.CharField( _("Indirizzo"),max_length=100,null=True,blank=True)
+    phone = models.CharField( _("Tel"),max_length=15,null=True,blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
     # Override the __unicode__() method to return out something meaningful!
     def __unicode__(self):

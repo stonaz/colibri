@@ -32,20 +32,22 @@
               <nav>
                     <ul>
                         <li><a href="/logout/">Logout</a></li>
-                        
-                       
-
+                                         
                         
                     </ul>
-                </nav>
+                    
+                </nav><br>
+              
             </header>
+            
         </div>
 
         <div class="main-container">
             <div class="main wrapper clearfix">
-
+            
                 <article>
                     <header>
+                        <h3>Ciao {{user}}</h3>
                         <div id="Search">
                             <div class="searchIntest">
                        <strong>Autore</strong>    <br>
@@ -110,7 +112,7 @@
 <div class="book" >
 <div class="bookField"><%= book.author %></div>
 <div class="bookField"><%= book.title %></div>
-<div class="bookWhereIs"><input id="where_is_<%= book.id %>" style="width: 90%" type=text value="<%= book.where_is %>"></div>     
+<div class="bookWhereIs"><input id="where_is_<%= book.id %>" style="width: 90%" type=text value="<%= book.dove_sta %>"></div>     
 <div class="bookUpdate"> <button class="updateBookButton" id="<%= book.id %>">Cambia</button> </div> 
 </div>
 
