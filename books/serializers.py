@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from django.contrib.auth.models import User
-from .models import Book
+from .models import Book,UserProfile
 
 
 
@@ -20,3 +20,23 @@ class BookListSerializer(serializers.ModelSerializer):
         fields= (
            'id','user','where_is', 'sharer', 'author', 'title', 'dove_sta', 'created', 'modified',
             )
+        
+class UserProfileListSerializer(serializers.ModelSerializer):
+    """
+    User profiles list
+    """
+    email = serializers.Field(source='user.email')
+    username = serializers.Field(source='user.username')
+
+    #dove_sta = serializers.Field(source='where_is.username')
+    
+    class Meta:
+        model = UserProfile
+
+        fields= (
+           'username','email', 'address','phone'
+            )
+        
+        
+
+              

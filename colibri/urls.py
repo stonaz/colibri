@@ -16,7 +16,9 @@ urlpatterns = patterns('',
     url(r'^logout/$', views.user_logout, name='logout'),
     
     url(r'^api/v1/books/$', views.book_list ,name='book_list'),
-    
+    url(r'^api/v1/(?P<user>[-\w]+)/books/$', views.user_book_list ,name='user_book_list'),
+    url(r'^api/v1/user_profile/$', views.user_profile_list ,name='user_profile_list'),
+    url(r'^api/v1/(?P<user>[-\w]+)/user_profile/$', views.user_profile_list ,name='user_profile_list'),
     url(r'^admin/', include(admin.site.urls)),
 )
 

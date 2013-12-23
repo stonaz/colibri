@@ -80,6 +80,29 @@ function getBooks()
     });
 }
 
+function getMyBooks(user)
+{
+      var url="/api/v1/"+user+"/books";
+      var args = {};
+      $("#Intestazione").html('');
+      $("#Books").html('');
+      //cleanScreen();
+      //$("#Loading").show();
+      $.ajax({
+        async: true, 
+        url: url,
+        dataType: 'json',
+        data:args,
+        success: function(response){
+         //printVolumi(response,0,args);
+         //console.log(response);
+       printBooks(response)
+      
+          }
+        
+    });
+}
+
 function printBooks(data)
 {
 

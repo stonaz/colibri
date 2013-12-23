@@ -1,6 +1,6 @@
 from django.shortcuts import render,render_to_response
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse,Http404
 from django.forms import ModelForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -14,7 +14,19 @@ from rest_framework.response import Response
 from .serializers import *
 
 from books.forms import BookForm,UserProfileForm,UserForm
-from books.models import Book
+from books.models import Book,UserProfile
+
+def get_queryset_or_404(queryset, kwargs):
+    """
+    Checks if object returned by queryset exists
+    """
+    # ensure exists
+    try:
+        obj = queryset.get(**kwargs)
+    except Exception:
+        raise Http404(_('Not found'))
+    
+    return obj
 
 @login_required
 def index(request):
@@ -225,3 +237,52 @@ class BookList(generics.ListCreateAPIView):
         return queryset
 
 book_list = BookList.as_view()
+
+
+class UserBookList(generics.ListAPIView):
+    """
+    ### GET
+    
+    Retrieve list of books of a user.
+        
+    """
+    
+    #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
+    authentication_classes = (authentication.SessionAuthentication,)
+    serializer_class= BookListSerializer
+    #model=Book
+    #pagination_serializer_class = PaginatedRicetteListSerializer
+    #paginate_by_param = 'limit'
+    #paginate_by = 2
+    
+    def get_queryset(self):
+        user = self.kwargs.get('user', None)
+        user_id=User.objects.get(username=user)
+        return Book.objects.all().filter(user=user_id)
+
+user_book_list = UserBookList.as_view()
+
+class UserProfileList(generics.ListAPIView):
+    """
+    ### GET
+    
+    Retrieve user profiles.
+        
+    """
+    
+    #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
+    authentication_classes = (authentication.SessionAuthentication,)
+    serializer_class= UserProfileListSerializer
+    #model=Book
+    #pagination_serializer_class = PaginatedRicetteListSerializer
+    #paginate_by_param = 'limit'
+    #paginate_by = 2
+    
+    def get_queryset(self):
+        user = self.kwargs.get('user', None)
+        user_id=User.objects.get(username=user)
+        
+        queryset=get_queryset_or_404(UserProfile.objects.all(),{ 'user': self.kwargs.get('user', None)})
+        return queryset
+
+user_profile_list = UserProfileList.as_view()
