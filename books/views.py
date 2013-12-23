@@ -37,21 +37,6 @@ def index(request):
             'books/index.html',
             context)
 
-#@login_required
-#def book_list(request):
-#    # Obtain the context from the HTTP request.
-#    context = RequestContext(request)
-#
-#    # Query the database for a list of ALL categories currently stored.
-#    # Order the categories by no. likes in descending order.
-#    # Retrieve the top 5 only - or all if less than 5.
-#    # Place the list in our context_dict dictionary which will be passed to the template engine.
-#    book_list = Book.objects.all()[:5]
-#    context_dict = {'book_list': book_list}
-#
-#    # Render the response and send it back!
-#    return render_to_response('books/book_list.html', context_dict, context)
-
 @login_required
 def add_book(request):
     # Get the context from the request.
@@ -79,6 +64,37 @@ def add_book(request):
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
     return render_to_response('books/add_book.html', {'form': form}, context)
+
+@login_required
+def update_book(request,id):
+    # Get the context from the request.
+    context = RequestContext(request)
+    book_id=id
+    #book_id=request.GET.get('id')
+    book=Book.objects.get(id=book_id)
+
+    # A HTTP POST?
+    if request.method == 'POST':
+        form = BookForm(request.POST,instance=book)
+
+        # Have we been provided with a valid form?
+        if form.is_valid():
+            # Save the new category to the database.
+            form.save(commit=True)
+
+            # Now call the index() view.
+            # The user will be shown the homepage.
+            return HttpResponseRedirect('/books')
+        else:
+            # The supplied form contained errors - just print them to the terminal.
+            print form.errors
+    else:
+        # If the request was not a POST, display the form to enter details.
+        form = BookForm(instance=book)
+
+    # Bad form (or form details), no form supplied...
+    # Render the form with error messages (if any).
+    return render_to_response('books/update_book.html', {'form': form}, context)
 
 def user_login(request):
     # Like before, obtain the context for the user's request.
@@ -257,7 +273,10 @@ class UserBookList(generics.ListAPIView):
     
     def get_queryset(self):
         user = self.kwargs.get('user', None)
-        user_id=User.objects.get(username=user)
+        try:
+            user_id=User.objects.get(username=user)
+        except Exception:
+            raise Http404(_('Not found'))
         return Book.objects.all().filter(user=user_id)
 
 user_book_list = UserBookList.as_view()
@@ -280,9 +299,12 @@ class UserProfileList(generics.ListAPIView):
     
     def get_queryset(self):
         user = self.kwargs.get('user', None)
-        user_id=User.objects.get(username=user)
-        
-        queryset=get_queryset_or_404(UserProfile.objects.all(),{ 'user': self.kwargs.get('user', None)})
-        return queryset
+        try:
+            user_id=User.objects.get(username=user)
+        except Exception:
+            raise Http404(_('Not found'))
+        return UserProfile.objects.all().filter(user=user_id)    
+        #queryset=get_queryset_or_404(UserProfile.objects.all(),{ 'user': user_id})
+        #return queryset
 
 user_profile_list = UserProfileList.as_view()

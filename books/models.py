@@ -24,6 +24,9 @@ class Book( TimeStamped_Model):
     
     def __unicode__(self):
         return self.title
+    
+    class Meta:
+        ordering = ['-modified']
 
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
