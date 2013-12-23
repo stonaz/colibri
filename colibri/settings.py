@@ -85,10 +85,11 @@ WSGI_APPLICATION = 'colibri.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'colibri',
-        'USER': 'root',
-        'PASSWORD': 'st3f4n0',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost'
         
     }
 }

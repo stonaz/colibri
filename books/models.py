@@ -30,10 +30,12 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
 
     # The additional attributes we wish to include.
-    email = models.EmailField( _("E-mail"),null=True,blank=True)
     address = models.CharField( _("Indirizzo"),max_length=100,null=True,blank=True)
     phone = models.CharField( _("Tel"),max_length=15,null=True,blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
+    public_email = models.BooleanField(default=False)
+    public_phone = models.BooleanField(default=False)
+    public_address = models.BooleanField(default=False)
     # Override the __unicode__() method to return out something meaningful!
     def __unicode__(self):
         return self.user.username
