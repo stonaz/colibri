@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+{% block scripts %}
+<script src="{% static "js/main.js" %}"></script>
+<script type="text/javascript">
+$( document ).ready(function() {
+    getBooks();                        
+});
+</script>
+{% endblock scripts %}

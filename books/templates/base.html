@@ -18,8 +18,7 @@
 
         <link rel="stylesheet" href="{% static "css/normalize.css" %}" /> <!-- CSS -->
         <link rel="stylesheet" href="{% static "css/main.css" %}" /> <!-- CSS -->
-
-        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="{% static "js/vendor/modernizr-2.6.2-respond-1.1.0.min.js" %}"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -31,8 +30,9 @@
                 <h1 class="title">CoLibri</h1>
               <nav>
                     <ul>
-                        <li><a href="#" onclick=getMyBooks('{{user}}')>I miei libri</a></li>
-                        <li><a href="/logout/">Logout</a></li>
+                        <!--<li><a href="/mybooks/" >I miei libri</a></li>
+                        <li><a href="#" >Il mio profilo</a></li>
+                        <li><a href="/logout/">Logout</a></li>-->
                                          
                         
                     </ul>
@@ -45,10 +45,10 @@
 
         <div class="main-container">
             <div class="main wrapper clearfix">
-            
+                {% block content %}
                 <article>
-                    <header>
-                        <h3>Ciao {{user}}</h3>
+                    <section>
+                        
                         <div id="Search">
                             <div class="searchIntest">
                        <strong>Autore</strong>    <br>
@@ -73,31 +73,32 @@
     <div style="clear: both;"   </div>
 </div>
                   
-                    </header>
-                    <section>
-                         <h3>
-
-    
-</h3>
                     </section>
-
-                    <footer>
-                        <h3></h3>
-                    </footer>
+                   
                 </article>
-
-                <aside id="insertBook">
-                    
-                        <a name="insert_book">
+{% endblock content %}
+                <aside id="userMenu">
+                    <h4>Ciao {{user}} !</h4>
+                     <ul>
+                        <li><a href="/" >Cerca libri</a></li>
+                        <li><a href="/add_book/" >Inserisci libro</a></li>
+                        <li><a href="/mybooks/" >I miei libri</a></li>
+                        <li><a href="#" >Libri in prestito</a></li>
+                        <li><a href="#" >Il mio profilo</a></li>
+                        <li><a href="/logout/">Logout</a></li>
+                                         
+                        
+                    </ul>
+                       <!-- <a name="insert_book">
                            <p class="formText"><strong>Inserisci un libro:</strong></p>
                            Titolo<br> <input id ="title" type="text"><br>
                            Autore<br> <input id ="author" type="text"><br>
                            Dove sta<br> <input id ="where_is" type="text"><br>
                            <button onclick=postBook()>Ok</button>
                            <div class="formText" id ="formError"></div>
-                        </a>
+                        </a>-->
                 </aside>
-
+    
             </div> <!-- #main -->
         </div> <!-- #main-container -->
 
@@ -106,6 +107,7 @@
                 
             </footer>
         </div>
+{% block templates %}
 <script id="templateBooksCounter" type="text/template">
 <strong><%= item %>  </strong><%= count %>
 </script>
@@ -116,10 +118,11 @@
 <div class="bookWhereIs"><input id="where_is_<%= book.id %>" style="width: 90%" type=text value="<%= book.dove_sta %>"></div>     
 <div class="bookUpdate"> <button class="updateBookButton" id="<%= book.id %>">Cambia</button> </div> 
 </div>
-
 </script>
+{% endblock templates %}
         <script src="{% static "js/vendor/jquery-1.10.1.min.js" %}"></script>
         <script src="{% static "js/vendor/underscore.js" %}"></script>
+        {% block scripts %}
         <script src="{% static "js/main.js" %}"></script>
         <script type="text/javascript">
 $( document ).ready(function() {
@@ -130,5 +133,6 @@ $( document ).ready(function() {
 
 });
         </script>
+        {% endblock scripts %}
     </body>
 </html>

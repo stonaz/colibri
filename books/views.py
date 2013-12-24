@@ -34,7 +34,16 @@ def index(request):
     context = RequestContext(request)
     
     return render_to_response(
-            'books/index.html',
+            'index.html',
+            context)
+
+@login_required
+def mybooks(request):
+    
+    context = RequestContext(request)
+    
+    return render_to_response(
+            'mybooks.html',
             context)
 
 @login_required
@@ -65,7 +74,7 @@ def add_book(request):
 
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
-    return render_to_response('books/add_book.html', {'form': form}, context)
+    return render_to_response('add_book.html', {'form': form}, context)
 
 @login_required
 def update_book(request,id):
@@ -97,7 +106,7 @@ def update_book(request,id):
 
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
-    return render_to_response('books/update_book.html', {'form': form}, context)
+    return render_to_response('update_book.html', {'form': form}, context)
 
 @login_required
 def delete_book(request,id):
@@ -129,7 +138,7 @@ def delete_book(request,id):
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
     #context.book=book
-    return render_to_response('books/delete_book.html', {'form': form,'book': book}, context)
+    return render_to_response('delete_book.html', {'form': form,'book': book}, context)
 
 def user_login(request):
     # Like before, obtain the context for the user's request.
@@ -169,7 +178,7 @@ def user_login(request):
     else:
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
-        return render_to_response('books/login.html', {}, context)
+        return render_to_response('login.html', {}, context)
 
 @login_required
 def user_logout(request):
@@ -235,7 +244,7 @@ def register(request):
 
     # Render the template depending on the context.
     return render_to_response(
-            'books/register.html',
+            'register.html',
             {'user_form': user_form, 'profile_form': profile_form, 'registered': registered},
             context)
 

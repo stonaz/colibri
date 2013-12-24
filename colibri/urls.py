@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', views.index, name='index'),
     url(r'^books/$', views.book_list,name='books'),
+    url(r'^mybooks/$', views.mybooks,name='mybooks'),
     url(r'^add_book/$', views.add_book, name='add_book'),
     url(r'^update_book/(?P<id>\d+)/$', views.update_book, name='update_book'),
     url(r'^delete_book/(?P<id>\d+)/$', views.delete_book, name='delete_book'),

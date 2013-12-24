@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+  {% block content %}
+                <article>
+                    <section>
+                        
+
+                      <div style="clear: both;" id="Intestazione">  </div>
+                      
+                        <div class="bookIntest">Autore</div>
+<div class="bookIntest">Titolo</div>
+<div class="bookIntest">Dove sta</div>
+<div id="BooksContainer">
+    <div id="Books">    </div>
+    <div style="clear: both;"   </div>
+</div>
+                  
+                    </section>
+                   
+                </article>
+{% endblock content %}
+{% block templates %}
+    <script id="templateBooksCounter" type="text/template">
+<strong><%= item %>  </strong><%= count %>
+</script>
+<script id="templateBook" type="text/template">
+<div class="book" >
+<div class="bookField"><%= book.author %></div>
+<div class="bookField"><%= book.title %></div>
+<div class="bookWhereIs"><input id="where_is_<%= book.id %>" style="width: 90%" type=text value="<%= book.dove_sta %>"></div>     
+<div class="bookUpdate"><a href="/update_book/<%= book.id %>/"><button class="updateBookButton">Modifica</button></a>  </div> 
+<div class="bookUpdate"><a href="/delete_book/<%= book.id %>/"><button class="updateBookButton">Elimina</button></a>  </div> 
+
+</div>
+</script>
+{% endblock templates %}
+{% block scripts %}
+<script src="{% static "js/main.js" %}"></script>
+<script type="text/javascript">
+$( document ).ready(function() {
+    getMyBooks(getMyBooks('{{user}}'));                        
+});
+</script>
+{% endblock scripts %}

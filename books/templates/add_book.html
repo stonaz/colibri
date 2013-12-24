@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Colibri</title>
-    </head>
+{% extends "base.html" %}
+{% block content %}
+    <article>
+        <h1>Aggiungi un libro</h1>
 
-    <body>
-        <h1>Modifica un libro</h1>
-
-        <form id="book_form" method="post" action="{{ request.path }}">
+        <form id="book_form" method="post" action="/add_book/">
 
             {% csrf_token %}
+            <input type="hidden" name="id_user" value="1" />
             {% for hidden in form.hidden_fields %}
                 {{ hidden }}
             {% endfor %}
@@ -20,9 +17,7 @@
                 {{ field }}<br>
             {% endfor %}
 
-            <input type="submit" name="submit" value="Modifica Libro" />
+            <input type="submit" name="submit" value="Aggiungi Libro" />
         </form>
-
-    </body>
-
-</html>
+        </article>
+{% endblock content %}

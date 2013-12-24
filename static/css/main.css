@@ -137,7 +137,7 @@ nav a:hover {
 
 .main aside {
     color: white;
-    padding: 0px 5% 10px;
+    padding: 0px 3% 10px;
     display: none;
     }
 
@@ -215,7 +215,7 @@ nav a:hover {
 .bookWhereIs
 {
     float: left;
-    width:25%;
+    width:15%;
     word-wrap:break-word;
      background-color: #c0c0c0;
      padding-left: 2px;
@@ -258,7 +258,42 @@ nav a:hover {
     clear: both;
 }
 
+#userMenu  ul, ol {
+padding-left: 0;
+margin-left: 0;
+padding-bottom: 20px;
+color:#2c539e;
+font-family: "Arial Black", Arial, Helvetica, sans-serif;
+font-size: 16px;
+font-weight: bold;
+/*text-shadow: 4px 3px 6px rgba(0,0,0,.5);*/
+}
 
+#userMenu  li {
+font-size: 13px;
+list-style: none;
+color: #000000;
+padding-left: 0;
+margin-left: 0;
+text-shadow: none;
+background-color: orange;
+border-radius: 4px;
+margin:3px;
+text-align: center;
+}
+
+#userMenu  li  a{
+font-size: 13px;
+list-style: none;
+color: #0000ff;
+padding-left: 0;
+margin-left: 0;
+text-shadow: none;
+text-decoration: none;
+cursor: pointer;
+
+width:75%
+}
 
 
 
@@ -302,7 +337,7 @@ nav a:hover {
     
     .main aside {
     color: white;
-    padding: 0px 5% 10px;
+    padding: 0px 3% 10px;
     display: inline;
     border-radius: 4px;
 
@@ -375,12 +410,12 @@ nav a:hover {
 
     .main article {
         float: left;
-        width: 57%;
+        width: 70%;
     }
 
     .main aside {
         float: right;
-        width: 28%;
+        width: 15%;
     }
 }
 
