@@ -5,7 +5,7 @@
     </head>
 
     <body>
-        <h1>Modifica un libro</h1>
+        <h1>Elimina un libro</h1>
 
         <form id="book_form" method="post" action="{{ request.path }}">
 
@@ -17,10 +17,10 @@
             {% for field in form.visible_fields %}
                 {{ field.errors }}
                 {{ field.help_text}}
-                {{ field }}<br>
+                {{ field }}
             {% endfor %}
-
-            <input type="submit" name="submit" value="Modifica Libro" />
+{{book.title}}
+            <input type="submit" name="submit" value="Elimiba Libro" />
         </form>
 
     </body>

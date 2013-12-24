@@ -18,9 +18,9 @@ class TimeStamped_Model(models.Model):
 
 class Book( TimeStamped_Model):
     user= models.ForeignKey(User,related_name="sharer")
-    title = models.CharField( _("Titolo"),max_length=100)
-    author = models.CharField( _("Autore"),max_length=100)
-    where_is = models.ForeignKey(User,related_name="where_is")
+    title = models.CharField( _("Titolo"),max_length=100,help_text=_("Titolo"))
+    author = models.CharField( _("Autore"),max_length=100,help_text=_("Autore"))
+    where_is = models.ForeignKey(User,related_name="where_is",help_text=_("Da chi sta"))
     
     def __unicode__(self):
         return self.title

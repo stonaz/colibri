@@ -1,4 +1,4 @@
-from django.shortcuts import render,render_to_response
+from django.shortcuts import render,render_to_response,get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse,Http404
 from django.forms import ModelForm
@@ -13,7 +13,7 @@ from rest_framework.response import Response
 
 from .serializers import *
 
-from books.forms import BookForm,UserProfileForm,UserForm
+from books.forms import BookForm,DeleteBookForm,UserProfileForm,UserForm
 from books.models import Book,UserProfile
 
 def get_queryset_or_404(queryset, kwargs):
@@ -49,11 +49,13 @@ def add_book(request):
         # Have we been provided with a valid form?
         if form.is_valid():
             # Save the new category to the database.
-            form.save(commit=True)
+            book=form.save(commit=False)
+            book.user=request.user
+            book.save()
 
             # Now call the index() view.
             # The user will be shown the homepage.
-            return HttpResponseRedirect('/books')
+            return HttpResponseRedirect('/')
         else:
             # The supplied form contained errors - just print them to the terminal.
             print form.errors
@@ -71,7 +73,7 @@ def update_book(request,id):
     context = RequestContext(request)
     book_id=id
     #book_id=request.GET.get('id')
-    book=Book.objects.get(id=book_id)
+    book=get_object_or_404(Book,user= request.user,id=book_id)
 
     # A HTTP POST?
     if request.method == 'POST':
@@ -80,11 +82,12 @@ def update_book(request,id):
         # Have we been provided with a valid form?
         if form.is_valid():
             # Save the new category to the database.
-            form.save(commit=True)
-
+            book=form.save(commit=False)
+            book.user=request.user
+            book.save()
             # Now call the index() view.
             # The user will be shown the homepage.
-            return HttpResponseRedirect('/books')
+            return HttpResponseRedirect('/books/')
         else:
             # The supplied form contained errors - just print them to the terminal.
             print form.errors
@@ -95,6 +98,38 @@ def update_book(request,id):
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
     return render_to_response('books/update_book.html', {'form': form}, context)
+
+@login_required
+def delete_book(request,id):
+    # Get the context from the request.
+    context = RequestContext(request)
+    book_id=id
+    #book_id=request.GET.get('id')
+    book=get_object_or_404(Book,user= request.user,id=book_id)
+
+    # A HTTP POST?
+    if request.method == 'POST':
+        form = DeleteBookForm(request.POST,instance=book)
+
+        # Have we been provided with a valid form?
+        if form.is_valid():
+            # Save the new category to the database.
+            book.delete()
+
+            # Now call the index() view.
+            # The user will be shown the homepage.
+            return HttpResponseRedirect('/books/')
+        else:
+            # The supplied form contained errors - just print them to the terminal.
+            print form.errors
+    else:
+        # If the request was not a POST, display the form to enter details.
+        form = DeleteBookForm(instance=book)
+
+    # Bad form (or form details), no form supplied...
+    # Render the form with error messages (if any).
+    #context.book=book
+    return render_to_response('books/delete_book.html', {'form': form,'book': book}, context)
 
 def user_login(request):
     # Like before, obtain the context for the user's request.
@@ -280,6 +315,32 @@ class UserBookList(generics.ListAPIView):
         return Book.objects.all().filter(user=user_id)
 
 user_book_list = UserBookList.as_view()
+
+class UserHoldingBookList(generics.ListAPIView):
+    """
+    ### GET
+    
+    Retrieve list of books of a user.
+        
+    """
+    
+    #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
+    authentication_classes = (authentication.SessionAuthentication,)
+    serializer_class= BookListSerializer
+    #model=Book
+    #pagination_serializer_class = PaginatedRicetteListSerializer
+    #paginate_by_param = 'limit'
+    #paginate_by = 2
+    
+    def get_queryset(self):
+        user = self.kwargs.get('user', None)
+        try:
+            user_id=User.objects.get(username=user)
+        except Exception:
+            raise Http404(_('Not found'))
+        return Book.objects.all().exclude(user=user_id).filter(where_is=user_id)
+
+user_holding_book_list = UserHoldingBookList.as_view()
 
 class UserProfileList(generics.ListAPIView):
     """

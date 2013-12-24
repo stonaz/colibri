@@ -10,6 +10,7 @@
         <form id="book_form" method="post" action="/add_book/">
 
             {% csrf_token %}
+            <input type="hidden" name="id_user" value="1" />
             {% for hidden in form.hidden_fields %}
                 {{ hidden }}
             {% endfor %}
@@ -17,7 +18,7 @@
             {% for field in form.visible_fields %}
                 {{ field.errors }}
                 {{ field.help_text}}
-                {{ field }}
+                {{ field }}<br>
             {% endfor %}
 
             <input type="submit" name="submit" value="Aggiungi Libro" />
