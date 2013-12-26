@@ -189,7 +189,7 @@ def user_logout(request):
     return HttpResponseRedirect('/login/')
 
 def register(request):
-    # Like before, get the request's context.
+    # Get the request's context.
     context = RequestContext(request)
 
     # A boolean value for telling the template whether the registration was successful.
@@ -201,7 +201,58 @@ def register(request):
         # Attempt to grab information from the raw form information.
         # Note that we make use of both UserForm and UserProfileForm.
         user_form = UserForm(data=request.POST)
-        profile_form = UserProfileForm(data=request.POST)
+
+        if user_form.is_valid():
+            # Save the user's form data to the database.
+            user = user_form.save()
+
+            # Now we hash the password with the set_password method.
+            # Once hashed, we can update the user object.
+            user.set_password(user.password)
+            user.save()
+
+            # Now sort out the UserProfile instance.
+            profile=UserProfile()
+            profile.user = user
+
+            # Now we save the UserProfile model instance.
+            profile.save()
+
+            # Update our variable to tell the template registration was successful.
+            registered = True
+
+        # Invalid form or forms - mistakes or something else?
+        # Print problems to the terminal.
+        # They'll also be shown to the user.
+        else:
+            print user_form.errors
+
+    # Not a HTTP POST, so we render our form using two ModelForm instances.
+    # These forms will be blank, ready for user input.
+    else:
+        user_form = UserForm()
+
+    # Render the template depending on the context.
+    return render_to_response(
+            'register.html',
+            {'user_form': user_form,  'registered': registered},
+            context)
+
+def update_profile(request):
+    # Like before, get the request's context.
+    context = RequestContext(request)
+
+    # A boolean value for telling the template whether the update was successful.
+    # Set to False initially. Code changes value to True when update succeeds.
+    updated = False
+    user=request.user
+    user_profile=UserProfile.objects.get(user=request.user.id)
+    # If it's a HTTP POST, we're interested in processing form data.
+    if request.method == 'POST':
+        # Attempt to grab information from the raw form information.
+        # Note that we make use of both UserForm and UserProfileForm.
+        user_form = UserForm(data=request.POST,instance=user)
+        profile_form = UserProfileForm(data=request.POST,instance=user_profile)
 
         # If the two forms are valid...
         if user_form.is_valid() and profile_form.is_valid():
@@ -227,8 +278,8 @@ def register(request):
             # Now we save the UserProfile model instance.
             profile.save()
 
-            # Update our variable to tell the template registration was successful.
-            registered = True
+            # Update our variable to tell the template update was successful.
+            updated = True
 
         # Invalid form or forms - mistakes or something else?
         # Print problems to the terminal.
@@ -239,13 +290,13 @@ def register(request):
     # Not a HTTP POST, so we render our form using two ModelForm instances.
     # These forms will be blank, ready for user input.
     else:
-        user_form = UserForm()
-        profile_form = UserProfileForm()
+        user_form = UserForm(instance=user)
+        profile_form = UserProfileForm(instance=user_profile)
 
     # Render the template depending on the context.
     return render_to_response(
-            'register.html',
-            {'user_form': user_form, 'profile_form': profile_form, 'registered': registered},
+            'update_profile.html',
+            {'user_form': user_form, 'profile_form': profile_form,'updated': updated},
             context)
 
 #Serializers Views

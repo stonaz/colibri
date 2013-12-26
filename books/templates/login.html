@@ -41,12 +41,12 @@
                 <article>
                               <form id="login_form" method="post" action="/login/">
             {% csrf_token %}
-            Username: <input type="text" name="username" value="" size="50" />
+            Username: <input type="text" name="username" value="" width="50px" />
             <br />
-            Password: <input type="password" name="password" value="" size="50" />
+            Password: <input type="password" name="password" value="" width="50px" />
             <br />
 
-            <input type="submit" value="submit" />
+            <input type="submit" value="Login" />
         </form>
         <br>
             <a href="/register/">Registrati adesso</a>

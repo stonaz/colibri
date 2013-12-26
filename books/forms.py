@@ -20,11 +20,12 @@ class DeleteBookForm(forms.ModelForm):
 
 
 class UserForm(forms.ModelForm):
+    username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password')
+        fields = ('username', 'password', 'email', )
 
 
 class UserProfileForm(forms.ModelForm):

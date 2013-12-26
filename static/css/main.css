@@ -137,7 +137,7 @@ nav a:hover {
 
 .main aside {
     color: white;
-    padding: 0px 3% 10px;
+    padding: 0px 2% 10px;
     display: none;
     }
 
@@ -270,7 +270,7 @@ font-weight: bold;
 }
 
 #userMenu  li {
-font-size: 13px;
+font-size: 14px;
 list-style: none;
 color: #000000;
 padding-left: 0;
@@ -283,7 +283,7 @@ text-align: center;
 }
 
 #userMenu  li  a{
-font-size: 13px;
+font-size: 14px;
 list-style: none;
 color: #0000ff;
 padding-left: 0;
@@ -295,9 +295,20 @@ cursor: pointer;
 width:75%
 }
 
+#userMenu a:hover {
+ background: #0095cd;
+ background: -webkit-gradient(linear, left top, left bottom, from(#0078a5), to(#00adee));
+ background: -webkit-linear-gradient(top,  #0078a5,  #00adee);
+ background: -moz-linear-gradient(top,  #0078a5,  #00adee);
+ background: -ms-linear-gradient(top,  #0078a5,  #00adee);
+ background: -o-linear-gradient(top,  #0078a5,  #00adee);
+ background: linear-gradient(top,  #0078a5,  #00adee);
+}
 
-
-
+#userMenu a:active {
+  position: relative;
+  top: 1px;
+}
 
 
 /* ==========================================================================
@@ -337,7 +348,7 @@ width:75%
     
     .main aside {
     color: white;
-    padding: 0px 3% 10px;
+    padding: 0px 2% 10px;
     display: inline;
     border-radius: 4px;
 
@@ -415,7 +426,7 @@ width:75%
 
     .main aside {
         float: right;
-        width: 15%;
+        width: 16%;
     }
 }
 
