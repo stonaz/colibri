@@ -123,8 +123,9 @@ $("#Intestazione").append(compiledTmpl);
       var output = _.template(tmplMarkup, { book : b } );
       $("#Books").append(output);
       $("#"+buttonID).on("click",function(){
-        var where_is=$("#where_is_"+buttonID).val();
-      updateBook(buttonID,where_is)
+	$.get('/rango/like_category/')
+      //  var where_is=$("#where_is_"+buttonID).val();
+      //updateBook(buttonID,where_is)
       
       });
       

@@ -4,14 +4,21 @@ from django.contrib.auth.models import User
 
 from books.models import Book,UserProfile
 
-class BookForm(forms.ModelForm):
-    
+class AddBookForm(forms.ModelForm):
+    # An inline class to provide additional information on the form.
+    class Meta:
+        # Provide an association between the ModelForm and a model
+        model = Book
+        exclude=['user','where_is']
+        
 
+class UpdateBookForm(forms.ModelForm):
     # An inline class to provide additional information on the form.
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Book
         exclude=['user']
+
         
 class DeleteBookForm(forms.ModelForm):
     class Meta:
@@ -31,4 +38,4 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('address','phone', 'picture','public_email',)
+        fields = ('address','phone', 'picture','public_email','public_phone','public_address')

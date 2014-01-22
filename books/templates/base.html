@@ -116,7 +116,10 @@
 <div class="bookField"><%= book.author %></div>
 <div class="bookField"><%= book.title %></div>
 <div class="bookWhereIs"><input id="where_is_<%= book.id %>" style="width: 90%" type=text value="<%= book.dove_sta %>"></div>     
-<div class="bookUpdate"> <button class="updateBookButton" id="<%= book.id %>">Cambia</button> </div> 
+<div class="bookUpdate">
+<a href="take_book/<%= book.id %>">
+<button class="updateBookButton" id="<%= book.id %>">Mi interessa</button> </div>
+</a>
 </div>
 </script>
 {% endblock templates %}

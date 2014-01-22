@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <article>
-        <h1>Elimina un libro</h1>
+        <h2>Elimina un libro</h2>
 
         <form id="book_form" method="post" action="{{ request.path }}">
 
@@ -15,7 +15,7 @@
                 {{ field.help_text}}
                 {{ field }}<br>
             {% endfor %}
-{{book.title}}
+
             <input type="submit" name="submit" value="Elimina Libro" />
         </form>
 </article>

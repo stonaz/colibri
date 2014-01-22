@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse,Http404
 from django.forms import ModelForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
+from django.core.mail import send_mail
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Q
 
@@ -13,7 +13,7 @@ from rest_framework.response import Response
 
 from .serializers import *
 
-from books.forms import BookForm,DeleteBookForm,UserProfileForm,UserForm
+from books.forms import *
 from books.models import Book,UserProfile
 
 def get_queryset_or_404(queryset, kwargs):
@@ -27,6 +27,22 @@ def get_queryset_or_404(queryset, kwargs):
         raise Http404(_('Not found'))
     
     return obj
+
+@login_required
+def take_book(request,id):
+    
+    context = RequestContext(request)
+    book_id=id
+    #book_id=request.GET.get('id')
+    book=get_object_or_404(Book,user= request.user,id=book_id)
+    #sharer=User.objects.get(username=book.user)
+    borrower=User.objects.get(username=book.where_is)
+    borrower_email=borrower.email
+    borrower_profile=UserProfile.objects.get(user=borrower.id)
+    borrower_phone=borrower_profile.phone
+    return render_to_response(
+            'take_book.html',{'book': book,'borrower':borrower},
+            context)
 
 @login_required
 def index(request):
@@ -53,13 +69,14 @@ def add_book(request):
 
     # A HTTP POST?
     if request.method == 'POST':
-        form = BookForm(request.POST)
+        form = AddBookForm(request.POST)
 
         # Have we been provided with a valid form?
         if form.is_valid():
             # Save the new category to the database.
             book=form.save(commit=False)
             book.user=request.user
+            book.where_is=request.user
             book.save()
 
             # Now call the index() view.
@@ -70,7 +87,7 @@ def add_book(request):
             print form.errors
     else:
         # If the request was not a POST, display the form to enter details.
-        form = BookForm()
+        form = AddBookForm()
 
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
@@ -86,7 +103,7 @@ def update_book(request,id):
 
     # A HTTP POST?
     if request.method == 'POST':
-        form = BookForm(request.POST,instance=book)
+        form = UpdateBookForm(request.POST,instance=book)
 
         # Have we been provided with a valid form?
         if form.is_valid():
@@ -94,15 +111,20 @@ def update_book(request,id):
             book=form.save(commit=False)
             book.user=request.user
             book.save()
+            #print book.where_is
+            borrower=User.objects.get(username=book.where_is)
+            mail_to=borrower.email
+            send_mail('Subject here', 'Here is the message.', 'from@example.com',
+    [mail_to], fail_silently=False)
             # Now call the index() view.
             # The user will be shown the homepage.
-            return HttpResponseRedirect('/books/')
+            return HttpResponseRedirect('/mybooks/')
         else:
             # The supplied form contained errors - just print them to the terminal.
             print form.errors
     else:
         # If the request was not a POST, display the form to enter details.
-        form = BookForm(instance=book)
+        form = UpdateBookForm(instance=book)
 
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).

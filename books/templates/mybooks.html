@@ -3,7 +3,7 @@
   {% block content %}
                 <article>
                     <section>
-                        
+                     <h2>I miei libri</h2>   
 
                       <div style="clear: both;" id="Intestazione">  </div>
                       
@@ -27,7 +27,7 @@
 <div class="book" >
 <div class="bookField"><%= book.author %></div>
 <div class="bookField"><%= book.title %></div>
-<div class="bookWhereIs"><input id="where_is_<%= book.id %>" style="width: 90%" type=text value="<%= book.dove_sta %>"></div>     
+<div class="bookField"><%= book.dove_sta %></div>     
 <div class="bookUpdate"><a href="/update_book/<%= book.id %>/"><button class="updateBookButton">Modifica</button></a>  </div> 
 <div class="bookUpdate"><a href="/delete_book/<%= book.id %>/"><button class="updateBookButton">Elimina</button></a>  </div> 
 
@@ -38,7 +38,7 @@
 <script src="{% static "js/main.js" %}"></script>
 <script type="text/javascript">
 $( document ).ready(function() {
-    getMyBooks(getMyBooks('{{user}}'));                        
+    getMyBooks('{{user}}');                        
 });
 </script>
 {% endblock scripts %}
