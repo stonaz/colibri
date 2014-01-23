@@ -135,7 +135,7 @@ def update_book(request,id):
             #print book.where_is
             borrower=User.objects.get(username=book.where_is)
             mail_to="essetizeta@gmail.com"
-            send_mail('Subject here', 'Here is the message.', 'from@example.com',
+            send_mail('Subject here', 'Here is the message.', 'booksharing@colibri.org',
     [mail_to], fail_silently=False)
             # Now call the index() view.
             # The user will be shown the homepage.
