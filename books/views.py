@@ -134,7 +134,7 @@ def update_book(request,id):
             book.save()
             #print book.where_is
             borrower=User.objects.get(username=book.where_is)
-            mail_to=borrower.email
+            mail_to="essetizeta@gmail.com"
             send_mail('Subject here', 'Here is the message.', 'from@example.com',
     [mail_to], fail_silently=False)
             # Now call the index() view.

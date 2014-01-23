@@ -1,2 +1,3 @@
 *.pyc
 runserver
+settings.py
