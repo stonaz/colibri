@@ -16,32 +16,53 @@ from .serializers import *
 from books.forms import *
 from books.models import Book,UserProfile
 
-def get_queryset_or_404(queryset, kwargs):
-    """
-    Checks if object returned by queryset exists
-    """
-    # ensure exists
-    try:
-        obj = queryset.get(**kwargs)
-    except Exception:
-        raise Http404(_('Not found'))
-    
-    return obj
-
 @login_required
 def take_book(request,id):
     
     context = RequestContext(request)
     book_id=id
     #book_id=request.GET.get('id')
-    book=get_object_or_404(Book,user= request.user,id=book_id)
+    book=get_object_or_404(Book,id=book_id)
     #sharer=User.objects.get(username=book.user)
-    borrower=User.objects.get(username=book.where_is)
+    borrower=get_object_or_404(User,username=book.where_is)
     borrower_email=borrower.email
-    borrower_profile=UserProfile.objects.get(user=borrower.id)
-    borrower_phone=borrower_profile.phone
+    
+    borrower_profile=get_object_or_404(UserProfile,user=borrower.id)
+    if borrower_profile.phone != "" and borrower_profile.public_phone is True:
+        borrower_phone=borrower_profile.phone
+    else:
+        borrower_phone="Non disponibile"
+        
+    print borrower_phone
+
     return render_to_response(
-            'take_book.html',{'book': book,'borrower':borrower},
+            'take_book.html',{'book': book,
+                              'borrower':borrower,
+                              'borrower_phone':borrower_phone
+                              },
+            context)
+
+@login_required
+def confirm_book(request,id):
+    
+    context = RequestContext(request)
+    book_id=id
+    #book_id=request.GET.get('id')
+    book=get_object_or_404(Book,id=book_id)
+    #sharer=User.objects.get(username=book.user)
+    sharer=get_object_or_404(User,username=book.user)
+    borrower=get_object_or_404(User,username=book.where_is)
+    borrower_email=borrower.email
+    sharer_email=sharer.email
+    borrower_profile=get_object_or_404(UserProfile,user=borrower.id)
+
+    book.where_is=request.user
+    book.save()
+    
+    return render_to_response(
+            'confirm_book.html',{'book': book,
+                              'borrower':borrower,
+                              },
             context)
 
 @login_required

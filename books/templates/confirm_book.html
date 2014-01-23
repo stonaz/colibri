@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<article>
+        <h2>Conferma passaggio libro</h2>
+{{ book.title }} {{ book.author }}<br>
+ora sta da {{user}}.
+
+Una mail è stata spedita a  
+
+{{ borrower.username }} ed al proprietario del libro<br>
+
+
+    </article>
+{% endblock content %}

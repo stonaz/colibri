@@ -1,10 +1,22 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 <article>
         <h2>Prendi in prestito libro</h2>
-{{ book.title }}<br>
+{{ book.title }} {{ book.author }}<br>
 
-{{ borrower.username }}
+
+{{ borrower.username }}<br>
+<img src="{% static "images/mail.png" %}" width=32 height=20></img>
+{{ borrower.email }}<br>
+<img src="{% static "images/phone.png" %}" width=20 height=32></img>
+{{ borrower_phone }}
+<br>
+Se hai già contattato {{ borrower.username }} e  preso il libro
+clicca sotto per aggiornare i dati.
+<a href="/confirm_book/{{ book.id }}">
+ <button>Ok</button>       
+</a>
 
     </article>
 {% endblock content %}
