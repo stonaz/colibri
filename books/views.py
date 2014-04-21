@@ -393,6 +393,33 @@ class BookList(generics.ListCreateAPIView):
 book_list = BookList.as_view()
 
 
+class BookDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    ### 
+    
+    Delete list of books of a user.
+        
+    """
+    
+    #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
+    authentication_classes = (authentication.SessionAuthentication,)
+    serializer_class= BookDetailSerializer
+    model=Book
+    #pagination_serializer_class = PaginatedRicetteListSerializer
+    #paginate_by_param = 'limit'
+    #paginate_by = 2
+    
+    #def get_queryset(self):
+    #    user = self.kwargs.get('user', None)
+    #    try:
+    #        user_id=User.objects.get(username=user)
+    #    except Exception:
+    #        raise Http404(_('Not found'))
+    #    return Book.objects.all().filter(user=user_id)
+
+book_detail = BookDetail.as_view()
+
+
 class UserBookList(generics.ListAPIView):
     """
     ### GET

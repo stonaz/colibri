@@ -21,6 +21,22 @@ class BookListSerializer(serializers.ModelSerializer):
            'id','user','where_is', 'sharer', 'author', 'title', 'dove_sta', 'created', 'modified',
             )
         
+class BookDetailSerializer(serializers.ModelSerializer):
+    """
+    Book details
+    """
+    sharer = serializers.Field(source='user.username')
+    dove_sta = serializers.Field(source='where_is.username')
+    #nodes = serializers.HyperlinkedIdentityField(view_name='api_layer_nodes_list', slug_field='slug')
+    #geojson = serializers.HyperlinkedIdentityField(view_name='api_layer_nodes_geojson', slug_field='slug')
+    
+    class Meta:
+        model = Book
+        
+        fields= (
+           'id','user','where_is', 'sharer', 'author', 'title', 'dove_sta', 'created', 'modified',
+            )   
+        
 class UserProfileListSerializer(serializers.ModelSerializer):
     """
     User profiles list
