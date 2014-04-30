@@ -27,6 +27,17 @@ class Book( TimeStamped_Model):
     
     class Meta:
         ordering = ['-modified']
+        
+class BookHistory( TimeStamped_Model):
+    book= models.ForeignKey(Book)
+    took_from = models.ForeignKey(User,related_name="took_from",help_text=_("Preso da"))
+    given_to = models.ForeignKey(User,related_name="given_to",help_text=_("Dato a"))
+    
+    def __unicode__(self):
+        return self.title
+    
+    class Meta:
+        ordering = ['-modified']
 
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
