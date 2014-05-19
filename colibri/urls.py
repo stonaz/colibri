@@ -29,6 +29,7 @@ urlpatterns = patterns('books.views',
     
     url(r'^api/v1/books/$', 'book_list' ,name='book_list'),
     url(r'^api/v1/books/(?P<pk>[-\d\.]+)/$', 'book_detail' ,name='book_detail'),
+    url(r'^api/v1/books/(?P<pk>[-\d\.]+)$', 'book_detail' ,name='book_detail'),
     url(r'^api/v1/(?P<user>[-\w\.]+)/books/$', 'user_book_list' ,name='user_book_list'),
     url(r'^api/v1/(?P<user>[-\w]+)/holding_books/$', 'user_holding_book_list' ,name='user_holding_book_list'),
     url(r'^api/v1/user_profile/$', 'user_profile_list' ,name='user_profile_list'),
