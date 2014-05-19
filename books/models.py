@@ -32,7 +32,7 @@ class Book( TimeStamped_Model):
     class Meta:
         ordering = ['-modified']
         
-    def save(self):
+    def save(self,*args, **kwargs):
         print self.title
         # Place code here, which is excecuted the same
         # time the ``pre_save``-signal would be
@@ -40,10 +40,16 @@ class Book( TimeStamped_Model):
             old_obj = Book.objects.get(pk=self.pk)
 
         # Call parent's ``save`` function
-        super(Book, self).save()
-        new_entry = BookHistory(book=old_obj,took_from=old_obj.where_is,given_to=self.where_is)
-        new_entry.save()
-        print(new_entry.id)
+        super(Book, self).save(*args, **kwargs)
+        try:
+            old_obj
+        except NameError:
+            old_obj = None
+        if old_obj :
+            new_entry = BookHistory(book=old_obj,took_from=old_obj.where_is,given_to=self.where_is)
+            new_entry.save()
+        
+        #print(new_entry.id)
         # Place code here, which is excecuted the same
         # time the ``post_save``-signal would be
 
