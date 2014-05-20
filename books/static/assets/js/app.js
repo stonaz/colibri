@@ -10,6 +10,8 @@ return oldSync(method, model, options);
 };
 
 var ColibriApp = new Marionette.Application();
+console.log(window.user)
+ColibriApp.user = window.user;
 ColibriApp.addRegions({
     mainRegion: "#main-region",
     dialogRegion: Marionette.Region.Dialog.extend({

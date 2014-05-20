@@ -77,10 +77,10 @@ def index(request):
 @login_required
 def ui_index(request):
     
-    #context = RequestContext(request)
+    context = RequestContext(request)
     
     return render_to_response(
-            'ui_books.html',
+            'ui_books.html', context
 )
 
 @login_required

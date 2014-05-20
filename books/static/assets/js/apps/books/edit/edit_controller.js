@@ -2,8 +2,8 @@ ColibriApp.module('BooksApp.Edit', function (Edit, ColibriApp, Backbone, Marione
     Edit.Controller = {
         editBook: function (id) {
             var loadingView = new ColibriApp.Common.Views.Loading({
-                title: "Artificial Loading Delay",
-                message: "Loading data to be edited"
+                //title: "Artificial Loading Delay",
+                //message: "Loading data to be edited"
             });
             ColibriApp.mainRegion.show(loadingView);
 

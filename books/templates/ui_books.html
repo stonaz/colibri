@@ -27,8 +27,9 @@
     <script type="text/template" id="book-list-panel">
       <button class="btn btn-primary js-new"> New book </button>
     </script>
-
+<h4>Ciao {{user}} !</h4>
     <div id="main-region" class="container">
+      
       <p>Here is static content in the web page. You'll notice that it gets replaced by our app as soon as we start it.</p>
     </div>
     <div id="dialog-region"></div>
@@ -104,7 +105,8 @@
         <button class="btn js-submit">Save</button>
       </form>
     </script>
-<!--<script src="{% static "js/vendor/jquery-1.10.1.min.js" %}"></script>-->
+
+    <script type="text/javascript">var user="{{user}}"</script>
     <script src="{% static "assets/js/vendor/jquery.js" %}"></script>
     <script src="{% static "assets/js/vendor/jquery-ui-1.10.3.js" %}"></script>
     <script src="{% static "assets/js/vendor/jquery.cookie.js" %}"></script>

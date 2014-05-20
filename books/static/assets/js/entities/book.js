@@ -82,7 +82,7 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
     getBookEntity: function(bookId){
       var book = new Entities.Book({id: bookId});
       var defer = $.Deferred();
-      setTimeout(function(){
+      
         book.fetch({
           success: function(data){
           defer.resolve(data);
@@ -91,7 +91,7 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
           defer.resolve(undefined);
           } 
       });
-      }, 2000);
+      
       return defer.promise();
     }
   };
