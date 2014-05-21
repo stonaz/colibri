@@ -5,8 +5,8 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
     defaults: {
               author: '',
               title: '',
-              where_is: 1,
-              user:1,
+              where_is: ColibriApp.user,
+              user:ColibriApp.user,
               dove_sta:''
     },
     
