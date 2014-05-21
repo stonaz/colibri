@@ -48,8 +48,9 @@ class Book( TimeStamped_Model):
         except NameError:
             old_obj = None
         if old_obj :
-            new_entry = BookHistory(book=old_obj,took_from=old_obj.where_is,given_to=self.where_is)
-            new_entry.save()
+            if old_obj.where_is != self.where_is:
+                new_entry = BookHistory(book=old_obj,took_from=old_obj.where_is,given_to=self.where_is)
+                new_entry.save()
         
         #print(new_entry.id)
         # Place code here, which is excecuted the same
