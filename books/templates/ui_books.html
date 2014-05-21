@@ -82,6 +82,7 @@
         Edit this book
       </a>
       <p><strong>Author</strong> <%= author %></p>
+      <p><strong>Title</strong> <%= title %></p>
     </script>
 
     <script type="text/template" id="loading-view">
@@ -125,7 +126,7 @@
     <script src="{% static "assets/js/entities/book.js" %}"></script>
     <script src="{% static "assets/js/common/views.js" %}"></script>
 
-    <script src="{% static "assets/js/apps/books/books_app.js" %}"></script>
+<!--    <script src="{% static "assets/js/apps/books/books_app.js" %}"></script>
     <script src="{% static "assets/js/apps/books/common/views.js" %}"></script>
     <script src="{% static "assets/js/apps/books/list/list_view.js "%}"></script>
     <script src="{% static "assets/js/apps/books/list/list_controller.js" %}"></script>
@@ -133,7 +134,18 @@
     <script src="{% static "assets/js/apps/books/show/show_controller.js" %}"></script>
     <script src="{% static "assets/js/apps/books/edit/edit_view.js" %}"></script>
     <script src="{% static "assets/js/apps/books/edit/edit_controller.js" %}"></script>
-    <script src="{% static "assets/js/apps/books/new/new_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/books/new/new_view.js" %}"></script>-->
+    
+        <script src="{% static "assets/js/apps/mybooks/mybooks_app.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/common/views.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/list/list_view.js "%}"></script>
+    <script src="{% static "assets/js/apps/mybooks/list/list_controller.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/show/show_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/show/show_controller.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/edit/edit_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/edit/edit_controller.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/new/new_view.js" %}"></script>
+    
     <script type="text/javascript">
       ColibriApp.start();
     </script>

@@ -33,8 +33,8 @@ ColibriApp.on("initialize:after", function () {
     if (Backbone.history) {
         Backbone.history.start();
         if(this.getCurrentRoute() === ""){
-      ColibriApp.trigger("books:list");
+      ColibriApp.trigger("mybooks:list");
     }
-        ColibriApp.BooksApp.List.Controller.listBooks();
+        //ColibriApp.BooksApp.List.Controller.listBooks();
     }
 });

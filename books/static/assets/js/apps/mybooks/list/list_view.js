@@ -1,4 +1,4 @@
-ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marionette, $, _) {
+ColibriApp.module('MyBooksApp.List', function (List, ColibriApp, Backbone, Marionette, $, _) {
   
     List.Layout = Marionette.Layout.extend({
         template: "#book-list-layout",
@@ -41,16 +41,16 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
         showClicked: function (e) {
             e.preventDefault();
             e.stopPropagation();
-            this.trigger("book:show", this.model);
+            this.trigger("mybook:show", this.model);
         },
         editClicked: function (e) {
             e.preventDefault();
             e.stopPropagation();
-            this.trigger("book:edit", this.model);
+            this.trigger("mybook:edit", this.model);
         },
         deleteClicked: function (e) {
             e.stopPropagation();
-            this.trigger("book:delete", this.model);
+            this.trigger("mybook:delete", this.model);
         }
     });
 

@@ -1,4 +1,4 @@
-ColibriApp.module('BooksApp.Show', function(Show, ColibriApp,
+ColibriApp.module('MyBooksApp.Show', function(Show, ColibriApp,
 Backbone, Marionette, $, _){
     Show.MissingBook = Marionette.ItemView.extend({
             template: "#missing-book-view"
@@ -10,7 +10,7 @@ Backbone, Marionette, $, _){
                     },
             editClicked: function(e){
                     e.preventDefault();
-                    this.trigger("book:edit", this.model);
+                    this.trigger("mybook:edit", this.model);
                     }
                     
             });

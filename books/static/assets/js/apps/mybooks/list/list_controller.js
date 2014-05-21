@@ -1,4 +1,4 @@
-ColibriApp.module('BooksApp.List', function (List, ColibriApp,
+ColibriApp.module('MyBooksApp.List', function (List, ColibriApp,
 Backbone, Marionette, $, _) {
     List.Controller = {
         listBooks: function () {
@@ -28,7 +28,7 @@ Backbone, Marionette, $, _) {
                     newBook = new ColibriApp.Entities.Book();
                     console.log('BOOK: ' + newBook)
 
-                    var view = new ColibriApp.BooksApp.New.Book({
+                    var view = new ColibriApp.MyBooksApp.New.Book({
                         model: newBook,
                         //asModal: true
                     });
@@ -51,7 +51,7 @@ Backbone, Marionette, $, _) {
                     ColibriApp.dialogRegion.show(view);
                 });
 
-                booksListView.on("itemview:book:delete", function (childView, model) {
+                booksListView.on("itemview:mybook:delete", function (childView, model) {
                     model.destroy({
                         error: function (model, response) {
                             console.log(response)
@@ -62,8 +62,9 @@ Backbone, Marionette, $, _) {
                     });
                 });
 
-                booksListView.on("itemview:book:edit", function (childView, model) {
-                    var view = new ColibriApp.BooksApp.Edit.Book({
+                booksListView.on("itemview:mybook:edit", function (childView, model) {
+                    console.log("clicked on edit")
+                    var view = new ColibriApp.MyBooksApp.Edit.Book({
                         model: model,
                         //asModal: true
                     })
@@ -85,10 +86,10 @@ Backbone, Marionette, $, _) {
                     ColibriApp.dialogRegion.show(view);
                 });
 
-                booksListView.on("itemview:book:show", function (childView, model) {
+                booksListView.on("itemview:mybook:show", function (childView, model) {
 
-                    //ColibriApp.BooksApp.Show.Controller.showBook(model);
-                    ColibriApp.trigger("book:show", model.get('id'));
+                    //ColibriApp.MyBooksApp.Show.Controller.showBook(model);
+                    ColibriApp.trigger("mybook:show", model.get('id'));
                 });
 
                 ColibriApp.mainRegion.show(booksListLayout);

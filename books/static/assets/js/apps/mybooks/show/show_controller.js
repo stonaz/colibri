@@ -1,4 +1,4 @@
-ColibriApp.module('BooksApp.Show', function(Show, ColibriApp,
+ColibriApp.module('MyBooksApp.Show', function(Show, ColibriApp,
 Backbone, Marionette, $, _){
     Show.Controller = {
             showBook: function(id){
@@ -16,8 +16,8 @@ Backbone, Marionette, $, _){
                         bookView = new Show.Book({
                             model: book  
                             });
-                    bookView.on("book:edit", function(book){
-                        ColibriApp.trigger("book:edit", book.get('id'));
+                    bookView.on("mybook:edit", function(book){
+                        ColibriApp.trigger("mybook:edit", book.get('id'));
                         });
                     }
                     else {

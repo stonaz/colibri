@@ -1,4 +1,4 @@
-ColibriApp.module('BooksApp.Common.Views', function(Views, ColibriApp, Backbone, Marionette, $, _){
+ColibriApp.module('MyBooksApp.Common.Views', function(Views, ColibriApp, Backbone, Marionette, $, _){
   Views.Form = Marionette.ItemView.extend({
     template: "#book-form",
 

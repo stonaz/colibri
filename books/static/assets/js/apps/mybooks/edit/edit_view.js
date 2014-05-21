@@ -1,5 +1,5 @@
-ColibriApp.module('BooksApp.Edit', function (Edit, ColibriApp, Backbone, Marionette, $, _) {
-    Edit.Book = ColibriApp.BooksApp.Common.Views.Form.extend({
+ColibriApp.module('MyBooksApp.Edit', function (Edit, ColibriApp, Backbone, Marionette, $, _) {
+    Edit.Book = ColibriApp.MyBooksApp.Common.Views.Form.extend({
 
         initialize: function () {
             this.title = "Edit " + this.model.get('author');

@@ -1,4 +1,4 @@
-ColibriApp.module('BooksApp.Edit', function (Edit, ColibriApp, Backbone, Marionette, $, _) {
+ColibriApp.module('MyBooksApp.Edit', function (Edit, ColibriApp, Backbone, Marionette, $, _) {
     Edit.Controller = {
         editBook: function (id) {
             var loadingView = new ColibriApp.Common.Views.Loading({
@@ -18,13 +18,13 @@ ColibriApp.module('BooksApp.Edit', function (Edit, ColibriApp, Backbone, Marione
                     view.on("form:submit", function (data) {
                         console.log('saving book..')
                         if (book.save(data)) {
-                            ColibriApp.trigger("book:show", book.get('id'));
+                            ColibriApp.trigger("mybook:show", book.get('id'));
                         } else {
                             view.triggerMethod("form:data:invalid", book.validationError);
                         }
                     });
                 } else {
-                    view = new ColibriApp.BooksApp.Show.MissingBook();
+                    view = new ColibriApp.MyBooksApp.Show.MissingBook();
                 }
 
                 ColibriApp.mainRegion.show(view);
