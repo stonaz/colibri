@@ -14,7 +14,8 @@ from rest_framework.response import Response
 from .serializers import *
 
 from books.forms import *
-from books.models import Book,UserProfile
+from books.models import Book
+from profiles.models import UserProfile
 
 @login_required
 def take_book(request,id):
