@@ -107,7 +107,11 @@
       </form>
     </script>
 
-    <script type="text/javascript">var user="{{user.id}}"</script>
+    <script type="text/javascript">
+      var user="{{user.id}}"
+      var username="{{user}}"
+
+    </script>
     <script src="{% static "assets/js/vendor/jquery.js" %}"></script>
     <script src="{% static "assets/js/vendor/jquery-ui-1.10.3.js" %}"></script>
     <script src="{% static "assets/js/vendor/jquery.cookie.js" %}"></script>

@@ -1,13 +1,13 @@
 ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionette, $, _){
   Entities.Book = Backbone.Model.extend({
-    urlRoot: "/api/v1/books/",
+    urlRoot: "/api/v1/"+ColibriApp.username+"/books/",
     
     defaults: {
               author: '',
               title: '',
               where_is: ColibriApp.user,
               user:ColibriApp.user,
-              dove_sta:''
+              //dove_sta:''
     },
     
     //validate: function(attrs, options) {
@@ -35,7 +35,7 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
   //Entities.configureStorage(Entities.Book);
 
   Entities.BookCollection = Backbone.Collection.extend({
-    url: "/api/v1/books/",
+    url: "/api/v1/"+ColibriApp.username+"/books/",
     model: Entities.Book,
     comparator: "author"
   });

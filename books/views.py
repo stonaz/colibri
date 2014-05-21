@@ -366,7 +366,7 @@ class BookList(generics.ListCreateAPIView):
     """
     
     #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
-    #authentication_classes = (authentication.SessionAuthentication,)
+    authentication_classes = (authentication.SessionAuthentication,)
     serializer_class= BookListSerializer
     #pagination_serializer_class = PaginatedRicetteListSerializer
     #paginate_by_param = 'limit'
@@ -407,7 +407,7 @@ class BookDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     ### 
     
-    Delete list of books of a user.
+    Details of books of a user.
         
     """
     
@@ -430,7 +430,7 @@ class BookDetail(generics.RetrieveUpdateDestroyAPIView):
 book_detail = BookDetail.as_view()
 
 
-class UserBookList(generics.ListAPIView):
+class UserBookList(generics.ListCreateAPIView):
     """
     ### GET
     
@@ -455,6 +455,35 @@ class UserBookList(generics.ListAPIView):
         return Book.objects.all().filter(user=user_id)
 
 user_book_list = UserBookList.as_view()
+
+
+class UserBookDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    ### GET
+    
+    Retrieve details of books of a user.
+        
+    """
+    
+    #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
+    authentication_classes = (authentication.SessionAuthentication,)
+    serializer_class= BookDetailSerializer
+    #model=Book
+    #pagination_serializer_class = PaginatedRicetteListSerializer
+    #paginate_by_param = 'limit'
+    #paginate_by = 2
+    
+    def get_queryset(self):
+        user = self.kwargs.get('user', None)
+        book_id = self.kwargs.get('pk', None)
+        try:
+            user_id=User.objects.get(username=user)
+        except Exception:
+            raise Http404(_('Not found'))
+        return Book.objects.all().filter(user=user_id).filter(id=book_id)
+
+user_book_detail = UserBookDetail.as_view()
+
 
 class UserHoldingBookList(generics.ListAPIView):
     """
