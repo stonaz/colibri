@@ -14,6 +14,7 @@ console.log(window.user)
 ColibriApp.user = window.user;
 ColibriApp.username = window.username;
 ColibriApp.addRegions({
+    headerRegion: "#header-region",
     mainRegion: "#main-region",
     dialogRegion: Marionette.Region.Dialog.extend({
                         el: "#dialog-region"

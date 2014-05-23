@@ -1,4 +1,4 @@
-ContactManager.module("HeaderApp.List", function(List, ContactManager, Backbone, Marionette, $, _){
+ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marionette, $, _){
   List.Header = Marionette.ItemView.extend({
     template: "#header-link",
     tagName: "li",

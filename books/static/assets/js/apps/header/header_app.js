@@ -1,12 +1,12 @@
-ContactManager.module("HeaderApp", function(Header, ContactManager, Backbone, Marionette, $, _){
+ColibriApp.module("HeaderApp", function(Header, ColibriApp, Backbone, Marionette, $, _){
   var API = {
     listHeader: function(){
       Header.List.Controller.listHeader();
     }
   };
 
-  ContactManager.commands.setHandler("set:active:header", function(name){
-    ContactManager.HeaderApp.List.Controller.setActiveHeader(name);
+  ColibriApp.commands.setHandler("set:active:header", function(name){
+    ColibriApp.HeaderApp.List.Controller.setActiveHeader(name);
   });
 
   Header.on("start", function(){

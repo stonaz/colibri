@@ -1,8 +1,8 @@
-ContactManager.module("AboutApp.Show", function(Show, ContactManager, Backbone, Marionette, $, _){
+ColibriApp.module("AboutApp.Show", function(Show, ColibriApp, Backbone, Marionette, $, _){
   Show.Controller = {
     showAbout: function(){
       var view = new Show.Message();
-      ContactManager.mainRegion.show(view);
+      ColibriApp.mainRegion.show(view);
     }
   };
 });

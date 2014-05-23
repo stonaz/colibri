@@ -465,10 +465,10 @@ class UserBookDetail(generics.RetrieveUpdateDestroyAPIView):
         
     """
     
-    #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
+    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
     authentication_classes = (authentication.SessionAuthentication,)
     serializer_class= BookDetailSerializer
-    #model=Book
+    model=Book
     #pagination_serializer_class = PaginatedRicetteListSerializer
     #paginate_by_param = 'limit'
     #paginate_by = 2

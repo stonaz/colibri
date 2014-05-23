@@ -1,4 +1,4 @@
-ContactManager.module("Entities", function(Entities, ContactManager, Backbone, Marionette, $, _){
+ColibriApp.module("Entities", function(Entities, ColibriApp, Backbone, Marionette, $, _){
   Entities.Header = Backbone.Model.extend({
     initialize: function(){
       var selectable = new Backbone.Picky.Selectable(this);
@@ -17,7 +17,7 @@ ContactManager.module("Entities", function(Entities, ContactManager, Backbone, M
 
   var initializeHeaders = function(){
     Entities.headers = new Entities.HeaderCollection([
-      { name: "Contacts", url: "contacts", navigationTrigger: "contacts:list" },
+      { name: "MyBooks", url: "mybooks", navigationTrigger: "mybooks:list" },
       { name: "About", url: "about", navigationTrigger: "about:show" }
     ]);
   };
@@ -31,7 +31,7 @@ ContactManager.module("Entities", function(Entities, ContactManager, Backbone, M
     }
   };
 
-  ContactManager.reqres.setHandler("header:entities", function(){
+  ColibriApp.reqres.setHandler("header:entities", function(){
     return API.getHeaders();
   });
 });

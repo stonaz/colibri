@@ -1,4 +1,4 @@
-ContactManager.module("AboutApp", function(AboutApp, ContactManager, Backbone, Marionette, $, _){
+ColibriApp.module("AboutApp", function(AboutApp, ColibriApp, Backbone, Marionette, $, _){
   AboutApp.Router = Marionette.AppRouter.extend({
     appRoutes: {
       "about" : "showAbout"
@@ -8,16 +8,16 @@ ContactManager.module("AboutApp", function(AboutApp, ContactManager, Backbone, M
   var API = {
     showAbout: function(){
       AboutApp.Show.Controller.showAbout();
-      ContactManager.execute("set:active:header", "about");
+      ColibriApp.execute("set:active:header", "about");
     }
   };
 
-  ContactManager.on("about:show", function(){
-    ContactManager.navigate("about");
+  ColibriApp.on("about:show", function(){
+    ColibriApp.navigate("about");
     API.showAbout();
   });
 
-  ContactManager.addInitializer(function(){
+  ColibriApp.addInitializer(function(){
     new AboutApp.Router({
       controller: API
     });
