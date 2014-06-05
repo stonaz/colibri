@@ -7,8 +7,16 @@ Backbone, Marionette, $, _){
                 
                 var fetchingBook = ColibriApp.request("book:entity", id);
                 
+                var bookShowLayout = new Show.Layout();
+                var bookShowHistory = new Show.History();
+                
                 var bookView
                 $.when(fetchingBook).done(function(book){
+                    
+                    bookShowLayout.on("show", function () {
+                    bookShowLayout.bookRegion.show(bookView);
+                    bookShowLayout.historyRegion.show(bookShowHistory);
+                });
                     
                     if(book !== undefined) {
                         console.log('not undefined')
@@ -23,7 +31,8 @@ Backbone, Marionette, $, _){
                     else {
                         bookView = new Show.MissingBook();
                     }
-                    ColibriApp.mainRegion.show(bookView);
+                    console.log(bookShowLayout)
+                    ColibriApp.mainRegion.show(bookShowLayout);
                 });            
         }
     }
