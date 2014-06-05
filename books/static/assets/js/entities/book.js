@@ -6,7 +6,7 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
               author: '',
               title: '',
               where_is: ColibriApp.user,
-              user:ColibriApp.user,
+              owner:ColibriApp.user,
               //dove_sta:''
     },
     

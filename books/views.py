@@ -12,9 +12,10 @@ from rest_framework import generics, permissions, authentication
 from rest_framework.response import Response
 
 from .serializers import *
+from .permissions import IsOwnerOrReadOnly
 
 from books.forms import *
-from books.models import Book
+from books.models import Book,BookWhereIs
 from profiles.models import UserProfile
 
 @login_required
@@ -23,9 +24,10 @@ def take_book(request,id):
     context = RequestContext(request)
     book_id=id
     #book_id=request.GET.get('id')
-    book=get_object_or_404(Book,id=book_id)
+    book=get_object_or_404(BookWhereIs,book_id=book_id)
+    print book.user
     #sharer=User.objects.get(username=book.user)
-    borrower=get_object_or_404(User,username=book.where_is)
+    borrower=get_object_or_404(User,username=book.user)
     borrower_email=borrower.email
     
     borrower_profile=get_object_or_404(UserProfile,user=borrower.id)
@@ -49,10 +51,11 @@ def confirm_book(request,id):
     context = RequestContext(request)
     book_id=id
     #book_id=request.GET.get('id')
-    book=get_object_or_404(Book,id=book_id)
+    book=get_object_or_404(BookWhereIs,book_id=book_id)
+    print book.user
     #sharer=User.objects.get(username=book.user)
     sharer=get_object_or_404(User,username=book.user)
-    borrower=get_object_or_404(User,username=book.where_is)
+    borrower=get_object_or_404(User,username=book.user)
     borrower_email=borrower.email
     sharer_email=sharer.email
     borrower_profile=get_object_or_404(UserProfile,user=borrower.id)
@@ -106,8 +109,8 @@ def add_book(request):
         if form.is_valid():
             # Save the new category to the database.
             book=form.save(commit=False)
-            book.user=request.user
-            book.where_is=request.user
+            book.owner=request.user
+            #book.where_is=request.user
             book.save()
 
             # Now call the index() view.
@@ -130,7 +133,7 @@ def update_book(request,id):
     context = RequestContext(request)
     book_id=id
     #book_id=request.GET.get('id')
-    book=get_object_or_404(Book,user= request.user,id=book_id)
+    book=get_object_or_404(Book,owner= request.user,id=book_id)
 
     # A HTTP POST?
     if request.method == 'POST':
@@ -140,13 +143,13 @@ def update_book(request,id):
         if form.is_valid():
             # Save the new category to the database.
             book=form.save(commit=False)
-            book.user=request.user
+            book.owner=request.user
             book.save()
             #print book.where_is
-            borrower=User.objects.get(username=book.where_is)
-            mail_to="essetizeta@gmail.com"
-            send_mail('Subject here', 'Here is the message.', 'booksharing@colibri.org',
-    [mail_to], fail_silently=False)
+    #        borrower=User.objects.get(username=book.where_is)
+    #        mail_to="essetizeta@gmail.com"
+    #        send_mail('Subject here', 'Here is the message.', 'booksharing@colibri.org',
+    #[mail_to], fail_silently=False)
             # Now call the index() view.
             # The user will be shown the homepage.
             return HttpResponseRedirect('/mybooks/')
@@ -167,7 +170,7 @@ def delete_book(request,id):
     context = RequestContext(request)
     book_id=id
     #book_id=request.GET.get('id')
-    book=get_object_or_404(Book,user= request.user,id=book_id)
+    book=get_object_or_404(Book,owner= request.user,id=book_id)
 
     # A HTTP POST?
     if request.method == 'POST':
@@ -415,9 +418,6 @@ class BookDetail(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = (authentication.SessionAuthentication,)
     serializer_class= BookDetailSerializer
     model=Book
-    #pagination_serializer_class = PaginatedRicetteListSerializer
-    #paginate_by_param = 'limit'
-    #paginate_by = 2
     
     #def get_queryset(self):
     #    user = self.kwargs.get('user', None)
@@ -452,7 +452,7 @@ class UserBookList(generics.ListCreateAPIView):
             user_id=User.objects.get(username=user)
         except Exception:
             raise Http404(_('Not found'))
-        return Book.objects.all().filter(user=user_id)
+        return Book.objects.all().filter(owner=user_id)
 
 user_book_list = UserBookList.as_view()
 
@@ -465,7 +465,7 @@ class UserBookDetail(generics.RetrieveUpdateDestroyAPIView):
         
     """
     
-    permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
     authentication_classes = (authentication.SessionAuthentication,)
     serializer_class= BookDetailSerializer
     model=Book
@@ -480,9 +480,63 @@ class UserBookDetail(generics.RetrieveUpdateDestroyAPIView):
             user_id=User.objects.get(username=user)
         except Exception:
             raise Http404(_('Not found'))
-        return Book.objects.all().filter(user=user_id).filter(id=book_id)
+        return Book.objects.all().filter(owner=user_id).filter(id=book_id)
 
 user_book_detail = UserBookDetail.as_view()
+
+
+class BookHistoryWhereIsList(generics.ListCreateAPIView):
+    """
+    ### GET
+    
+    Retrieve history of a book.
+        
+    """
+    
+    #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
+    authentication_classes = (authentication.SessionAuthentication,)
+    serializer_class= BookWhereIsListSerializer
+    model=BookWhereIs
+    #pagination_serializer_class = PaginatedRicetteListSerializer
+    #paginate_by_param = 'limit'
+    #paginate_by = 2
+    
+    #def get_queryset(self):
+    #    book = self.kwargs.get('book', None)
+    #    try:
+    #        book_id=Book.objects.get(id=book)
+    #    except Exception:
+    #        raise Http404(_('Not found'))
+    #    return BookHistory.objects.all().filter(book=book)
+
+book_history_where_is_list = BookHistoryWhereIsList.as_view()
+
+
+class BookHistoryList(generics.ListCreateAPIView):
+    """
+    ### GET
+    
+    Retrieve history of a book.
+        
+    """
+    
+    #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
+    authentication_classes = (authentication.SessionAuthentication,)
+    serializer_class= BookistoryListSerializer
+    model=BookHistory
+    #pagination_serializer_class = PaginatedRicetteListSerializer
+    #paginate_by_param = 'limit'
+    #paginate_by = 2
+    
+    def get_queryset(self):
+        book = self.kwargs.get('book', None)
+        try:
+            book_id=Book.objects.get(id=book)
+        except Exception:
+            raise Http404(_('Not found'))
+        return BookHistory.objects.all().filter(book=book)
+
+book_history_list = BookHistoryList.as_view()
 
 
 class UserHoldingBookList(generics.ListAPIView):

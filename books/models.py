@@ -23,10 +23,10 @@ class TimeStamped_Model(models.Model):
 
 
 class Book( TimeStamped_Model):
-    user= models.ForeignKey(User,related_name="sharer")
+    owner= models.ForeignKey(User,related_name="sharer")
     title = models.CharField( _("Titolo"),max_length=100,help_text=_("Titolo"))
     author = models.CharField( _("Autore"),max_length=100,help_text=_("Autore"))
-    where_is = models.ForeignKey(User,related_name="where_is",help_text=_("Da chi sta"))
+    #where_is = models.ForeignKey(User,related_name="where_is",help_text=_("Da chi sta"))
     
     def __unicode__(self):
         return self.title
@@ -38,23 +38,38 @@ class Book( TimeStamped_Model):
         print self.title
         # Place code here, which is excecuted the same
         # time the ``pre_save``-signal would be
-        if self.pk:
-            old_obj = Book.objects.get(pk=self.pk)
-
+        #if self.pk:
+        #    old_obj = Book.objects.get(pk=self.pk)
+    
         # Call parent's ``save`` function
         super(Book, self).save(*args, **kwargs)
-        try:
-            old_obj
-        except NameError:
-            old_obj = None
-        if old_obj :
-            if old_obj.where_is != self.where_is:
-                new_entry = BookHistory(book=old_obj,took_from=old_obj.where_is,given_to=self.where_is)
-                new_entry.save()
-        
-        #print(new_entry.id)
+        #try:
+        #    old_obj
+        #except NameError:
+        #    old_obj = None
+        #if old_obj :
+        #    if old_obj.where_is != self.where_is:
+        #        new_entry = BookHistory(book=old_obj,took_from=old_obj.where_is,given_to=self.where_is)
+        #        new_entry.save()
+    
         # Place code here, which is excecuted the same
         # time the ``post_save``-signal would be
+        try:
+            book_where_is = BookWhereIs.objects.get(book=self)
+        except BookWhereIs.DoesNotExist:
+            book_where_is = BookWhereIs(book=self,user=self.owner)
+            book_where_is.save()
+
+
+class BookWhereIs( TimeStamped_Model):
+    book= models.OneToOneField(Book,related_name="where_is",help_text=_("Da chi sta"))
+    user = models.ForeignKey(User)
+    
+    def __unicode__(self):
+        return self.user
+    
+    class Meta:
+        ordering = ['-modified']
 
         
 class BookHistory( TimeStamped_Model):
@@ -63,7 +78,7 @@ class BookHistory( TimeStamped_Model):
     given_to = models.ForeignKey(User,related_name="given_to",help_text=_("Dato a"))
     
     #def __unicode__(self):
-    #    return self.title
+    #    return self.book
     
     class Meta:
         ordering = ['-modified']

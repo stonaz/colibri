@@ -9,7 +9,7 @@ class AddBookForm(forms.ModelForm):
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Book
-        exclude=['user','where_is']
+        exclude=['owner','where_is']
         
 
 class UpdateBookForm(forms.ModelForm):
@@ -17,13 +17,13 @@ class UpdateBookForm(forms.ModelForm):
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Book
-        exclude=['user']
+        exclude=['owner']
 
         
 class DeleteBookForm(forms.ModelForm):
     class Meta:
         model = Book
-        exclude=['user']
+        exclude=['owner']
 
 
 class UserForm(forms.ModelForm):
