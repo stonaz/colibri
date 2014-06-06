@@ -414,7 +414,7 @@ class BookDetail(generics.RetrieveUpdateDestroyAPIView):
         
     """
     
-    #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
     authentication_classes = (authentication.SessionAuthentication,)
     serializer_class= BookDetailSerializer
     model=Book

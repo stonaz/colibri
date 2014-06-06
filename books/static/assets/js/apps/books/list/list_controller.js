@@ -8,7 +8,7 @@ Backbone, Marionette, $, _) {
             });
             ColibriApp.mainRegion.show(loadingView);
 
-            var fetchingBooks = ColibriApp.request("book:entities");
+            var fetchingBooks = ColibriApp.request("book_all:entities");
 
             var booksListLayout = new List.Layout();
             var booksListPanel = new List.Panel();

@@ -13,6 +13,7 @@ ColibriApp.module('BooksApp', function (BooksApp, ColibriApp, Backbone, Marionet
             BooksApp.Edit.Controller.editBook(id);
         },
         listBooks: function () {
+            console.log("Show all books")
             BooksApp.List.Controller.listBooks();
         },
         showBook: function(id){
