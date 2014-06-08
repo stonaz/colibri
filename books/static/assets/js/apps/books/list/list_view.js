@@ -17,15 +17,15 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
 
     List.Book = Marionette.ItemView.extend({
         tagName: "tr",
-        template: "#book-list-item",
+        template: "#book-all-list-item",
         events: {
             "click": "highlightName",
                 "click td a.js-show": "showClicked",
-                "click td a.js-edit": "editClicked",
-                "click button.js-delete": "deleteClicked"
+                //"click td a.js-edit": "editClicked",
+                //"click button.js-delete": "deleteClicked"
         },
         flash: function (cssClass) {
-            console.log('flash')
+            
             var $view = this.$el;
             $view.hide().toggleClass(cssClass).fadeIn(800, function () {
                 setTimeout(function () {
