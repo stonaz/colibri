@@ -108,10 +108,6 @@
     <script type="text/template" id="book-view-layout">
       <div id="book-region"></div>
       <div id="history-region"></div>
-    </script>
-    
-    <script type="text/template" id="book-view-history">
-      <h2>History goes here</h2>
     </script> 
 
     <script type="text/template" id="book-view">
@@ -122,6 +118,28 @@
       </a>
       <p><strong>Author</strong> <%= author %></p>
       <p><strong>Title</strong> <%= title %></p>
+    </script>
+    
+       <script type="text/template" id="book-view-history-list">
+      <thead>
+        <tr>
+          
+          <th>Preso da</th>
+          <th>Dato a </th>
+          <th>Quando</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </script>
+
+    <script type="text/template" id="book-view-history-item">
+      
+      <td><%= took_from_name %></td>
+      <td><%= given_to_name %></td>
+      <td><%= created %></td>
+
     </script>
 
     <script type="text/template" id="loading-view">
@@ -175,6 +193,7 @@
     <script src="{% static "assets/js/entities/header.js" %}"></script>
     <script src="{% static "assets/js/entities/book.js" %}"></script>
     <script src="{% static "assets/js/entities/book_all.js" %}"></script>
+    <script src="{% static "assets/js/entities/book_history.js" %}"></script>
     <script src="{% static "assets/js/common/views.js" %}"></script>
 
     <script src="{% static "assets/js/apps/books/books_app.js" %}"></script>

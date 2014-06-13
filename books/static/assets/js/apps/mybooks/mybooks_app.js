@@ -30,6 +30,7 @@ ColibriApp.module('MyBooksApp', function (MyBooksApp, ColibriApp, Backbone, Mari
         API.showBook(id);
         });
     ColibriApp.on("mybook:edit", function(id){
+        console.log('catched')
         ColibriApp.navigate("mybooks/" + id + "/edit");
         API.editBook(id);
         });
