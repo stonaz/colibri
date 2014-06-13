@@ -7,34 +7,16 @@ ColibriApp.module('MyBooksApp.Show', function(Show, ColibriApp,Backbone, Marione
             historyRegion: "#history-region"
         }
     });
-
-    //Show.History = Marionette.ItemView.extend({
-    //    onShow: function(){
-    //        console.log(this.model)
-    //    },
-    //    template: "#book-view-history",
-    //    //triggers: {
-    //    //      'click button.js-new': "book:new"
-    //    //}
-    //});
     
     Show.HistoryDetail = Marionette.ItemView.extend({
         tagName: "tr",
-        template: "#book-view-history-item",
-        //events: {
-        //        "click a.js-edit": "editClicked"
-        //        },
-        //editClicked: function(e){
-        //        e.preventDefault();
-        //        this.trigger("mybook:edit", this.model);
-        //        }
-                
+        template: "#book-view-history-item",               
         });
     
     Show.History = Marionette.CompositeView.extend({
         tagName: "table",
         template: "#book-view-history-list",
-        className: "table table-hover",
+        className: "table table-hover table-condensed",
         itemView: Show.HistoryDetail,
         itemViewContainer: "tbody",
         
@@ -63,7 +45,6 @@ ColibriApp.module('MyBooksApp.Show', function(Show, ColibriApp,Backbone, Marione
                     "click a.js-edit": "editClicked"
                     },
             editClicked: function(e){
-                    console.log('clicked')
                     e.preventDefault();
                     this.trigger("mybook:edit", this.model);
                     }

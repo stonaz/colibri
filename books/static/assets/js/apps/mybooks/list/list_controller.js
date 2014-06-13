@@ -64,6 +64,8 @@ Backbone, Marionette, $, _) {
 
                 booksListView.on("itemview:mybook:edit", function (childView, model) {
                     console.log("clicked on edit")
+                    console.log(ColibriApp.username)
+                    console.log(model.attributes.where_is)
                     var view = new ColibriApp.MyBooksApp.Edit.Book({
                         model: model,
                         //asModal: true

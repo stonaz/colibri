@@ -42,7 +42,7 @@ class BookWhereIsListSerializer(serializers.ModelSerializer):
     #dove_sta = serializers.Field(source='where_is.username')
     where_is = serializers.Field(source='user.username')
     book_title = serializers.Field(source='book.title')
-    book_author = serializers.Field(source='book.author')
+    book_author = serializers.Field(source='book.author')    
     
     class Meta:
         model = BookWhereIs

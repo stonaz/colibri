@@ -65,8 +65,8 @@ class BookWhereIs( TimeStamped_Model):
     book= models.OneToOneField(Book,related_name="where_is",help_text=_("Da chi sta"))
     user = models.ForeignKey(User)
     
-    def __unicode__(self):
-        return self.user
+    #def __unicode__(self):
+    #    return self.user
     
     class Meta:
         ordering = ['-modified']

@@ -15,7 +15,7 @@ from .serializers import *
 from .permissions import IsOwnerOrReadOnly
 
 from books.forms import *
-from books.models import Book,BookWhereIs
+from books.models import Book,BookHistory,BookWhereIs
 from profiles.models import UserProfile
 
 @login_required
@@ -485,31 +485,32 @@ class UserBookDetail(generics.RetrieveUpdateDestroyAPIView):
 user_book_detail = UserBookDetail.as_view()
 
 
-class BookHistoryWhereIsList(generics.ListCreateAPIView):
+class BookWhereIsDetail(generics.RetrieveUpdateAPIView):
     """
     ### GET
     
-    Retrieve history of a book.
+    Retrieve and update where a book is now.
         
     """
     
     #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
     authentication_classes = (authentication.SessionAuthentication,)
-    serializer_class= BookWhereIsListSerializer
-    model=BookWhereIs
+    serializer_class = BookWhereIsListSerializer
+    model = BookWhereIs
+    lookup_field = 'book'
     #pagination_serializer_class = PaginatedRicetteListSerializer
     #paginate_by_param = 'limit'
-    #paginate_by = 2
+    #paginate_by = 2       
     
-    #def get_queryset(self):
-    #    book = self.kwargs.get('book', None)
-    #    try:
-    #        book_id=Book.objects.get(id=book)
-    #    except Exception:
-    #        raise Http404(_('Not found'))
-    #    return BookHistory.objects.all().filter(book=book)
+    def get_queryset(self):
+        book = self.kwargs.get('book', None)
+        try:
+            book_id=Book.objects.get(id=book)
+        except Exception:
+            raise Http404(_('Not found'))
+        return BookWhereIs.objects.all().filter(book=book)
 
-book_history_where_is_list = BookHistoryWhereIsList.as_view()
+book_where_is = BookWhereIsDetail.as_view()
 
 
 class BookHistoryList(generics.ListCreateAPIView):
@@ -522,8 +523,8 @@ class BookHistoryList(generics.ListCreateAPIView):
     
     #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
     authentication_classes = (authentication.SessionAuthentication,)
-    serializer_class= BookistoryListSerializer
-    model=BookHistory
+    serializer_class = BookistoryListSerializer
+    model = BookHistory
     #pagination_serializer_class = PaginatedRicetteListSerializer
     #paginate_by_param = 'limit'
     #paginate_by = 2
