@@ -503,12 +503,32 @@ class BookWhereIsDetail(generics.RetrieveUpdateAPIView):
     #paginate_by = 2       
     
     def get_queryset(self):
+        print 'pippa'
         book = self.kwargs.get('book', None)
         try:
             book_id=Book.objects.get(id=book)
         except Exception:
             raise Http404(_('Not found'))
         return BookWhereIs.objects.all().filter(book=book)
+    
+    def put(self, request, *args, **kwargs):
+        """ Post a service request ( requires authentication) """
+
+        ##print request.POST['book']
+        book_id = kwargs['book']
+        book = Book.objects.get(pk=book_id)
+        print book
+        book_where_is = BookWhereIs.objects.get(book=book)
+        print book_where_is
+        user = User.objects.get(pk=request.POST['user'])
+        user_id= user.id
+        print user
+        book_where_is.user = user
+        book_where_is.save()
+        return Response({ 'user': user_id }, status=201)
+        
+        #kwargs['book'] = book
+        #super(BookWhereIsDetail, self).update(request, *args, **kwargs)
 
 book_where_is = BookWhereIsDetail.as_view()
 
