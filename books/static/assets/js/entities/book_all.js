@@ -68,7 +68,8 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
     },
 
     getBookEntity: function(bookId){
-      var book = new Entities.Book({id: bookId});
+      console.log('Showing book to be taken')
+      var book = new Entities.BookAll({id: bookId});
       var defer = $.Deferred();
       
         book.fetch({

@@ -9,7 +9,6 @@ Backbone, Marionette, $, _){
                 
                 
                 var bookShowLayout = new Show.Layout();
-                //var bookShowHistory = new Show.History();
                 
                 var bookView
                 var bookHistoryView

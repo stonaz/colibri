@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render,render_to_response,get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse,Http404
@@ -503,7 +504,6 @@ class BookWhereIsDetail(generics.RetrieveUpdateAPIView):
     #paginate_by = 2       
     
     def get_queryset(self):
-        print 'pippa'
         book = self.kwargs.get('book', None)
         try:
             book_id=Book.objects.get(id=book)
@@ -513,14 +513,15 @@ class BookWhereIsDetail(generics.RetrieveUpdateAPIView):
     
     def put(self, request, *args, **kwargs):
         """ Post a service request ( requires authentication) """
-
-        ##print request.POST['book']
+        body = json.loads(request.body) 
+        print body
         book_id = kwargs['book']
         book = Book.objects.get(pk=book_id)
         print book
         book_where_is = BookWhereIs.objects.get(book=book)
         print book_where_is
-        user = User.objects.get(pk=request.POST['user'])
+        print request.POST
+        user = User.objects.get(pk=body['user'])
         user_id= user.id
         print user
         book_where_is.user = user

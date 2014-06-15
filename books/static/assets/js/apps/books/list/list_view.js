@@ -21,8 +21,6 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
         events: {
             "click": "highlightName",
                 "click td a.js-show": "showClicked",
-                //"click td a.js-edit": "editClicked",
-                //"click button.js-delete": "deleteClicked"
         },
         flash: function (cssClass) {
             
@@ -41,17 +39,8 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
         showClicked: function (e) {
             e.preventDefault();
             e.stopPropagation();
-            this.trigger("book:show", this.model);
+            this.trigger("book:take", this.model);
         },
-        editClicked: function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            this.trigger("book:edit", this.model);
-        },
-        deleteClicked: function (e) {
-            e.stopPropagation();
-            this.trigger("book:delete", this.model);
-        }
     });
 
     List.Books = Marionette.CompositeView.extend({

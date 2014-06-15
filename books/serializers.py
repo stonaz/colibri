@@ -40,14 +40,21 @@ class BookWhereIsListSerializer(serializers.ModelSerializer):
     #sharer = serializers.Field(source='owner.username')
     #dove_sta = serializers.Field(source='where_is.username')
     where_is = serializers.Field(source='user.username')
+    email = serializers.Field(source='user.email')
     book_title = serializers.Field(source='book.title')
-    book_author = serializers.Field(source='book.author')    
+    book_author = serializers.Field(source='book.author')
+    #user_email = serializers.SerializerMethodField('get_user_email')
+    #
+    #def get_user_email(self, obj):
+    #    print obj.user_id
+    #    profile= UserProfile.objects.get(user=2)
+    #    return profile.email
     
     class Meta:
         model = BookWhereIs
 
         fields= (
-           'book','book_title','user','where_is','created', 'modified',
+           'book','book_title','book_author','user','email','where_is','created', 'modified',
             )
         #read_only_fields = ('book',)
         

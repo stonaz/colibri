@@ -65,6 +65,7 @@ ColibriApp.module('MyBooksApp.List', function (List, ColibriApp, Backbone, Mario
       this.listenTo(this.collection, "reset", function(){
         this.appendHtml = function(collectionView, itemView, index){
           collectionView.$el.append(itemView.el);
+          this.render()
         }
       });
     },

@@ -88,7 +88,7 @@
       <td>
         <a href="#books/<%= id %>" class="btn btn-small js-show">
           <i class="icon-eye-open"></i>
-          Show
+          Take
         </a>
 <!--        <a href="#books/<%= id %>/edit" class="btn btn-small js-edit">
         <i class="icon-pencil"></i>
@@ -141,6 +141,19 @@
       <td><%= created %></td>
 
     </script>
+    
+      <script type="text/template" id="book-where-is-view">
+      <h1><%= book_author %> <%= book_title %></h1>
+<!--      <a href="#books/<%= id %>/edit" class="btn btn-small js-edit">
+        <i class="icon-pencil"></i>
+        Edit this book
+      </a>-->
+      <p><strong>Author</strong> <%= book_author %></p>
+      <p><strong>Title</strong> <%= book_title %></p>
+      <p><strong>Where is</strong> <%= where_is %></p>
+      <p><strong>User email</strong> <%= email %></p>
+
+    </script>
 
     <script type="text/template" id="loading-view">
       <h3><%= title %></h3>
@@ -164,6 +177,21 @@
       </form>
     </script>
     
+    <script type="text/template" id="book-where-is-form">
+      <p><strong>Author</strong> <%= book_author %></p>
+      <p><strong>Title</strong> <%= book_title %></p>
+      <p><strong>Where is</strong> <%= where_is %></p>
+      <p><strong>User email</strong> <%= email %></p>
+      <form>
+        <div class="control-group">
+          <label for="book-where-is" class="control-label">Where is:</label>
+          <input id="book-where-is" name="user" type="text" value="<%= user %>"/>
+        </div>
+
+        <button class="btn js-submit">Take</button>
+      </form>
+    </script>
+    
         <script type="text/template" id="about-message">
       <h1>About CoLibri</h1>
       
@@ -182,7 +210,7 @@
     <script src="{% static "assets/js/vendor/backbone.js" %}"></script>
     <script src="{% static "assets/js/vendor/backbone.picky.js" %}"></script>
     <script src="{% static "assets/js/vendor/backbone.syphon.js" %}"></script>
-    <script src="{% static "assets/js/vendor/backbone.localstorage.js" %}"></script>
+ <!--   <script src="{% static "assets/js/vendor/backbone.localstorage.js" %}"></script>-->
     <script src="{% static "assets/js/vendor/backbone.marionette.js" %}"></script>
     <script src="{% static "assets/js/vendor/spin.js" %}"></script>
     <script src="{% static "assets/js/vendor/spin.jquery.js" %}"></script>
@@ -194,14 +222,15 @@
     <script src="{% static "assets/js/entities/book.js" %}"></script>
     <script src="{% static "assets/js/entities/book_all.js" %}"></script>
     <script src="{% static "assets/js/entities/book_history.js" %}"></script>
+    <script src="{% static "assets/js/entities/book_where_is.js" %}"></script>
     <script src="{% static "assets/js/common/views.js" %}"></script>
 
     <script src="{% static "assets/js/apps/books/books_app.js" %}"></script>
     <script src="{% static "assets/js/apps/books/common/views.js" %}"></script>
     <script src="{% static "assets/js/apps/books/list/list_view.js "%}"></script>
     <script src="{% static "assets/js/apps/books/list/list_controller.js" %}"></script>
-    <script src="{% static "assets/js/apps/books/show/show_view.js" %}"></script>
-    <script src="{% static "assets/js/apps/books/show/show_controller.js" %}"></script>
+    <script src="{% static "assets/js/apps/books/take/take_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/books/take/take_controller.js" %}"></script>
     <script src="{% static "assets/js/apps/books/edit/edit_view.js" %}"></script>
     <script src="{% static "assets/js/apps/books/edit/edit_controller.js" %}"></script>
     <script src="{% static "assets/js/apps/books/new/new_view.js" %}"></script>
