@@ -6,20 +6,33 @@ Backbone, Marionette, $, _){
     Take.Book = ColibriApp.BooksApp.Common.Views.Form.extend({
         
         template: "#book-where-is-form",
+        
+        templateHelpers:function(){
+
+            return {
+                taker: ColibriApp.user
+            }
+        },
 
         initialize: function () {
-            this.title = "Edit " + this.model.get('book_author');
-            this.title += " " + this.model.get('book_title');
+            this.title = "Take book" ;
         },
 
         onRender: function () {
-            if (this.options.generateTitle) {
-                var $title = $('<h1>', {
-                    text: this.title
-                });
-                this.$el.prepend($title);
-            }
+            console.log(this.options)
+            //if (this.options.generateTitle) {
+            //    console.log('eppure..')
+            //    var $title = $('<h3>', {
+            //        text: this.title
+            //    });
+            //    this.$el.prepend($title);
+            //}
             this.$(".js-submit").text("Take book");
+        },
+        
+        onShowSuccess: function(msg){
+            console.log('ok')
+            this.$(".book-where-is-form-msg").html(msg).addClass("text-success");
         }
 
         });

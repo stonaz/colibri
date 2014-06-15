@@ -10,12 +10,11 @@ ColibriApp.module('BooksApp.Common.Views', function(Views, ColibriApp, Backbone,
       e.preventDefault();
       var data = Backbone.Syphon.serialize(this);
       this.trigger("form:submit", data);
-      console.log(data)
     },
 
     onFormDataInvalid: function(errors){
       //form_errors = errors.split(',')
-      console.log(errors)
+     // console.log(errors)
       var $view = this.$el;
 
       var clearFormErrors = function(){

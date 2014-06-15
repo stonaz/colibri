@@ -184,12 +184,13 @@
       <p><strong>User email</strong> <%= email %></p>
       <form>
         <div class="control-group">
-          <label for="book-where-is" class="control-label">Where is:</label>
-          <input id="book-where-is" name="user" type="text" value="<%= user %>"/>
+          <!--<label for="book-where-is" class="control-label">Where is:</label>-->
+          <input id="book-where-is" name="user" type="hidden" value="<%= taker %>"/>
         </div>
 
         <button class="btn js-submit">Take</button>
       </form>
+      <div class="book-where-is-form-msg"></div>
     </script>
     
         <script type="text/template" id="about-message">
@@ -231,9 +232,6 @@
     <script src="{% static "assets/js/apps/books/list/list_controller.js" %}"></script>
     <script src="{% static "assets/js/apps/books/take/take_view.js" %}"></script>
     <script src="{% static "assets/js/apps/books/take/take_controller.js" %}"></script>
-    <script src="{% static "assets/js/apps/books/edit/edit_view.js" %}"></script>
-    <script src="{% static "assets/js/apps/books/edit/edit_controller.js" %}"></script>
-    <script src="{% static "assets/js/apps/books/new/new_view.js" %}"></script>
     
     <script src="{% static "assets/js/apps/mybooks/mybooks_app.js" %}"></script>
     <script src="{% static "assets/js/apps/mybooks/common/views.js" %}"></script>

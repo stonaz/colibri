@@ -381,8 +381,8 @@ class BookList(generics.ListCreateAPIView):
         Optionally restricts the returned results
         by filtering against a `search` query parameter in the URL.
         """
-
-        queryset = Book.objects.all()
+        #print self.request.user
+        queryset = Book.objects.all().exclude(owner=self.request.user)
         
         # retrieve value of querystring parameter "search"
         author = self.request.QUERY_PARAMS.get('author', None)

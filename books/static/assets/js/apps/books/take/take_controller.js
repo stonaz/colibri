@@ -12,15 +12,16 @@ Backbone, Marionette, $, _) {
 
                 if (book !== undefined) {
                     console.log('not undefined')
-                    console.log(book)
+                    //console.log(book)
                     bookWhereIsView = new Take.Book({
-                        model: book
+                        model: book,
+                        //generateTitle: false
                     });
                     bookWhereIsView.on("form:submit", function (data) {
-                        console.log(data)
+                        //console.log(data)
                         book.save(data, {
                             success: function (model, response, options) {
-                                console.log(view)
+                               // console.log(view)
                                 view.model.collection.fetch({
                                     success: function () {
                                         view.render();
@@ -29,7 +30,10 @@ Backbone, Marionette, $, _) {
                                         console.log('error');
                                     }
                                 });
-                                bookWhereIsView.trigger("dialog:close");
+                                var msg = "You are now owning this book<br>";
+                                msg += "An email has been sent to the previous owner"
+                                bookWhereIsView.triggerMethod("show:success", msg);
+                                //bookWhereIsView.trigger("dialog:close");
                                 //childView.flash("success");
                                 console.log("The model has been updated");
                             },
