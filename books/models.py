@@ -26,7 +26,6 @@ class Book( TimeStamped_Model):
     owner= models.ForeignKey(User,related_name="sharer")
     title = models.CharField( _("Titolo"),max_length=100,help_text=_("Titolo"))
     author = models.CharField( _("Autore"),max_length=100,help_text=_("Autore"))
-    #where_is = models.ForeignKey(User,related_name="where_is",help_text=_("Da chi sta"))
     
     def __unicode__(self):
         return self.title
@@ -37,20 +36,9 @@ class Book( TimeStamped_Model):
     def save(self,*args, **kwargs):
         print self.title
         # Place code here, which is excecuted the same
-        # time the ``pre_save``-signal would be
-        #if self.pk:
-        #    old_obj = Book.objects.get(pk=self.pk)
     
         # Call parent's ``save`` function
         super(Book, self).save(*args, **kwargs)
-        #try:
-        #    old_obj
-        #except NameError:
-        #    old_obj = None
-        #if old_obj :
-        #    if old_obj.where_is != self.where_is:
-        #        new_entry = BookHistory(book=old_obj,took_from=old_obj.where_is,given_to=self.where_is)
-        #        new_entry.save()
     
         # Place code here, which is excecuted the same
         # time the ``post_save``-signal would be
@@ -71,6 +59,24 @@ class BookWhereIs( TimeStamped_Model):
     class Meta:
         ordering = ['-modified']
 
+    def save(self,*args, **kwargs):
+        print self.user
+    # Place code here, which is excecuted the same
+        # time the ``pre_save``-signal would be
+        if self.pk:
+            update = True
+            old_obj = BookWhereIs.objects.get(pk=self.pk)
+        # Call parent's ``save`` function
+        super(BookWhereIs, self).save(*args, **kwargs)
+        try:
+            update
+        except NameError:
+            update = None
+        if update :
+            if old_obj.user != self.user:
+                new_entry = BookHistory(book=self.book,took_from=old_obj.user,given_to=self.user)
+                new_entry.save()
+
         
 class BookHistory( TimeStamped_Model):
     book= models.ForeignKey(Book)
@@ -82,4 +88,6 @@ class BookHistory( TimeStamped_Model):
     
     class Meta:
         ordering = ['-modified']
+        
+
             
