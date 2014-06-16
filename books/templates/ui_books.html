@@ -14,7 +14,7 @@
 
 
 <div id="header-region"></div>
-<h4>Ciao {{user}} !</h4>
+
     <div id="main-region" class="container">
       
       <p>Here is static content in the web page. You'll notice that it gets replaced by our app as soon as we start it.</p>
@@ -27,7 +27,9 @@
           <a class="brand" href="#mybooks">CoLibri</a>
           <div class="nav-collapse collapse">
             <ul class="nav"></ul>
+            
           </div>
+          <button class="btn btn-primary"> <%= username %> </button>
         </div>
       </div>
     </script>
@@ -43,7 +45,19 @@
     
     <script type="text/template" id="book-list-panel">
       <button class="btn btn-primary js-new"> New book </button>
-    </script>    
+    </script>
+    
+    <script type="text/template" id="book-all-list-panel">
+      <button > <%= username %> </button>
+       <form id="filter-form" class="form-search form-inline pull-right">
+        <div class="input-append">
+          <input type="text" class="span2 search-query js-filter-criterion">
+          <button type="submit" class="btn">Cerca libri</button>
+        </div>
+      </form>
+
+      
+    </script> 
     
     <script type="text/template" id="book-list">
       <thead>
@@ -159,6 +173,12 @@
       <h3><%= title %></h3>
       <p><%= message %></p>
       <div id="spinner"></div>
+    </script>
+    
+    
+        <script type="text/template" id="error-view">
+      <p><%= message %></p>
+     
     </script>
 
     <script type="text/template" id="book-form">

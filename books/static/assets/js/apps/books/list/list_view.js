@@ -9,7 +9,14 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
     });
 
     List.Panel = Marionette.ItemView.extend({
-        template: "#book-list-panel",
+        template: "#book-all-list-panel",
+        
+        templateHelpers:function(){
+            return {
+                taker: ColibriApp.user
+            }
+        },
+        
         triggers: {
               'click button.js-new': "book:new"
         }
@@ -20,7 +27,7 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
         template: "#book-all-list-item",
         events: {
             "click": "highlightName",
-                "click td a.js-show": "showClicked",
+            "click td a.js-show": "showClicked",
         },
         flash: function (cssClass) {
             

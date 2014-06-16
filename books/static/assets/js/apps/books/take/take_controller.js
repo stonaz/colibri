@@ -11,7 +11,7 @@ Backbone, Marionette, $, _) {
             $.when(fetchingBook).done(function (book) {
 
                 if (book !== undefined) {
-                    console.log('not undefined')
+                    //console.log('not undefined')
                     //console.log(book)
                     bookWhereIsView = new Take.Book({
                         model: book,

@@ -25,7 +25,21 @@ Backbone, Marionette, $, _) {
                 });
 
                 booksListView.on("itemview:book:take", function (booksListView, model) {
-                    ColibriApp.BooksApp.Take.Controller.showBook(model.get('id'),booksListView);
+                    
+                    console.log(ColibriApp.username+model.attributes.where_is)
+                    if (ColibriApp.username===model.attributes.where_is) {
+                        var msg = "Already owning this book"
+                        console.log(ColibriApp.username+model.attributes.where_is)
+                        var errorView = new ColibriApp.Common.Views.Error({
+                title: "Errore",
+                message: msg,
+                generateTitle: true
+            });
+            ColibriApp.dialogRegion.show(errorView);
+                    }
+                    else {
+                        ColibriApp.BooksApp.Take.Controller.showBook(model.get('id'),booksListView);
+                    }
                 });
 
                 ColibriApp.mainRegion.show(booksListLayout);

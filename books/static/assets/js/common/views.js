@@ -30,4 +30,34 @@ ColibriApp.module('Common.Views', function(Views, ColibriApp, Backbone, Marionet
       $('#spinner').spin(opts);
     }
   });
+  
+    Views.Error = Marionette.ItemView.extend({
+    template: "#error-view",
+    
+    initialize: function () {
+            this.title = "Ooops";
+        },
+    
+    serializeData: function(){
+      return {
+        //title: this.options.title || "Error",
+        message: this.options.message || "Error."
+      }
+    },
+    onShow: function(){
+      this.$el.addClass("text-error");
+    },
+    
+    //onRender: function () {
+    //        if (this.options.generateTitle) {
+    //          console.log('gen title')
+    //            var $title = $('<h1>', {
+    //                text: this.title
+    //            });
+    //            //this.$el.prepend($title);
+    //        }
+    //        this.$(".js-submit").text("Update book");
+    //    }
+  });
+    
 });
