@@ -7,6 +7,15 @@
     <link href="{% static "assets/css/bootstrap.css" %}"rel="stylesheet">
     <link href="{% static "assets/css/application.css" %}"rel="stylesheet">
     <link href="{% static "assets/css/jquery-ui-1.10.0.custom.css" %}"rel="stylesheet">
+    <style type=text/css>
+      .navbar-inverse .navbar-inner {
+  
+ background-color: #FFBF00; /* it's flat*/
+ background-image: none;
+}
+
+    </style>
+
   </head>
 
   <body>
@@ -29,7 +38,7 @@
             <ul class="nav"></ul>
             
           </div>
-          <button class="btn btn-primary"> <%= username %> </button>
+          <button class="btn btn-primary btn-success disabled"> <%= username %> </button>
         </div>
       </div>
     </script>
@@ -48,8 +57,7 @@
     </script>
     
     <script type="text/template" id="book-all-list-panel">
-      <button > <%= username %> </button>
-       <form id="filter-form" class="form-search form-inline pull-right">
+       <form id="filter-form" class="form-search form-inline">
         <div class="input-append">
           <input type="text" class="span2 search-query js-filter-criterion">
           <button type="submit" class="btn">Cerca libri</button>
