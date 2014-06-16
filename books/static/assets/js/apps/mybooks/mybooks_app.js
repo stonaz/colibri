@@ -14,6 +14,7 @@ ColibriApp.module('MyBooksApp', function (MyBooksApp, ColibriApp, Backbone, Mari
         },
         listBooks: function () {
             MyBooksApp.List.Controller.listBooks();
+            ColibriApp.execute("set:active:header", "mybooks");
         },
         showBook: function(id){
             console.log("Trying to show " + id)

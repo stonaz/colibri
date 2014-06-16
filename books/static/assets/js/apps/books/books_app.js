@@ -11,6 +11,7 @@ ColibriApp.module('BooksApp', function (BooksApp, ColibriApp, Backbone, Marionet
         listBooks: function () {
            // console.log("Show all books")
             BooksApp.List.Controller.listBooks();
+            ColibriApp.execute("set:active:header", "books");
         },
         //showBook: function(id){
         //    console.log("Trying to show " + id)
