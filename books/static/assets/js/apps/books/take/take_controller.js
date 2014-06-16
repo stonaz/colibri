@@ -8,18 +8,18 @@ Backbone, Marionette, $, _) {
             var fetchingBook = ColibriApp.request("book_where_is:entity", id);
 
             var bookWhereIsView
-            $.when(fetchingBook).done(function (book) {
+            $.when(fetchingBook).done(function (book_where_is) {
 
-                if (book !== undefined) {
+                if (book_where_is !== undefined) {
                     //console.log('not undefined')
-                    //console.log(book)
+                    //console.log(book_where_is)
                     bookWhereIsView = new Take.Book({
-                        model: book,
+                        model: book_where_is,
                         //generateTitle: false
                     });
                     bookWhereIsView.on("form:submit", function (data) {
                         //console.log(data)
-                        book.save(data, {
+                        book_where_is.save(data, {
                             success: function (model, response, options) {
                                // console.log(view)
                                 view.model.collection.fetch({
@@ -34,7 +34,7 @@ Backbone, Marionette, $, _) {
                                 msg += "An email has been sent to the previous owner"
                                 bookWhereIsView.triggerMethod("show:success", msg);
                                 //bookWhereIsView.trigger("dialog:close");
-                                //childView.flash("success");
+                                view.flash("success");
                                 console.log("The model has been updated");
                             },
                             error: function (model, xhr, options) {

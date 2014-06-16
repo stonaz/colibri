@@ -13,7 +13,7 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
         
         templateHelpers:function(){
             return {
-                taker: ColibriApp.user
+                username: ColibriApp.username
             }
         },
         
