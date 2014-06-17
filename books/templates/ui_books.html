@@ -6,13 +6,21 @@
     <title>Colibri Manager</title>
     <link href="{% static "assets/css/bootstrap.css" %}"rel="stylesheet">
     <link href="{% static "assets/css/application.css" %}"rel="stylesheet">
+      <link href="{% static "assets/css/colibri.css" %}"rel="stylesheet">
     <link href="{% static "assets/css/jquery-ui-1.10.0.custom.css" %}"rel="stylesheet">
+<!--    <link href="{% static "assets/css/fonts/glyphicons-halflings-regular.eot" %}"rel="stylesheet">
+    <link href="{% static "assets/fonts/glyphicons-halflings-regular.svg" %}"rel="stylesheet">
+    <link href="{% static "assets/fonts/glyphicons-halflings-regular.ttf" %}"rel="stylesheet">
+    <link href="{% static "assets/fonts/glyphicons-halflings-regular.woff" %}"rel="stylesheet">-->
+
     <style type=text/css>
-      .navbar-inverse .navbar-inner {
+    body { padding-top: 70px; }
+
+      .navbar {
   
- background-color: #FFBF00; /* it's flat*/
- background-image: none;
-}
+      background-color: #FFBF00; /* it's flat*/
+      background-image: none;
+      }
 
     </style>
 
@@ -31,16 +39,56 @@
     <div id="dialog-region"></div>
     
  <script type="text/template" id="header-template">
-      <div class="navbar-inner">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#_nav-menu">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#mybooks">CoLibri</a>
+    </div>
+      <div class="collapse navbar-collapse" id="_nav-menu">
+        <ul class="nav navbar-nav">
+<!--        <li class="active"><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>-->
+<!--        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>-->
+      </ul>
+<!--      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>-->
+<button class="btn btn-primary btn-success navbar-btn disabled navbar-right"> <%= username %> </button>
+
+       </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  
+  <!--      <div class="navbar-header">
         <div class="container">
-          <a class="brand" href="#mybooks">CoLibri</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav"></ul>
+          <a class="navbar-brand" href="#mybooks">CoLibri</a>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav"></ul>
             
           </div>
           <button class="btn btn-primary btn-success disabled"> <%= username %> </button>
         </div>
-      </div>
+      </div>-->
     </script>
 
     <script type="text/template" id="header-link">
@@ -53,14 +101,14 @@
     </script>
     
     <script type="text/template" id="book-list-panel">
-      <button class="btn btn-primary js-new"> New book </button>
+      <button class="btn btn-default js-new"> New book </button>
     </script>
     
     <script type="text/template" id="book-all-list-panel">
        <form id="filter-form" class="form-search form-inline">
         <div class="input-append">
           <input type="text" class="span2 search-query js-filter-criterion">
-          <button type="submit" class="btn">Cerca libri</button>
+          <button type="submit" class="btn btn-default">Cerca libri</button>
         </div>
       </form>
 
@@ -87,16 +135,16 @@
       <td><%= title %></td>
       <td><%= where_is %></td>
       <td>
-        <a href="#books/<%= id %>" class="btn btn-small js-show">
-          <i class="icon-eye-open"></i>
+        <a href="#books/<%= id %>" class="btn btn-orange js-show">
+          <span class="glyphicon glyphicon-question-sign"></span> 
           History
         </a>
-        <a href="#books/<%= id %>/edit" class="btn btn-small js-edit">
-        <i class="icon-pencil"></i>
+        <a href="#books/<%= id %>/edit" class="btn btn-orange js-edit">
+          <span class="glyphicon glyphicon-pencil"></span> 
           Edit
         </a>
-        <button class="btn btn-small js-delete">
-          <i class="icon-remove"></i>
+        <button class="btn btn-orange js-delete">
+         <span class="glyphicon glyphicon-remove"></span> 
           Delete
         </button>
       </td>
@@ -108,18 +156,12 @@
       <td><%= title %></td>
       <td><%= where_is %></td>
       <td>
-        <a href="#books/<%= id %>" class="btn btn-small js-show">
-          <i class="icon-eye-open"></i>
-          Take
+      
+        <a href="#books/<%= id %>/edit" class="btn btn-orange js-show">
+          <span class="glyphicon glyphicon-download"></span> 
+          Mi interessa
         </a>
-<!--        <a href="#books/<%= id %>/edit" class="btn btn-small js-edit">
-        <i class="icon-pencil"></i>
-          Edit
-        </a>
-        <button class="btn btn-small js-delete">
-          <i class="icon-remove"></i>
-          Delete
-        </button>-->
+
       </td>
     </script>
 
@@ -133,11 +175,11 @@
     </script> 
 
     <script type="text/template" id="book-view">
-      <h1><%= author %> <%= title %></h1>
+      <!--<h1><%= author %> <%= title %></h1>
       <a href="#books/<%= id %>/edit" class="btn btn-small js-edit">
         <i class="icon-pencil"></i>
         Edit this book
-      </a>
+      </a>-->
       <p><strong>Author</strong> <%= author %></p>
       <p><strong>Title</strong> <%= title %></p>
     </script>
@@ -191,14 +233,18 @@
 
     <script type="text/template" id="book-form">
       
-      <form>
-        <div class="control-group">
-          <label for="book-author" class="control-label">Author:</label>
-          <input id="book-author" name="author" type="text" value="<%= author %>"/>
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label for="book-author" class="col-sm-2 control-label">Author </label>
+          <div class="col-sm-10">
+          <input id="book-author" class="form-control"  name="author" type="text" value="<%= author %>"/>
+          </div>
         </div>
-        <div class="control-group">
-          <label for="book-title" class="control-label">Title:</label>
-          <input id="book-title" name="title" type="text" value="<%= title %>"/>
+        <div class="form-group">
+          <label for="book-title" class="col-sm-2 control-label">Title </label>
+          <div class="col-sm-10">
+          <input id="book-title" class="form-control"  name="title" type="text" value="<%= title %>"/>
+          </div>
         </div>
 
         <button class="btn js-submit">Save</button>
@@ -216,7 +262,7 @@
           <input id="book-where-is" name="user" type="hidden" value="<%= taker %>"/>
         </div>
 
-        <button class="btn js-submit">Take</button>
+        <button class="btn btn-default js-submit">Take</button>
       </form>
       <div class="book-where-is-form-msg"></div>
     </script>
@@ -231,7 +277,9 @@
       var username="{{user}}"
 
     </script>
+    
     <script src="{% static "assets/js/vendor/jquery.js" %}"></script>
+    <script src="{% static "assets/css/js/bootstrap.min.js" %}"></script>
     <script src="{% static "assets/js/vendor/jquery-ui-1.10.3.js" %}"></script>
     <script src="{% static "assets/js/vendor/jquery.cookie.js" %}"></script>
     <script src="{% static "assets/js/vendor/json2.js" %}"></script>
@@ -282,6 +330,15 @@
     <script src="{% static "assets/js/apps/header/list/list_controller.js" %}"></script>
     
     <script type="text/javascript">
+//      $( document ).ready(function() {
+//console.log( "ready!" );
+//$('.nav  a').on("click",function(){
+//        console.log("collapsing");
+//    
+//});
+//});
+
+      
       ColibriApp.start();
     </script>
   </body>

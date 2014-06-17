@@ -2,14 +2,16 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
   List.Header = Marionette.ItemView.extend({
     template: "#header-link",
     tagName: "li",
+    //className:"prova",
 
     events: {
       "click a": "navigate"
     },
 
     navigate: function(e){
-      e.preventDefault();
+      //e.preventDefault();
       this.trigger("navigate", this.model);
+      //$("#_nav-menu ").collapse('hide');
     },
 
     onRender: function(){
@@ -22,7 +24,8 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
 
   List.Headers = Marionette.CompositeView.extend({
     template: "#header-template",
-    className: "navbar navbar-inverse navbar-fixed-top",
+    //className: "navbar navbar-inverse navbar-fixed-top",
+    className: "nav navbar-nav",
     itemView: List.Header,
     itemViewContainer: "ul",
 
