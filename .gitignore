@@ -2,4 +2,4 @@
 runserver
 settings.py
 python
-static/
+./static
