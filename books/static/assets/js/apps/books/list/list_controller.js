@@ -38,7 +38,7 @@ Backbone, Marionette, $, _) {
             ColibriApp.dialogRegion.show(errorView);
                     }
                     else {
-                        ColibriApp.BooksApp.Take.Controller.showBook(model.get('id'),booksListView);
+                        ColibriApp.Common.Controllers.TakeBook.showBook(model.get('id'),booksListView);
                     }
                 });
 

@@ -68,7 +68,10 @@ Backbone, Marionette, $, _) {
                     var user = ColibriApp.username
                     var where_is = model.attributes.where_is
                     if (user !== where_is) {
-                        ColibriApp.BooksApp.Take.Controller.showBook(model.get('id'),childView);
+                      //  ColibriApp.BooksApp.Take.Controller.showBook(model.get('id'),childView);
+                    //    console.log(ColibriApp.Common.Controllers)
+                       // var takeBookController = new ColibriApp.Common.Controllers.TakeBook();
+                        ColibriApp.Common.Controllers.TakeBook.showBook(model.get('id'),childView);
                     }
                     
                     else{

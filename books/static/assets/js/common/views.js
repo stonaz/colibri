@@ -10,10 +10,10 @@ ColibriApp.module('Common.Views', function(Views, ColibriApp, Backbone, Marionet
     },
     onShow: function(){
       var opts = {
-        lines: 13, // The number of lines to draw
-        length: 20, // The length of each line
-        width: 5, // The line thickness
-        radius: 30, // The radius of the inner circle
+        lines: 9, // The number of lines to draw
+        length: 5, // The length of each line
+        width: 8, // The line thickness
+        radius: 8, // The radius of the inner circle
         corners: 1, // Corner roundness (0..1)
         rotate: 0, // The rotation offset
         direction: 1, // 1: clockwise, -1: counterclockwise
@@ -60,4 +60,85 @@ ColibriApp.module('Common.Views', function(Views, ColibriApp, Backbone, Marionet
     //    }
   });
     
+    Views.Form = Marionette.ItemView.extend({
+    template: "#book-form",
+
+    events: {
+      'click button.js-submit': 'submitClicked'
+    },
+
+    submitClicked: function(e){
+      e.preventDefault();
+      var data = Backbone.Syphon.serialize(this);
+      this.trigger("form:submit", data);
+    },
+
+    onFormDataInvalid: function(errors){
+      //form_errors = errors.split(',')
+      console.log(errors)
+      var $view = this.$el;
+
+      var clearFormErrors = function(){
+        var $form = $view.find("form");
+        $form.find(".help-inline.error").each(function(){
+          $(this).remove();
+        });
+        $form.find(".control-group.error").each(function(){
+          $(this).removeClass("error");
+        });
+      }
+
+      var markErrors = function(value, key){
+        console.log(value)
+        var $controlGroup = $view.find("#book-" + key).parent();
+        var $errorEl = $('<span>', { class: "help-inline error", text: value });
+        $controlGroup.append($errorEl).addClass("error");
+      }
+
+      clearFormErrors();
+      _.each(errors, markErrors);
+    }
+  });
+    
+    Views.MissingBook = Marionette.ItemView.extend({
+            template: "#missing-book-view"
+            });
+    
+    Views.WhereIsBook = Views.Form.extend({
+        
+        template: "#book-where-is-form",
+        
+        templateHelpers:function(){
+
+            return {
+                taker: ColibriApp.user
+            }
+        },
+
+        initialize: function () {
+            this.title = "Take book" ;
+        },
+
+        onRender: function () {
+            console.log(this.options)
+            //if (this.options.generateTitle) {
+            //    console.log('eppure..')
+            //    var $title = $('<h3>', {
+            //        text: this.title
+            //    });
+            //    this.$el.prepend($title);
+            //}
+            this.$(".js-submit").text("Take book");
+        },
+        
+        onShowSuccess: function(msg){
+            console.log('ok')
+            this.$(".book-where-is-form-msg").html(msg).addClass("text-success");
+        }
+
+        });
+  
+    
 });
+
+    
