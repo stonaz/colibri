@@ -7,7 +7,7 @@ admin.autodiscover()
 #from books import views
 
 urlpatterns = patterns('books.views',
-    # Examples:
+    
     url(r'^$', 'index', name='index'),
     url(r'^books/$', 'book_list',name='books'),
     url(r'^mybooks/$', 'mybooks',name='mybooks'),
@@ -34,16 +34,18 @@ urlpatterns = patterns('books.views',
     url(r'^api/v1/(?P<user>[-\w\.]+)/books/(?P<pk>[-\d\.]+)/$', 'user_book_detail' ,name='user_book_detail'),
     url(r'^api/v1/(?P<user>[-\w\.]+)/books/(?P<pk>[-\d\.]+)$', 'user_book_detail' ,name='user_book_detail'),
     url(r'^api/v1/book_where_is/(?P<book>[-\d\.]+)/$', 'book_where_is' ,name='book_where_is'),
+    url(r'^api/v1/book_where_is/(?P<book>[-\d\.]+)$', 'book_where_is' ,name='book_where_is'),
     url(r'^api/v1/book_history/(?P<book>[-\d\.]+)/$', 'book_history_list' ,name='book_history_list'),
     url(r'^api/v1/(?P<user>[-\w]+)/holding_books/$', 'user_holding_book_list' ,name='user_holding_book_list'),
     url(r'^api/v1/user_profile/$', 'user_profile_list' ,name='user_profile_list'),
     url(r'^api/v1/(?P<user>[-\w]+)/user_profile/$', 'user_profile_list' ,name='user_profile_list'),
     url(r'^admin/', include(admin.site.urls)),
-)  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+)  
 
-#urlpatterns += patterns('ui.views',
-#    url(r'^js/$', 'index',name='ui-index'),                   
-#)
+urlpatterns += patterns('profiles.views',
+        url(r'^api/v1/account/login/$', 'account_login', name='api_account_login'),
+    url(r'^api/v1/account/logout/$', 'account_logout', name='api_account_logout'),                  
+) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 #if settings.DEBUG:
