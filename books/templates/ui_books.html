@@ -73,7 +73,13 @@
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>-->
-<button class="btn btn-primary btn-success navbar-btn navbar-right js-login"> login </button>
+<% if(ColibriApp.username === undefined) { %>
+      <button class="btn btn-primary btn-success navbar-btn navbar-right js-login"> Login </button>
+    <% } else { %>
+      <button class="btn btn-primary btn-success navbar-btn  js-login"> <%=  ColibriApp.username %></button>&nbsp;
+      <button class="btn btn-primary btn-success navbar-btn navbar-right js-logout"> Logout </button> 
+    <% } %>
+
 
        </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -282,11 +288,16 @@
       </form>
     </script>
 
-<!--    <script type="text/javascript">
-      var user="{{user.id}}"
-      var username="{{user}}"
+    <script >
+        {% if request.user.is_authenticated %}
+                  var user="{{user.id}}"
+                  var username="{{user}}"
+        {% else %}
+            var authenticated = false;
+        {% endif %}
 
-    </script>-->
+
+    </script>
     
     <script src="{% static "assets/js/vendor/jquery.js" %}"></script>
     <script src="{% static "assets/css/js/bootstrap.min.js" %}"></script>

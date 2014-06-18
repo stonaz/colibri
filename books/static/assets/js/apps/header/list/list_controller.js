@@ -33,6 +33,7 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
                     //console.log("Login OK?");
                     ColibriApp.user=user.user;
                     ColibriApp.username=user.username;
+                    ColibriApp.HeaderApp.List.Controller.listHeader();
                 },
                 error: function (model, xhr, options) {
                     console.log(xhr)

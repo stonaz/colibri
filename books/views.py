@@ -243,7 +243,7 @@ def user_logout(request):
     logout(request)
 
     # Take the user back to the homepage.
-    return HttpResponseRedirect('/login/')
+    return HttpResponseRedirect('/js')
 
 def register(request):
     # Get the request's context.

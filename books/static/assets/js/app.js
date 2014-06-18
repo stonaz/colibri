@@ -1,7 +1,9 @@
 //var CSRF_TOKEN = '3sflZvkWvFT1WtdxMnXmUTxf45RCQ4hJ'
-var csrftoken = $.cookie('csrftoken');
+
 var oldSync = Backbone.sync;
 Backbone.sync = function(method, model, options){
+var csrftoken = $.cookie('csrftoken');
+console.log(csrftoken)
 options.beforeSend = function(xhr){
 xhr.setRequestHeader('X-CSRFToken', csrftoken);
 };
