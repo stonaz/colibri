@@ -12,8 +12,8 @@ return oldSync(method, model, options);
 
 var ColibriApp = new Marionette.Application();
 console.log(window.user)
-//ColibriApp.user = window.user;
-//ColibriApp.username = window.username;
+ColibriApp.user = window.user;
+ColibriApp.username = window.username;
 ColibriApp.addRegions({
     headerRegion: "#header-region",
     mainRegion: "#main-region",

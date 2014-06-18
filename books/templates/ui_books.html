@@ -73,13 +73,15 @@
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>-->
+      <div class="btn-toolbar">
 <% if(ColibriApp.username === undefined) { %>
       <button class="btn btn-primary btn-success navbar-btn navbar-right js-login"> Login </button>
     <% } else { %>
-      <button class="btn btn-primary btn-success navbar-btn  js-login"> <%=  ColibriApp.username %></button>&nbsp;
-      <button class="btn btn-primary btn-success navbar-btn navbar-right js-logout"> Logout </button> 
-    <% } %>
+      <button class="btn btn-primary btn-success navbar-btn navbar-right js-logout"> Logout </button>&nbsp;
+      <button class="btn btn-primary btn-success navbar-btn  navbar-right js-login"> <%=  ColibriApp.username %></button>&nbsp;
 
+    <% } %>
+      </div>
 
        </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -287,16 +289,14 @@
         <button class="btn js-submit">Login</button>
       </form>
     </script>
-
-    <script >
-        {% if request.user.is_authenticated %}
-                  var user="{{user.id}}"
+    
+    <script>
+      {% if request.user.is_authenticated %}
+             var user="{{user.id}}"
                   var username="{{user}}"
         {% else %}
-            var authenticated = false;
+            Nodeshot.currentUser = new User();
         {% endif %}
-
-
     </script>
     
     <script src="{% static "assets/js/vendor/jquery.js" %}"></script>
