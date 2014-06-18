@@ -12,6 +12,38 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
         var trigger = model.get("navigationTrigger");
         ColibriApp.trigger(trigger);
       });
+      
+      headers.on("login:clicked", function(childView){
+        console.log('login controller');
+        newLogin = new ColibriApp.Entities.Login();
+
+        var view = new ColibriApp.HeaderApp.Login.LoginForm({
+                        model: newLogin,
+                        //asModal: true
+            });
+        view.on("form:submit", function (data) {
+          console.log(data)
+            newLogin.save(data, {
+                success: function (model, response, options) {
+                    //books.add(newBook);
+                    console.log(newLogin);
+                    var user = newLogin.attributes
+                    view.trigger("dialog:close");
+                    //booksListView.children.findByModel(newBook).flash("success");
+                    //console.log("Login OK?");
+                    ColibriApp.user=user.user;
+                    ColibriApp.username=user.username;
+                },
+                error: function (model, xhr, options) {
+                    console.log(xhr)
+                    view.triggerMethod("form:data:invalid", xhr.responseJSON);
+                    console.log("Something went wrong while saving the model");
+                }
+            });
+        });
+
+                    ColibriApp.dialogRegion.show(view);
+      });
 
       ColibriApp.headerRegion.show(headers);
     },

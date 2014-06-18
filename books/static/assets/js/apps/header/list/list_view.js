@@ -7,9 +7,9 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
     //className:"prova",
 
     events: {
-      "click a": "navigate"
+      "click a": "navigate",
     },
-
+    
     navigate: function(e){
       //e.preventDefault();
       this.trigger("navigate", this.model);
@@ -32,12 +32,21 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
     itemViewContainer: "ul",
 
     events: {
-      "click a.brand": "brandClicked"
+      "click a.brand": "brandClicked",
+      "click button.js-login": "login"
     },
 
     brandClicked: function(e){
       e.preventDefault();
       this.trigger("brand:clicked");
-    }
+    },
+    
+    login: function(e){
+      e.preventDefault();
+      console.log('Open login form');
+      this.trigger("login:clicked");
+      //$("#_nav-menu ").collapse('hide');
+    },
+    
   });
 });
