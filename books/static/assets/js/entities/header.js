@@ -17,9 +17,10 @@ ColibriApp.module("Entities", function(Entities, ColibriApp, Backbone, Marionett
 
   var initializeHeaders = function(){
     Entities.headers = new Entities.HeaderCollection([
-      { name: "MyBooks", url: "mybooks", navigationTrigger: "mybooks:list" },
+      { name: "Home", url: "about", navigationTrigger: "about:show" },
       { name: "Books", url: "books", navigationTrigger: "books:list" },
-      { name: "About", url: "about", navigationTrigger: "about:show" }
+      { name: "MyBooks", url: "mybooks", navigationTrigger: "mybooks:list" },
+
     ]);
   };
 

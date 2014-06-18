@@ -79,7 +79,7 @@ def index(request):
             'index.html',
             context)
 
-@login_required
+#@login_required
 def ui_index(request):
     
     context = RequestContext(request)

@@ -10,8 +10,8 @@ return oldSync(method, model, options);
 
 var ColibriApp = new Marionette.Application();
 console.log(window.user)
-ColibriApp.user = window.user;
-ColibriApp.username = window.username;
+//ColibriApp.user = window.user;
+//ColibriApp.username = window.username;
 ColibriApp.addRegions({
     headerRegion: "#header-region",
     mainRegion: "#main-region",
@@ -34,7 +34,7 @@ ColibriApp.on("initialize:after", function () {
     if (Backbone.history) {
         Backbone.history.start();
         if(this.getCurrentRoute() === ""){
-      ColibriApp.trigger("mybooks:list");
+      ColibriApp.trigger("about:show");
     }
         //ColibriApp.BooksApp.List.Controller.listBooks();
     }

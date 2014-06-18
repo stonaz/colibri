@@ -45,6 +45,7 @@ class AccountLogin(generics.GenericAPIView):
         
         if serializer.is_valid():
             login(request, serializer.instance)
+            user = serializer.instance
         
             if request.DATA.get('remember'):
                 # TODO: remember configurable
@@ -53,7 +54,9 @@ class AccountLogin(generics.GenericAPIView):
                 request.session.set_expiry(0)
                 
             return Response({
-                'detail': _(u'Logged in successfully')
+                'detail': _(u'Logged in successfully'),
+                'username': user.username,
+                'user' : user.id
             })
         
         return Response(serializer.errors, status=400)
