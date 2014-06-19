@@ -13,7 +13,7 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
         ColibriApp.trigger(trigger);
       });
       
-      headers.on("login:clicked", function(childView){
+      headers.on("login:clicked", function(){
         console.log('login controller');
         newLogin = new ColibriApp.Entities.Login();
 
@@ -25,26 +25,51 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
           console.log(data)
             newLogin.save(data, {
                 success: function (model, response, options) {
-                    //books.add(newBook);
                     console.log(newLogin);
                     var user = newLogin.attributes
                     view.trigger("dialog:close");
-                    //booksListView.children.findByModel(newBook).flash("success");
-                    //console.log("Login OK?");
                     ColibriApp.user=user.user;
                     ColibriApp.username=user.username;
-                    ColibriApp.HeaderApp.List.Controller.listHeader();
+                    headers.render()
+                    //ColibriApp.HeaderApp.List.Controller.listHeader();
                 },
                 error: function (model, xhr, options) {
                     console.log(xhr)
                     view.triggerMethod("form:data:invalid", xhr.responseJSON);
-                    console.log("Something went wrong while saving the model");
+                    console.log("Something went wrong while logging in");
                 }
             });
         });
 
                     ColibriApp.dialogRegion.show(view);
       });
+      
+      headers.on("logout:clicked", function(){
+        console.log('logging out')
+        var csfrtoken= $.cookie('csrftoken')
+        var headers_view= headers
+        Backbone.ajax({
+                url: "/api/v1/account/logout/",
+                method:"POST",
+                beforeSend: function(xhr){
+                  xhr.setRequestHeader("X-CSRFToken", csfrtoken);
+                  },
+                data: "",
+                success: function (val) {
+                      console.log('logged out');
+                      ColibriApp.user=undefined;
+                      ColibriApp.username=undefined;
+                      headers_view.render()
+                      },
+                error: function (model, xhr, options) {
+                    console.log(xhr)
+                    //view.triggerMethod("form:data:invalid", xhr.responseJSON);
+                    console.log("Something went wrong while logging out");
+                } 
+        });
+
+      })
+      
 
       ColibriApp.headerRegion.show(headers);
     },

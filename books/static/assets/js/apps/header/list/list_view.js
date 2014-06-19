@@ -18,6 +18,7 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
 
     onRender: function(){
       if(this.model.selected){
+        console.log("Headers rendering..")
         // add class so Bootstrap will highlight the active entry in the navbar
         this.$el.addClass("active");
       };
@@ -33,7 +34,8 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
 
     events: {
       "click a.brand": "brandClicked",
-      "click button.js-login": "login"
+      "click button.js-login": "login",
+      "click button.js-logout": "logout"
     },
 
     brandClicked: function(e){
@@ -45,6 +47,12 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
       e.preventDefault();
       console.log('Open login form');
       this.trigger("login:clicked");
+      //$("#_nav-menu ").collapse('hide');
+    },
+    
+    logout: function(e){
+      e.preventDefault();
+      this.trigger("logout:clicked");
       //$("#_nav-menu ").collapse('hide');
     },
     
