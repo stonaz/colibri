@@ -19,7 +19,6 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
 
         var view = new ColibriApp.HeaderApp.Login.LoginForm({
                         model: newLogin,
-                        //asModal: true
             });
         view.on("form:submit", function (data) {
           console.log(data)
@@ -47,7 +46,7 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
       headers.on("logout:clicked", function(){
         console.log('logging out')
         var csfrtoken= $.cookie('csrftoken')
-        var headers_view= headers
+        var self= this
         Backbone.ajax({
                 url: "/api/v1/account/logout/",
                 method:"POST",
@@ -56,10 +55,10 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
                   },
                 data: "",
                 success: function (val) {
-                      console.log('logged out');
+                      console.log('happilylogged out');
                       ColibriApp.user=undefined;
                       ColibriApp.username=undefined;
-                      headers_view.render()
+                      self.render()
                       },
                 error: function (model, xhr, options) {
                     console.log(xhr)

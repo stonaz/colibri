@@ -20,6 +20,9 @@ ColibriApp.module('BooksApp', function (BooksApp, ColibriApp, Backbone, Marionet
     };
     
     ColibriApp.on("books:list", function(){
+        if (!ColibriApp.user) {
+            console.log('not logged in !')
+        }
         ColibriApp.navigate("books");
         API.listBooks();
         });
