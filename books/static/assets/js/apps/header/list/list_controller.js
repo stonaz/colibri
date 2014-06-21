@@ -15,32 +15,33 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
       
       headers.on("login:clicked", function(){
         console.log('login controller');
-        newLogin = new ColibriApp.Entities.Login();
-
-        var view = new ColibriApp.HeaderApp.Login.LoginForm({
-                        model: newLogin,
-            });
-        view.on("form:submit", function (data) {
-          console.log(data)
-            newLogin.save(data, {
-                success: function (model, response, options) {
-                    console.log(newLogin);
-                    var user = newLogin.attributes
-                    view.trigger("dialog:close");
-                    ColibriApp.user=user.user;
-                    ColibriApp.username=user.username;
-                    headers.render()
-                    //ColibriApp.HeaderApp.List.Controller.listHeader();
-                },
-                error: function (model, xhr, options) {
-                    console.log(xhr)
-                    view.triggerMethod("form:data:invalid", xhr.responseJSON);
-                    console.log("Something went wrong while logging in");
-                }
-            });
-        });
-
-                    ColibriApp.dialogRegion.show(view);
+        ColibriApp.trigger('header:login');
+        //newLogin = new ColibriApp.Entities.Login();
+        //
+        //var view = new ColibriApp.HeaderApp.Login.LoginForm({
+        //                model: newLogin,
+        //    });
+        //view.on("form:submit", function (data) {
+        //  console.log(data)
+        //    newLogin.save(data, {
+        //        success: function (model, response, options) {
+        //            console.log(newLogin);
+        //            var user = newLogin.attributes
+        //            view.trigger("dialog:close");
+        //            ColibriApp.user=user.user;
+        //            ColibriApp.username=user.username;
+        //            headers.render()
+        //            ColibriApp.HeaderApp.List.Controller.listHeader();
+        //        },
+        //        error: function (model, xhr, options) {
+        //            console.log(xhr)
+        //            view.triggerMethod("form:data:invalid", xhr.responseJSON);
+        //            console.log("Something went wrong while logging in");
+        //        }
+        //    });
+        //});
+        //
+        //            ColibriApp.dialogRegion.show(view);
       });
       
       headers.on("logout:clicked", function(){
@@ -58,7 +59,10 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
                       console.log('happilylogged out');
                       ColibriApp.user=undefined;
                       ColibriApp.username=undefined;
-                      self.render()
+                      ColibriApp.authenticated=false;
+                      //self.render()
+                      ColibriApp.trigger("about:show")
+                      ColibriApp.HeaderApp.List.Controller.listHeader();
                       },
                 error: function (model, xhr, options) {
                     console.log(xhr)

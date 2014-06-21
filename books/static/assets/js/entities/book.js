@@ -73,13 +73,13 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
           }
         });             
       var promise = defer.promise();
-      $.when(promise).done(function(books){
-        if(books.length === 0){
-          // if we don't have any books yet, create some for convenience
-          var models = initializeBooks();
-          books.reset(models);
-        }
-      })
+      //$.when(promise).done(function(books){
+      //  if(books.length === 0){
+      //    // if we don't have any books yet, create some for convenience
+      //    //var models = initializeBooks();
+      //    books.reset();
+      //  }
+      //})
       return promise;
     
     },

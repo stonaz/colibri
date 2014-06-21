@@ -84,7 +84,7 @@ ColibriApp.module('Common.Views', function(Views, ColibriApp, Backbone, Marionet
           $(this).remove();
         });
         $form.find(".control-group.error").each(function(){
-          $(this).removeClass("error");
+          $(this).removeClass("bg-danger");
         });
       }
 
@@ -92,7 +92,7 @@ ColibriApp.module('Common.Views', function(Views, ColibriApp, Backbone, Marionet
         console.log(value)
         var $controlGroup = $view.find("#book-" + key).parent();
         var $errorEl = $('<span>', { class: "help-inline error", text: value });
-        $controlGroup.append($errorEl).addClass("error");
+        $controlGroup.append($errorEl).addClass("bg-danger");
       }
 
       clearFormErrors();
@@ -132,8 +132,8 @@ ColibriApp.module('Common.Views', function(Views, ColibriApp, Backbone, Marionet
       var markErrors = function(value, key){
         console.log(value)
         var $controlGroup = $view.find("#book-" + key).parent();
-        var $errorEl = $('<span>', { class: "help-inline error", text: value });
-        $controlGroup.append($errorEl).addClass("error");
+        var $errorEl = $('<span>', { class: "help-inline bg-danger", text: value });
+        $view.append($errorEl);
       }
 
       clearFormErrors();

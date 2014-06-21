@@ -14,10 +14,15 @@ ColibriApp.module('MyBooksApp.List', function (List, ColibriApp, Backbone, Mario
               'click button.js-new': "book:new"
         }
     });
+    
+    List.NoBooks = Marionette.ItemView.extend({
+        template: "#missing-books-view"
+        });
 
     List.Book = Marionette.ItemView.extend({
         tagName: "tr",
         template: "#book-list-item",
+
         events: {
             "click": "highlightName",
                 "click td a.js-show": "showClicked",
@@ -60,6 +65,18 @@ ColibriApp.module('MyBooksApp.List', function (List, ColibriApp, Backbone, Mario
         className: "table table-hover",
         itemView: List.Book,
         itemViewContainer: "tbody",
+        
+        onRender: function(){
+                        if (this.collection.length  < 1) {
+                            console.log('No books to show')
+                var $title = $('<tr>', {
+                    text: 'No books inserted yet'
+                });
+                $title.addClass('bg-danger')
+                this.$el.append($title);
+                
+            }
+        },
         
         initialize: function(){
       this.listenTo(this.collection, "reset", function(){

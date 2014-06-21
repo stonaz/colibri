@@ -39,7 +39,8 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
     },
 
     brandClicked: function(e){
-      e.preventDefault();
+      //e.preventDefault();
+      console.log('Brand clicked')
       this.trigger("brand:clicked");
     },
     

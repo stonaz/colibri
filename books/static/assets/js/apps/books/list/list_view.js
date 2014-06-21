@@ -57,6 +57,18 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
         itemView: List.Book,
         itemViewContainer: "tbody",
         
+                onRender: function(){
+                        if (this.collection.length  < 1) {
+                            console.log('No books to show')
+                var $title = $('<tr>', {
+                    text: 'No books inserted yet'
+                });
+                $title.addClass('bg-danger')
+                this.$el.append($title);
+                
+            }
+        },
+        
         initialize: function(){
       this.listenTo(this.collection, "reset", function(){
         this.appendHtml = function(collectionView, itemView, index){

@@ -167,6 +167,10 @@
       <div class="alert alert-error">This book doesn't exist !</div>
     </script>
     
+    <script type="text/template" id="missing-books-view">
+      <div class="warning warning-error">No books inserted yet</div>
+    </script>
+    
     <script type="text/template" id="book-view-layout">
       <div id="book-region"></div>
       <div id="history-region"></div>
@@ -288,14 +292,20 @@
 
         <button class="btn js-submit">Login</button>
       </form>
+      
     </script>
     
     <script>
       {% if request.user.is_authenticated %}
             var user="{{user.id}}";
             var username="{{user}}";
+            var isAuthenticated=function(){
+              return true;
+            }
         {% else %}
-            var authenticated=false;
+            var isAuthenticated=function(){
+              return false;
+            }
         {% endif %}
     </script>
     
@@ -351,6 +361,7 @@
     <script src="{% static "assets/js/apps/header/list/list_view.js" %}"></script>
     <script src="{% static "assets/js/apps/header/list/list_controller.js" %}"></script>
     <script src="{% static "assets/js/apps/header/login/login_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/header/login/login_controller.js" %}"></script>
     
     <script type="text/javascript">
 //      $( document ).ready(function() {

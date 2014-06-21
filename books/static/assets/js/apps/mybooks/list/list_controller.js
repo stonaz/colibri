@@ -14,6 +14,7 @@ Backbone, Marionette, $, _) {
             var booksListPanel = new List.Panel();
 
             $.when(fetchingBooks).done(function (books) {
+                console.log(books.length)
 
                 var booksListView = new List.Books({
                     collection: books
@@ -26,17 +27,16 @@ Backbone, Marionette, $, _) {
 
                 booksListPanel.on("book:new", function () {
                     newBook = new ColibriApp.Entities.Book();
-                    console.log('BOOK: ' + newBook)
 
                     var view = new ColibriApp.MyBooksApp.New.Book({
                         model: newBook,
-                        //asModal: true
                     });
                     view.on("form:submit", function (data) {
                         newBook.save(data, {
                             success: function (model, response, options) {
                                 books.add(newBook);
                                 view.trigger("dialog:close");
+                                booksListView.render()
                                 booksListView.children.findByModel(newBook).flash("success");
                                 console.log("The model has been saved to the server");
                             },
@@ -68,9 +68,6 @@ Backbone, Marionette, $, _) {
                     var user = ColibriApp.username
                     var where_is = model.attributes.where_is
                     if (user !== where_is) {
-                      //  ColibriApp.BooksApp.Take.Controller.showBook(model.get('id'),childView);
-                    //    console.log(ColibriApp.Common.Controllers)
-                       // var takeBookController = new ColibriApp.Common.Controllers.TakeBook();
                         ColibriApp.Common.Controllers.TakeBook.showBook(model.get('id'),childView);
                     }
                     

@@ -2,7 +2,11 @@ ColibriApp.module("HeaderApp", function(Header, ColibriApp, Backbone, Marionette
   var API = {
     listHeader: function(){
       Header.List.Controller.listHeader();
-    }
+    },
+      login: function(){
+      Header.Login.Controller.login();
+    },
+    
   };
 
   ColibriApp.commands.setHandler("set:active:header", function(name){
@@ -12,4 +16,8 @@ ColibriApp.module("HeaderApp", function(Header, ColibriApp, Backbone, Marionette
   Header.on("start", function(){
     API.listHeader();
   });
+  
+      ColibriApp.on("header:login", function(){
+        API.login();
+        });
 });

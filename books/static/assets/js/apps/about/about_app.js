@@ -13,6 +13,7 @@ ColibriApp.module("AboutApp", function(AboutApp, ColibriApp, Backbone, Marionett
   };
 
   ColibriApp.on("about:show", function(){
+    console.log('show about/home')
     ColibriApp.navigate("about");
     API.showAbout();
   });

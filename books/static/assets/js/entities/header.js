@@ -18,17 +18,26 @@ ColibriApp.module("Entities", function(Entities, ColibriApp, Backbone, Marionett
   var initializeHeaders = function(){
     Entities.headers = new Entities.HeaderCollection([
       { name: "Home", url: "about", navigationTrigger: "about:show" },
-      { name: "Books", url: "books", navigationTrigger: "books:list" },
-      { name: "MyBooks", url: "mybooks", navigationTrigger: "mybooks:list" },
+      //{ name: "Books", url: "books", navigationTrigger: "books:list" },
+      //{ name: "MyBooks", url: "mybooks", navigationTrigger: "mybooks:list" },
 
     ]);
+    if (ColibriApp.authenticated) {
+      console.log('app auth ok')
+      console.log(ColibriApp.authenticated)
+      Entities.headers.add({ name: "Books", url: "books", navigationTrigger: "books:list" });
+      Entities.headers.add({ name: "MyBooks", url: "mybooks", navigationTrigger: "mybooks:list" });
+
+    }
   };
 
   var API = {
     getHeaders: function(){
-      if(Entities.headers === undefined){
-        initializeHeaders();
-      }
+      //if(Entities.headers === undefined){
+      //  initializeHeaders();
+      //}
+      initializeHeaders();
+      console.log('initializing headers')
       return Entities.headers;
     }
   };
