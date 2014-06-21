@@ -19,6 +19,7 @@ ColibriApp.module("HeaderApp.Login", function (Login, ColibriApp, Backbone, Mari
                         ColibriApp.authenticated=true;
                         //headers.render()
                         ColibriApp.HeaderApp.List.Controller.listHeader();
+                        ColibriApp.trigger("books:list")
                     },
                     error: function (model, xhr, options) {
                         console.log(xhr)

@@ -46,7 +46,6 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
     
     login: function(e){
       e.preventDefault();
-      console.log('Open login form');
       this.trigger("login:clicked");
       //$("#_nav-menu ").collapse('hide');
     },
