@@ -35,7 +35,8 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
     events: {
       "click a.brand": "brandClicked",
       "click button.js-login": "login",
-      "click button.js-logout": "logout"
+      "click button.js-logout": "logout",
+      "click button.js-signin": "signin"
     },
 
     brandClicked: function(e){
@@ -53,6 +54,12 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
     logout: function(e){
       e.preventDefault();
       this.trigger("logout:clicked");
+      //$("#_nav-menu ").collapse('hide');
+    },
+    
+    signin: function(e){
+      e.preventDefault();
+      this.trigger("signin:clicked");
       //$("#_nav-menu ").collapse('hide');
     },
     

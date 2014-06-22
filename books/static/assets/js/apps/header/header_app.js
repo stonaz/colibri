@@ -6,6 +6,9 @@ ColibriApp.module("HeaderApp", function(Header, ColibriApp, Backbone, Marionette
       login: function(){
       Header.Login.Controller.login();
     },
+      signin: function(){
+      Header.Signin.Controller.signin();
+    },
     
   };
 
@@ -17,7 +20,11 @@ ColibriApp.module("HeaderApp", function(Header, ColibriApp, Backbone, Marionette
     API.listHeader();
   });
   
-      ColibriApp.on("header:login", function(){
-        API.login();
-        });
+  ColibriApp.on("header:login", function(){
+    API.login();
+    });
+  
+  ColibriApp.on("header:signin", function(){
+    API.signin();
+    });
 });

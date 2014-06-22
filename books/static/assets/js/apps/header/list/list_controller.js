@@ -13,6 +13,37 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
         ColibriApp.trigger(trigger);
       });
       
+      headers.on("signin:clicked", function(){
+        console.log('signin controller');
+        ColibriApp.trigger('header:signin');
+        //newLogin = new ColibriApp.Entities.Login();
+        //
+        //var view = new ColibriApp.HeaderApp.Login.LoginForm({
+        //                model: newLogin,
+        //    });
+        //view.on("form:submit", function (data) {
+        //  console.log(data)
+        //    newLogin.save(data, {
+        //        success: function (model, response, options) {
+        //            console.log(newLogin);
+        //            var user = newLogin.attributes
+        //            view.trigger("dialog:close");
+        //            ColibriApp.user=user.user;
+        //            ColibriApp.username=user.username;
+        //            headers.render()
+        //            ColibriApp.HeaderApp.List.Controller.listHeader();
+        //        },
+        //        error: function (model, xhr, options) {
+        //            console.log(xhr)
+        //            view.triggerMethod("form:data:invalid", xhr.responseJSON);
+        //            console.log("Something went wrong while logging in");
+        //        }
+        //    });
+        //});
+        //
+        //            ColibriApp.dialogRegion.show(view);
+      });
+      
       headers.on("login:clicked", function(){
         console.log('login controller');
         ColibriApp.trigger('header:login');
