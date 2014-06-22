@@ -4,6 +4,65 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from .models import UserProfile
 
+class ExtraFieldSerializerOptions(serializers.ModelSerializerOptions):
+    """
+    Meta class options for ExtraFieldSerializerOptions
+    """
+    def __init__(self, meta):
+        super(ExtraFieldSerializerOptions, self).__init__(meta)
+        self.non_native_fields = getattr(meta, 'non_native_fields', ())
+
+
+# TODO: rename / remove
+class ExtraFieldSerializer(serializers.ModelSerializer):
+    """
+    ModelSerializer in which non native extra fields can be specified.
+    """
+    
+    _options_class = ExtraFieldSerializerOptions
+    
+    def restore_object(self, attrs, instance=None):
+        """
+        Deserialize a dictionary of attributes into an object instance.
+        You should override this method to control how deserialized objects
+        are instantiated.
+        """
+        for field in self.opts.non_native_fields:
+            attrs.pop(field)
+        
+        return super(ExtraFieldSerializer, self).restore_object(attrs, instance)
+    
+    def to_native(self, obj):
+        """
+        Serialize objects -> primitives.
+        """
+        ret = self._dict_class()
+        ret.fields = self._dict_class()
+
+        for field_name, field in self.fields.items():
+            if field.read_only and obj is None:
+               continue
+            field.initialize(parent=self, field_name=field_name)
+            key = self.get_field_key(field_name)
+            
+            # skips to next iteration but permits to show the field in API browser
+            try:
+                value = field.field_to_native(obj, field_name)
+            except AttributeError as e:
+                if field_name in self.opts.non_native_fields:
+                    continue
+                else:
+                    raise AttributeError(e.message)
+            
+            method = getattr(self, 'transform_%s' % field_name, None)
+            if callable(method):
+                value = method(obj, value)
+            if not getattr(field, 'write_only', False):
+                ret[key] = value
+            ret.fields[key] = self.augment_field(field, field_name, key, value)
+
+        return ret
+
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
@@ -31,3 +90,33 @@ class LoginSerializer(serializers.Serializer):
             error = _("Ivalid login credentials.")
             raise serializers.ValidationError(error)
         return attrs
+    
+
+class UserCreateSerializer(ExtraFieldSerializer):
+    """ Profile Serializer for User Creation """
+    password_confirmation = serializers.CharField(label=_('password_confirmation'))
+    email = serializers.CharField(source='email')
+
+    def validate_password_confirmation(self, attrs, source):
+        """
+        password_confirmation check
+        """
+        password_confirmation = attrs[source]
+        password = attrs['password']
+
+        if password_confirmation != password:
+            raise serializers.ValidationError(_('Password confirmation mismatch'))
+
+        return attrs
+
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            # required
+            'username', 'email', 'password', 'password_confirmation',
+            # optional
+            #'first_name', 'last_name', 'about', 'gender',
+            #'birth_date', 'address', 'city', 'country'
+        )
+        non_native_fields = ('password_confirmation', )

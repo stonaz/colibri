@@ -13,6 +13,7 @@ from rest_framework.authentication import TokenAuthentication, SessionAuthentica
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from .serializers import *
+from .models import UserProfile
 
 class IsNotAuthenticated(IsAuthenticated):
     """
@@ -80,3 +81,39 @@ class AccountLogout(APIView):
         return Response({ 'detail': _(u'Logged out successfully') })
 
 account_logout = AccountLogout.as_view()
+
+class AccountSignIn(generics.ListCreateAPIView):
+    """
+Return profile of current authenticated user or return 401.
+### POST
+Create a new user account.
+
+"""
+    authentication_classes = (TokenAuthentication, SessionAuthentication)
+    model = User
+    serializer_class = UserCreateSerializer
+    
+    
+    #def get(self, request, *args, **kwargs):
+    #    """ return profile of current user if authenticated otherwise 401 """
+    #    serializer = self.serializer_reader_class
+    #    
+    #    if request.user.is_authenticated():
+    #        return Response(serializer(request.user, context=self.get_serializer_context()).data)
+    #    else:
+    #        return Response({ 'detail': _('Authentication credentials were not provided') }, status=401)
+    
+    def post_save(self, obj, created):
+
+        super(AccountSignIn, self).post_save(obj)
+
+        if created:
+            obj.set_password(obj.password)
+            obj.save()
+            profile=UserProfile(user=obj)
+            profile.save()
+            #user = authenticate(username=obj.password, password=obj.password)
+            #login(request,user)
+            
+
+account_signin = AccountSignIn.as_view()
