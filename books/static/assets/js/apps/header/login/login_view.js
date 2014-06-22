@@ -1,11 +1,10 @@
 ColibriApp.module("HeaderApp.Login", function(Login, ColibriApp, Backbone, Marionette, $, _){
     Login.LoginForm = ColibriApp.Common.Views.Login.extend({
 
-        //initialize: function () {
-        //    this.title = "Edit " + this.model.get('author');
-        //    this.title += " " + this.model.get('title');
-        //},
-        //
+        initialize: function () {
+            this.title = "Login ";
+        },
+        
         //onRender: function () {
         //    if (this.options.generateTitle) {
         //        var $title = $('<h1>', {

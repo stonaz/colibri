@@ -1,11 +1,10 @@
 ColibriApp.module("HeaderApp.Signin", function(Signin, ColibriApp, Backbone, Marionette, $, _){
-    Signin.SigninForm = ColibriApp.Common.Views.Login.extend({
+    Signin.SigninForm = ColibriApp.Common.Views.Signin.extend({
         template: "#signin-form",
 
-        //initialize: function () {
-        //    this.title = "Edit " + this.model.get('author');
-        //    this.title += " " + this.model.get('title');
-        //},
+        initialize: function () {
+            this.title = "Sign in ";
+        },
         //
         //onRender: function () {
         //    if (this.options.generateTitle) {
