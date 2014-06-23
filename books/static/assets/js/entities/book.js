@@ -7,8 +7,8 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
     defaults: {
               author: '',
               title: '',
-              where_is: ColibriApp.user,
-              owner:ColibriApp.user,
+              where_is: '',
+              owner: '',
               //dove_sta:''
     },
     
@@ -38,7 +38,7 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
 
   Entities.BookCollection = Backbone.Collection.extend({
     url: function(){
-      console.log(ColibriApp.username)
+      //console.log(ColibriApp.username)
       return "/api/v1/"+ColibriApp.username+"/books/";
     },
     model: Entities.Book,

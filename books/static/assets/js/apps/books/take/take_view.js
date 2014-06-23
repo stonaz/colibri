@@ -15,7 +15,7 @@ Backbone, Marionette, $, _){
         },
 
         initialize: function () {
-            this.title = "Take book" ;
+            this.title = "Prendi il libro o contatta chi ce l'ha" ;
         },
 
         onRender: function () {
@@ -27,12 +27,13 @@ Backbone, Marionette, $, _){
             //    });
             //    this.$el.prepend($title);
             //}
-            this.$(".js-submit").text("Take book");
+            this.$(".js-submit").text("Ho già il libro");
         },
         
         onShowSuccess: function(msg){
             console.log('ok')
             this.$(".book-where-is-form-msg").html(msg).addClass("text-success");
+            this.$(".js-submit").hide();
         }
 
         });

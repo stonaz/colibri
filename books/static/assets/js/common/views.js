@@ -147,7 +147,7 @@ ColibriApp.module('Common.Views', function(Views, ColibriApp, Backbone, Marionet
     
     Views.WhereIsBook = Views.Form.extend({
         
-        template: "#book-where-is-form",
+        template: "#book-my-where-is-form",
         
         templateHelpers:function(){
 
@@ -169,7 +169,7 @@ ColibriApp.module('Common.Views', function(Views, ColibriApp, Backbone, Marionet
             //    });
             //    this.$el.prepend($title);
             //}
-            this.$(".js-submit").text("Take book");
+            this.$(".js-submit").text("Procedi ugualmente");
         },
         
         onShowSuccess: function(msg){

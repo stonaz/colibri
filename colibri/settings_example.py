@@ -102,3 +102,4 @@ USE_TZ = True
 
 STATIC_ROOT="/Users/stefano/colibri/static/"
 STATIC_URL = '/static/'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

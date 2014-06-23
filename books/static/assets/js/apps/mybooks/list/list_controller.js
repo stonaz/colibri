@@ -26,13 +26,23 @@ Backbone, Marionette, $, _) {
                 });
 
                 booksListPanel.on("book:new", function () {
-                    newBook = new ColibriApp.Entities.Book();
+                    newBook = new ColibriApp.Entities.Book(
+                                                    {
+              author: '',
+              title: '',
+              where_is: ColibriApp.user,
+              owner: ColibriApp.user,
+              //dove_sta:''
+    }       
+                                                           );
 
                     var view = new ColibriApp.MyBooksApp.New.Book({
                         model: newBook,
                     });
                     view.on("form:submit", function (data) {
+                        console.log(data)
                         newBook.save(data, {
+                            
                             success: function (model, response, options) {
                                 books.add(newBook);
                                 view.trigger("dialog:close");

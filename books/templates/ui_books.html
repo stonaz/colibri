@@ -275,6 +275,28 @@
       
     </script>
         
+    <script type="text/template" id="book-my-where-is-form">
+      Il libro attualmente sta da <%= where_is %>
+     <!-- <p><strong>Author</strong> <%= book_author %></p>
+      <p><strong>Title</strong> <%= book_title %></p>
+      <p><strong>Where is</strong> <%= where_is %></p>
+      <p><strong>User email</strong> <%= email %></p>-->
+      <form>
+        <div class="control-group">
+          <!--<label for="book-where-is" class="control-label">Where is:</label>-->
+          <input id="book-where-is" name="user" type="hidden" value="<%= taker %>"/>
+        </div>
+
+        <button class="btn btn-default js-submit">Procedi ugualmente</button>
+      </form>
+      <div class="book-where-is-form-msg"></div>
+    </script>
+    
+        <script type="text/template" id="about-message">
+      <h1>About CoLibri</h1>
+      
+    </script>
+        
     <script type="text/template" id="login-form">
       
       <form class="form-horizontal">
@@ -382,8 +404,8 @@
     <script src="{% static "assets/js/apps/books/common/views.js" %}"></script>
     <script src="{% static "assets/js/apps/books/list/list_view.js "%}"></script>
     <script src="{% static "assets/js/apps/books/list/list_controller.js" %}"></script>
-<!--    <script src="{% static "assets/js/apps/books/take/take_view.js" %}"></script>
-    <script src="{% static "assets/js/apps/books/take/take_controller.js" %}"></script>-->
+    <script src="{% static "assets/js/apps/books/take/take_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/books/take/take_controller.js" %}"></script>
     
     <script src="{% static "assets/js/apps/mybooks/mybooks_app.js" %}"></script>
     <script src="{% static "assets/js/apps/mybooks/common/views.js" %}"></script>
