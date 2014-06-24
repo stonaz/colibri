@@ -1,4 +1,6 @@
+import json
 from django.shortcuts import render
+from django.core.mail import send_mail
 from django.http import Http404
 from django.contrib.auth import login, logout
 from django.utils.http import base36_to_int
@@ -117,3 +119,25 @@ Create a new user account.
             
 
 account_signin = AccountSignIn.as_view()
+
+
+def SendMail(request):
+    """
+    Send mail
+    """
+    #authentication_classes = (TokenAuthentication, SessionAuthentication)
+    #permission_classes = (IsAuthenticated, )
+
+    body = json.loads(request.body)
+    print body
+    #subject = "Colibri notification - %s %s " % ('libro','autore')
+    #message = "test"
+    #mail_to = "test@io.net"
+    #sender= "test@io.net"
+    #print subject
+    send_mail('Subject', 'Message', 'from@example.com',['john@example.com', 'jane@example.com'])
+    #send_mail("test", "message", 'booksharing@colibri.org',['booksharing@colibri.org'], fail_silently=False)
+    #self._send_mail()
+    return Response({ 'detail': _(u'Mail sent') })
+
+#send_mail = SendMail.as_view()
