@@ -46,6 +46,7 @@ urlpatterns += patterns('profiles.views',
         url(r'^api/v1/account/login/$', 'account_login', name='api_account_login'),
     url(r'^api/v1/account/logout/$', 'account_logout', name='api_account_logout'),
     url(r'^api/v1/account/signin/$', 'account_signin', name='api_account_signin'),
+    url(r'^sendmail/$', 'SendMail', name='api_send_mail'),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

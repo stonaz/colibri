@@ -210,9 +210,9 @@ ColibriApp.module('Common.Views', function(Views, ColibriApp, Backbone, Marionet
 
       var markErrors = function(value, key){
         console.log(value)
-        var $controlGroup = $view.find("#book-" + key).parent();
+        var $controlGroup = $view.find("#signin-" + key).parent();
         var $errorEl = $('<span>', { class: "help-inline error", text: value });
-        $controlGroup.append($errorEl).addClass("bg-danger");
+        $controlGroup.append($errorEl).addClass("text-danger");
       }
 
       clearFormErrors();

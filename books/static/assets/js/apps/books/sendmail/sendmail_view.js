@@ -1,15 +1,14 @@
-ColibriApp.module('BooksApp.Take', function(Take, ColibriApp,
+ColibriApp.module('BooksApp.Sendmail', function(Sendmail, ColibriApp,
 Backbone, Marionette, $, _){
-    Take.MissingBook = Marionette.ItemView.extend({
+    Sendmail.MissingBook = Marionette.ItemView.extend({
             template: "#missing-book-view"
             });
     
-    Take.Form = Marionette.ItemView.extend({
+    Sendmail.Form = Marionette.ItemView.extend({
     
 
     events: {
       'click button.js-submit': 'submitClicked',
-      'click button.js-send-mail': 'sendMailClicked'
     },
 
     submitClicked: function(e){
@@ -19,13 +18,6 @@ Backbone, Marionette, $, _){
       this.trigger("form:submit", data);
     },
     
-    sendMailClicked: function(e){
-      e.preventDefault();
-      console.log('send mail')
-      var data = Backbone.Syphon.serialize(this);
-      //console.log(data)
-      this.trigger("form:sendmail", data);
-    },
 
     onFormDataInvalid: function(errors){
       //form_errors = errors.split(',')
@@ -53,9 +45,9 @@ Backbone, Marionette, $, _){
       _.each(errors, markErrors);
     }
   });
-    Take.Book = ColibriApp.BooksApp.Take.Form.extend({
+    Sendmail.Book = ColibriApp.BooksApp.Sendmail.Form.extend({
         
-        template: "#book-where-is-form",
+        template: "#book-where-is-form-sendmail",
         
         templateHelpers:function(){
 
@@ -77,8 +69,7 @@ Backbone, Marionette, $, _){
             //    });
             //    this.$el.prepend($title);
             //}
-            this.$(".js-submit").text("Ho già il libro");
-            this.$(".js-send-mail").text("Manda mail");
+            this.$(".js-submit").text("Invia mail");
         },
         
         onShowSuccess: function(msg){

@@ -18,10 +18,10 @@ Backbone, Marionette, $, _) {
                         //generateTitle: false
                     });
                     bookWhereIsView.on("form:submit", function (data) {
-                        //console.log(data)
+                        console.log(data)
                         book_where_is.save(data, {
                             success: function (model, response, options) {
-                               // console.log(view)
+                                // console.log(view)
                                 view.model.collection.fetch({
                                     success: function () {
                                         view.render();
@@ -40,11 +40,57 @@ Backbone, Marionette, $, _) {
                             error: function (model, xhr, options) {
                                 // to review
                                 console.log(xhr)
-                               // bookWhereIsView.triggerMethod("form:data:invalid", xhr);
+                                // bookWhereIsView.triggerMethod("form:data:invalid", xhr);
                                 console.log("Something went wrong while saving the model");
                             }
                         });
                     });
+
+                    //bookWhereIsView.on("form:sendmail", function (data) {
+                    //    //console.log(data)
+                    //    Mail = Backbone.Model.extend({
+                    //        urlRoot: function () {
+                    //            return "/api/v1/sendmail/";
+                    //        },
+                    //
+                    //        defaults: {
+                    //            sender: '',
+                    //            user: '',
+                    //            message: '',
+                    //            
+                    //            //dove_sta:''
+                    //        }
+                    //    });
+                    //    
+                    //    var mail = new Mail();
+                    //    console.log(mail)
+                    //    
+                    //    
+                    //    mail.save(data, {
+                    //        success: function (model, response, options) {
+                    //            // console.log(view)
+                    //            //view.model.collection.fetch({
+                    //            //    success: function () {
+                    //            //        console.log('success');
+                    //            //    },
+                    //            //    error: function () {
+                    //            //        console.log('error');
+                    //            //    }
+                    //            //});
+                    //            var msg = "Mail sent<br>";
+                    //            //bookWhereIsView.triggerMethod("show:success", msg);
+                    //            bookWhereIsView.trigger("dialog:close");
+                    //            //view.flash("success");
+                    //            //console.log("The model has been updated");
+                    //        },
+                    //        error: function (model, xhr, options) {
+                    //            // to review
+                    //            console.log(xhr)
+                    //            // bookWhereIsView.triggerMethod("form:data:invalid", xhr);
+                    //            console.log("Something went wrong while saving the model");
+                    //        }
+                    //    });
+                    //});
                 } else {
                     bookView = new Take.MissingBook();
                 }

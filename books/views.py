@@ -514,16 +514,16 @@ class BookWhereIsDetail(generics.RetrieveUpdateAPIView):
     def put(self, request, *args, **kwargs):
         """ Post a service request ( requires authentication) """
         body = json.loads(request.body) 
-        print body
+        #print body
         book_id = kwargs['book']
         book = Book.objects.get(pk=book_id)
-        print book
+        #print book
         book_where_is = BookWhereIs.objects.get(book=book)
-        print book_where_is
-        print request.POST
+        #print book_where_is
+        #print request.POST
         user = User.objects.get(pk=body['user'])
         user_id= user.id
-        print user
+        #print user
         book_where_is.user = user
         book_where_is.save()
         return Response({ 'user': user_id }, status=201)
@@ -614,3 +614,4 @@ class UserProfileList(generics.ListAPIView):
         #return queryset
 
 user_profile_list = UserProfileList.as_view()
+

@@ -28,6 +28,7 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
         events: {
             "click": "highlightName",
             "click td a.js-show": "showClicked",
+            "click td a.js-sendmail": "showSendmail",
         },
         flash: function (cssClass) {
             
@@ -47,6 +48,11 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
             e.preventDefault();
             e.stopPropagation();
             this.trigger("book:take", this.model);
+        },
+        showSendmail: function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.trigger("book:sendmail", this.model);
         },
     });
 
