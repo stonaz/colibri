@@ -1,7 +1,8 @@
 import json
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-from django.http import Http404
+from django.http import Http404,HttpResponse
 from django.contrib.auth import login, logout
 from django.utils.http import base36_to_int
 from django.utils.translation import ugettext_lazy as _
@@ -120,7 +121,7 @@ Create a new user account.
 
 account_signin = AccountSignIn.as_view()
 
-
+@login_required
 def SendMail(request):
     """
     Send mail
@@ -130,14 +131,11 @@ def SendMail(request):
 
     body = json.loads(request.body)
     print body
-    #subject = "Colibri notification - %s %s " % ('libro','autore')
-    #message = "test"
-    #mail_to = "test@io.net"
-    #sender= "test@io.net"
-    #print subject
-    send_mail('Subject', 'Message', 'from@example.com',['john@example.com', 'jane@example.com'])
+    subject = "Colibri notification - %s %s " % (body['book_title'],body['book_author'])
+    sender = request.user.email
+    message = body['message']
+    send_mail(subject, 'Message', sender,[body['where_is_email']])
     #send_mail("test", "message", 'booksharing@colibri.org',['booksharing@colibri.org'], fail_silently=False)
-    #self._send_mail()
-    return Response({ 'detail': _(u'Mail sent') })
+    return HttpResponse('Mail sent')
 
 #send_mail = SendMail.as_view()

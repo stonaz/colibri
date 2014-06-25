@@ -4,8 +4,8 @@ Backbone, Marionette, $, _) {
     Controllers.TakeBook = {
         showBook: function (id, view) {
 
-            function editBook(id, parent_view) {
-                console.log(parent_view);
+            var editBook = function (id, parent_view) {
+                //console.log(parent_view);
                 var fetchingBook = ColibriApp.request("book:entity", id);
                 $.when(fetchingBook).done(function (book) {
                     var edit_view = new ColibriApp.MyBooksApp.Edit.Book({
@@ -19,7 +19,7 @@ Backbone, Marionette, $, _) {
                                         parent_view.render();
                                         edit_view.trigger("dialog:close");
                                         parent_view.flash("success");
-                                        console.log("The model has been updated");
+                                        //console.log("The model has been updated");
                                     },
                                     error: function () {
                                         console.log('error');
@@ -49,7 +49,7 @@ Backbone, Marionette, $, _) {
                 if (book_where_is !== undefined) {
                     //console.log('not undefined')
                     console.log(book_where_is)
-                    bookWhereIsView = new ColibriApp.Common.Views.WhereIsBook({
+                    bookWhereIsView = new ColibriApp.Common.Views.EditDeleteConfirm({
                         model: book_where_is,
                         //generateTitle: false
                     });

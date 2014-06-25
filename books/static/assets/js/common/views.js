@@ -145,7 +145,7 @@ ColibriApp.module('Common.Views', function(Views, ColibriApp, Backbone, Marionet
             template: "#missing-book-view"
             });
     
-    Views.WhereIsBook = Views.Form.extend({
+    Views.EditDeleteConfirm = Views.Form.extend({
         
         template: "#book-my-where-is-form",
         
@@ -157,7 +157,7 @@ ColibriApp.module('Common.Views', function(Views, ColibriApp, Backbone, Marionet
         },
 
         initialize: function () {
-            this.title = "Take book" ;
+            this.title = "Conferma modifica" ;
         },
 
         onRender: function () {

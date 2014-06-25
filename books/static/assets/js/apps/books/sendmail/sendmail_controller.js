@@ -29,7 +29,7 @@ Backbone, Marionette, $, _) {
                                 user: '',
                                 message: '',
                                 
-                                //dove_sta:''
+                                
                             }
                         });
                         

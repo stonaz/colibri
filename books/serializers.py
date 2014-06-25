@@ -37,10 +37,8 @@ class BookWhereIsListSerializer(serializers.ModelSerializer):
     """
     Book WhereIs list
     """
-    #sharer = serializers.Field(source='owner.username')
-    #dove_sta = serializers.Field(source='where_is.username')
     where_is = serializers.Field(source='user.username')
-    email = serializers.Field(source='user.email')
+    where_is_email = serializers.Field(source='user.email')
     book_title = serializers.Field(source='book.title')
     book_author = serializers.Field(source='book.author')
     #user_email = serializers.SerializerMethodField('get_user_email')
@@ -54,7 +52,7 @@ class BookWhereIsListSerializer(serializers.ModelSerializer):
         model = BookWhereIs
 
         fields= (
-           'book','book_title','book_author','user','email','where_is','created', 'modified',
+           'book','book_title','book_author','user','where_is_email','where_is','created', 'modified',
             )
         #read_only_fields = ('book',)
         
