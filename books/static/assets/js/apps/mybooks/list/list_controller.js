@@ -26,15 +26,13 @@ Backbone, Marionette, $, _) {
                 });
 
                 booksListPanel.on("book:new", function () {
-                    newBook = new ColibriApp.Entities.Book(
-                                                    {
-              author: '',
-              title: '',
-              where_is: ColibriApp.user,
-              owner: ColibriApp.user,
-              //dove_sta:''
-    }       
-                                                           );
+                    newBook = new ColibriApp.Entities.Book({
+                        author: '',
+                        title: '',
+                        where_is: ColibriApp.user,
+                        owner: ColibriApp.user,
+
+                    });
 
                     var view = new ColibriApp.MyBooksApp.New.Book({
                         model: newBook,
@@ -42,7 +40,7 @@ Backbone, Marionette, $, _) {
                     view.on("form:submit", function (data) {
                         console.log(data)
                         newBook.save(data, {
-                            
+
                             success: function (model, response, options) {
                                 books.add(newBook);
                                 view.trigger("dialog:close");
@@ -62,47 +60,65 @@ Backbone, Marionette, $, _) {
                 });
 
                 booksListView.on("itemview:mybook:delete", function (childView, model) {
-                    model.destroy({
-                        error: function (model, response) {
-                            console.log(response)
-                        },
-                        success: function (model, response) {
-                            console.log(response)
-                        },
-                    });
-                });
-
-                booksListView.on("itemview:mybook:edit", function (childView, model) {
-                    console.log(model)
-                    console.log("clicked on edit")
                     var user = ColibriApp.username
                     var where_is = model.attributes.where_is
                     if (user !== where_is) {
-                        ColibriApp.Common.Controllers.TakeBook.showBook(model.get('id'),childView);
+                        ColibriApp.MyBooksApp.Delete.Controller.showBook(model.get('id'), childView);
+                    }
+                    else{
+                        var view = new ColibriApp.MyBooksApp.Delete.Book({
+                            model: model,
+                            //asModal: true
+                        });
+                    view.on("form:submit", function (data) {
+                            model.destroy( {
+                                success: function (model, response, options) {
+                                    childView.render();
+                                    view.trigger("dialog:close");
+                                    //childView.flash("success");
+                                    console.log("The model has been deleted");
+                                },
+                                error: function (model, xhr, options) {
+                                    console.log(xhr)
+                                    view.triggerMethod("form:data:invalid", xhr.responseJSON);
+                                    console.log("Something went wrong while deleting the model");
+                                }
+                            });
+                        });
+                    ColibriApp.dialogRegion.show(view);
                     }
                     
-                    else{
+                });
+
+                booksListView.on("itemview:mybook:edit", function (childView, model) {
+                    //console.log(model)
+                    //console.log("clicked on edit")
+                    var user = ColibriApp.username
+                    var where_is = model.attributes.where_is
+                    if (user !== where_is) {
+                        ColibriApp.MyBooksApp.Edit.Controller.showBook(model.get('id'), childView);
+                    } else {
                         var view = new ColibriApp.MyBooksApp.Edit.Book({
-                        model: model,
-                        //asModal: true
-                    })
-                    view.on("form:submit", function (data) {
-                        model.save(data, {
-                            success: function (model, response, options) {
-                                childView.render();
-                                view.trigger("dialog:close");
-                                childView.flash("success");
-                                console.log("The model has been updated");
-                            },
-                            error: function (model, xhr, options) {
-                                console.log(xhr)
-                                view.triggerMethod("form:data:invalid", xhr.responseJSON);
-                                console.log("Something went wrong while saving the model");
-                            }
+                            model: model,
+                            //asModal: true
+                        })
+                        view.on("form:submit", function (data) {
+                            model.save(data, {
+                                success: function (model, response, options) {
+                                    childView.render();
+                                    view.trigger("dialog:close");
+                                    childView.flash("success");
+                                    console.log("The model has been updated");
+                                },
+                                error: function (model, xhr, options) {
+                                    console.log(xhr)
+                                    view.triggerMethod("form:data:invalid", xhr.responseJSON);
+                                    console.log("Something went wrong while saving the model");
+                                }
+                            });
                         });
-                    });
-                    ColibriApp.dialogRegion.show(view);
-                    }   
+                        ColibriApp.dialogRegion.show(view);
+                    }
                 });
 
                 booksListView.on("itemview:mybook:show", function (childView, model) {

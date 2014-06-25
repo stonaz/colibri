@@ -1,6 +1,6 @@
-ColibriApp.module('MyBooksApp.Edit', function (Edit, ColibriApp, Backbone, Marionette, $, _) {
-    Edit.Controller = {
-        //editBook: function (id) {
+ColibriApp.module('MyBooksApp.Delete', function (Delete, ColibriApp, Backbone, Marionette, $, _) {
+    Delete.Controller = {
+        //deleteBook: function (id) {
         //    var loadingView = new ColibriApp.Common.Views.Loading({
         //        title: "Artificial Loading Delay",
         //        message: "Loading data to be edited"
@@ -33,37 +33,28 @@ ColibriApp.module('MyBooksApp.Edit', function (Edit, ColibriApp, Backbone, Mario
         
         showBook: function (id, view) {
 
-            var editBook = function (id, parent_view) {
-                //console.log(parent_view);
+            var deleteBook = function (id, parent_view) {
+                console.log(id);
                 var fetchingBook = ColibriApp.request("book:entity", id);
                 $.when(fetchingBook).done(function (book) {
-                    var edit_view = new ColibriApp.MyBooksApp.Edit.Book({
-                        model: book,
-                    });
-                    edit_view.on("form:submit", function (data) {
-                        book.save(data, {
+                        book.destroy( {
                             success: function (model, response, options) {
                                 parent_view.model.collection.fetch({
                                     success: function () {
                                         parent_view.render();
-                                        edit_view.trigger("dialog:close");
-                                        parent_view.flash("success");
-                                        //console.log("The model has been updated");
+                                        bookWhereIsView.trigger("dialog:close");
                                     },
                                     error: function () {
                                         console.log('error');
                                     }
                                 });
-
                             },
                             error: function (model, xhr, options) {
                                 console.log(xhr)
                                 edit_view.triggerMethod("form:data:invalid", xhr.responseJSON);
-                                console.log("Something went wrong while saving the model");
+                                console.log("Something went wrong while deleting the model");
                             }
                         });
-                    });
-                    ColibriApp.dialogRegion.show(edit_view);
                 })
             };
 
@@ -80,13 +71,13 @@ ColibriApp.module('MyBooksApp.Edit', function (Edit, ColibriApp, Backbone, Mario
                     console.log(book_where_is)
                     bookWhereIsView = new ColibriApp.MyBooksApp.Common.Views.EditDeleteConfirm({
                         model: book_where_is,
-                        title: "Conferma modifica"
+                        title: "Conferma eliminazione"
                         //generateTitle: false
                     });
                     bookWhereIsView.on("form:submit", function (data) {
                         console.log(data)
                         //bookWhereIsView.trigger("dialog:close");
-                        editBook(book_where_is.id, view)
+                        deleteBook(book_where_is.id, view,bookWhereIsView)
                     });
                 } else {
                     bookView = new Take.MissingBook();

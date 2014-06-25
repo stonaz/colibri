@@ -262,7 +262,7 @@
       <p><strong>Author</strong> <%= book_author %></p>
       <p><strong>Title</strong> <%= book_title %></p>
       <p><strong>Where is</strong> <%= where_is %></p>
-      <p><strong>User email</strong> <%= email %></p>
+      <p><strong>User email</strong> <%= where_is_email %></p>
 
       <form>
         <div class="control-group">
@@ -432,8 +432,6 @@
     <script src="{% static "assets/js/entities/book_history.js" %}"></script>
     <script src="{% static "assets/js/entities/book_where_is.js" %}"></script>
     <script src="{% static "assets/js/common/views.js" %}"></script>
-    <script src="{% static "assets/js/common/controllers.js" %}"></script>
-
 
     <script src="{% static "assets/js/apps/books/books_app.js" %}"></script>
     <script src="{% static "assets/js/apps/books/common/views.js" %}"></script>
@@ -452,6 +450,8 @@
     <script src="{% static "assets/js/apps/mybooks/show/show_controller.js" %}"></script>
     <script src="{% static "assets/js/apps/mybooks/edit/edit_view.js" %}"></script>
     <script src="{% static "assets/js/apps/mybooks/edit/edit_controller.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/delete/delete_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/delete/delete_controller.js" %}"></script>
     <script src="{% static "assets/js/apps/mybooks/new/new_view.js" %}"></script>
     
     <script src="{% static "assets/js/apps/about/about_app.js" %}"></script>

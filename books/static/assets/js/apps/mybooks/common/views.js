@@ -38,4 +38,39 @@ ColibriApp.module('MyBooksApp.Common.Views', function(Views, ColibriApp, Backbon
       _.each(errors, markErrors);
     }
   });
+  
+      Views.EditDeleteConfirm = Views.Form.extend({
+        
+        template: "#book-my-where-is-form",
+        
+        templateHelpers:function(){
+
+            return {
+                taker: ColibriApp.user
+            }
+        },
+
+        initialize: function () {
+            this.title = this.options.title ;
+            console.log(this.options)
+        },
+
+        onRender: function () {
+            console.log(this.options)
+            //if (this.options.generateTitle) {
+            //    console.log('eppure..')
+            //    var $title = $('<h3>', {
+            //        text: this.title
+            //    });
+            //    this.$el.prepend($title);
+            //}
+            this.$(".js-submit").text("Procedi ugualmente");
+        },
+        
+        onShowSuccess: function(msg){
+            console.log('ok')
+            this.$(".book-where-is-form-msg").html(msg).addClass("text-success");
+        }
+
+        });
 });
