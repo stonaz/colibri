@@ -18,6 +18,7 @@ Backbone, Marionette, $, _) {
                 var booksListView = new List.Books({
                     collection: books
                 });
+                console.log(booksListView)
 
                 booksListLayout.on("show", function () {
                     booksListLayout.panelRegion.show(booksListPanel);

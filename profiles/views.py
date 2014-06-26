@@ -134,7 +134,7 @@ def SendMail(request):
     subject = "Colibri notification - %s %s " % (body['book_title'],body['book_author'])
     sender = request.user.email
     message = body['message']
-    send_mail(subject, 'Message', sender,[body['where_is_email']])
+    send_mail(subject, message, sender,[body['where_is_email']])
     #send_mail("test", "message", 'booksharing@colibri.org',['booksharing@colibri.org'], fail_silently=False)
     return HttpResponse('Mail sent')
 

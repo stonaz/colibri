@@ -33,10 +33,25 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
 
   //Entities.configureStorage(Entities.Book);
 
-  Entities.BookAllCollection = Backbone.Collection.extend({
+  Entities.BookAllCollection = Backbone.PageableCollection.extend({
     url: "/api/v1/books/",
     model: Entities.BookAll,
-    comparator: "author"
+    comparator: "author",
+    
+    mode: "client",
+    
+    state: {
+
+    // You can use 0-based or 1-based indices, the default is 1-based.
+    // You can set to 0-based by setting ``firstPage`` to 0.
+    firstPage: 1,
+
+    // Set this to the initial page index if different from `firstPage`. Can
+    // also be 0-based or 1-based.
+    currentPage: 1,
+
+    pageSize: 2
+  },
   });
 
   //Entities.configureStorage(Entities.BookCollection);
@@ -44,6 +59,7 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
   var API = {
     getBookEntities: function(){
       var books = new Entities.BookAllCollection();
+      books.setPageSize(2)
       var defer = $.Deferred();
       books.fetch({
         success: function(data){          

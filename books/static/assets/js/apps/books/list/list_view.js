@@ -1,5 +1,5 @@
 ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marionette, $, _) {
-  
+
     List.Layout = Marionette.Layout.extend({
         template: "#book-list-layout",
         regions: {
@@ -10,28 +10,29 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
 
     List.Panel = Marionette.ItemView.extend({
         template: "#book-all-list-panel",
-        
-        templateHelpers:function(){
+
+        templateHelpers: function () {
             return {
                 username: ColibriApp.username
             }
         },
-        
+
         triggers: {
-              'click button.js-new': "book:new"
+            'click button.js-new': "book:new"
         }
     });
 
     List.Book = Marionette.ItemView.extend({
         tagName: "tr",
         template: "#book-all-list-item",
+        
         events: {
             "click": "highlightName",
-            "click td a.js-show": "showClicked",
-            "click td a.js-sendmail": "showSendmail",
+                "click td a.js-show": "showClicked",
+                "click td a.js-sendmail": "showSendmail",
         },
         flash: function (cssClass) {
-            
+
             var $view = this.$el;
             $view.hide().toggleClass(cssClass).fadeIn(800, function () {
                 setTimeout(function () {
@@ -63,30 +64,38 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
         itemView: List.Book,
         itemViewContainer: "tbody",
         
-                onRender: function(){
-                        if (this.collection.length  < 1) {
-                            console.log('No books to show')
+        events: {
+                "click": "showSendmail",
+        },
+
+        onRender: function () {
+            if (this.collection.length < 1) {
+                console.log('No books to show')
                 var $title = $('<tr>', {
                     text: 'No books inserted yet'
                 });
                 $title.addClass('bg-danger')
                 this.$el.append($title);
-                
-            }
-        },
-        
-        initialize: function(){
-      this.listenTo(this.collection, "reset", function(){
-        this.appendHtml = function(collectionView, itemView, index){
-          collectionView.$el.append(itemView.el);
-        }
-      });
-    },
 
-    onCompositeCollectionRendered: function(){
-      this.appendHtml = function(collectionView, itemView, index){
-        collectionView.$el.prepend(itemView.el);
-      }
-    }
+            }
+            //var buttons = "<button type=\"button\" id ='next' class=\"btn btn-default btn-sm js-next\">Small button</button>"
+            //this.$el.append(buttons);
+            //this.$el.find('js-next').on('click',function(){alert('oh')})
+            
+        },
+
+        initialize: function () {
+            this.listenTo(this.collection, "reset", function () {
+                this.appendHtml = function (collectionView, itemView, index) {
+                    collectionView.$el.append(itemView.el);
+                }
+            });
+        },
+
+        onCompositeCollectionRendered: function () {
+            this.appendHtml = function (collectionView, itemView, index) {
+                collectionView.$el.prepend(itemView.el);
+            }
+        }
     });
 });
