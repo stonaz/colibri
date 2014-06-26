@@ -18,94 +18,28 @@ Backbone, Marionette, $, _) {
                         //generateTitle: false
                     });
                     bookWhereIsView.on("form:submit", function (data) {
-                    console.log(data)
-                    Mail = Backbone.Model.extend({
-                            urlRoot: function () {
-                                return "/sendmail/";
+                        console.log(data)
+                        var csfrtoken= $.cookie('csrftoken')
+                        Backbone.ajax({
+                            url: "/sendmail/",
+                            method: "POST",
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("X-CSRFToken", csfrtoken);
                             },
-                    
-                            defaults: {
-                                sender: '',
-                                user: '',
-                                message: '',
-                                
-                                
-                            }
-                        });
-                        
-                        var mail = new Mail(data);
-                        console.log(mail);
-                        mail.save(data, {
-                            success: function (model, response, options) {
-                                // console.log(view)
-                                //view.model.collection.fetch({
-                                //    success: function () {
-                                //        console.log('success');
-                                //    },
-                                //    error: function () {
-                                //        console.log('error');
-                                //    }
-                                //});
-                                var msg = "Mail sent<br>";
-                                //bookWhereIsView.triggerMethod("show:success", msg);
+                            data: data,
+                            success: function (val) {
+                                console.log('Mail sent');
                                 bookWhereIsView.trigger("dialog:close");
-                                //view.flash("success");
-                                //console.log("The model has been updated");
+
                             },
                             error: function (model, xhr, options) {
-                                // to review
                                 console.log(xhr)
-                                // bookWhereIsView.triggerMethod("form:data:invalid", xhr);
-                                console.log("Something went wrong while saving the model");
+                                //view.triggerMethod("form:data:invalid", xhr.responseJSON);
+                                console.log("Something went wrong while logging out");
                             }
                         });
                     });
 
-                    bookWhereIsView.on("form:sendmail", function (data) {
-                        //console.log(data)
-                        Mail = Backbone.Model.extend({
-                            urlRoot: function () {
-                                return "/api/v1/sendmail/";
-                            },
-                    
-                            defaults: {
-                                sender: '',
-                                user: '',
-                                message: '',
-                                
-                                //dove_sta:''
-                            }
-                        });
-                        
-                        var mail = new Mail();
-                        console.log(mail)
-                        
-                        
-                        mail.save(data, {
-                            success: function (model, response, options) {
-                                // console.log(view)
-                                //view.model.collection.fetch({
-                                //    success: function () {
-                                //        console.log('success');
-                                //    },
-                                //    error: function () {
-                                //        console.log('error');
-                                //    }
-                                //});
-                                var msg = "Mail sent<br>";
-                                //bookWhereIsView.triggerMethod("show:success", msg);
-                                bookWhereIsView.trigger("dialog:close");
-                                //view.flash("success");
-                                //console.log("The model has been updated");
-                            },
-                            error: function (model, xhr, options) {
-                                // to review
-                                console.log(xhr)
-                                // bookWhereIsView.triggerMethod("form:data:invalid", xhr);
-                                console.log("Something went wrong while saving the model");
-                            }
-                        });
-                    });
                 } else {
                     bookView = new Take.MissingBook();
                 }

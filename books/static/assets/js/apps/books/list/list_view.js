@@ -58,15 +58,32 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
     });
 
     List.Books = Marionette.CompositeView.extend({
-        tagName: "table",
+        //tagName: "table",
         template: "#book-list",
-        className: "table table-hover",
+        //className: "table table-hover",
         itemView: List.Book,
         itemViewContainer: "tbody",
         
         events: {
-                "click": "showSendmail",
+                'click #js-back': 'getPreviousPage',
+                'click button.js-next': 'getNextPage',
         },
+        
+        getNextPage: function(e){
+        e.preventDefault();
+        this.collection.getNextPage();
+        },
+    
+        getPreviousPage: function(e){
+        e.preventDefault();
+        this.collection.getPreviousPage();
+        },
+        
+        //ui: {
+        //back: "#js-back"
+        //},
+        
+        test: function(){alert('test')},
 
         onRender: function () {
             if (this.collection.length < 1) {
@@ -78,24 +95,25 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
                 this.$el.append($title);
 
             }
+            //this.ui.back.addClass('disabled');
             //var buttons = "<button type=\"button\" id ='next' class=\"btn btn-default btn-sm js-next\">Small button</button>"
             //this.$el.append(buttons);
             //this.$el.find('js-next').on('click',function(){alert('oh')})
             
         },
 
-        initialize: function () {
-            this.listenTo(this.collection, "reset", function () {
-                this.appendHtml = function (collectionView, itemView, index) {
-                    collectionView.$el.append(itemView.el);
-                }
-            });
-        },
-
-        onCompositeCollectionRendered: function () {
-            this.appendHtml = function (collectionView, itemView, index) {
-                collectionView.$el.prepend(itemView.el);
-            }
-        }
+        //initialize: function () {
+        //    this.listenTo(this.collection, "reset", function () {
+        //        this.appendHtml = function (collectionView, itemView, index) {
+        //            collectionView.$el.append(itemView.el);
+        //        }
+        //    });
+        //},
+        //
+        //onCompositeCollectionRendered: function () {
+        //    this.appendHtml = function (collectionView, itemView, index) {
+        //        collectionView.$el.prepend(itemView.el);
+        //    }
+        //}
     });
 });

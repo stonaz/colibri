@@ -128,13 +128,12 @@ def SendMail(request):
     """
     #authentication_classes = (TokenAuthentication, SessionAuthentication)
     #permission_classes = (IsAuthenticated, )
-
-    body = json.loads(request.body)
-    print body
-    subject = "Colibri notification - %s %s " % (body['book_title'],body['book_author'])
+    data = request.POST
+    #print data
+    subject = "Colibri notification - %s %s " % (data['book_title'],data['book_author'])
     sender = request.user.email
-    message = body['message']
-    send_mail(subject, message, sender,[body['where_is_email']])
+    message = data['message']
+    send_mail(subject, message, sender,[data['where_is_email']])
     #send_mail("test", "message", 'booksharing@colibri.org',['booksharing@colibri.org'], fail_silently=False)
     return HttpResponse('Mail sent')
 

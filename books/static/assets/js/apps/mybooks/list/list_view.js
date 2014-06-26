@@ -60,11 +60,26 @@ ColibriApp.module('MyBooksApp.List', function (List, ColibriApp, Backbone, Mario
     });
 
     List.Books = Marionette.CompositeView.extend({
-        tagName: "table",
+        //tagName: "table",
         template: "#book-list",
-        className: "table table-hover",
+        //className: "table table-hover",
         itemView: List.Book,
         itemViewContainer: "tbody",
+        
+        events: {
+                'click #js-back': 'getPreviousPage',
+                'click button.js-next': 'getNextPage',
+        },
+        
+        getNextPage: function(e){
+        e.preventDefault();
+        this.collection.getNextPage();
+        },
+    
+        getPreviousPage: function(e){
+        e.preventDefault();
+        this.collection.getPreviousPage();
+        },
         
         onRender: function(){
                         if (this.collection.length  < 1) {
@@ -78,19 +93,19 @@ ColibriApp.module('MyBooksApp.List', function (List, ColibriApp, Backbone, Mario
             }
         },
         
-        initialize: function(){
-      this.listenTo(this.collection, "reset", function(){
-        this.appendHtml = function(collectionView, itemView, index){
-          collectionView.$el.append(itemView.el);
-          this.render()
-        }
-      });
-    },
-
-    onCompositeCollectionRendered: function(){
-      this.appendHtml = function(collectionView, itemView, index){
-        collectionView.$el.prepend(itemView.el);
-      }
-    }
+    //    initialize: function(){
+    //  this.listenTo(this.collection, "reset", function(){
+    //    this.appendHtml = function(collectionView, itemView, index){
+    //      collectionView.$el.append(itemView.el);
+    //      this.render()
+    //    }
+    //  });
+    //},
+    //
+    //onCompositeCollectionRendered: function(){
+    //  this.appendHtml = function(collectionView, itemView, index){
+    //    collectionView.$el.prepend(itemView.el);
+    //  }
+    //}
     });
 });
