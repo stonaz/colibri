@@ -27,7 +27,7 @@ ColibriApp.module("Entities", function(Entities, ColibriApp, Backbone, Marionett
       console.log(ColibriApp.authenticated)
       Entities.headers.add({ name: "Books", url: "books", navigationTrigger: "books:list" });
       Entities.headers.add({ name: "MyBooks", url: "mybooks", navigationTrigger: "mybooks:list" });
-
+      Entities.headers.add({ name: "Libri in prestito", url: "borrowedbooks", navigationTrigger: "borrowedbooks:list" });
     }
   };
 

@@ -4,7 +4,6 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
     
     
     tagName: "li",
-    //className:"prova",
 
     events: {
       "click a": "navigate",

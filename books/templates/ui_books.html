@@ -113,9 +113,7 @@
           <input type="text" class="span2 search-query js-search-criterion">
           <button type="submit" class="btn js-search">Cerca libri</button>
         </div>
-      </form>
-
-      
+       </form> 
     </script> 
     
     <script type="text/template" id="book-list">
@@ -175,6 +173,33 @@
         </a>
 
       </td>
+    </script>
+       
+        <script type="text/template" id="book-borrowed-list">
+      <table class="table table-hover">
+      <thead>
+        <tr>
+          
+          <th>Autore</th>
+          <th>Titolo</th>
+          <th>Proprietario</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+      </table>
+      <button id="js-back" class="btn btn-default js-back">Prev</button>
+      <button class="btn btn-default js-next">Next</button>
+ 
+    </script>
+
+    <script type="text/template" id="book-borrowed-list-item">
+      
+      <td><%= book_author %></td>
+      <td><%= book_title %></td>
+      <td><%= book_owner %></td>
+     
     </script>
 
     <script type="text/template" id="missing-book-view">
@@ -441,6 +466,7 @@
     <script src="{% static "assets/js/entities/book_all.js" %}"></script>
     <script src="{% static "assets/js/entities/book_history.js" %}"></script>
     <script src="{% static "assets/js/entities/book_where_is.js" %}"></script>
+    <script src="{% static "assets/js/entities/book_borrowed.js" %}"></script>
     <script src="{% static "assets/js/common/views.js" %}"></script>
 
     <script src="{% static "assets/js/apps/books/books_app.js" %}"></script>
@@ -454,6 +480,8 @@
     
     <script src="{% static "assets/js/apps/mybooks/mybooks_app.js" %}"></script>
     <script src="{% static "assets/js/apps/mybooks/common/views.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/list_borrowed/list_view.js "%}"></script>
+    <script src="{% static "assets/js/apps/mybooks/list_borrowed/list_controller.js" %}"></script>
     <script src="{% static "assets/js/apps/mybooks/list/list_view.js "%}"></script>
     <script src="{% static "assets/js/apps/mybooks/list/list_controller.js" %}"></script>
     <script src="{% static "assets/js/apps/mybooks/show/show_view.js" %}"></script>

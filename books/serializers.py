@@ -41,6 +41,7 @@ class BookWhereIsListSerializer(serializers.ModelSerializer):
     where_is_email = serializers.Field(source='user.email')
     book_title = serializers.Field(source='book.title')
     book_author = serializers.Field(source='book.author')
+    book_owner = serializers.Field(source='book.owner')
     #user_email = serializers.SerializerMethodField('get_user_email')
     #
     #def get_user_email(self, obj):
@@ -52,7 +53,7 @@ class BookWhereIsListSerializer(serializers.ModelSerializer):
         model = BookWhereIs
 
         fields= (
-           'book','book_title','book_author','user','where_is_email','where_is','created', 'modified',
+           'book','book_title','book_author','book_owner','user','where_is_email','where_is','created', 'modified',
             )
         #read_only_fields = ('book',)
         

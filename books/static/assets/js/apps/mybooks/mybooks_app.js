@@ -2,6 +2,7 @@ ColibriApp.module('MyBooksApp', function (MyBooksApp, ColibriApp, Backbone, Mari
     MyBooksApp.Router = Marionette.AppRouter.extend({
         appRoutes: {
             "mybooks": "listBooks",
+            "borrowedbooks": "listBorrowedBooks",
             "mybooks/:id": "showBook",
             "mybooks/:id/edit": "editBook"
         }
@@ -16,6 +17,10 @@ ColibriApp.module('MyBooksApp', function (MyBooksApp, ColibriApp, Backbone, Mari
             MyBooksApp.List.Controller.listBooks();
             ColibriApp.execute("set:active:header", "mybooks");
         },
+        listBorrowedBooks: function () {
+            MyBooksApp.ListBorrowed.Controller.listBooks();
+            ColibriApp.execute("set:active:header", "borrowedbooks");
+        },
         showBook: function(id){
             console.log("Trying to show " + id)
             MyBooksApp.Show.Controller.showBook(id);
@@ -26,12 +31,15 @@ ColibriApp.module('MyBooksApp', function (MyBooksApp, ColibriApp, Backbone, Mari
         ColibriApp.navigate("mybooks");
         API.listBooks();
         });
+    ColibriApp.on("borrowedbooks:list", function(){
+        ColibriApp.navigate("borrowedbooks");
+        API.listBorrowedBooks();
+        });
     ColibriApp.on("mybook:show", function(id){
         ColibriApp.navigate("mybooks/" + id);
         API.showBook(id);
         });
     ColibriApp.on("mybook:edit", function(id){
-        console.log('catched')
         ColibriApp.navigate("mybooks/" + id + "/edit");
         API.editBook(id);
         });

@@ -2,6 +2,7 @@ ColibriApp.module('MyBooksApp.List', function (List, ColibriApp,
 Backbone, Marionette, $, _) {
     List.Controller = {
         listBooks: function () {
+            console.log('QUI??????????')
             var loadingView = new ColibriApp.Common.Views.Loading({
                 title: "Loading books..",
                 msg: "Loading collection..."

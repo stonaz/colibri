@@ -381,31 +381,30 @@ class BookList(generics.ListCreateAPIView):
         Optionally restricts the returned results
         by filtering against a `search` query parameter in the URL.
         """
-        #print self.request.user
+        print self.request.user
         queryset = Book.objects.all().exclude(owner=self.request.user)
-        
+        print self.request.QUERY_PARAMS
         # retrieve value of querystring parameter "search"
-        author = self.request.QUERY_PARAMS.get('author', None)
-        title= self.request.QUERY_PARAMS.get('title', None)
+        search = self.request.QUERY_PARAMS.get('search', None)
         
-        if author is not None:
+        if search is not None:
+            print search
             search_query = (
-                Q(author__icontains=author) 
+                Q(author__icontains=search) | Q(title__icontains=search)
             )
             # add instructions for search to queryset
             queryset = queryset.filter(search_query)
         
-        if title is not None:
-            search_query = (
-                Q(title__icontains=title) 
-            )
-            # add instructions for search to queryset
-            queryset = queryset.filter(search_query)
+        #if title is not None:
+        #    search_query = (
+        #        Q(title__icontains=title) 
+        #    )
+        #    # add instructions for search to queryset
+        #    queryset = queryset.filter(search_query)
         
         return queryset
 
 book_list = BookList.as_view()
-
 
 class BookDetail(generics.RetrieveUpdateDestroyAPIView):
     """
@@ -571,11 +570,19 @@ class UserHoldingBookList(generics.ListAPIView):
     
     #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
     authentication_classes = (authentication.SessionAuthentication,)
-    serializer_class= BookListSerializer
-    #model=Book
+    serializer_class= BookWhereIsListSerializer
+    model=BookWhereIs
     #pagination_serializer_class = PaginatedRicetteListSerializer
     #paginate_by_param = 'limit'
     #paginate_by = 2
+    
+    def get_queryset(self):
+        book = self.kwargs.get('book', None)
+        try:
+            book_id=Book.objects.get(id=book)
+        except Exception:
+            raise Http404(_('Not found'))
+        return BookWhereIs.objects.all().filter(book=book)
     
     def get_queryset(self):
         user = self.kwargs.get('user', None)
@@ -583,7 +590,7 @@ class UserHoldingBookList(generics.ListAPIView):
             user_id=User.objects.get(username=user)
         except Exception:
             raise Http404(_('Not found'))
-        return Book.objects.all().exclude(user=user_id).filter(where_is=user_id)
+        return BookWhereIs.objects.all().filter(user=user_id).exclude(book__owner=self.request.user)
 
 user_holding_book_list = UserHoldingBookList.as_view()
 
