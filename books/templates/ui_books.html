@@ -94,6 +94,10 @@
       <a href="#<%- url %>"><%- name %></a>
     </script>
     
+    <script type="text/template" id="book-list-none">
+      <td colspan="3"> Nessun libro trovato</td>
+    </script> 
+    
     <script type="text/template" id="book-list-layout">
       <div id="panel-region"></div>
       <div id="books-region"></div>
@@ -104,10 +108,10 @@
     </script>
     
     <script type="text/template" id="book-all-list-panel">
-       <form id="filter-form" class="form-search form-inline">
+       <form id="book-search-form" class="form-search form-inline">
         <div class="input-append">
-          <input type="text" class="span2 search-query js-filter-criterion">
-          <button type="submit" class="btn btn-default">Cerca libri</button>
+          <input type="text" class="span2 search-query js-search-criterion">
+          <button type="submit" class="btn js-search">Cerca libri</button>
         </div>
       </form>
 

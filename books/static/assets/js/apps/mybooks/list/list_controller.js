@@ -47,7 +47,6 @@ Backbone, Marionette, $, _) {
                                 booksListView.render()
                                 booksListView.children.findByModel(newBook).flash("success");
                                 console.log("The model has been saved to the server");
-                                console.log(xhr)
                             },
                             error: function (model, xhr, options) {
                                 console.log(xhr)

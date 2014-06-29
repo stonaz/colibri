@@ -25,6 +25,51 @@ Backbone, Marionette, $, _) {
                     booksListLayout.booksRegion.show(booksListView);
                 });
 
+                booksListPanel.on("books:search", function (filterCriterion) {
+                    console.log("filter list with criterion ", filterCriterion);
+                    var fetchingBooks = ColibriApp.request("book_all:entities:filter", filterCriterion);
+                    $.when(fetchingBooks).done(function (books) {
+                        var booksListView = new List.Books({
+                            collection: books
+                        });
+                        booksListLayout.booksRegion.show(booksListView);
+                        // A DRY method should be implemented
+                        booksListView.on("itemview:book:take", function (booksListView, model) {
+
+                            // console.log(ColibriApp.username+model.attributes.where_is)
+                            if (ColibriApp.username === model.attributes.where_is) {
+                                var msg = "Already owning this book"
+                                //  console.log(ColibriApp.username+model.attributes.where_is)
+                                var errorView = new ColibriApp.Common.Views.Error({
+                                    title: "Errore",
+                                    message: msg,
+                                    generateTitle: true
+                                });
+                                ColibriApp.dialogRegion.show(errorView);
+                            } else {
+                                ColibriApp.BooksApp.Take.Controller.showBook(model.get('id'), booksListView);
+                            }
+                        });
+                        booksListView.on("itemview:book:sendmail", function (booksListView, model) {
+
+                            // console.log(ColibriApp.username+model.attributes.where_is)
+                            if (ColibriApp.username === model.attributes.where_is) {
+                                var msg = "Already owning this book"
+                                //  console.log(ColibriApp.username+model.attributes.where_is)
+                                var errorView = new ColibriApp.Common.Views.Error({
+                                    title: "Errore",
+                                    message: msg,
+                                    generateTitle: true
+                                });
+                                ColibriApp.dialogRegion.show(errorView);
+                            } else {
+                                ColibriApp.BooksApp.Sendmail.Controller.showBook(model.get('id'), booksListView);
+                            }
+                        });
+                    });
+
+                });
+
                 booksListView.on("itemview:book:take", function (booksListView, model) {
 
                     // console.log(ColibriApp.username+model.attributes.where_is)

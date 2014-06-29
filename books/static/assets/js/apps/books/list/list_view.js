@@ -1,4 +1,10 @@
 ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marionette, $, _) {
+    
+    var NoBooksView = Marionette.ItemView.extend({
+        template: "#book-list-none",
+        tagName: "tr",
+        className: "danger"
+        });
 
     List.Layout = Marionette.Layout.extend({
         template: "#book-list-layout",
@@ -17,8 +23,13 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
             }
         },
 
-        triggers: {
-            'click button.js-new': "book:new"
+        events: {
+            'click button.js-search': "searchClicked"
+        },
+        
+        searchClicked: function(){
+            var criterion = this.$(".js-search-criterion").val();
+            this.trigger("books:search", criterion);
         }
     });
 
@@ -79,28 +90,21 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
         this.collection.getPreviousPage();
         },
         
-        //ui: {
-        //back: "#js-back"
-        //},
-        
         test: function(){alert('test')},
 
-        onRender: function () {
-            if (this.collection.length < 1) {
-                console.log('No books to show')
-                var $title = $('<tr>', {
-                    text: 'No books inserted yet'
-                });
-                $title.addClass('bg-danger')
-                this.$el.append($title);
-
-            }
-            //this.ui.back.addClass('disabled');
-            //var buttons = "<button type=\"button\" id ='next' class=\"btn btn-default btn-sm js-next\">Small button</button>"
-            //this.$el.append(buttons);
-            //this.$el.find('js-next').on('click',function(){alert('oh')})
-            
-        },
+        //onRender: function () {
+        //    if (this.collection.length < 1) {
+        //        console.log('No books to show')
+        //        var $title = $('<tr>', {
+        //            text: 'No books inserted yet'
+        //        });
+        //        $title.addClass('bg-danger')
+        //        this.$el.append($title);
+        //
+        //    }           
+        //},
+        
+        emptyView: NoBooksView
 
         //initialize: function () {
         //    this.listenTo(this.collection, "reset", function () {

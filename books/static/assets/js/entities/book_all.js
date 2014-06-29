@@ -53,13 +53,34 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
     pageSize: 2
   },
   });
+  
+   Entities.FilteredBookAllCollection = Backbone.PageableCollection.extend({
+    url: "/api/v1/books/",
+    model: Entities.BookAll,
+    comparator: "author",
+    
+    mode: "client",
+    
+    state: {
+
+    // You can use 0-based or 1-based indices, the default is 1-based.
+    // You can set to 0-based by setting ``firstPage`` to 0.
+    firstPage: 1,
+
+    // Set this to the initial page index if different from `firstPage`. Can
+    // also be 0-based or 1-based.
+    currentPage: 1,
+
+    pageSize: 2
+  },
+  });
 
   //Entities.configureStorage(Entities.BookCollection);
 
   var API = {
     getBookEntities: function(){
       var books = new Entities.BookAllCollection();
-      books.setPageSize(2)
+      //books.setPageSize(2)
       var defer = $.Deferred();
       books.fetch({
         success: function(data){          
@@ -71,16 +92,31 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
           }
         });             
       var promise = defer.promise();
-      //$.when(promise).done(function(books){
-      //  if(books.length === 0){
-      //    // if we don't have any books yet, create some for convenience
-      //    var models = initializeBooks();
-      //    books.reset(models);
-      //  }
-      //})
       return promise;
     
     },
+    
+    getFilteredBookEntities: function(filter){
+      var books = new Entities.BookAllCollection({
+        
+      });
+      books.url="/api/v1/books/?search="+filter
+      console.log(books)
+      //books.setPageSize(2)
+      var defer = $.Deferred();
+      books.fetch({
+        success: function(data){          
+          defer.resolve(data);
+          //console.log(data)
+          },
+        error: function(data){          
+          alert(data);
+          }
+        });             
+      var promise = defer.promise();
+      return promise;
+    
+    },   
 
     getBookEntity: function(bookId){
       console.log('Showing book to be taken')
@@ -102,6 +138,14 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
 
   ColibriApp.reqres.setHandler("book_all:entities", function(){
     return API.getBookEntities();
+  });
+  
+  ColibriApp.reqres.setHandler("book_all:entities:filter", function(filter){
+    console.log(filter)
+    if (filter == "" | filter === undefined) {
+      return API.getBookEntities();
+    }
+    return API.getFilteredBookEntities(filter);
   });
 
   ColibriApp.reqres.setHandler("book_all:entity", function(id){
