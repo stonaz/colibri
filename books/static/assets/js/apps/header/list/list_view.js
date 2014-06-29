@@ -10,14 +10,13 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
     },
     
     navigate: function(e){
-      //e.preventDefault();
+      e.preventDefault();
       this.trigger("navigate", this.model);
       //$("#_nav-menu ").collapse('hide');
     },
 
     onRender: function(){
       if(this.model.selected){
-        console.log("Headers rendering..")
         // add class so Bootstrap will highlight the active entry in the navbar
         this.$el.addClass("active");
       };

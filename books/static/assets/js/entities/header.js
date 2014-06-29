@@ -23,21 +23,21 @@ ColibriApp.module("Entities", function(Entities, ColibriApp, Backbone, Marionett
 
     ]);
     if (ColibriApp.authenticated) {
-      console.log('app auth ok')
-      console.log(ColibriApp.authenticated)
-      Entities.headers.add({ name: "Books", url: "books", navigationTrigger: "books:list" });
-      Entities.headers.add({ name: "MyBooks", url: "mybooks", navigationTrigger: "mybooks:list" });
+      //console.log('app auth ok')
+      //console.log(ColibriApp.authenticated)
+      Entities.headers.add({ name: "Trova libri", url: "books", navigationTrigger: "books:list" });
+      Entities.headers.add({ name: "I miei libri", url: "mybooks", navigationTrigger: "mybooks:list" });
       Entities.headers.add({ name: "Libri in prestito", url: "borrowedbooks", navigationTrigger: "borrowedbooks:list" });
     }
   };
 
   var API = {
     getHeaders: function(){
-      //if(Entities.headers === undefined){
-      //  initializeHeaders();
-      //}
-      initializeHeaders();
-      console.log('initializing headers')
+      if(Entities.headers === undefined){
+        initializeHeaders();
+      }
+      //initializeHeaders();
+      //console.log('initializing headers')
       return Entities.headers;
     }
   };

@@ -8,15 +8,15 @@ ColibriApp.module("HeaderApp.Signin", function (Signin, ColibriApp, Backbone, Ma
                 model: newSignin,
             });
             view.on("form:submit", function (data) {
-                console.log(data)
+                //console.log(data)
                 newSignin.save(data, {
                     success: function (model, response, options) {
-                        console.log(model);
+                        //console.log(model);
                         var login = new ColibriApp.Entities.Login({
                             "username": model.username,
                             "password": model.password_confirmation
                         });
-                        console.log(login)
+                        //console.log(login)
                         login.save(data, {
                             success: function (model, response, options) {
                                 var user = model.attributes
@@ -24,6 +24,7 @@ ColibriApp.module("HeaderApp.Signin", function (Signin, ColibriApp, Backbone, Ma
                                 ColibriApp.user = user.user;
                                 ColibriApp.username = user.username;
                                 ColibriApp.authenticated = true;
+                                ColibriApp.Entities.headers = undefined
                                 ColibriApp.HeaderApp.List.Controller.listHeader();
                                 ColibriApp.trigger("books:list")
                             },

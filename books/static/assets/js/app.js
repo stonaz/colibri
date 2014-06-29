@@ -3,7 +3,7 @@
 var oldSync = Backbone.sync;
 Backbone.sync = function(method, model, options){
 var csrftoken = $.cookie('csrftoken');
-console.log(csrftoken)
+//console.log(csrftoken)
 options.beforeSend = function(xhr){
 xhr.setRequestHeader('X-CSRFToken', csrftoken);
 };
@@ -11,12 +11,12 @@ return oldSync(method, model, options);
 };
 
 var ColibriApp = new Marionette.Application();
-console.log('user: '+window.user)
+//console.log('user: '+window.user)
 ColibriApp.user = window.user;
 ColibriApp.username = window.username;
 ColibriApp.authenticated = window.isAuthenticated()
 
-console.log(ColibriApp.authenticated)
+//console.log(ColibriApp.authenticated)
 ColibriApp.addRegions({
     headerRegion: "#header-region",
     mainRegion: "#main-region",
@@ -35,7 +35,7 @@ ColibriApp.getCurrentRoute = function(){
 };
 
 ColibriApp.on("initialize:after", function () {
-        console.log('app started')
+        //console.log('app started')
     if (Backbone.history) {
         Backbone.history.start();
         if(this.getCurrentRoute() === ""){

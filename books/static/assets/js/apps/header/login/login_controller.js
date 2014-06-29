@@ -11,13 +11,14 @@ ColibriApp.module("HeaderApp.Login", function (Login, ColibriApp, Backbone, Mari
                 console.log(data)
                 newLogin.save(data, {
                     success: function (model, response, options) {
-                        console.log(newLogin);
+                        //console.log(newLogin);
                         var user = newLogin.attributes
                         view.trigger("dialog:close");
                         ColibriApp.user = user.user;
                         ColibriApp.username = user.username;
                         ColibriApp.authenticated=true;
                         //headers.render()
+                        ColibriApp.Entities.headers = undefined
                         ColibriApp.HeaderApp.List.Controller.listHeader();
                         ColibriApp.trigger("books:list")
                     },

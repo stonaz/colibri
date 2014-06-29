@@ -5,7 +5,7 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
       var headers = new List.Headers({collection: links});
 
       headers.on("brand:clicked", function(){
-        ColibriApp.trigger("mybooks:list");
+        ColibriApp.trigger("about:show");
       });
 
       headers.on("itemview:navigate", function(childView, model){
@@ -35,13 +35,13 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
                   },
                 data: "",
                 success: function (val) {
-                      console.log('happilylogged out');
+                      //console.log('happilylogged out');
                       ColibriApp.user=undefined;
                       ColibriApp.username=undefined;
-                      ColibriApp.authenticated=false;
-                      //self.render()
-                      ColibriApp.trigger("about:show")
+                      ColibriApp.authenticated=false; 
+                      ColibriApp.Entities.headers = undefined
                       ColibriApp.HeaderApp.List.Controller.listHeader();
+                      ColibriApp.trigger("about:show");
                       },
                 error: function (model, xhr, options) {
                     console.log(xhr)
@@ -49,6 +49,7 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
                     console.log("Something went wrong while logging out");
                 } 
         });
+        
 
       })
       
@@ -57,12 +58,12 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
     },
 
     setActiveHeader: function(headerUrl){
-      console.log('set active')
+      //console.log('set active')
       var links = ColibriApp.request("header:entities");
       var headerToSelect = links.find(function(header){ return header.get("url") === headerUrl; });
-      console.log(headerToSelect)
       headerToSelect.select();
-      links.trigger("reset");
+      links.trigger("reset");     
+      
     }
   };
 });
