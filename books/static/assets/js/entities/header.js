@@ -25,9 +25,9 @@ ColibriApp.module("Entities", function(Entities, ColibriApp, Backbone, Marionett
     if (ColibriApp.authenticated) {
       //console.log('app auth ok')
       //console.log(ColibriApp.authenticated)
-      Entities.headers.add({ name: "Trova libri", url: "books", navigationTrigger: "books:list" });
-      Entities.headers.add({ name: "I miei libri", url: "mybooks", navigationTrigger: "mybooks:list" });
-      Entities.headers.add({ name: "Libri in prestito", url: "borrowedbooks", navigationTrigger: "borrowedbooks:list" });
+      Entities.headers.add({ name: "Trova libri", url: "items", navigationTrigger: "books:list" });
+      Entities.headers.add({ name: "I miei libri", url: "myitems", navigationTrigger: "mybooks:list" });
+      Entities.headers.add({ name: "Libri in prestito", url: "borroweditems", navigationTrigger: "borrowedbooks:list" });
     }
   };
 

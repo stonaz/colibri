@@ -1,7 +1,7 @@
 ColibriApp.module('BooksApp', function (BooksApp, ColibriApp, Backbone, Marionette, $, _) {
     BooksApp.Router = Marionette.AppRouter.extend({
         appRoutes: {
-            "books": "listBooks",
+            "items": "listBooks",
             //"books/:id": "showBook",
         }
     });
@@ -11,7 +11,7 @@ ColibriApp.module('BooksApp', function (BooksApp, ColibriApp, Backbone, Marionet
         listBooks: function () {
            // console.log("Show all books")
             BooksApp.List.Controller.listBooks();
-            ColibriApp.execute("set:active:header", "books");
+            ColibriApp.execute("set:active:header", "items");
         },
         //showBook: function(id){
         //    console.log("Trying to show " + id)
@@ -24,7 +24,7 @@ ColibriApp.module('BooksApp', function (BooksApp, ColibriApp, Backbone, Marionet
             console.log('not logged in !')
         }
         console.log(ColibriApp.user)
-        ColibriApp.navigate("books");
+        ColibriApp.navigate("items");
         API.listBooks();
         });
     //ColibriApp.on("book:take", function(id){

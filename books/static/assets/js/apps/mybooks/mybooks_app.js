@@ -1,8 +1,8 @@
 ColibriApp.module('MyBooksApp', function (MyBooksApp, ColibriApp, Backbone, Marionette, $, _) {
     MyBooksApp.Router = Marionette.AppRouter.extend({
         appRoutes: {
-            "mybooks": "listBooks",
-            "borrowedbooks": "listBorrowedBooks",
+            "myitems": "listBooks",
+            "borroweditems": "listBorrowedBooks",
             "mybooks/:id": "showBook",
             "mybooks/:id/edit": "editBook"
         }
@@ -15,11 +15,11 @@ ColibriApp.module('MyBooksApp', function (MyBooksApp, ColibriApp, Backbone, Mari
         },
         listBooks: function () {
             MyBooksApp.List.Controller.listBooks();
-            ColibriApp.execute("set:active:header", "mybooks");
+            ColibriApp.execute("set:active:header", "myitems");
         },
         listBorrowedBooks: function () {
             MyBooksApp.ListBorrowed.Controller.listBooks();
-            ColibriApp.execute("set:active:header", "borrowedbooks");
+            ColibriApp.execute("set:active:header", "borroweditems");
         },
         showBook: function(id){
             //console.log("Trying to show " + id)
@@ -28,11 +28,11 @@ ColibriApp.module('MyBooksApp', function (MyBooksApp, ColibriApp, Backbone, Mari
     };
     
     ColibriApp.on("mybooks:list", function(){
-        ColibriApp.navigate("mybooks");
+        ColibriApp.navigate("myitems");
         API.listBooks();
         });
     ColibriApp.on("borrowedbooks:list", function(){
-        ColibriApp.navigate("borrowedbooks");
+        ColibriApp.navigate("borroweditems");
         API.listBorrowedBooks();
         });
     ColibriApp.on("mybook:show", function(id){
