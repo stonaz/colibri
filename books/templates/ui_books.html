@@ -143,15 +143,19 @@
       <td>
         <a href="#books/<%= id %>" class="btn btn-orange js-show">
           <span class="glyphicon glyphicon-question-sign"></span> 
-          History
+          Prestiti
+        </a>
+        <a href="#books/<%= id %>" class="btn btn-orange js-take">
+          <span class="glyphicon glyphicon-download"></span> 
+          Riprendi
         </a>
         <a href="#books/<%= id %>/edit" class="btn btn-orange js-edit">
           <span class="glyphicon glyphicon-pencil"></span> 
-          Edit
+          Modifica
         </a>
         <button class="btn btn-orange js-delete">
          <span class="glyphicon glyphicon-remove"></span> 
-          Delete
+          Elimina
         </button>
       </td>
     </script>
@@ -486,6 +490,8 @@
     <script src="{% static "assets/js/apps/mybooks/list/list_controller.js" %}"></script>
     <script src="{% static "assets/js/apps/mybooks/show/show_view.js" %}"></script>
     <script src="{% static "assets/js/apps/mybooks/show/show_controller.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/take/take_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/take/take_controller.js" %}"></script>
     <script src="{% static "assets/js/apps/mybooks/edit/edit_view.js" %}"></script>
     <script src="{% static "assets/js/apps/mybooks/edit/edit_controller.js" %}"></script>
     <script src="{% static "assets/js/apps/mybooks/delete/delete_view.js" %}"></script>

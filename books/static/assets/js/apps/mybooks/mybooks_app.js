@@ -22,7 +22,6 @@ ColibriApp.module('MyBooksApp', function (MyBooksApp, ColibriApp, Backbone, Mari
             ColibriApp.execute("set:active:header", "borroweditems");
         },
         showBook: function(id){
-            //console.log("Trying to show " + id)
             MyBooksApp.Show.Controller.showBook(id);
         }
     };

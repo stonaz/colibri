@@ -59,6 +59,23 @@ Backbone, Marionette, $, _) {
 
                     ColibriApp.dialogRegion.show(view);
                 });
+                
+                booksListView.on("itemview:mybook:take", function (booksListView, model) {
+
+                    // console.log(ColibriApp.username+model.attributes.where_is)
+                    if (ColibriApp.username === model.attributes.where_is) {
+                        var msg = "Already owning this book"
+                        console.log(ColibriApp.username+model.attributes.where_is)
+                        var errorView = new ColibriApp.Common.Views.Error({
+                            title: "Errore",
+                            message: msg,
+                            generateTitle: true
+                        });
+                        ColibriApp.dialogRegion.show(errorView);
+                    } else {
+                        ColibriApp.MyBooksApp.Take.Controller.showBook(model.get('id'), booksListView);
+                    }
+                });
 
                 booksListView.on("itemview:mybook:delete", function (childView, model) {
                     var user = ColibriApp.username

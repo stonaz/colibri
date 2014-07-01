@@ -77,13 +77,13 @@ class BookWhereIs( TimeStamped_Model):
             if old_obj.user != self.user:
                 new_entry = BookHistory(book=self.book,took_from=old_obj.user,given_to=self.user)
                 new_entry.save()
+                print self.book.owner
                 mail_to=old_obj.user.email
                 subject = "Colibri notification - %s %s " % (self.book.title, self.book.author)
                 message = "%s ha preso in prestito il libro " % self.user.username
                 message += "Puoi contattarlo all'indirizzo email: %s " % self.user.email
-                print subject
-                send_mail(subject, message, 'booksharing@colibri.org',
-    [mail_to], fail_silently=False)
+                if self.book.owner != self.user:
+                    send_mail(subject, message, 'booksharing@colibri.org',[mail_to], fail_silently=False)
                 
 
         

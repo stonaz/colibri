@@ -33,7 +33,8 @@ ColibriApp.module('MyBooksApp.List', function (List, ColibriApp, Backbone, Mario
             "click": "highlightName",
                 "click td a.js-show": "showClicked",
                 "click td a.js-edit": "editClicked",
-                "click button.js-delete": "deleteClicked"
+                "click button.js-delete": "deleteClicked",
+                "click td a.js-take": "takeClicked"
         },
         flash: function (cssClass) {
             console.log('flash')
@@ -53,6 +54,12 @@ ColibriApp.module('MyBooksApp.List', function (List, ColibriApp, Backbone, Mario
             e.preventDefault();
             e.stopPropagation();
             this.trigger("mybook:show", this.model);
+        },
+        takeClicked: function (e) {
+            console.log('taking back')
+            e.preventDefault();
+            e.stopPropagation();
+            this.trigger("mybook:take", this.model);
         },
         editClicked: function (e) {
             e.preventDefault();
