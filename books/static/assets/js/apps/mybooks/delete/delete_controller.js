@@ -71,7 +71,8 @@ ColibriApp.module('MyBooksApp.Delete', function (Delete, ColibriApp, Backbone, M
                     console.log(book_where_is)
                     bookWhereIsView = new ColibriApp.MyBooksApp.Common.Views.EditDeleteConfirm({
                         model: book_where_is,
-                        title: "Conferma eliminazione"
+                        title: "Conferma eliminazione",
+                        delete_warn: "Se si elimina il libro, sarà cancellata anche la cronologia dei prestiti"
                         //generateTitle: false
                     });
                     bookWhereIsView.on("form:submit", function (data) {

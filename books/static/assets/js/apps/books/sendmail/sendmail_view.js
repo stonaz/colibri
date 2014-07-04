@@ -57,7 +57,7 @@ Backbone, Marionette, $, _){
         },
 
         initialize: function () {
-            this.title = "Prendi il libro o contatta chi ce l'ha" ;
+            this.title = "Contatta chi ha questo libro" ;
         },
 
         onRender: function () {

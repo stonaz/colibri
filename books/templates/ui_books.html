@@ -14,7 +14,10 @@
     <link href="{% static "assets/fonts/glyphicons-halflings-regular.woff" %}"rel="stylesheet">-->
 
     <style type=text/css>
-    body { padding-top: 70px; }
+    body {
+      padding-top: 70px;
+      /*background-color: #c0c0c0;*/
+    }
 
       .navbar {
   
@@ -48,38 +51,20 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#about">CoLibri</a>
+      <a class="navbar-brand" href="#about">
+      
+      </a>
     </div>
       <div class="collapse navbar-collapse" id="_nav-menu">
         <ul class="nav navbar-nav">
-<!--        <li class="active"><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>-->
-<!--        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>-->
       </ul>
-<!--      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>-->
       <div class="btn-toolbar">
 <% if(ColibriApp.username === undefined) { %>
-      <button class="btn btn-primary btn-success navbar-btn navbar-right js-signin"> Sign in </button>
-      <button class="btn btn-primary btn-success navbar-btn navbar-right js-login"> Login </button>
+      <button class="btn btn-primary btn-primary navbar-btn navbar-right js-signin"> Sign in </button>
+      <button class="btn btn-primary btn-primary navbar-btn navbar-right js-login"> Login </button>
     <% } else { %>
-      <button class="btn btn-primary btn-success navbar-btn navbar-right js-logout"> Logout </button>&nbsp;
-      <button class="btn btn-primary btn-success navbar-btn  navbar-right "> <%=  ColibriApp.username %></button>&nbsp;
+      <button class="btn btn-primary btn-primary navbar-btn navbar-right js-logout"> Logout </button>&nbsp;
+      <button class="btn btn-primary btn-primary navbar-btn  navbar-right "> <%=  ColibriApp.username %></button>&nbsp;
 
     <% } %>
       </div>
@@ -91,8 +76,15 @@
     </script>
 
     <script type="text/template" id="header-link">
-      <a href="#<%- url %>"><%- name %></a>
+      <a href="#<%- url %>" class="btn btn-menu">
+          <span class="glyphicon glyphicon-<%- icon %>"></span> <%- name %></a>
+          
     </script>
+    
+   <!-- <a href="#books/<%= id %>/edit" class="btn btn-orange js-edit">
+          <span class="glyphicon glyphicon-pencil"></span> 
+          Modifica
+        </a>-->
     
     <script type="text/template" id="book-list-none">
       <td colspan="3"> Nessun libro trovato</td>
@@ -104,7 +96,7 @@
     </script>
     
     <script type="text/template" id="book-list-panel">
-      <button class="btn btn-default js-new"> New book </button>
+      <button class="btn  js-new"> Aggiungi libro</button>
     </script>
     
     <script type="text/template" id="book-all-list-panel">
@@ -117,7 +109,7 @@
     </script> 
     
     <script type="text/template" id="book-list">
-      <table class="table table-hover">
+      <table class="table table-condensed">
       <thead>
         <tr>
           
@@ -180,8 +172,9 @@
     </script>
        
         <script type="text/template" id="book-borrowed-list">
-      <table class="table table-hover">
+      <table class="table table-condensed">
       <thead>
+        
         <tr>
           
           <th>Autore</th>
@@ -349,7 +342,8 @@
     </script>
         
     <script type="text/template" id="book-my-where-is-form">
-      Il libro attualmente sta da <%= where_is %>
+     <p>Il libro in questo momento si trova da <%= where_is %></p>
+     <p><%= delete_warn %></p>
      <!-- <p><strong>Author</strong> <%= book_author %></p>
       <p><strong>Title</strong> <%= book_title %></p>
       <p><strong>Where is</strong> <%= where_is %></p>

@@ -2,8 +2,9 @@ ColibriApp.module('MyBooksApp.Delete', function (Delete, ColibriApp, Backbone, M
     Delete.Book = ColibriApp.MyBooksApp.Common.Views.Form.extend({
 
         initialize: function () {
-            this.title = "Delete " + this.model.get('author');
-            this.title += " " + this.model.get('title');
+            //this.title = "Delete " + this.model.get('author');
+            //this.title += " " + this.model.get('title');
+            this.title = "Elimina libro";
         },
 
         onRender: function () {
@@ -13,7 +14,7 @@ ColibriApp.module('MyBooksApp.Delete', function (Delete, ColibriApp, Backbone, M
                 });
                 this.$el.prepend($title);
             }
-            this.$(".js-submit").text("Delete book");
+            this.$(".js-submit").text("Elimina");
         }
 
     });

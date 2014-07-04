@@ -12,7 +12,7 @@ Backbone, Marionette, $, _) {
 
             var booksListLayout = new List.Layout();
             var booksListPanel = new List.Panel();
-
+            var msg = "Hai già questo libro"
             $.when(fetchingBooks).done(function (books) {
 
                 var booksListView = new List.Books({
@@ -38,7 +38,7 @@ Backbone, Marionette, $, _) {
 
                             // console.log(ColibriApp.username+model.attributes.where_is)
                             if (ColibriApp.username === model.attributes.where_is) {
-                                var msg = "Already owning this book"
+                                //var msg = "Already owning this book"
                                 //  console.log(ColibriApp.username+model.attributes.where_is)
                                 var errorView = new ColibriApp.Common.Views.Error({
                                     title: "Errore",
@@ -54,7 +54,7 @@ Backbone, Marionette, $, _) {
 
                             // console.log(ColibriApp.username+model.attributes.where_is)
                             if (ColibriApp.username === model.attributes.where_is) {
-                                var msg = "Already owning this book"
+                                //var msg = "Already owning this book"
                                 //  console.log(ColibriApp.username+model.attributes.where_is)
                                 var errorView = new ColibriApp.Common.Views.Error({
                                     title: "Errore",
@@ -74,7 +74,7 @@ Backbone, Marionette, $, _) {
 
                     // console.log(ColibriApp.username+model.attributes.where_is)
                     if (ColibriApp.username === model.attributes.where_is) {
-                        var msg = "Already owning this book"
+                        //var msg = "Already owning this book"
                         //  console.log(ColibriApp.username+model.attributes.where_is)
                         var errorView = new ColibriApp.Common.Views.Error({
                             title: "Errore",
@@ -90,7 +90,7 @@ Backbone, Marionette, $, _) {
 
                     // console.log(ColibriApp.username+model.attributes.where_is)
                     if (ColibriApp.username === model.attributes.where_is) {
-                        var msg = "Already owning this book"
+                        //var msg = "Already owning this book"
                         //  console.log(ColibriApp.username+model.attributes.where_is)
                         var errorView = new ColibriApp.Common.Views.Error({
                             title: "Errore",

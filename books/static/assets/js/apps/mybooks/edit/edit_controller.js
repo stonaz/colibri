@@ -80,7 +80,8 @@ ColibriApp.module('MyBooksApp.Edit', function (Edit, ColibriApp, Backbone, Mario
                     console.log(book_where_is)
                     bookWhereIsView = new ColibriApp.MyBooksApp.Common.Views.EditDeleteConfirm({
                         model: book_where_is,
-                        title: "Conferma modifica"
+                        title: "Conferma modifica",
+                        delete_warn: ""
                         //generateTitle: false
                     });
                     bookWhereIsView.on("form:submit", function (data) {

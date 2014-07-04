@@ -64,7 +64,7 @@ Backbone, Marionette, $, _) {
 
                     // console.log(ColibriApp.username+model.attributes.where_is)
                     if (ColibriApp.username === model.attributes.where_is) {
-                        var msg = "Already owning this book"
+                        var msg = "Hai già questo libro"
                         console.log(ColibriApp.username+model.attributes.where_is)
                         var errorView = new ColibriApp.Common.Views.Error({
                             title: "Errore",

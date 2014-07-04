@@ -65,7 +65,7 @@ Backbone, Marionette, $, _){
         },
 
         initialize: function () {
-            this.title = "Prendi il libro o contatta chi ce l'ha" ;
+            this.title = "Registra il prestito" ;
         },
 
         onRender: function () {
@@ -77,8 +77,8 @@ Backbone, Marionette, $, _){
             //    });
             //    this.$el.prepend($title);
             //}
-            this.$(".js-submit").text("Ho già il libro");
-            this.$(".js-send-mail").text("Manda mail");
+            this.$(".js-submit").text("Procedi");
+            
         },
         
         onShowSuccess: function(msg){

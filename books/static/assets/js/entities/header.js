@@ -17,7 +17,7 @@ ColibriApp.module("Entities", function(Entities, ColibriApp, Backbone, Marionett
 
   var initializeHeaders = function(){
     Entities.headers = new Entities.HeaderCollection([
-      { name: "Home", url: "about", navigationTrigger: "about:show" },
+      { name: "Home", url: "about", icon:"home", navigationTrigger: "about:show" },
       //{ name: "Books", url: "books", navigationTrigger: "books:list" },
       //{ name: "MyBooks", url: "mybooks", navigationTrigger: "mybooks:list" },
 
@@ -25,9 +25,9 @@ ColibriApp.module("Entities", function(Entities, ColibriApp, Backbone, Marionett
     if (ColibriApp.authenticated) {
       //console.log('app auth ok')
       //console.log(ColibriApp.authenticated)
-      Entities.headers.add({ name: "Trova libri", url: "items", navigationTrigger: "books:list" });
-      Entities.headers.add({ name: "I miei libri", url: "myitems", navigationTrigger: "mybooks:list" });
-      Entities.headers.add({ name: "Libri in prestito", url: "borroweditems", navigationTrigger: "borrowedbooks:list" });
+      Entities.headers.add({ name: "Trova libri", url: "items", icon:"search", navigationTrigger: "books:list" });
+      Entities.headers.add({ name: "I miei libri", url: "myitems", icon:"arrow-left", navigationTrigger: "mybooks:list" });
+      Entities.headers.add({ name: "Libri in prestito", url: "borroweditems", icon:"arrow-right", navigationTrigger: "borrowedbooks:list" });
     }
   };
 

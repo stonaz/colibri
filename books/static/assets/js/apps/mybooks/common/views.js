@@ -46,12 +46,14 @@ ColibriApp.module('MyBooksApp.Common.Views', function(Views, ColibriApp, Backbon
         templateHelpers:function(){
 
             return {
-                taker: ColibriApp.user
+                taker: ColibriApp.user,
+                delete_warn : this.delete_warn
             }
         },
 
         initialize: function () {
             this.title = this.options.title ;
+            this.delete_warn = this.options.delete_warn ;
             console.log(this.options)
         },
 

@@ -2,8 +2,9 @@ ColibriApp.module('MyBooksApp.Edit', function (Edit, ColibriApp, Backbone, Mario
     Edit.Book = ColibriApp.MyBooksApp.Common.Views.Form.extend({
 
         initialize: function () {
-            this.title = "Edit " + this.model.get('author');
-            this.title += " " + this.model.get('title');
+            //this.title = "Edit " + this.model.get('author');
+            //this.title += " " + this.model.get('title');
+            this.title = "Modifica libro ";
         },
 
         onRender: function () {
@@ -13,7 +14,7 @@ ColibriApp.module('MyBooksApp.Edit', function (Edit, ColibriApp, Backbone, Mario
                 });
                 this.$el.prepend($title);
             }
-            this.$(".js-submit").text("Update book");
+            this.$(".js-submit").text("Modifica");
         }
 
     });
