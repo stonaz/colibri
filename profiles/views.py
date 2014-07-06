@@ -111,10 +111,15 @@ Create a new user account.
         super(AccountSignIn, self).post_save(obj)
 
         if created:
+            clear_password = obj.password
             obj.set_password(obj.password)
             obj.save()
-            profile=UserProfile(user=obj)
+            profile =UserProfile(user=obj)
             profile.save()
+            message = "Benvenuto su Colibri\n"
+            message += "Username: %s  \n" % obj.username
+            message += "Password: %s  " % clear_password
+            send_mail("Registrazione a CoLibri", message, 'admin@colibri.org',[obj.email])
             #user = authenticate(username=obj.password, password=obj.password)
             #login(request,user)
             
