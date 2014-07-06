@@ -9,7 +9,7 @@ Backbone, Marionette, $, _){
 
     events: {
       'click button.js-submit': 'submitClicked',
-      'click button.js-send-mail': 'sendMailClicked'
+      'click button.js-close': 'closeWindow'
     },
 
     submitClicked: function(e){
@@ -19,12 +19,10 @@ Backbone, Marionette, $, _){
       this.trigger("form:submit", data);
     },
     
-    sendMailClicked: function(e){
+    closeWindow: function(e){
       e.preventDefault();
-      console.log('send mail')
-      var data = Backbone.Syphon.serialize(this);
-      //console.log(data)
-      this.trigger("form:sendmail", data);
+      console.log('close')
+      this.trigger("dialog:close");
     },
 
     onFormDataInvalid: function(errors){
@@ -53,6 +51,7 @@ Backbone, Marionette, $, _){
       _.each(errors, markErrors);
     }
   });
+    
     Take.Book = ColibriApp.BooksApp.Take.Form.extend({
         
         template: "#book-where-is-form",
@@ -78,6 +77,7 @@ Backbone, Marionette, $, _){
             //    this.$el.prepend($title);
             //}
             this.$(".js-submit").text("Procedi");
+            this.$(".js-close").hide();
             
         },
         
@@ -85,6 +85,7 @@ Backbone, Marionette, $, _){
             console.log('ok')
             this.$(".book-where-is-form-msg").html(msg).addClass("text-success");
             this.$(".js-submit").hide();
+            this.$(".js-close").show();
         }
 
         });

@@ -30,8 +30,8 @@ Backbone, Marionette, $, _) {
                                         console.log('error');
                                     }
                                 });
-                                var msg = "You are now owning this book<br>";
-                                msg += "An email has been sent to the previous owner"
+                                var msg = "Hai preso in prestito il libro<br>";
+                                msg += "E' stata inviata un email a chi lo aveva prima di te"
                                 bookWhereIsView.triggerMethod("show:success", msg);
                                 //bookWhereIsView.trigger("dialog:close");
                                 view.flash("success");
@@ -45,52 +45,6 @@ Backbone, Marionette, $, _) {
                             }
                         });
                     });
-
-                    //bookWhereIsView.on("form:sendmail", function (data) {
-                    //    //console.log(data)
-                    //    Mail = Backbone.Model.extend({
-                    //        urlRoot: function () {
-                    //            return "/api/v1/sendmail/";
-                    //        },
-                    //
-                    //        defaults: {
-                    //            sender: '',
-                    //            user: '',
-                    //            message: '',
-                    //            
-                    //            //dove_sta:''
-                    //        }
-                    //    });
-                    //    
-                    //    var mail = new Mail();
-                    //    console.log(mail)
-                    //    
-                    //    
-                    //    mail.save(data, {
-                    //        success: function (model, response, options) {
-                    //            // console.log(view)
-                    //            //view.model.collection.fetch({
-                    //            //    success: function () {
-                    //            //        console.log('success');
-                    //            //    },
-                    //            //    error: function () {
-                    //            //        console.log('error');
-                    //            //    }
-                    //            //});
-                    //            var msg = "Mail sent<br>";
-                    //            //bookWhereIsView.triggerMethod("show:success", msg);
-                    //            bookWhereIsView.trigger("dialog:close");
-                    //            //view.flash("success");
-                    //            //console.log("The model has been updated");
-                    //        },
-                    //        error: function (model, xhr, options) {
-                    //            // to review
-                    //            console.log(xhr)
-                    //            // bookWhereIsView.triggerMethod("form:data:invalid", xhr);
-                    //            console.log("Something went wrong while saving the model");
-                    //        }
-                    //    });
-                    //});
                 } else {
                     bookView = new Take.MissingBook();
                 }

@@ -218,8 +218,20 @@
         <i class="icon-pencil"></i>
         Edit this book
       </a>-->
-      <p><strong>Author</strong> <%= author %></p>
-      <p><strong>Title</strong> <%= title %></p>
+      <table class="table table-bordered">
+      <tbody>         
+          <tr>
+            <td class="active"><strong>Autore</strong></td>
+            <td><%= author %></td>
+          </tr>
+           <tr>
+            <td class="active"><strong>Titolo</strong></td>
+            <td><%= title %></td>
+          </tr>
+          
+        </tbody>
+      </table>
+    
     </script>
     
        <script type="text/template" id="book-view-history-list">
@@ -273,13 +285,13 @@
       
       <form class="form-horizontal">
         <div class="form-group">
-          <label for="book-author" class="col-sm-2 control-label">Author </label>
+          <label for="book-author" class="col-sm-2 control-label">Autore </label>
           <div class="col-sm-10">
           <input id="book-author" class="form-control"  name="author" type="text" value="<%= author %>"/>
           </div>
         </div>
         <div class="form-group">
-          <label for="book-title" class="col-sm-2 control-label">Title </label>
+          <label for="book-title" class="col-sm-2 control-label">Titolo </label>
           <div class="col-sm-10">
           <input id="book-title" class="form-control"  name="title" type="text" value="<%= title %>"/>
           </div>
@@ -290,10 +302,49 @@
     </script>
  
     <script type="text/template" id="book-where-is-form">
-      <p><strong>Author</strong> <%= book_author %></p>
-      <p><strong>Title</strong> <%= book_title %></p>
-      <p><strong>Where is</strong> <%= where_is %></p>
-      <p><strong>User email</strong> <%= where_is_email %></p>
+      <img src="{% static "assets/images/book.png" %}"><br>
+      <table class="table table-bordered">
+        <thead>
+        
+        </thead>
+        <tbody>         
+          <tr>
+            <td class="active"><strong>Autore</strong></td>
+            <td><%= book_author %></td>
+          </tr>
+           <tr>
+            <td class="active"><strong>Titolo</strong></td>
+            <td><%= book_title %></td>
+          </tr>
+            <tr>
+            <td class="active"><strong>Da chi sta</strong></td>
+            <td><%= where_is %></td>
+          </tr>
+             <tr>
+            <td class="active"><strong>Email</strong></td>
+            <td><%= where_is_email %></td>
+          </tr>
+        </tbody>
+      </table>
+      
+     <!-- <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Da chi sta</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>         
+          <tr>
+            <td><%= where_is %></td>
+            <td><%= where_is_email %></td>
+          </tr>
+        </tbody>
+      </table>-->
+     <!-- <p><strong>Author</strong> <%= book_author %></p>
+      <p><strong>Title</strong> <%= book_title %></p>-->
+      <!--<p><strong>Where is</strong> <%= where_is %></p>
+      <p><strong>User email</strong> <%= where_is_email %></p>-->
 
       <form>
         <div class="control-group">
@@ -301,7 +352,8 @@
           <input id="book-where-is" name="user" type="hidden" value="<%= taker %>"/>
         </div>
 
-        <button class="btn btn-default js-submit">Take</button>
+        <button class="btn btn-active js-submit">Take</button>
+        <button class="btn btn-active js-close">Chiudi</button>
       </form>
       <div class="book-where-is-form-msg"></div>
     </script>
@@ -379,7 +431,6 @@
           <input id="password" class="form-control"  name="password" type="password" value="<%= password %>"/>
           </div>
         </div>
-
         <div class="col-sm-offset-4 col-sm-8">
             <button  class="btn js-submit">Login</button>
         </div>
@@ -390,7 +441,7 @@
     
       <script type="text/template" id="signin-form">
       
-      <form >
+      <form class="form-horizontal">
         <div class="form-group">
           <label for="username" class="col-sm-4 control-label">Username </label>
           <div class="col-sm-8">
@@ -402,6 +453,7 @@
           <div class="col-sm-8">
           <input id="signin-email" class="form-control"  name="email" type="text" "/>
           </div>
+        </div>
         <div class="form-group">
           <label for="signin-password" class="col-sm-4 control-label" placeholder="password">Password </label>
           <div class="col-sm-8">
@@ -413,13 +465,12 @@
           <div class="col-sm-8">
           <input id="signin-password_confirmation" class="form-control"  name="password_confirmation" type="password"  />
         </div>
+        </div>
         <div class="form-group">
           <div class="col-sm-offset-4 col-sm-8">
             <button  class="btn js-submit">Sign in</button>
            </div>
-        </div>
-
-        
+        </div>        
       </form>
       
     </script>

@@ -78,7 +78,7 @@ Backbone, Marionette, $, _){
             //    this.$el.prepend($title);
             //}
             this.$(".js-submit").text("Riprendi");
-            this.$(".js-send-mail").text("Manda mail");
+            this.$(".js-close").hide();
         },
         
         onShowSuccess: function(msg){

@@ -2,6 +2,7 @@ ColibriApp.module('MyBooksApp.Take', function (Take, ColibriApp,
 Backbone, Marionette, $, _) {
     Take.Controller = {
         showBook: function (id, view) {
+            
             var loadingView = new ColibriApp.Common.Views.Loading();
             ColibriApp.dialogRegion.show(loadingView);
 
@@ -35,7 +36,7 @@ Backbone, Marionette, $, _) {
                                 msg += "An email has been sent to the previous owner"
                                 //bookWhereIsView.triggerMethod("show:success", msg);
                                 bookWhereIsView.trigger("dialog:close");
-                                view.flash("success");
+                                //view.flash("success");
                                 console.log("The model has been updated");
                             },
                             error: function (model, xhr, options) {
