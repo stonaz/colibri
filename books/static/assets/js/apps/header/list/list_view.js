@@ -12,7 +12,10 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
     navigate: function(e){
       e.preventDefault();
       this.trigger("navigate", this.model);
-      //$("#_nav-menu ").collapse('hide');
+      if($('.navbar-toggle').css('display') !='none'){
+        $(".navbar-collapse").collapse('hide');
+      }
+      
     },
 
     onRender: function(){
@@ -46,19 +49,25 @@ ColibriApp.module("HeaderApp.List", function(List, ColibriApp, Backbone, Marione
     login: function(e){
       e.preventDefault();
       this.trigger("login:clicked");
-      //$("#_nav-menu ").collapse('hide');
+      if($('.navbar-toggle').css('display') !='none'){
+        $(".navbar-collapse").collapse('hide');
+      }
     },
     
     logout: function(e){
       e.preventDefault();
       this.trigger("logout:clicked");
-      //$("#_nav-menu ").collapse('hide');
+      if($('.navbar-toggle').css('display') !='none'){
+        $(".navbar-collapse").collapse('hide');
+      }
     },
     
     signin: function(e){
       e.preventDefault();
       this.trigger("signin:clicked");
-      //$("#_nav-menu ").collapse('hide');
+      if($('.navbar-toggle').css('display') !='none'){
+        $(".navbar-collapse").collapse('hide');
+      }
     },
     
   });

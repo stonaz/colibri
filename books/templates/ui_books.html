@@ -3,6 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+      <meta name="viewport" content="initial-scale=1">
     <title>Colibri Manager</title>
     <link href="{% static "assets/css/bootstrap.css" %}"rel="stylesheet">
     <link href="{% static "assets/css/application.css" %}"rel="stylesheet">
@@ -55,7 +56,7 @@
       
       </a>
     </div>
-      <div class="collapse navbar-collapse" id="_nav-menu">
+      <div class="collapse navbar-collapse" id="_nav-menu" >
         <ul class="nav navbar-nav">
       </ul>
       <div class="btn-toolbar">
@@ -122,7 +123,7 @@
       <tbody>
       </tbody>
       </table>
-      <button id="js-back" class="btn btn-default js-back">Prev</button>
+      <button class="btn btn-default js-back">Prev</button>
       <button class="btn btn-default js-next">Next</button>
  
     </script>
@@ -218,20 +219,22 @@
         <i class="icon-pencil"></i>
         Edit this book
       </a>-->
+      <div class="col-md-4">
       <table class="table table-bordered">
       <tbody>         
           <tr>
             <td class="active"><strong>Autore</strong></td>
-            <td><%= author %></td>
+            <td class="active"><strong>Titolo</strong></td>
+            
           </tr>
            <tr>
-            <td class="active"><strong>Titolo</strong></td>
+            <td><%= author %></td>
             <td><%= title %></td>
           </tr>
           
         </tbody>
       </table>
-    
+    </div>
     </script>
     
        <script type="text/template" id="book-view-history-list">

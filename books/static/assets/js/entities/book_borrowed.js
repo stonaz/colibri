@@ -55,7 +55,7 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
     // also be 0-based or 1-based.
     currentPage: 1,
 
-    pageSize: 2
+    pageSize: 10
   },
   });
 

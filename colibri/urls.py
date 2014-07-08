@@ -8,7 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('books.views',
     
-    url(r'^$', 'index', name='index'),
+    url(r'^old$', 'index', name='index'),
     url(r'^books/$', 'book_list',name='books'),
     url(r'^mybooks/$', 'mybooks',name='mybooks'),
     url(r'^add_book/$', 'add_book', name='add_book'),
@@ -21,7 +21,7 @@ urlpatterns = patterns('books.views',
     url(r'^login/$', 'user_login', name='login'),
     url(r'^logout/$', 'user_logout', name='logout'),
     
-    url(r'^js/$', 'ui_index',name='ui-index'),
+    url(r'^$', 'ui_index',name='ui-index'),
     
     url(r'^update_profile/$', 'update_profile', name='update_profile'),
     

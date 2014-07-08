@@ -76,33 +76,56 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
         itemViewContainer: "tbody",
         
         events: {
-                'click #js-back': 'getPreviousPage',
+                'click button.js-back': 'getPreviousPage',
                 'click button.js-next': 'getNextPage',
         },
         
         getNextPage: function(e){
         e.preventDefault();
         this.collection.getNextPage();
+        console.log(this.collection.state.currentPage)
+        this.pageCheck();
         },
     
         getPreviousPage: function(e){
         e.preventDefault();
         this.collection.getPreviousPage();
+        this.pageCheck();
         },
         
-        test: function(){alert('test')},
+        pageCheck: function(){
+            var pageProperties = this.collection.state
+            console.log(pageProperties.currentPage)
+            console.log(pageProperties.totalPages)
+            if (pageProperties.currentPage == pageProperties.totalPages) {
+                console.log('hide next button');
+                this.$(".js-next").addClass('disabled');
+            }
+            else{
+                this.$(".js-next").removeClass('disabled');
+            }
+            if (pageProperties.currentPage == pageProperties.firstPage) {
+                console.log('hide prev button');
+                this.$(".js-back").addClass('disabled');
+            }
+            else{
+                this.$(".js-back").removeClass('disabled');
+            }
+        },
 
-        //onRender: function () {
-        //    if (this.collection.length < 1) {
-        //        console.log('No books to show')
-        //        var $title = $('<tr>', {
-        //            text: 'No books inserted yet'
-        //        });
-        //        $title.addClass('bg-danger')
-        //        this.$el.append($title);
-        //
-        //    }           
-        //},
+        onRender: function () {
+            this.pageCheck();
+            
+            //if (this.collection.length < 1) {
+            //    console.log('No books to show')
+            //    var $title = $('<tr>', {
+            //        text: 'No books inserted yet'
+            //    });
+            //    $title.addClass('bg-danger')
+            //    this.$el.append($title);
+            //
+            //}           
+        },
         
         emptyView: NoBooksView
 
