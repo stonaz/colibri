@@ -97,7 +97,7 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
             var pageProperties = this.collection.state
             console.log(pageProperties.currentPage)
             console.log(pageProperties.totalPages)
-            if (pageProperties.currentPage == pageProperties.totalPages) {
+            if (pageProperties.currentPage == pageProperties.totalPages || pageProperties.totalPages===null) {
                 console.log('hide next button');
                 this.$(".js-next").addClass('disabled');
             }
