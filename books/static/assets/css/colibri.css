@@ -56,7 +56,7 @@ fieldset[disabled] .btn-menu.active {
 
 .btn-orange {
   color: #333;
-  background-color: #FFBF00;
+  background-color: #FE9A2E;
   border-color: #ccc;
   margin-left: 1px;
   margin-right: 1px;
@@ -96,4 +96,30 @@ fieldset[disabled] .btn-orange.active {
 .btn-orange .badge {
   color: #fff;
   background-color: #333;
+}
+
+.about {
+  border:  solid;
+  color: #333;
+  background-color: #FE9A2E;
+  border-color: #0000FF;
+  margin-left: 1px;
+  margin-right: 1px;
+  padding: 5px;
+  border-radius: 15px;
+}
+.contacts {
+  float: right;
+  border: thin solid;
+  color: #333;
+  background-color: #CCCCCC;
+  border-color: #0000FF;
+  margin-left: 1px;
+  margin-right: 1px;
+  padding: 5px;
+  /*border-radius: 15px;*/
+}
+.spiegazione {
+  background-color: #CCCCCC;
+  padding: 3px;
 }

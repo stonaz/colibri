@@ -3,14 +3,41 @@ ColibriApp.module('MyBooksApp.Show', function(Show, ColibriApp,Backbone, Marione
     Show.Layout = Marionette.Layout.extend({
         template: "#book-view-layout",
         regions: {
-            bookRegion: "#book-region",
+           bookRegion: "#book-history-title-region",
             historyRegion: "#history-region"
         }
     });
     
+    
+    
+    
+    
     Show.HistoryDetail = Marionette.ItemView.extend({
         tagName: "tr",
-        template: "#book-view-history-item",               
+        template: "#book-view-history-item",
+        templateHelpers: function () {
+                return {
+                        showDate: function(){
+                            var months=['Gennaio',
+                                        'Febbraio',
+                                        'Marzo',
+                                        'Aprile',
+                                        'Maggio',
+                                        'Giugno',
+                                        'Luglio',
+                                        'Agosto',
+                                        'Settembre',
+                                        'Ottobre',
+                                        'Novembre',
+                                        'Dicembre'
+                                        ]
+                            var d = new Date(this.created);
+                        return d.getUTCDay() + " " + months[d.getUTCMonth()] + " " + d.getUTCFullYear();
+                            },
+
+                        
+                      };
+            }
         });
     
     Show.History = Marionette.CompositeView.extend({
@@ -20,19 +47,6 @@ ColibriApp.module('MyBooksApp.Show', function(Show, ColibriApp,Backbone, Marione
         itemView: Show.HistoryDetail,
         itemViewContainer: "tbody",
         
-    //    initialize: function(){
-    //  this.listenTo(this.collection, "reset", function(){
-    //    this.appendHtml = function(collectionView, itemView, index){
-    //      collectionView.$el.append(itemView.el);
-    //    }
-    //  });
-    //},
-    //
-    //onCompositeCollectionRendered: function(){
-    //  this.appendHtml = function(collectionView, itemView, index){
-    //    collectionView.$el.prepend(itemView.el);
-    //  }
-    //}
     });
     
     Show.MissingBook = Marionette.ItemView.extend({
@@ -41,13 +55,7 @@ ColibriApp.module('MyBooksApp.Show', function(Show, ColibriApp,Backbone, Marione
     
     Show.Book = Marionette.ItemView.extend({
             template: "#book-view",
-            events: {
-                    "click a.js-edit": "editClicked"
-                    },
-            editClicked: function(e){
-                    e.preventDefault();
-                    this.trigger("mybook:edit", this.model);
-                    }
+            tagName: "p"
                     
             });
     });

@@ -3,7 +3,7 @@ Backbone, Marionette, $, _) {
     New.Book = ColibriApp.MyBooksApp.Common.Views.Form.extend({
         title: "New Book",
         onRender: function () {
-            this.$(".js-submit").text("Add book");
+            this.$(".js-submit").text("Inserisci il libro");
         }
     });
 })

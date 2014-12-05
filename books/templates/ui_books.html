@@ -22,7 +22,7 @@
 
       .navbar {
   
-      background-color: #FFBF00; /* it's flat*/
+      background-color: #FE9A2E; /* it's flat*/
       background-image: none;
       }
 
@@ -38,7 +38,7 @@
 
     <div id="main-region" class="container">
       
-      <p>Here is static content in the web page. You'll notice that it gets replaced by our app as soon as we start it.</p>
+      <p>Colibri si sta caricando.. ancora un attimo..</p>
     </div>
     <div id="dialog-region"></div>
     
@@ -61,8 +61,8 @@
       </ul>
       <div class="btn-toolbar">
 <% if(ColibriApp.username === undefined) { %>
-      <button class="btn btn-primary btn-primary navbar-btn navbar-right js-signin"> Sign in </button>
-      <button class="btn btn-primary btn-primary navbar-btn navbar-right js-login"> Login </button>
+      <button class="btn btn-primary btn-primary navbar-btn navbar-right js-signin"> Registrazione</button>
+      <button class="btn btn-primary btn-primary navbar-btn navbar-right js-login"> Accedi </button>
     <% } else { %>
       <button class="btn btn-primary btn-primary navbar-btn navbar-right js-logout"> Logout </button>&nbsp;
       <button class="btn btn-primary btn-primary navbar-btn  navbar-right "> <%=  ColibriApp.username %></button>&nbsp;
@@ -209,32 +209,17 @@
     </script>
     
     <script type="text/template" id="book-view-layout">
-      <div id="book-region"></div>
+      <div id="book-history-title-region" ></div>
       <div id="history-region"></div>
     </script> 
 
     <script type="text/template" id="book-view">
-      <!--<h1><%= author %> <%= title %></h1>
-      <a href="#books/<%= id %>/edit" class="btn btn-small js-edit">
-        <i class="icon-pencil"></i>
-        Edit this book
-      </a>-->
-      <div class="col-md-4">
-      <table class="table table-bordered">
-      <tbody>         
-          <tr>
-            <td class="active"><strong>Autore</strong></td>
-            <td class="active"><strong>Titolo</strong></td>
-            
-          </tr>
-           <tr>
-            <td><%= author %></td>
-            <td><%= title %></td>
-          </tr>
-          
-        </tbody>
-      </table>
-    </div>
+      <h4>
+      <strong>Autore: </strong><%= author %><br>
+      <strong>Titolo: </strong><%= title %>
+      </h4>
+    
+
     </script>
     
        <script type="text/template" id="book-view-history-list">
@@ -255,7 +240,7 @@
       
       <td><%= took_from_name %></td>
       <td><%= given_to_name %></td>
-      <td><%= created %></td>
+      <td><%= showDate() %></td>
 
     </script>
     
@@ -392,8 +377,36 @@
     </script>
     
        <script type="text/template" id="about-message">
-      <h1>About CoLibri</h1>
-      
+        <div class="contacts">
+Per contatti,info o assistenza manda una mail a:<br>
+<strong>colibribooksharing@gmail.com</strong> 
+</div>
+      <h1><strong>CoLibri</strong></h1>
+<h4>
+CoLibri è un sistema pensato per facilitare la condivisione e lo scambio di libri.<br>
+Ciascun utente registrato può inserire nel sistema i  libri che vuole mettere in condivisione,
+che saranno così disponibili per tutti gli altri utenti.
+</h4><h3>
+<strong>COME FUNZIONA</strong>
+</h3>
+<h4><strong><u>Registrazione</u></strong></h4>
+<p class="spiegazione">
+Clicca su registrazione ed inserisci uno username, la tua email e la password.<br>
+Ti verrà inviata una mail di benvenuto, contenente la password che hai scelto.<br>
+<strong>*** IMPORTANTE ***</strong><br>
+Il sistema non prevede per ora una funzione di recupero password, per cui conserva la mail, dato che se dimentichi la password, questa dovrà essere reimpostata dall'admin, che ti vorrà un pò meno bene :-)'
+</p>
+<h4><strong><u>Gestione libri</u></strong></h4>
+<p class="spiegazione">
+Dal pulsante 'I miei libri' potrai inserire e gestire i libri che vuoi condividere.
+</p>
+<h4><strong><u>Scambio libri</u></strong></h4>
+<p class="spiegazione">
+Una volta trovato un libro che interessa, si può contattare il proprietario, o chi ne è in possesso in quel momento, mandando una mail direttamente dall'applicazione per accordarsi su come scambiarsi il libro.
+<br>Chi prende il libro deve registrare sul sistema l'avvenuta presa in consegna.
+<br><u>Quest'operazione va fatta da chi ha preso il libro.</u>
+Non si può notificare al sistema che qualcun altro ha preso un libro di cui si era in possesso.</p>
+  </h4>    
     </script>
         
     <script type="text/template" id="book-my-where-is-form">
@@ -557,8 +570,9 @@
     <script src="{% static "assets/js/apps/header/login/login_controller.js" %}"></script>
     <script src="{% static "assets/js/apps/header/signin/signin_view.js" %}"></script>
     <script src="{% static "assets/js/apps/header/signin/signin_controller.js" %}"></script>
-    
+
     <script type="text/javascript">
+
 //      $( document ).ready(function() {
 //console.log( "ready!" );
 //$('.nav  a').on("click",function(){
