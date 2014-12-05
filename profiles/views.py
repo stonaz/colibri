@@ -119,7 +119,7 @@ Create a new user account.
             message = "Benvenuto su Colibri\n"
             message += "Username: %s  \n" % obj.username
             message += "Password: %s  " % clear_password
-            send_mail("Registrazione a CoLibri", message, 'admin@colibri.org',[obj.email])
+            send_mail("Registrazione a CoLibri", message, 'colibribooksharing@gmail.com',[obj.email])
             #user = authenticate(username=obj.password, password=obj.password)
             #login(request,user)
             

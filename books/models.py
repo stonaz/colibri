@@ -83,7 +83,7 @@ class BookWhereIs( TimeStamped_Model):
                 message = "%s ha preso in prestito il libro " % self.user.username
                 message += "Puoi contattarlo all'indirizzo email: %s " % self.user.email
                 if self.book.owner != self.user:
-                    send_mail(subject, message, 'booksharing@colibri.org',[mail_to], fail_silently=False)
+                    send_mail(subject, message, 'colibribooksharing@gmail.com',[mail_to], fail_silently=False)
                 
 
         
