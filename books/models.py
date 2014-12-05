@@ -35,7 +35,7 @@ class Book( TimeStamped_Model):
         ordering = ['-modified']
         
     def save(self,*args, **kwargs):
-        print self.title
+        #print self.title
         # Place code here, which is excecuted the same
     
         # Call parent's ``save`` function
@@ -77,7 +77,7 @@ class BookWhereIs( TimeStamped_Model):
             if old_obj.user != self.user:
                 new_entry = BookHistory(book=self.book,took_from=old_obj.user,given_to=self.user)
                 new_entry.save()
-                print self.book.owner
+                #print self.book.owner
                 mail_to=old_obj.user.email
                 subject = "Colibri notification - %s %s " % (self.book.title, self.book.author)
                 message = "%s ha preso in prestito il libro " % self.user.username

@@ -26,7 +26,7 @@ def take_book(request,id):
     book_id=id
     #book_id=request.GET.get('id')
     book=get_object_or_404(BookWhereIs,book_id=book_id)
-    print book.user
+    #print book.user
     #sharer=User.objects.get(username=book.user)
     borrower=get_object_or_404(User,username=book.user)
     borrower_email=borrower.email
@@ -37,7 +37,7 @@ def take_book(request,id):
     else:
         borrower_phone="Non disponibile"
         
-    print borrower_phone
+    #print borrower_phone
 
     return render_to_response(
             'take_book.html',{'book': book,
