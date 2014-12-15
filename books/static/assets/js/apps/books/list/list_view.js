@@ -72,6 +72,12 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
         //tagName: "table",
         template: "#book-list",
         //className: "table table-hover",
+        templateHelpers: function () {
+            //console.log(this.collection.length)
+            return {
+                count: this.collection.length
+            }
+        },
         itemView: List.Book,
         itemViewContainer: "tbody",
         

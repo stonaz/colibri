@@ -10,6 +10,50 @@ min-width: 200px;
 min-height: 53px;
 }
 
+.btn-action {
+  color: #333;
+  /*background-color: #FFBF00;*/
+  border-color: #00f;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+.btn-menu:hover,
+.btn-menu:focus,
+.btn-menu:active,
+.btn-menu.active,
+.open .dropdown-toggle.btn-menu {
+  color: #333;
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+.btn-menu:active,
+.btn-menu.active,
+.open .dropdown-toggle.btn-menu {
+  background-image: none;
+}
+.btn-menu.disabled,
+.btn-menu[disabled],
+fieldset[disabled] .btn-menu,
+.btn-menu.disabled:hover,
+.btn-menu[disabled]:hover,
+fieldset[disabled] .btn-menu:hover,
+.btn-menu.disabled:focus,
+.btn-menu[disabled]:focus,
+fieldset[disabled] .btn-menu:focus,
+.btn-menu.disabled:active,
+.btn-menu[disabled]:active,
+fieldset[disabled] .btn-menu:active,
+.btn-menu.disabled.active,
+.btn-menu[disabled].active,
+fieldset[disabled] .btn-menu.active {
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-menu .badge {
+  color: #fff;
+  background-color: #333;
+}
+
 .btn-menu {
   color: #333;
   background-color: #FFBF00;
@@ -121,5 +165,13 @@ fieldset[disabled] .btn-orange.active {
 }
 .spiegazione {
   background-color: #CCCCCC;
-  padding: 3px;
+  padding: 5px;
+  border-radius: 15px;
+  border: thin solid
+}
+.count {
+  background-color: #FE9A2E;
+  padding: 5px;
+  margin-bottom: 3px;
+  border-radius: 10px;
 }

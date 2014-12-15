@@ -14,11 +14,13 @@ Backbone, Marionette, $, _) {
             var booksListPanel = new List.Panel();
             var msg = "Hai già questo libro"
             $.when(fetchingBooks).done(function (books) {
+                console.log("Libri trovati: " +books.length)
 
                 var booksListView = new List.Books({
-                    collection: books
+                    collection: books,
+                    
                 });
-                console.log(booksListView)
+                //console.log(booksListView)
 
                 booksListLayout.on("show", function () {
                     booksListLayout.panelRegion.show(booksListPanel);

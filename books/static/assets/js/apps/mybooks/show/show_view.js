@@ -32,7 +32,7 @@ ColibriApp.module('MyBooksApp.Show', function(Show, ColibriApp,Backbone, Marione
                                         'Dicembre'
                                         ]
                             var d = new Date(this.created);
-                        return d.getUTCDay() + " " + months[d.getUTCMonth()] + " " + d.getUTCFullYear();
+                        return d.getUTCDate() + " " + months[d.getUTCMonth()] + " " + d.getUTCFullYear();
                             },
 
                         

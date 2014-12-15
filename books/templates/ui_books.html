@@ -97,14 +97,15 @@
     </script>
     
     <script type="text/template" id="book-list-panel">
-      <button class="btn  js-new"> Aggiungi libro</button>
+      <button class="btn btn-action js-new"> Aggiungi libro</button>
     </script>
     
     <script type="text/template" id="book-all-list-panel">
        <form id="book-search-form" class="form-search form-inline">
         <div class="input-append">
+          <strong>Ricerca libri per autore o titolo:</strong>
           <input type="text" class="span2 search-query js-search-criterion">
-          <button type="submit" class="btn js-search">Cerca libri</button>
+          <button type="submit" class="btn btn-action js-search">Cerca</button>
         </div>
        </form> 
     </script> 
@@ -112,6 +113,12 @@
     <script type="text/template" id="book-list">
       <table class="table table-condensed">
       <thead>
+        <tr>
+          <th><p class="count">Libri trovati: <%= count %></p> </th>
+        <th></th>
+        <th></th>
+        <th></th>
+        </tr>
         <tr>
           
           <th>Autore</th>

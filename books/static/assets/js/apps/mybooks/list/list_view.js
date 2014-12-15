@@ -75,6 +75,12 @@ ColibriApp.module('MyBooksApp.List', function (List, ColibriApp, Backbone, Mario
     List.Books = Marionette.CompositeView.extend({
         //tagName: "table",
         template: "#book-list",
+        templateHelpers: function () {
+            //console.log(this.collection.length)
+            return {
+                count: this.collection.length
+            }
+        },
         //className: "table table-hover",
         itemView: List.Book,
         itemViewContainer: "tbody",
