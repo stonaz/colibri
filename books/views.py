@@ -83,9 +83,10 @@ def index(request):
 def ui_index(request):
     
     context = RequestContext(request)
+    count = Book.objects.count()
     
     return render_to_response(
-            'ui_books.html', context
+            'ui_books.html', {'count':count},context
 )
 
 @login_required

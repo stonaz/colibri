@@ -98,6 +98,7 @@
     
     <script type="text/template" id="book-list-panel">
       <button class="btn btn-action js-new"> Aggiungi libro</button>
+      <br><br>
     </script>
     
     <script type="text/template" id="book-all-list-panel">
@@ -106,6 +107,7 @@
           <strong>Ricerca libri per autore o titolo:</strong>
           <input type="text" class="span2 search-query js-search-criterion">
           <button type="submit" class="btn btn-action js-search">Cerca</button>
+          <br><br>
         </div>
        </form> 
     </script> 
@@ -113,7 +115,12 @@
     <script type="text/template" id="book-list">
       <table class="table table-condensed">
       <thead>
-  
+        <tr>
+          <th class="count"><span >Libri trovati: <%= count %></span> </th>
+        <th></th>
+        <th></th>
+        <th></th>
+        </tr>
         <tr>
           
           <th>Autore</th>

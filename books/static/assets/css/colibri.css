@@ -172,6 +172,6 @@ fieldset[disabled] .btn-orange.active {
 .count {
   background-color: #FE9A2E;
   padding: 5px;
-  margin-bottom: 3px;
+  margin: 3px;
   border-radius: 10px;
 }

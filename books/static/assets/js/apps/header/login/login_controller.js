@@ -8,7 +8,7 @@ ColibriApp.module("HeaderApp.Login", function (Login, ColibriApp, Backbone, Mari
                 model: newLogin,
             });
             view.on("form:submit", function (data) {
-                console.log(data)
+             //   console.log(data)
                 newLogin.save(data, {
                     success: function (model, response, options) {
                         //console.log(newLogin);

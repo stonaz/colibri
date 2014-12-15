@@ -85,7 +85,7 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
       books.fetch({
         success: function(data){          
           defer.resolve(data);
-          console.log(data)
+          //console.log(data)
           },
         error: function(data){          
           alert(data);
@@ -101,7 +101,7 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
         
       });
       books.url="/api/v1/books/?search="+filter
-      console.log(books)
+      //console.log(books)
       //books.setPageSize(2)
       var defer = $.Deferred();
       books.fetch({

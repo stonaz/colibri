@@ -39,8 +39,8 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
         
         events: {
             "click": "highlightName",
-                "click td a.js-show": "showClicked",
-                "click td a.js-sendmail": "showSendmail",
+            "click td a.js-show": "showClicked",
+            "click td a.js-sendmail": "showSendmail",
         },
         flash: function (cssClass) {
 
@@ -73,9 +73,9 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
         template: "#book-list",
         //className: "table table-hover",
         templateHelpers: function () {
-            //console.log(this.collection.length)
+            //console.log(this.collection.fullCollection.length)
             return {
-                count: this.collection.length
+                count: this.collection.fullCollection.length
             }
         },
         itemView: List.Book,
@@ -89,7 +89,7 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
         getNextPage: function(e){
         e.preventDefault();
         this.collection.getNextPage();
-        console.log(this.collection.state.currentPage)
+        //console.log(this.collection.state.currentPage)
         this.pageCheck();
         },
     
@@ -101,17 +101,17 @@ ColibriApp.module('BooksApp.List', function (List, ColibriApp, Backbone, Marione
         
         pageCheck: function(){
             var pageProperties = this.collection.state
-            console.log(pageProperties.currentPage)
-            console.log(pageProperties.totalPages)
+           // console.log(pageProperties.currentPage)
+           // console.log(pageProperties.totalPages)
             if (pageProperties.currentPage == pageProperties.totalPages || pageProperties.totalPages===null) {
-                console.log('hide next button');
+             //   console.log('hide next button');
                 this.$(".js-next").addClass('disabled');
             }
             else{
                 this.$(".js-next").removeClass('disabled');
             }
             if (pageProperties.currentPage == pageProperties.firstPage) {
-                console.log('hide prev button');
+              //  console.log('hide prev button');
                 this.$(".js-back").addClass('disabled');
             }
             else{
