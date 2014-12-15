@@ -15,7 +15,7 @@ Backbone, Marionette, $, _) {
             var booksListPanel = new List.Panel();
 
             $.when(fetchingBooks).done(function (books) {
-                console.log(books.length)
+                console.log("LIBRI:" +books.length)
 
                 var booksListView = new List.Books({
                     collection: books

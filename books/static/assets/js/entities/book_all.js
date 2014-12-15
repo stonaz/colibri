@@ -85,7 +85,7 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
       books.fetch({
         success: function(data){          
           defer.resolve(data);
-          //console.log(data)
+          console.log(data)
           },
         error: function(data){          
           alert(data);
