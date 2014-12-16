@@ -51,11 +51,11 @@ class AccountLogin(generics.GenericAPIView):
             login(request, serializer.instance)
             user = serializer.instance
         
-            if request.DATA.get('remember'):
-                # TODO: remember configurable
-                request.session.set_expiry(60 * 60 * 24 * 7 * 3)
-            else:
-                request.session.set_expiry(0)
+            #if request.DATA.get('remember'):
+            #    # TODO: remember configurable
+            #    request.session.set_expiry(60 * 60 * 24 * 7 * 3)
+            #else:
+            #    request.session.set_expiry(0)
                 
             return Response({
                 'detail': _(u'Logged in successfully'),
