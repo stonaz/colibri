@@ -36,7 +36,9 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
   Entities.BookAllCollection = Backbone.PageableCollection.extend({
     url: "/api/v1/books/",
     model: Entities.BookAll,
-    comparator: "author",
+    comparator: function(item) { return item.get('author').toLowerCase(); },
+
+    
     
     mode: "client",
     

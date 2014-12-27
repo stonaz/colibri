@@ -42,7 +42,8 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
       return "/api/v1/"+ColibriApp.username+"/borrowed_books/";
     },
     model: Entities.Book,
-    comparator: "author",
+    comparator: function(item) { return item.get('book_author').toLowerCase(); },
+
     mode: "client",
     
     state: {
