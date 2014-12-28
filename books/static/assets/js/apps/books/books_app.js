@@ -23,7 +23,7 @@ ColibriApp.module('BooksApp', function (BooksApp, ColibriApp, Backbone, Marionet
         if (!ColibriApp.user) {
             console.log('not logged in !')
         }
-        console.log(ColibriApp.user)
+        console.log('User:' +ColibriApp.user)
         ColibriApp.navigate("items");
         API.listBooks();
         });

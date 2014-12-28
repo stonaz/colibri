@@ -89,8 +89,17 @@ ColibriApp.module('Entities', function(Entities, ColibriApp, Backbone, Marionett
           defer.resolve(data);
           //console.log(data)
           },
-        error: function(data){          
-          alert(data);
+        error: function(data,jqXHR){
+          if (jqXHR.status === 403) {
+            ColibriApp.trigger('header:login');
+          defer.resolve(data);
+          //alert('Effettuare prima il login');
+          console.log(jqXHR.status)
+          }
+          else{
+            ColibriApp.trigger("about:show");
+          }
+          
           }
         });             
       var promise = defer.promise();

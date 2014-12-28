@@ -11,6 +11,8 @@ from django.db.models import Q
 
 from rest_framework import generics, permissions, authentication
 from rest_framework.response import Response
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from .serializers import *
 from .permissions import IsOwnerOrReadOnly
@@ -18,6 +20,16 @@ from .permissions import IsOwnerOrReadOnly
 from books.forms import *
 from books.models import Book,BookHistory,BookWhereIs
 from profiles.models import UserProfile
+
+class IsNotAuthenticated(IsAuthenticated):
+    """
+Restrict access only to unauthenticated users.
+"""
+    def has_permission(self, request, view, obj=None):
+        if request.user and request.user.is_authenticated():
+            return False
+        else:
+            return True
 
 @login_required
 def take_book(request,id):
@@ -373,6 +385,7 @@ class BookList(generics.ListCreateAPIView):
     #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
     authentication_classes = (authentication.SessionAuthentication,)
     serializer_class= BookListSerializer
+    permission_classes = (IsAuthenticated, )
     #pagination_serializer_class = PaginatedRicetteListSerializer
     #paginate_by_param = 'limit'
     #paginate_by = 2
@@ -382,14 +395,14 @@ class BookList(generics.ListCreateAPIView):
         Optionally restricts the returned results
         by filtering against a `search` query parameter in the URL.
         """
-        print self.request.user
+        #print self.request.user
         queryset = Book.objects.all().exclude(owner=self.request.user)
-        print self.request.QUERY_PARAMS
+        #print self.request.QUERY_PARAMS
         # retrieve value of querystring parameter "search"
         search = self.request.QUERY_PARAMS.get('search', None)
         
         if search is not None:
-            print search
+            #print search
             search_query = (
                 Q(author__icontains=search) | Q(title__icontains=search)
             )
@@ -442,6 +455,7 @@ class UserBookList(generics.ListCreateAPIView):
     #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
     authentication_classes = (authentication.SessionAuthentication,)
     serializer_class= BookListSerializer
+    permission_classes = (IsAuthenticated, )
     #model=Book
     #pagination_serializer_class = PaginatedRicetteListSerializer
     #paginate_by_param = 'limit'
@@ -573,6 +587,7 @@ class UserHoldingBookList(generics.ListAPIView):
     authentication_classes = (authentication.SessionAuthentication,)
     serializer_class= BookWhereIsListSerializer
     model=BookWhereIs
+    permission_classes = (IsAuthenticated, )
     #pagination_serializer_class = PaginatedRicetteListSerializer
     #paginate_by_param = 'limit'
     #paginate_by = 2
