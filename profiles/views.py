@@ -23,9 +23,12 @@ class IsNotAuthenticated(IsAuthenticated):
 Restrict access only to unauthenticated users.
 """
     def has_permission(self, request, view, obj=None):
-        if request.user and request.user.is_authenticated():
+        if request.user and request.user.is_authenticated():           
+            #print ('here')
             return False
         else:
+            #print ('there')
+
             return True
 
 # Create your views here.
@@ -40,7 +43,7 @@ class AccountLogin(generics.GenericAPIView):
      * remember
     """
     authentication_classes = (TokenAuthentication, SessionAuthentication)
-    permission_classes = (IsNotAuthenticated, )
+    #permission_classes = (IsNotAuthenticated, )
     serializer_class = LoginSerializer
     
     def post(self, request, format=None):
@@ -66,6 +69,7 @@ class AccountLogin(generics.GenericAPIView):
         return Response(serializer.errors, status=400)
     
     def permission_denied(self, request):
+        print ('give 403')
         raise exceptions.PermissionDenied(_("You are already authenticated"))
 
 account_login = AccountLogin.as_view()
@@ -134,12 +138,14 @@ def SendMail(request):
     #authentication_classes = (TokenAuthentication, SessionAuthentication)
     #permission_classes = (IsAuthenticated, )
     data = request.POST
-    #print data
+    print data
     subject = "Colibri notification - %s %s " % (data['book_title'],data['book_author'])
     sender = request.user.email
+    print sender
     message = data['message']
     send_mail(subject, message, sender,[data['where_is_email']])
     #send_mail("test", "message", 'booksharing@colibri.org',['booksharing@colibri.org'], fail_silently=False)
-    return HttpResponse('Mail sent')
+    response_data = {}
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 #send_mail = SendMail.as_view()

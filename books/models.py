@@ -32,7 +32,7 @@ class Book( TimeStamped_Model):
         return self.title
     
     class Meta:
-        ordering = ['-modified']
+        ordering = ['author']
         
     def save(self,*args, **kwargs):
         #print self.title
