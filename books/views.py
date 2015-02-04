@@ -46,13 +46,10 @@ class BookList(generics.ListCreateAPIView):
     Create new book if authorized (admins and allowed users only).
     """
     
-    #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
-    authentication_classes = (authentication.SessionAuthentication,authentication.TokenAuthentication)
+    authentication_classes = (SessionAuthentication,TokenAuthentication)
     serializer_class= BookListSerializer
     permission_classes = (IsAuthenticated, )
-    #pagination_serializer_class = PaginatedRicetteListSerializer
-    #paginate_by_param = 'limit'
-    #paginate_by = 2
+
     
     def get_queryset(self):
         """
@@ -79,28 +76,28 @@ class BookList(generics.ListCreateAPIView):
 
 book_list = BookList.as_view()
 
-class BookDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    ### 
-    
-    Details of books of a user.
-        
-    """
-    
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
-    authentication_classes = (authentication.SessionAuthentication,)
-    serializer_class= BookDetailSerializer
-    model=Book
-    
-    #def get_queryset(self):
-    #    user = self.kwargs.get('user', None)
-    #    try:
-    #        user_id=User.objects.get(username=user)
-    #    except Exception:
-    #        raise Http404(_('Not found'))
-    #    return Book.objects.all().filter(user=user_id)
-
-book_detail = BookDetail.as_view()
+#class BookDetail(generics.RetrieveUpdateDestroyAPIView):
+#    """
+#    ### 
+#    
+#    Details of books of a user.
+#        
+#    """
+#    
+#    authentication_classes = (TokenAuthentication,)
+#    permission_classes = (IsAuthenticated, )
+#    serializer_class= BookDetailSerializer
+#    model=Book
+#    
+#    def get_queryset(self):
+#        user = self.kwargs.get('user', None)
+#        try:
+#            user_id=User.objects.get(username=user)
+#        except Exception:
+#            raise Http404(_('Not found'))
+#        return Book.objects.all().filter(user=user_id)
+#
+#book_detail = BookDetail.as_view()
 
 
 class UserBookList(generics.ListCreateAPIView):
@@ -111,7 +108,6 @@ class UserBookList(generics.ListCreateAPIView):
         
     """
     
-    #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
     authentication_classes = (authentication.SessionAuthentication,)
     serializer_class= BookListSerializer
     permission_classes = (IsAuthenticated, )
@@ -136,7 +132,7 @@ class UserBookDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
-    authentication_classes = (authentication.SessionAuthentication,)
+    authentication_classes = (SessionAuthentication,)
     serializer_class= BookDetailSerializer
     model=Book
     
@@ -160,8 +156,8 @@ class BookWhereIsDetail(generics.RetrieveUpdateAPIView):
         
     """
     
-    #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
-    authentication_classes = (authentication.SessionAuthentication,)
+    permission_classes = (IsAuthenticated, )
+    authentication_classes = (SessionAuthentication,TokenAuthentication)
     serializer_class = BookWhereIsListSerializer
     model = BookWhereIs
     lookup_field = 'book'
@@ -206,8 +202,7 @@ class BookHistoryList(generics.ListCreateAPIView):
         
     """
     
-    #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
-    authentication_classes = (authentication.SessionAuthentication,)
+    authentication_classes = (SessionAuthentication,)
     serializer_class = BookistoryListSerializer
     model = BookHistory
     
@@ -230,8 +225,7 @@ class UserHoldingBookList(generics.ListAPIView):
         
     """
     
-    #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
-    authentication_classes = (authentication.SessionAuthentication,)
+    authentication_classes = (SessionAuthentication,)
     serializer_class= BookWhereIsListSerializer
     model=BookWhereIs
     permission_classes = (IsAuthenticated, )
@@ -263,7 +257,7 @@ class UserProfileList(generics.ListAPIView):
     """
     
     #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
-    authentication_classes = (authentication.SessionAuthentication,)
+    authentication_classes = (SessionAuthentication,)
     serializer_class= UserProfileListSerializer
     
     def get_queryset(self):
