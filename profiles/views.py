@@ -130,22 +130,44 @@ Create a new user account.
 
 account_signin = AccountSignIn.as_view()
 
-@login_required
-def SendMail(request):
+
+#def SendMail(request):
+#    """
+#    Send mail
+#    """
+#    #authentication_classes = (TokenAuthentication, SessionAuthentication)
+#    #permission_classes = (IsAuthenticated, )
+#    data = request.POST
+#    print request.POST['book_author']
+#    print data['book_title']
+#    subject = "Colibri notification - %s %s " % (data['book_title'],data['book_author'])
+#    sender = request.user.email
+#    print sender
+#    message = data['message']
+#    send_mail(subject, message, sender,[data['where_is_email']])
+#    #send_mail("test", "message", 'booksharing@colibri.org',['booksharing@colibri.org'], fail_silently=False)
+#    response_data = {}
+#    return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+
+
+class SendMail(generics.ListCreateAPIView):
     """
     Send mail
     """
-    #authentication_classes = (TokenAuthentication, SessionAuthentication)
+    authentication_classes = (TokenAuthentication, SessionAuthentication)
     #permission_classes = (IsAuthenticated, )
-    data = request.POST
-    print data
-    subject = "Colibri notification - %s %s " % (data['book_title'],data['book_author'])
-    sender = request.user.email
-    print sender
-    message = data['message']
-    send_mail(subject, message, sender,[data['where_is_email']])
-    #send_mail("test", "message", 'booksharing@colibri.org',['booksharing@colibri.org'], fail_silently=False)
-    response_data = {}
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
+    def post(self,request):
+        data = request.POST
+        #print request.POST['book_author']
+        #print data
+        subject = "Colibri notification - %s %s " % (data['book_title'],data['book_author'])
+        sender = request.user.email
+        #print sender
+        message = data['message']
+        send_mail(subject, message, sender,[data['where_is_email']])
+        #send_mail("test", "message", 'booksharing@colibri.org',['booksharing@colibri.org'], fail_silently=False)
+        #response_data = {}
+        return Response({})
 
-#send_mail = SendMail.as_view()
+send_mail_api = SendMail.as_view()

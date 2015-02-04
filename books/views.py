@@ -47,7 +47,7 @@ class BookList(generics.ListCreateAPIView):
     """
     
     #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
-    authentication_classes = (authentication.SessionAuthentication,)
+    authentication_classes = (authentication.SessionAuthentication,authentication.TokenAuthentication)
     serializer_class= BookListSerializer
     permission_classes = (IsAuthenticated, )
     #pagination_serializer_class = PaginatedRicetteListSerializer
