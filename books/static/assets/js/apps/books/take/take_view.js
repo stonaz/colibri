@@ -15,13 +15,13 @@ Backbone, Marionette, $, _){
     submitClicked: function(e){
       e.preventDefault();
       var data = Backbone.Syphon.serialize(this);
-      console.log(data)
+      //console.log(data)
       this.trigger("form:submit", data);
     },
     
     closeWindow: function(e){
       e.preventDefault();
-      console.log('close')
+      //console.log('close')
       this.trigger("dialog:close");
     },
 
@@ -68,7 +68,7 @@ Backbone, Marionette, $, _){
         },
 
         onRender: function () {
-            console.log(this.options)
+           // console.log(this.options)
             //if (this.options.generateTitle) {
             //    console.log('eppure..')
             //    var $title = $('<h3>', {
@@ -82,10 +82,9 @@ Backbone, Marionette, $, _){
         },
         
         onShowSuccess: function(msg){
-            console.log('ok')
             this.$(".book-where-is-form-msg").html(msg).addClass("text-success");
             this.$(".js-submit").hide();
-            this.$(".js-close").show();
+          //  this.$(".js-close").show();
         }
 
         });

@@ -74,8 +74,14 @@ Backbone, Marionette, $, _){
         
         onShowSuccess: function(msg){
             console.log('ok')
-            this.$(".book-where-is-form-msg").html(msg).addClass("text-success");
+            this.$(".book-where-is-form-msg").html(msg).removeClass("text-danger").addClass("text-success");
             this.$(".js-submit").hide();
+        },
+        
+        onShowError: function(msg){
+            console.log('ko')
+            this.$(".book-where-is-form-msg").html(msg).addClass("text-danger");
+            //this.$(".js-submit").hide();
         }
 
         });

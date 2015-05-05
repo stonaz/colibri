@@ -18,10 +18,11 @@ Backbone, Marionette, $, _) {
                         //generateTitle: false
                     });
                     bookWhereIsView.on("form:submit", function (data) {
-                        console.log(data)
+                        //console.log(data)
                         book_where_is.save(data, {
                             success: function (model, response, options) {
                                 // console.log(view)
+                                mail_recipient = model.attributes.where_is;
                                 view.model.collection.fetch({
                                     success: function () {
                                         view.render();
@@ -31,11 +32,11 @@ Backbone, Marionette, $, _) {
                                     }
                                 });
                                 var msg = "Hai preso in prestito il libro<br>";
-                                msg += "E' stata inviata un email a chi lo aveva prima di te"
+                                msg += "ed è stata inviata un email a " + mail_recipient
                                 bookWhereIsView.triggerMethod("show:success", msg);
                                 //bookWhereIsView.trigger("dialog:close");
                                 view.flash("success");
-                                console.log("The model has been updated");
+                               // console.log(model);
                             },
                             error: function (model, xhr, options) {
                                 // to review

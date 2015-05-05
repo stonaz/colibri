@@ -17,9 +17,18 @@ Backbone, Marionette, $, _) {
                         model: book_where_is,
                         //generateTitle: false
                     });
+                    
                     bookWhereIsView.on("form:submit", function (data) {
                         console.log(data)
+                        if (data.message === "") {
+                            var msg = "Scrivi qualcosa nel messaggio";
+                            console.log('msg missing')
+                            bookWhereIsView.triggerMethod("show:error", msg);
+                            return false;
+                            
+                        }
                         var csfrtoken= $.cookie('csrftoken')
+                        var msg = "Mail inviata"
                         Backbone.ajax({
                             url: "/sendmail/",
                             method: "POST",
@@ -29,13 +38,14 @@ Backbone, Marionette, $, _) {
                             data: data,
                             success: function (val) {
                                 console.log('Mail sent');
-                                bookWhereIsView.trigger("dialog:close");
+                                bookWhereIsView.triggerMethod("show:success", msg);
+                                //bookWhereIsView.trigger("dialog:close");
 
                             },
                             error: function (model, xhr, options) {
                                 console.log(xhr)
                                 //view.triggerMethod("form:data:invalid", xhr.responseJSON);
-                                console.log("Something went wrong while logging out");
+                                console.log("Something went wrong with the email");
                             }
                         });
                     });

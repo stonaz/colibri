@@ -366,12 +366,14 @@ min-height: 26px;
     </script>
     
     <script type="text/template" id="book-where-is-form-sendmail">
-      <p><strong>Author</strong> <%= book_author %></p>
-      <p><strong>Title</strong> <%= book_title %></p>
-      <p><strong>Where is</strong> <%= where_is %></p>
-      <p><strong>User email</strong> <%= where_is_email %></p>
-
-      <form>
+      <div>
+      <p><strong>Autore</strong> <%= book_author %></p>
+      <p><strong>Titolo</strong> <%= book_title %></p>
+      <p><strong>Dove sta</strong> <%= where_is %></p>
+      <p><strong>Email</strong> <%= where_is_email %></p>
+      </div>
+      <div>
+            <form>
         <div class="control-group">
           <!--<label for="book-where-is" class="control-label">Where is:</label>-->
           <input id="book-where-is" name="book_author" type="hidden" value="<%= book_author %>"/>
@@ -379,19 +381,24 @@ min-height: 26px;
           <input id="book-where-is" name="where_is" type="hidden" value="<%= where_is %>"/>
           <input id="book-where-is" name="where_is_email" type="hidden" value="<%= where_is_email %>"/>
           <div class="form-group">
-          <label for="password" class="col-sm-4 control-label">Messaggio </label>
-          <div class="col-sm-8">
-          <input id="password" class="form-control"  name="message" type="textarea" value=""/>
-          </div>
+          <label for="msg" class="control-label">Messaggio </label>
+          <textarea id="msg"   name="message"class="form-control" rows="3"></textarea>
+<!--          <input id="msg" class="form-control"  name="message" type="textarea" rows="3" value=""/>
+-->          <br>
+          <button  class="btn js-submit">Login</button>
+<!--          <div class="col-sm-8">
+          </div>-->
         </div>
 
-        <div class="col-sm-offset-4 col-sm-8">
-            <button  class="btn js-submit">Login</button>
-        </div>
+<!--        <div class="col-sm-offset-4 col-sm-8">
+           
+        </div>-->
           
           
         </div>
-      </form>
+      </form> 
+      </div>
+
       <div class="book-where-is-form-msg"></div>
     </script>
     
