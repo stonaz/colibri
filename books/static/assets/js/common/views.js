@@ -121,19 +121,21 @@ ColibriApp.module('Common.Views', function(Views, ColibriApp, Backbone, Marionet
 
       var clearFormErrors = function(){
         var $form = $view.find("form");
-        $form.find(".help-inline.error").each(function(){
+        $form.find(".help-inline.text-danger").each(function(){
           $(this).remove();
         });
-        $form.find(".control-group.error").each(function(){
-          $(this).removeClass("error");
+        $form.find(".form-group.text-danger").each(function(){
+          $(this).removeClass("text-danger");
         });
       }
 
       var markErrors = function(value, key){
         console.log(value)
-        var $controlGroup = $view.find("#book-" + key).parent();
-        var $errorEl = $('<span>', { class: "help-inline bg-danger", text: value });
-        $view.append($errorEl);
+        var $controlGroup = $view.find("#login-" + key).parent();
+        //var $errorEl = $('<span>', { class: "help-inline bg-danger", text: value });
+        //$view.append($errorEl);
+        var $errorEl = $('<span>', { class: "help-inline text-danger", text: value });
+        $controlGroup.append($errorEl).addClass("text-danger");
       }
 
       clearFormErrors();

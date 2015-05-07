@@ -28,7 +28,7 @@ ColibriApp.module('MyBooksApp.Common.Views', function(Views, ColibriApp, Backbon
       }
 
       var markErrors = function(value, key){
-        console.log(value)
+        console.log(key)
         var $controlGroup = $view.find("#book-" + key).parent();
         var $errorEl = $('<span>', { class: "help-inline error", text: value });
         $controlGroup.append($errorEl).addClass("error");

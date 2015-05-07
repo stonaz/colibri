@@ -23,7 +23,7 @@ ColibriApp.module("HeaderApp.Login", function (Login, ColibriApp, Backbone, Mari
                         ColibriApp.trigger("books:list")
                     },
                     error: function (model, xhr, options) {
-                        console.log(xhr)
+                        //console.log(xhr)
                         view.triggerMethod("form:data:invalid", xhr.responseJSON);
                         console.log("Something went wrong while logging in");
                     }
