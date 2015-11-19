@@ -1,0 +1,7 @@
+Django
+django-cors-headers
+django-debug-toolbar
+django-extensions
+django-rest-swagger
+djangorestframework
+psycopg2

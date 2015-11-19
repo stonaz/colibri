@@ -48,7 +48,7 @@ class AccountLogin(generics.GenericAPIView):
     
     def post(self, request, format=None):
         """ authenticate """
-        serializer = self.serializer_class(data=request.DATA)
+        serializer = self.serializer_class(data=request.data)
         
         if serializer.is_valid():
             login(request, serializer.instance)
@@ -109,6 +109,8 @@ Create a new user account.
     #        return Response(serializer(request.user, context=self.get_serializer_context()).data)
     #    else:
     #        return Response({ 'detail': _('Authentication credentials were not provided') }, status=401)
+    
+    queryset = User.objects.all()
     
     def post_save(self, obj, created):
 

@@ -60,9 +60,8 @@ class BookList(generics.ListCreateAPIView):
         current_user = self.request.user
         
         queryset = Book.objects.all().exclude(owner=self.request.user).exclude(where_is__user=self.request.user)
-        #print self.request.QUERY_PARAMS
         # retrieve value of querystring parameter "search"
-        search = self.request.QUERY_PARAMS.get('search', None)
+        search = self.request.query_params.get('search', None)
         
         if search is not None:
             #print search
@@ -75,29 +74,6 @@ class BookList(generics.ListCreateAPIView):
         return queryset
 
 book_list = BookList.as_view()
-
-#class BookDetail(generics.RetrieveUpdateDestroyAPIView):
-#    """
-#    ### 
-#    
-#    Details of books of a user.
-#        
-#    """
-#    
-#    authentication_classes = (TokenAuthentication,)
-#    permission_classes = (IsAuthenticated, )
-#    serializer_class= BookDetailSerializer
-#    model=Book
-#    
-#    def get_queryset(self):
-#        user = self.kwargs.get('user', None)
-#        try:
-#            user_id=User.objects.get(username=user)
-#        except Exception:
-#            raise Http404(_('Not found'))
-#        return Book.objects.all().filter(user=user_id)
-#
-#book_detail = BookDetail.as_view()
 
 
 class UserBookList(generics.ListCreateAPIView):
@@ -137,6 +113,7 @@ class UserBookDetail(generics.RetrieveUpdateDestroyAPIView):
     model=Book
     
     def get_queryset(self):
+        print ('retrieve book')
         user = self.kwargs.get('user', None)
         book_id = self.kwargs.get('pk', None)
         try:

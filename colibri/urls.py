@@ -3,7 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from rest_framework.authtoken import views
+#from rest_framework.authtoken import views
 
 
 admin.autodiscover()
@@ -27,7 +27,9 @@ urlpatterns = patterns('books.views',
     url(r'^api/v1/user_profile/$', 'user_profile_list' ,name='user_profile_list'),
     url(r'^api/v1/(?P<user>[-\w]+)/user_profile/$', 'user_profile_list' ,name='user_profile_list'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api-token-auth/', views.obtain_auth_token)
+    #url(r'^api-token-auth/', views.obtain_auth_token),
+    #url(r'^docs/', include('rest_framework_swagger.urls')),
+    
 )  
 
 urlpatterns += patterns('profiles.views',
