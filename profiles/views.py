@@ -6,6 +6,7 @@ from django.http import Http404,HttpResponse
 from django.contrib.auth import login, logout
 from django.utils.http import base36_to_int
 from django.utils.translation import ugettext_lazy as _
+from django.shortcuts import get_object_or_404
 from django.conf import settings
 
 from rest_framework import generics
@@ -133,24 +134,50 @@ Create a new user account.
 account_signin = AccountSignIn.as_view()
 
 
-#def SendMail(request):
-#    """
-#    Send mail
-#    """
-#    #authentication_classes = (TokenAuthentication, SessionAuthentication)
-#    #permission_classes = (IsAuthenticated, )
-#    data = request.POST
-#    print request.POST['book_author']
-#    print data['book_title']
-#    subject = "Colibri notification - %s %s " % (data['book_title'],data['book_author'])
-#    sender = request.user.email
-#    print sender
-#    message = data['message']
-#    send_mail(subject, message, sender,[data['where_is_email']])
-#    #send_mail("test", "message", 'booksharing@colibri.org',['booksharing@colibri.org'], fail_silently=False)
-#    response_data = {}
-#    return HttpResponse(json.dumps(response_data), content_type="application/json")
+class UserProfileList(generics.ListAPIView):
+    """
+    ### GET
+    
+    Retrieve user profiles.
+        
+    """
+    
+    authentication_classes = (SessionAuthentication,)
+    serializer_class = UserProfileSerializer
+    model = UserProfile
+    queryset = UserProfile.objects.all()   
 
+user_profile_list = UserProfileList.as_view()
+
+
+class UserProfileDetail(generics.RetrieveUpdateAPIView):
+    """
+    ### GET
+    
+    Retrieve user profiles.
+        
+    """
+    
+    authentication_classes = (SessionAuthentication,)
+    serializer_class = UserProfileSerializer
+    model = UserProfile
+    lookup_field = 'user'
+    queryset = UserProfile.objects.all()
+    
+    def get_object(self):
+        queryset = self.get_queryset()
+        username = self.kwargs.get('user', None)
+        user = User.objects.get(username=username)
+        print 'test ' +username
+        #filter = {}
+        #for field in self.multiple_lookup_fields:
+        #    filter[field] = self.kwargs[field]
+    
+        obj = get_object_or_404(queryset, user=user)
+        #self.check_object_permissions(self.request, obj)
+        return obj  
+
+user_profile_detail = UserProfileDetail.as_view()
 
 
 class SendMail(generics.ListCreateAPIView):
