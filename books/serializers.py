@@ -66,31 +66,12 @@ class BookistoryListSerializer(serializers.ModelSerializer):
     #dove_sta = serializers.Field(source='where_is.username')
     took_from_name = serializers.CharField(source='took_from.username',read_only=True)
     given_to_name = serializers.CharField(source='given_to.username',read_only=True)
+    owner = serializers.CharField(source='book.owner',read_only=True)
     
     class Meta:
         model = BookHistory
 
         fields= (
-           'book','took_from','took_from_name','given_to','given_to_name', 'created', 'modified',
-            )
+           'book','took_from','took_from_name','given_to','given_to_name', 'created', 'modified','owner'
+            )     
 
-        
-class UserProfileListSerializer(serializers.ModelSerializer):
-    """
-    User profiles list
-    """
-    email = serializers.CharField(source='user.email',read_only=True)
-    username = serializers.CharField(source='user.username',read_only=True)
-
-    #dove_sta = serializers.Field(source='where_is.username')
-    
-    class Meta:
-        model = UserProfile
-
-        fields= (
-           'username','email', 'address','phone'
-            )
-        
-        
-
-              

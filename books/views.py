@@ -10,14 +10,14 @@ from django.utils.translation import ugettext_lazy as _
 from django.db.models import Q
 
 from rest_framework import generics, permissions, authentication
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from .serializers import *
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsOwnerOrReadOnly,IsOwner
 
-#from books.forms import *
 from books.models import Book,BookHistory,BookWhereIs
 from profiles.models import UserProfile
 
@@ -87,6 +87,11 @@ class UserBookList(generics.ListCreateAPIView):
     serializer_class= BookListSerializer
     permission_classes = (IsAuthenticated, )
     
+    def perform_create(self, serializer):
+        """ determine user when node is added """
+        if serializer.instance is None:
+            serializer.save(owner=self.request.user)
+    
     def get_queryset(self):
         user = self.kwargs.get('user', None)
         try:
@@ -112,7 +117,6 @@ class UserBookDetail(generics.RetrieveUpdateDestroyAPIView):
     model=Book
     
     def get_queryset(self):
-        #print ('retrieve book')
         user = self.kwargs.get('user', None)
         book_id = self.kwargs.get('pk', None)
         try:
@@ -140,37 +144,32 @@ class BookWhereIsDetail(generics.RetrieveUpdateAPIView):
       
     
     def get_queryset(self):
-        book = self.kwargs.get('book', None)
+        book_id = self.kwargs.get('book', None)
         try:
-            book_id=Book.objects.get(id=book)
+            book=Book.objects.get(id=book_id)
         except Exception:
             raise Http404(_('Not found'))
         return BookWhereIs.objects.all().filter(book=book)
     
     def put(self, request, *args, **kwargs):
-        """ Post a service request ( requires authentication) """
+        """ Change property where_is of a book """
         body = json.loads(request.body) 
         #print body
         book_id = kwargs['book']
         book = Book.objects.get(pk=book_id)
         #print book
         book_where_is = BookWhereIs.objects.get(book=book)
-        #print book_where_is
-        #print request.POST
         user = User.objects.get(pk=body['user'])
         user_id= user.id
         #print user
         book_where_is.user = user
         book_where_is.save()
         return Response({ 'user': user_id }, status=201)
-        
-        #kwargs['book'] = book
-        #super(BookWhereIsDetail, self).update(request, *args, **kwargs)
 
 book_where_is = BookWhereIsDetail.as_view()
 
 
-class BookHistoryList(generics.ListCreateAPIView):
+class BookHistoryList(generics.ListAPIView):
     """
     ### GET
     
@@ -179,15 +178,19 @@ class BookHistoryList(generics.ListCreateAPIView):
     """
     
     authentication_classes = (SessionAuthentication,)
+    permission_classes = (IsAuthenticated, IsOwner,)
     serializer_class = BookistoryListSerializer
     model = BookHistory
     
     def get_queryset(self):
-        book = self.kwargs.get('book', None)
+        book_id = self.kwargs.get('book', None)
         try:
-            book_id=Book.objects.get(id=book)
+            book=Book.objects.get(id=book_id)
         except Exception:
             raise Http404(_('Not found'))
+        if book.owner != self.request.user:
+            message = {'detail': 'Not authorized'}
+            raise PermissionDenied(detail=None)
         return BookHistory.objects.all().filter(book=book)
 
 book_history_list = BookHistoryList.as_view()
@@ -197,7 +200,7 @@ class UserHoldingBookList(generics.ListAPIView):
     """
     ### GET
     
-    Retrieve list of books of a user.
+    Retrieve list of books a user is currently holding.
         
     """
     
@@ -205,14 +208,6 @@ class UserHoldingBookList(generics.ListAPIView):
     serializer_class= BookWhereIsListSerializer
     model=BookWhereIs
     permission_classes = (IsAuthenticated, )
-    
-    def get_queryset(self):
-        book = self.kwargs.get('book', None)
-        try:
-            book_id=Book.objects.get(id=book)
-        except Exception:
-            raise Http404(_('Not found'))
-        return BookWhereIs.objects.all().filter(book=book)
     
     def get_queryset(self):
         user = self.kwargs.get('user', None)
@@ -224,27 +219,4 @@ class UserHoldingBookList(generics.ListAPIView):
 
 user_holding_book_list = UserHoldingBookList.as_view()
 
-class UserProfileList(generics.ListAPIView):
-    """
-    ### GET
-    
-    Retrieve user profiles.
-        
-    """
-    
-    #permission_classes = (permissions.DjangoModelPermissionsOrAnonReadOnly, )
-    authentication_classes = (SessionAuthentication,)
-    serializer_class= UserProfileListSerializer
-    
-    def get_queryset(self):
-        user = self.kwargs.get('user', None)
-        try:
-            user_id=User.objects.get(username=user)
-        except Exception:
-            raise Http404(_('Not found'))
-        return UserProfile.objects.all().filter(user=user_id)    
-        #queryset=get_queryset_or_404(UserProfile.objects.all(),{ 'user': user_id})
-        #return queryset
-
-user_profile_list = UserProfileList.as_view()
 
