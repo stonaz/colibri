@@ -64,7 +64,6 @@ class BookList(generics.ListCreateAPIView):
         search = self.request.query_params.get('search', None)
         
         if search is not None:
-            #print search
             search_query = (
                 Q(author__icontains=search) | Q(title__icontains=search)
             )
@@ -113,7 +112,7 @@ class UserBookDetail(generics.RetrieveUpdateDestroyAPIView):
     model=Book
     
     def get_queryset(self):
-        print ('retrieve book')
+        #print ('retrieve book')
         user = self.kwargs.get('user', None)
         book_id = self.kwargs.get('pk', None)
         try:

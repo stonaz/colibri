@@ -37,11 +37,11 @@ class BookWhereIsListSerializer(serializers.ModelSerializer):
     """
     Book WhereIs list
     """
-    where_is = serializers.CharField(source='user.username')
-    where_is_email = serializers.CharField(source='user.email')
-    book_title = serializers.CharField(source='book.title')
-    book_author = serializers.CharField(source='book.author')
-    book_owner = serializers.CharField(source='book.owner')
+    where_is = serializers.CharField(source='user.username',read_only=True)
+    where_is_email = serializers.CharField(source='user.email',read_only=True)
+    book_title = serializers.CharField(source='book.title',read_only=True)
+    book_author = serializers.CharField(source='book.author',read_only=True)
+    book_owner = serializers.CharField(source='book.owner',read_only=True)
     #user_email = serializers.SerializerMethodField('get_user_email')
     #
     #def get_user_email(self, obj):
@@ -64,8 +64,8 @@ class BookistoryListSerializer(serializers.ModelSerializer):
     """
     #sharer = serializers.Field(source='owner.username')
     #dove_sta = serializers.Field(source='where_is.username')
-    took_from_name = serializers.CharField(source='took_from.username')
-    given_to_name = serializers.CharField(source='given_to.username')
+    took_from_name = serializers.CharField(source='took_from.username',read_only=True)
+    given_to_name = serializers.CharField(source='given_to.username',read_only=True)
     
     class Meta:
         model = BookHistory
@@ -79,8 +79,8 @@ class UserProfileListSerializer(serializers.ModelSerializer):
     """
     User profiles list
     """
-    email = serializers.CharField(source='user.email')
-    username = serializers.CharField(source='user.username')
+    email = serializers.CharField(source='user.email',read_only=True)
+    username = serializers.CharField(source='user.username',read_only=True)
 
     #dove_sta = serializers.Field(source='where_is.username')
     
