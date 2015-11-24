@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
-from .models import UserProfile
+from .models import UserProfile,PasswordReset
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
@@ -62,18 +62,6 @@ class UserCreateSerializer(serializers.ModelSerializer):
         u = UserProfile.objects.create(user=user)
         print u
         return user
-    
-    #def validate_password_confirmation(self, attrs, source):
-    #    """
-    #    password_confirmation check
-    #    """
-    #    password_confirmation = attrs[source]
-    #    password = attrs['password']
-    #
-    #    if password_confirmation != password:
-    #        raise serializers.ValidationError(_('Password confirmation mismatch'))
-    #
-    #    return attrs
 
     class Meta:
         model = User
@@ -81,8 +69,51 @@ class UserCreateSerializer(serializers.ModelSerializer):
             'id',
             'username', 'email', 'password', 'password_confirmation',
         )
-        
-        
+  
+     
+class ResetPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+
+    def validate_email(self, value):
+        """ ensure email is in the database """
+        #if EMAIL_CONFIRMATION:
+        #    queryset = EmailAddress.objects.filter(email__iexact=value, verified=True)
+        #else:
+        queryset = User.objects.filter(email__iexact=value, is_active=True)
+        print queryset
+        if queryset.count() < 1:
+            raise serializers.ValidationError(_("Email address not found"))
+        return queryset.first().email
+
+    def create(self, validated_data):
+        """ create password reset for user """
+        return PasswordReset.objects.create_for_user(validated_data["email"])
+
+      
+class ResetPasswordKeySerializer(serializers.Serializer):
+    password1 = serializers.CharField(help_text=_('New Password'),
+                                      max_length=15)
+    password2 = serializers.CharField(help_text=_('New Password (confirmation)'),
+                                      max_length=15)
+
+    def validate_password2(self, value):
+        """ ensure password confirmation is correct """
+        if value != self.initial_data['password1']:
+            raise serializers.ValidationError(_('Password confirmation mismatch'))
+        return value
+
+    def update(self, instance, validated_data):
+        """ change password """
+        instance.user.set_password(validated_data["password1"])
+        instance.user.full_clean()
+        instance.user.save()
+        # mark password reset object as reset
+        instance.reset = True
+        instance.full_clean()
+        instance.save()
+        return instance
+
+
 class UserProfileSerializer(serializers.ModelSerializer):
     """
     User profiles details

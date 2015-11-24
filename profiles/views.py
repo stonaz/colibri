@@ -180,6 +180,73 @@ class UserProfileDetail(generics.RetrieveUpdateAPIView):
 user_profile_detail = UserProfileDetail.as_view()
 
 
+class PasswordResetRequestKey(generics.GenericAPIView):
+    """
+    Sends an email to the user email address with a link to reset his password.
+
+    **TODO:** the key should be sent via push notification too.
+
+    **Accepted parameters:**
+
+     * email
+    """
+    authentication_classes = (TokenAuthentication, SessionAuthentication)
+    permission_classes = (IsNotAuthenticated, )
+    serializer_class = ResetPasswordSerializer
+
+    def post(self, request, format=None):
+        # init form with POST data
+        serializer = self.serializer_class(data=request.data)
+        # validate
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+                'detail': _(u'We just sent you the link with which you will able to reset your password at %s') % request.data.get('email')
+            })
+        # in case of errors
+        return Response(serializer.errors, status=400)
+
+account_password_reset_request_key = PasswordResetRequestKey.as_view()
+
+
+class PasswordResetFromKey(generics.GenericAPIView):
+    """
+    Reset password from key.
+
+    **The key must be part of the URL**!
+
+    **Accepted parameters:**
+
+     * password1
+     * password2
+    """
+    authentication_classes = (TokenAuthentication, SessionAuthentication)
+    permission_classes = (IsNotAuthenticated, )
+    serializer_class = ResetPasswordKeySerializer
+
+    def post(self, request, uidb36, key, format=None):
+        # pull out user
+        try:
+            uid_int = base36_to_int(uidb36)
+            password_reset_key = PasswordReset.objects.get(user_id=uid_int, temp_key=key, reset=False)
+        except (ValueError, PasswordReset.DoesNotExist, AttributeError):
+            return Response({'errors': _(u'Key Not Found')}, status=404)
+
+        serializer = ResetPasswordKeySerializer(
+            data=request.data,
+            instance=password_reset_key
+        )
+
+        # validate
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'detail': _(u'Password successfully changed.')})
+        # in case of errors
+        return Response(serializer.errors, status=400)
+
+account_password_reset_from_key = PasswordResetFromKey.as_view()
+
+
 class SendMail(generics.ListCreateAPIView):
     """
     Send mail
