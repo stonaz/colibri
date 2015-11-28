@@ -15,11 +15,19 @@ def now():
     """ returns the current date and time in UTC format (datetime object) """
     return datetime.utcnow().replace(tzinfo=utc)
 
+#def get_user_email(user):
+#    print type( user)
+#    u = User.objects.get(id= user)
+#    email =u.email
+#    return email
+
+
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
 
     # The additional attributes we wish to include.
+    profile_email = models.EmailField(default='test@email.net',blank=True)
     address = models.CharField( _("Indirizzo"),max_length=100,null=True,blank=True)
     phone = models.CharField( _("Tel"),max_length=15,null=True,blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
@@ -38,7 +46,8 @@ class PasswordResetManager(models.Manager):
         """ create password reset for specified user """
         # support passing email address too
         if type(user) is unicode:
-            user = User.objects.get(email=user)
+            userprofile = UserProfile.objects.get(profile_email=user)
+            user = User.objects.get(id=userprofile.user_id)
 
         temp_key = token_generator.make_token(user)
 
@@ -56,7 +65,7 @@ class PasswordResetManager(models.Manager):
             "site_url": settings.SITE_URL,
             "site_name": settings.SITE_NAME
         })
-        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
+        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [userprofile.profile_email])
 
         return password_reset
 

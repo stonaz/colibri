@@ -59,7 +59,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Password confirmation mismatch')
         
         user = User.objects.create_user(username=attrs.get('username'), email= attrs.get('email'), password=attrs.get('password'))
-        u = UserProfile.objects.create(user=user)
+        u = UserProfile.objects.create(user=user,profile_email=attrs.get('email'))
         print u
         return user
 
@@ -79,11 +79,11 @@ class ResetPasswordSerializer(serializers.Serializer):
         #if EMAIL_CONFIRMATION:
         #    queryset = EmailAddress.objects.filter(email__iexact=value, verified=True)
         #else:
-        queryset = User.objects.filter(email__iexact=value, is_active=True)
+        queryset = UserProfile.objects.filter(profile_email__iexact=value)
         print queryset
         if queryset.count() < 1:
             raise serializers.ValidationError(_("Email address not found"))
-        return queryset.first().email
+        return queryset.first().profile_email
 
     def create(self, validated_data):
         """ create password reset for user """
@@ -118,7 +118,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     """
     User profiles details
     """
-    email = serializers.CharField(source='user.email',read_only=True)
+    email = serializers.CharField(source='profile_email')
     username = serializers.CharField(source='user.username',read_only=True)
 
     #dove_sta = serializers.Field(source='where_is.username')
