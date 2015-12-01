@@ -38,7 +38,7 @@ ColibriApp.module("HeaderApp.Signin", function (Signin, ColibriApp, Backbone, Ma
                     error: function (model, xhr, options) {
                         console.log(xhr)
                         view.triggerMethod("form:data:invalid", xhr.responseJSON);
-                        console.log("Something went wrong while siging in");
+                        console.log("Something went wrong while signing in");
                     }
                 });
             });

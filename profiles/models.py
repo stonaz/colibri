@@ -27,7 +27,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
 
     # The additional attributes we wish to include.
-    profile_email = models.EmailField(default='test@email.net',blank=True)
+    profile_email = models.EmailField(blank=True, unique=True)
     address = models.CharField( _("Indirizzo"),max_length=100,null=True,blank=True)
     phone = models.CharField( _("Tel"),max_length=15,null=True,blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)

@@ -116,7 +116,7 @@ ColibriApp.module('Common.Views', function(Views, ColibriApp, Backbone, Marionet
 
     onFormDataInvalid: function(errors){
       //form_errors = errors.split(',')
-      console.log(errors)
+      console.log('Errors: ' + errors)
       var $view = this.$el;
 
       var clearFormErrors = function(){
@@ -137,7 +137,7 @@ ColibriApp.module('Common.Views', function(Views, ColibriApp, Backbone, Marionet
         var $errorEl = $('<span>', { class: "help-inline text-danger", text: value });
         $controlGroup.append($errorEl).addClass("text-danger");
       }
-
+      console.log('Errors: ' + errors)
       clearFormErrors();
       _.each(errors, markErrors);
     }

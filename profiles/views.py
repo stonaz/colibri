@@ -90,9 +90,8 @@ class AccountLogout(APIView):
 
 account_logout = AccountLogout.as_view()
 
-class AccountSignIn(generics.ListCreateAPIView):
+class AccountSignIn(generics.CreateAPIView):
     """
-Return profile of current authenticated user or return 401.
 ### POST
 Create a new user account.
 
@@ -118,11 +117,11 @@ Create a new user account.
         super(AccountSignIn, self).post_save(obj)
 
         if created:
-            clear_password = obj.password
-            obj.set_password(obj.password)
-            obj.save()
-            profile =UserProfile(user=obj)
-            profile.save()
+            #clear_password = obj.password
+            #obj.set_password(obj.password)
+            #obj.save()
+            #profile =UserProfile(user=obj)
+            #profile.save()
             message = "Benvenuto su Colibri\n"
             message += "Username: %s  \n" % obj.username
             message += "Password: %s  " % clear_password

@@ -1,7 +1,10 @@
-from rest_framework import serializers
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+
+from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
+
 from .models import UserProfile,PasswordReset
 
 class LoginSerializer(serializers.Serializer):
@@ -36,8 +39,8 @@ class LoginSerializer(serializers.Serializer):
 class UserCreateSerializer(serializers.ModelSerializer):
     """ Profile Serializer for User Creation """
     #password_confirmation = serializers.CharField(label=_('password_confirmation'))
-    email = serializers.CharField()
-    username = serializers.CharField()
+    email = serializers.EmailField(source='profile_email',validators=[UniqueValidator(queryset=UserProfile.objects.all(),message="Email gia' presente")], write_only=True)
+    username = serializers.CharField(validators=[UniqueValidator(queryset=User.objects.all(),message="Username gia' presente")])
     password = serializers.CharField(allow_blank=False, write_only=True)
     password_confirmation = serializers.CharField(allow_blank=False, write_only=True)
     
@@ -56,10 +59,11 @@ class UserCreateSerializer(serializers.ModelSerializer):
         password_confirmation = attrs.get('password_confirmation')
         password = attrs.get('password')
         if password != password_confirmation:
-            raise serializers.ValidationError('Password confirmation mismatch')
+            message = {'password_confirmation': 'Password mismatch'}
+            raise serializers.ValidationError(message)
         
-        user = User.objects.create_user(username=attrs.get('username'), email= attrs.get('email'), password=attrs.get('password'))
-        u = UserProfile.objects.create(user=user,profile_email=attrs.get('email'))
+        user = User.objects.create_user(username=attrs.get('username'), password=attrs.get('password'))
+        u = UserProfile.objects.create(user=user,profile_email=attrs.get('profile_email'))
         print u
         return user
 
