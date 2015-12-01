@@ -18,19 +18,8 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticate
 
 from .serializers import *
 from .models import UserProfile
+from .permissions import IsProfileOwner, IsNotAuthenticated
 
-class IsNotAuthenticated(IsAuthenticated):
-    """
-Restrict access only to unauthenticated users.
-"""
-    def has_permission(self, request, view, obj=None):
-        if request.user and request.user.is_authenticated():           
-            #print ('here')
-            return False
-        else:
-            #print ('there')
-
-            return True
 
 # Create your views here.
 class AccountLogin(generics.GenericAPIView):
@@ -44,7 +33,7 @@ class AccountLogin(generics.GenericAPIView):
      * remember
     """
     authentication_classes = (TokenAuthentication, SessionAuthentication)
-    #permission_classes = (IsNotAuthenticated, )
+    permission_classes = (IsNotAuthenticated, )
     serializer_class = LoginSerializer
     
     def post(self, request, format=None):
@@ -69,9 +58,9 @@ class AccountLogin(generics.GenericAPIView):
         
         return Response(serializer.errors, status=400)
     
-    def permission_denied(self, request):
-        print ('give 403')
-        raise exceptions.PermissionDenied(_("You are already authenticated"))
+    #def permission_denied(self, request):
+    #    print ('give 403')
+    #    raise exceptions.PermissionDenied(_("You are already authenticated"))
 
 account_login = AccountLogin.as_view()
 
@@ -97,6 +86,8 @@ Create a new user account.
 
 """
     authentication_classes = (TokenAuthentication, SessionAuthentication)
+    permission_classes = (IsNotAuthenticated, )
+
     model = User
     serializer_class = UserCreateSerializer
     
