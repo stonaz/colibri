@@ -12,7 +12,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('books.views',
     
-    url(r'^$', 'ui_index',name='ui-index'),
+    #url(r'^$', 'ui_index',name='ui-index'),
     
     url(r'^api/v1/books/$', 'book_list' ,name='book_list'),
     #url(r'^api/v1/books/(?P<pk>[-\d\.]+)/$', 'book_detail' ,name='book_detail'),
@@ -41,6 +41,10 @@ urlpatterns += patterns('profiles.views',
     url(r'^api/v1/(?P<user>[-\w]+)/user_profile/$', 'user_profile_detail' ,name='user_profile_detail'),
     url(r'^sendmail/$', 'send_mail_api', name='api_send_mail'),
 
+)
+
+urlpatterns += patterns('ui.views',
+    url(r'^$', 'ui_index',name='ui-index'),
 
 )
 

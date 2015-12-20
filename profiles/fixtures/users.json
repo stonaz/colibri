@@ -1,0 +1,182 @@
+[
+{
+    "pk": 2, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "stefano", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2015-11-23T13:03:38.713", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$PLoLXfKfpBB4$TtyQSc8fXNElRYg1af6pC688ckl3WKtyoKKf1DpHQVE=", 
+        "email": "essetizeta@gmail.com", 
+        "date_joined": "2014-07-07T15:30:15.853"
+    }
+},
+{
+    "pk": 6, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "sara", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2015-03-16T13:02:27.408", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$gs4dBk4stYkE$LhefZ27YK7xUiJFgT/F8Nbf+T6Pz2OH9eAgLG98yrm0=", 
+        "email": "saramarcucci1@gmail.com", 
+        "date_joined": "2014-12-06T20:07:29.806"
+    }
+},
+{
+    "pk": 7, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "endria", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2014-12-09T13:05:59.523", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$OfdnCSJ0DZxg$z79z5Ajj+DYUAkls9C5Y8WdCE0qto0B92XXCVPgO+DE=", 
+        "email": "endria@inventati.org", 
+        "date_joined": "2014-12-09T01:12:08.204"
+    }
+},
+{
+    "pk": 8, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "admin", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2015-05-22T14:52:11.554", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$fnVuyGINKQvN$V1IwcqPJZxVc1HwON9bZSvxh4m/xUnRwxeR+94u2zHg=", 
+        "email": "", 
+        "date_joined": "2014-12-11T12:34:18.960"
+    }
+},
+{
+    "pk": 9, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "vitti", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2014-12-14T19:26:34.386", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$USTlQ4Rci4pY$h9sfj/VOY/TbHXtjqKYnycuJWx0Yo4rX1/oUSkNPvMM=", 
+        "email": "vitaliana@libero.it", 
+        "date_joined": "2014-12-14T19:26:34.056"
+    }
+},
+{
+    "pk": 10, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "enrico", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2015-05-13T20:15:48.353", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$Wlo4H1GIBUvz$UnDW+D+GPgjRC7gxYE3+6Fa8H7UBYhuJKReISag5280=", 
+        "email": "fantax@libero.it", 
+        "date_joined": "2014-12-30T17:58:00"
+    }
+},
+{
+    "pk": 11, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "alessiog", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2015-01-27T20:59:52.841", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$ggbKq5rPkmb9$SVJw1Kj4PTwVEhZFg1UGPvI4puhIh8i9iMVNTi2s2ng=", 
+        "email": "alessiogras@tiscali.it", 
+        "date_joined": "2015-01-27T20:59:52.428"
+    }
+},
+{
+    "pk": 12, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "gengis", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2015-02-02T17:07:05.838", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$y0SHwdijmGKJ$sOzlwPCfL4QDFvonksx89JuO88yoUZ+W3YSAsP0hI4A=", 
+        "email": "gianluct@hotmail.com", 
+        "date_joined": "2015-02-02T17:07:05.373"
+    }
+},
+{
+    "pk": 13, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "testToken", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2015-02-04T18:46:33.298", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$0NgBNZKEFsi9$EDSkjAvZc8x3Y2XSMP9wEnv87OQzjONHpT+ZOO5mJgs=", 
+        "email": "essetizeta@gmail.com", 
+        "date_joined": "2015-02-04T18:46:32.960"
+    }
+},
+{
+    "pk": 14, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "test", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2015-05-05T23:13:59.716", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$2grtuvWg7mLR$82rv9L6klExXi+dyitO9C7pJTTiBzJAl4OmOu9WS9+k=", 
+        "email": "stefano.tonazzi@gmail.com", 
+        "date_joined": "2015-03-24T11:19:24.604"
+    }
+}
+]
