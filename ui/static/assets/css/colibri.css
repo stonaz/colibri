@@ -1,0 +1,177 @@
+.navbar-default .navbar-nav > li > a {
+color: #00F;
+}
+
+.navbar-default .navbar-brand {
+color: #777;
+background-image: url(images/logo.gif);
+background-repeat: no-repeat;
+min-width: 200px;
+min-height: 53px;
+}
+
+.btn-action {
+  color: #333;
+  /*background-color: #FFBF00;*/
+  border-color: #00f;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+.btn-menu:hover,
+.btn-menu:focus,
+.btn-menu:active,
+.btn-menu.active,
+.open .dropdown-toggle.btn-menu {
+  color: #333;
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+.btn-menu:active,
+.btn-menu.active,
+.open .dropdown-toggle.btn-menu {
+  background-image: none;
+}
+.btn-menu.disabled,
+.btn-menu[disabled],
+fieldset[disabled] .btn-menu,
+.btn-menu.disabled:hover,
+.btn-menu[disabled]:hover,
+fieldset[disabled] .btn-menu:hover,
+.btn-menu.disabled:focus,
+.btn-menu[disabled]:focus,
+fieldset[disabled] .btn-menu:focus,
+.btn-menu.disabled:active,
+.btn-menu[disabled]:active,
+fieldset[disabled] .btn-menu:active,
+.btn-menu.disabled.active,
+.btn-menu[disabled].active,
+fieldset[disabled] .btn-menu.active {
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-menu .badge {
+  color: #fff;
+  background-color: #333;
+}
+
+.btn-menu {
+  color: #333;
+  background-color: #FFBF00;
+  border-color: #00f;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+.btn-menu:hover,
+.btn-menu:focus,
+.btn-menu:active,
+.btn-menu.active,
+.open .dropdown-toggle.btn-menu {
+  color: #333;
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+.btn-menu:active,
+.btn-menu.active,
+.open .dropdown-toggle.btn-menu {
+  background-image: none;
+}
+.btn-menu.disabled,
+.btn-menu[disabled],
+fieldset[disabled] .btn-menu,
+.btn-menu.disabled:hover,
+.btn-menu[disabled]:hover,
+fieldset[disabled] .btn-menu:hover,
+.btn-menu.disabled:focus,
+.btn-menu[disabled]:focus,
+fieldset[disabled] .btn-menu:focus,
+.btn-menu.disabled:active,
+.btn-menu[disabled]:active,
+fieldset[disabled] .btn-menu:active,
+.btn-menu.disabled.active,
+.btn-menu[disabled].active,
+fieldset[disabled] .btn-menu.active {
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-menu .badge {
+  color: #fff;
+  background-color: #333;
+}
+
+.btn-orange {
+  color: #333;
+  background-color: #FE9A2E;
+  border-color: #ccc;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+.btn-orange:hover,
+.btn-orange:focus,
+.btn-orange:active,
+.btn-orange.active,
+.open .dropdown-toggle.btn-orange {
+  color: #333;
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+.btn-orange:active,
+.btn-orange.active,
+.open .dropdown-toggle.btn-orange {
+  background-image: none;
+}
+.btn-orange.disabled,
+.btn-orange[disabled],
+fieldset[disabled] .btn-orange,
+.btn-orange.disabled:hover,
+.btn-orange[disabled]:hover,
+fieldset[disabled] .btn-orange:hover,
+.btn-orange.disabled:focus,
+.btn-orange[disabled]:focus,
+fieldset[disabled] .btn-orange:focus,
+.btn-orange.disabled:active,
+.btn-orange[disabled]:active,
+fieldset[disabled] .btn-orange:active,
+.btn-orange.disabled.active,
+.btn-orange[disabled].active,
+fieldset[disabled] .btn-orange.active {
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-orange .badge {
+  color: #fff;
+  background-color: #333;
+}
+
+.about {
+  border:  solid;
+  color: #333;
+  background-color: #FE9A2E;
+  border-color: #0000FF;
+  margin-left: 1px;
+  margin-right: 1px;
+  padding: 5px;
+  border-radius: 15px;
+}
+.contacts {
+  float: right;
+  border: thin solid;
+  color: #333;
+  background-color: #CCCCCC;
+  border-color: #0000FF;
+  margin-left: 1px;
+  margin-right: 1px;
+  padding: 5px;
+  /*border-radius: 15px;*/
+}
+.spiegazione {
+  background-color: #CCCCCC;
+  padding: 5px;
+  border-radius: 15px;
+  border: thin solid
+}
+.count {
+  background-color: #FE9A2E;
+  padding: 5px;
+  margin: 3px;
+  border-radius: 10px;
+}

@@ -48,15 +48,19 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
+#    'debug_toolbar',
     'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
     'profiles',
     'books',
+    'ui',
     'django_extensions'
 )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -100,6 +104,30 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_ROOT="/Users/stefano/colibri/static/"
+STATIC_ROOT="/home/stefano/projects/colibri/static/"
 STATIC_URL = '/static/'
+
+SITE_URL = 'http://localhost:8000'
+SITE_NAME= 'colibri'
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST_USER = 'root@localhost'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
+#CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = (
+        'localhost','127.0.0.1'
+        
+    )
+#CORS_EXPOSE_HEADERS = ('authorization',
+#        'x-csrftoken')
+#SESSION_COOKIE_HTTPONLY = False
+AUTH_USER_MODEL = 'auth.User'

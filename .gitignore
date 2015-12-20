@@ -4,5 +4,5 @@ RUN
 settings.py
 settings_deployment.py
 python
-static
+/static
 migrations
