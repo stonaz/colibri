@@ -28,12 +28,8 @@ class UserProfile(models.Model):
 
     # The additional attributes we wish to include.
     profile_email = models.EmailField(blank=True, unique=True)
-    address = models.CharField( _("Indirizzo"),max_length=100,null=True,blank=True)
-    phone = models.CharField( _("Tel"),max_length=15,null=True,blank=True)
-    picture = models.ImageField(upload_to='profile_images', blank=True)
-    public_email = models.BooleanField(default=False)
-    public_phone = models.BooleanField(default=False)
-    public_address = models.BooleanField(default=False)
+    notify_wishlist = models.BooleanField(default=False)
+    notify_added_books = models.BooleanField(default=False)
     # Override the __unicode__() method to return out something meaningful!
     def __unicode__(self):
         return self.user.username
