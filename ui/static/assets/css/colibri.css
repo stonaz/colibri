@@ -1,5 +1,7 @@
 .navbar-default .navbar-nav > li > a {
 color: #00F;
+font-family: 'Passion One', cursive;
+font-size: 19px;
 }
 
 .navbar-default .navbar-brand {
@@ -104,6 +106,7 @@ fieldset[disabled] .btn-menu.active {
   border-color: #ccc;
   margin-left: 1px;
   margin-right: 1px;
+  font-family: 'Passion One', cursive;
 }
 .btn-orange:hover,
 .btn-orange:focus,
@@ -164,10 +167,11 @@ fieldset[disabled] .btn-orange.active {
   /*border-radius: 15px;*/
 }
 .spiegazione {
-  background-color: #CCCCCC;
+  background-color: #0000Ff;
   padding: 5px;
-  border-radius: 15px;
-  border: thin solid
+/*  border-radius: 15px;
+*/  border: thin solid;
+  color: yellow;
 }
 .count {
   background-color: #FE9A2E;

@@ -4,11 +4,14 @@
   <head>
     <meta charset="utf-8">
       <meta name="viewport" content="initial-scale=1">
+        <meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
     <title>Colibri Manager</title>
     <link href="{% static "assets/css/bootstrap.css" %}"rel="stylesheet">
     <link href="{% static "assets/css/application.css" %}"rel="stylesheet">
       <link href="{% static "assets/css/colibri.css" %}"rel="stylesheet">
     <link href="{% static "assets/css/jquery-ui-1.10.0.custom.css" %}"rel="stylesheet">
+      <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 <!--    <link href="{% static "assets/css/fonts/glyphicons-halflings-regular.eot" %}"rel="stylesheet">
     <link href="{% static "assets/fonts/glyphicons-halflings-regular.svg" %}"rel="stylesheet">
     <link href="{% static "assets/fonts/glyphicons-halflings-regular.ttf" %}"rel="stylesheet">
@@ -17,7 +20,7 @@
     <style type=text/css>
     body {
       padding-top: 70px;
-      background-color: #FE9A2E;
+      background-color: #ffffff;
     }
 
       .navbar {
@@ -39,5 +42,6 @@ min-height: 26px;
     </style>
 
   </head>
-
+{% block body %}
+{% endblock  %}
 </html>

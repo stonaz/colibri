@@ -9,5 +9,5 @@ def ui_index(request):
     count = Book.objects.count()
     
     return render_to_response(
-            'ui_books.html', {'count':count},context
+            'ui/ui_books.html', {'count':count},context
 )
