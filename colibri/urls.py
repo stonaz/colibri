@@ -27,6 +27,7 @@ urlpatterns = patterns('books.views',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url('', include('social.apps.django_app.urls', namespace='social')),
     #url(r'^docs/', include('rest_framework_swagger.urls')),
     
 )  

@@ -36,8 +36,18 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages"
+    "django.contrib.messages.context_processors.messages",
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
+
 )
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 
 # Application definition
 
@@ -51,11 +61,12 @@ INSTALLED_APPS = (
 #    'debug_toolbar',
     'rest_framework',
     'rest_framework.authtoken',
-    'corsheaders',
+     'corsheaders',
     'profiles',
     'books',
     'ui',
-    'django_extensions'
+    'django_extensions',
+    'social.apps.django_app.default',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -131,3 +142,11 @@ CORS_ORIGIN_WHITELIST = (
 #        'x-csrftoken')
 #SESSION_COOKIE_HTTPONLY = False
 AUTH_USER_MODEL = 'auth.User'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '597539196428-bcb8iee4m27nq6n72pupg1hfhsskbb68.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'zeOwpwpdsvoTJ5fYu7QYIxV8'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '1100541430066109'
+SOCIAL_AUTH_FACEBOOK_SECRET = '037022c4c90fac7d293d05e6758d38d3'
+
+LOGIN_REDIRECT_URL = '/'
