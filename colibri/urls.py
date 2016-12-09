@@ -49,6 +49,11 @@ urlpatterns += patterns('ui.views',
 
 )
 
+urlpatterns += patterns('angular.views',
+    url(r'^angular', 'angular_index',name='angular_index'),
+
+)
+
 urlpatterns += patterns('profiles.html_views',
     url(r'^account/password/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<key>.+)/$',
             'password_reset_from_key',

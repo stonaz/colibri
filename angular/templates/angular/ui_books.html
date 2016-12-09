@@ -1,0 +1,557 @@
+{% extends "ui/base.html" %}
+  {% load static %}
+  {% block body %}
+  <body>
+
+
+
+<div id="header-region"></div>
+
+    <div id="main-region" class="container">
+      
+      <p>Colibri si sta caricando.. ancora un attimo..</p>
+    </div>
+    <div id="dialog-region"></div>
+    
+
+ <script type="text/template" id="header-template">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#_nav-menu">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#about">
+      
+      </a>
+    </div>
+      <div class="collapse navbar-collapse" id="_nav-menu" >
+        <ul class="nav navbar-nav">
+      </ul>
+      <div class="btn-toolbar">
+<% if(ColibriApp.username === undefined) { %>
+      <button class="btn btn-primary btn-primary navbar-btn navbar-right js-signin"> Registrati</button>
+      <button class="btn btn-primary btn-primary navbar-btn navbar-right js-login"> Accedi </button>
+    <% } else { %>
+      <button class="btn btn-primary btn-primary navbar-btn navbar-right js-logout"> Logout </button>&nbsp;
+      <button class="btn btn-primary btn-primary navbar-btn  navbar-right "> <%=  ColibriApp.username %></button>&nbsp;
+
+    <% } %>
+      </div>
+
+       </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+    </script>
+
+    <script type="text/template" id="header-link">
+      <a href="#<%- url %>" class="btn btn-menu">
+          <span class="glyphicon glyphicon-<%- icon %>"></span> <%- name %></a>
+          
+    </script>
+    
+   <!-- <a href="#books/<%= id %>/edit" class="btn btn-orange js-edit">
+          <span class="glyphicon glyphicon-pencil"></span> 
+          Modifica
+        </a>-->
+    
+    <script type="text/template" id="book-list-none">
+      <td colspan="3"> Nessun libro trovato</td>
+    </script> 
+    
+    <script type="text/template" id="book-list-layout">
+      <div id="panel-region"></div>
+      <div id="books-region"></div>
+    </script>
+    
+    <script type="text/template" id="book-list-panel">
+      <button class="btn btn-action js-new"> Aggiungi libro</button>
+      <br><br>
+    </script>
+    
+    <script type="text/template" id="book-all-list-panel">
+       <form id="book-search-form" class="form-search form-inline">
+        <div class="input-append">
+          <strong>Ricerca libri per autore o titolo:</strong>
+          <input type="text" class="span2 search-query js-search-criterion">
+          <button type="submit" class="btn btn-action js-search">Cerca</button>
+          <br><br>
+        </div>
+       </form> 
+    </script> 
+    
+    <script type="text/template" id="book-list">
+      <table class="table table-condensed text-capitalize">
+      <thead>
+        <tr>
+          <th class="count"><span >Libri trovati: <%= count %></span> </th>
+        <th></th>
+        <th></th>
+        <th></th>
+        </tr>
+        <tr>
+          
+          <th>Autore</th>
+          <th>Titolo</th>
+          <th>Dove sta</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+      </table>
+      <button class="btn btn-default js-back">Prev</button>
+      <button class="btn btn-default js-next">Next</button>
+ 
+    </script>
+
+    <script type="text/template" id="book-list-item">
+      
+      <td><%= author %></td>
+      <td><%= title %></td>
+      <td><%= where_is %></td>
+      <td>
+        <a href="#books/<%= id %>" class="btn btn-orange js-show">
+          <span class="glyphicon glyphicon-question-sign"></span> 
+          Prestiti
+        </a>
+        <a href="#books/<%= id %>" class="btn btn-orange js-take">
+          <span class="glyphicon glyphicon-download"></span> 
+          Riprendi
+        </a>
+        <a href="#books/<%= id %>/edit" class="btn btn-orange js-edit">
+          <span class="glyphicon glyphicon-pencil"></span> 
+          Modifica
+        </a>
+        <button class="btn btn-orange js-delete">
+         <span class="glyphicon glyphicon-remove"></span> 
+          Elimina
+        </button>
+      </td>
+    </script>
+    
+       <script type="text/template" id="book-all-list-item">
+      
+      <td><%= author %></td>
+      <td><%= title %></td>
+      <td><%= where_is %></td>
+      <td>
+      
+        <a href="#books/<%= id %>/edit" class="btn btn-orange js-show">
+          <span class="glyphicon glyphicon-download"></span> 
+          Prendi
+        </a>
+         <a href="#books/<%= id %>/edit" class="btn btn-orange js-sendmail">
+          <span class="glyphicon glyphicon-envelope"></span> 
+          Contatta 
+        </a>
+
+      </td>
+    </script>
+       
+        <script type="text/template" id="book-borrowed-list">
+      <table class="table table-condensed">
+      <thead>
+        
+        <tr>
+          
+          <th>Autore</th>
+          <th>Titolo</th>
+          <th>Proprietario</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+      </table>
+      <button id="js-back" class="btn btn-default js-back">Prev</button>
+      <button class="btn btn-default js-next">Next</button>
+ 
+    </script>
+
+    <script type="text/template" id="book-borrowed-list-item">
+      
+      <td><%= book_author %></td>
+      <td><%= book_title %></td>
+      <td><%= book_owner %></td>
+     
+    </script>
+
+    <script type="text/template" id="missing-book-view">
+      <div class="alert alert-error">This book doesn't exist !</div>
+    </script>
+    
+    <script type="text/template" id="missing-books-view">
+      <div class="warning warning-error">No books inserted yet</div>
+    </script>
+    
+    <script type="text/template" id="book-view-layout">
+      <div id="book-history-title-region" ></div>
+      <div id="history-region"></div>
+    </script> 
+
+    <script type="text/template" id="book-view">
+      <h4>
+      <strong>Autore: </strong><%= author %><br>
+      <strong>Titolo: </strong><%= title %>
+      </h4>
+    
+
+    </script>
+    
+       <script type="text/template" id="book-view-history-list">
+      <thead>
+        <tr>
+          
+          <th>Preso da</th>
+          <th>Dato a </th>
+          <th>Quando</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </script>
+
+    <script type="text/template" id="book-view-history-item">
+      
+      <td><%= took_from_name %></td>
+      <td><%= given_to_name %></td>
+      <td><%= showDate() %></td>
+
+    </script>
+    
+      <script type="text/template" id="book-where-is-view">
+      <h1><%= book_author %> <%= book_title %></h1>
+<!--      <a href="#books/<%= id %>/edit" class="btn btn-small js-edit">
+        <i class="icon-pencil"></i>
+        Edit this book
+      </a>-->
+      <p><strong>Author</strong> <%= book_author %></p>
+      <p><strong>Title</strong> <%= book_title %></p>
+      <p><strong>Where is</strong> <%= where_is %></p>
+      <p><strong>User email</strong> <%= where_is_email %></p>
+
+    </script>
+
+    <script type="text/template" id="loading-view">
+<!--      <h3><%= title %></h3>
+      <p><%= message %></p>-->
+      <div id="spinner"></div>
+    </script>
+    
+    
+    <script type="text/template" id="error-view">
+      <p><%= message %></p>
+     
+    </script>
+
+    <script type="text/template" id="book-form">
+      
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label for="book-author" class="col-sm-2 control-label">Autore </label>
+          <div class="col-sm-10">
+          <input id="book-author" class="form-control"  name="author" type="text" value="<%= author %>"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="book-title" class="col-sm-2 control-label">Titolo </label>
+          <div class="col-sm-10">
+          <input id="book-title" class="form-control"  name="title" type="text" value="<%= title %>"/>
+          </div>
+        </div>
+
+        <button class="btn js-submit">Save</button>
+      </form>
+    </script>
+ 
+    <script type="text/template" id="book-where-is-form">
+      <img src="{% static "assets/images/book.png" %}"><br>
+      <table class="table table-bordered">
+        <thead>
+        
+        </thead>
+        <tbody>         
+          <tr>
+            <td class="active"><strong>Autore</strong></td>
+            <td><%= book_author %></td>
+          </tr>
+           <tr>
+            <td class="active"><strong>Titolo</strong></td>
+            <td><%= book_title %></td>
+          </tr>
+            <tr>
+            <td class="active"><strong>Da chi sta</strong></td>
+            <td><%= where_is %></td>
+          </tr>
+             <tr>
+            <td class="active"><strong>Email</strong></td>
+            <td><%= where_is_email %></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <form>
+        <div class="control-group">
+          <!--<label for="book-where-is" class="control-label">Where is:</label>-->
+          <input id="book-where-is" name="user" type="hidden" value="<%= taker %>"/>
+        </div>
+
+        <button class="btn btn-active js-submit">Take</button>
+        <button class="btn btn-active js-close">Chiudi</button>
+      </form>
+      <div class="book-where-is-form-msg"></div>
+    </script>
+    
+    <script type="text/template" id="book-where-is-form-sendmail">
+      <div>
+      <p><strong>Autore</strong> <%= book_author %></p>
+      <p><strong>Titolo</strong> <%= book_title %></p>
+      <p><strong>Dove sta</strong> <%= where_is %></p>
+      <p><strong>Email</strong> <%= where_is_email %></p>
+      </div>
+      <div>
+            <form>
+        <div class="control-group">
+          <!--<label for="book-where-is" class="control-label">Where is:</label>-->
+          <input id="book-where-is" name="book_author" type="hidden" value="<%= book_author %>"/>
+          <input id="book-where-is" name="book_title" type="hidden" value="<%= book_title %>"/>
+          <input id="book-where-is" name="where_is" type="hidden" value="<%= where_is %>"/>
+          <input id="book-where-is" name="where_is_email" type="hidden" value="<%= where_is_email %>"/>
+          <div class="form-group">
+          <label for="msg" class="control-label">Messaggio </label>
+          <textarea id="msg"   name="message"class="form-control" rows="3"></textarea>
+<!--          <input id="msg" class="form-control"  name="message" type="textarea" rows="3" value=""/>
+-->          <br>
+          <button  class="btn js-submit">Login</button>
+<!--          <div class="col-sm-8">
+          </div>-->
+        </div>
+
+<!--        <div class="col-sm-offset-4 col-sm-8">
+           
+        </div>-->
+          
+          
+        </div>
+      </form> 
+      </div>
+
+      <div class="book-where-is-form-msg"></div>
+    </script>
+    
+       <script type="text/template" id="about-message">
+        <div class="contacts">
+Per contatti,info o assistenza manda una mail a:<br>
+<strong>colibribooksharing@gmail.com</strong> 
+</div>
+      <h1><strong>CoLibri</strong></h1>
+<h4>
+CoLibri è un sistema pensato per facilitare la condivisione e lo scambio di libri.<br>
+Ciascun utente registrato può inserire nel sistema i  libri che vuole mettere in condivisione,
+che saranno così disponibili per tutti gli altri utenti.
+</h4><h3>
+<strong>COME FUNZIONA</strong>
+</h3>
+<h4><strong><u>Registrazione</u></strong></h4>
+<p class="spiegazione">
+Clicca su registrazione ed inserisci uno username, la tua email e la password.<br>
+Ti verrà inviata una mail di benvenuto, contenente la password che hai scelto.<br>
+<strong>*** IMPORTANTE ***</strong><br>
+Il sistema non prevede per ora una funzione di recupero password, per cui conserva la mail, dato che se dimentichi la password, questa dovrà essere reimpostata dall'admin, che ti vorrà un pò meno bene :-)
+</p>
+<h4><strong><u>Gestione libri</u></strong></h4>
+<p class="spiegazione">
+Dal pulsante <strong>'I miei libri'</strong> potrai inserire e gestire i libri che vuoi condividere.
+</p>
+<h4><strong><u>Scambio libri</u></strong></h4>
+<p class="spiegazione">
+Una volta trovato un libro che interessa, si può contattare il proprietario, o chi ne è in possesso in quel momento, mandando una mail direttamente dall'applicazione per accordarsi su come scambiarsi il libro.
+<br>Chi prende il libro deve registrare sul sistema l'avvenuta presa in consegna.
+<br><u>Quest'operazione va fatta da chi ha preso il libro.</u>
+Non si può notificare al sistema che qualcun altro ha preso un libro di cui si era in possesso.</p>
+  </h4>    
+    </script>
+        
+    <script type="text/template" id="book-my-where-is-form">
+     <p>Il libro in questo momento si trova da <%= where_is %></p>
+     <p><%= delete_warn %></p>
+     <!-- <p><strong>Author</strong> <%= book_author %></p>
+      <p><strong>Title</strong> <%= book_title %></p>
+      <p><strong>Where is</strong> <%= where_is %></p>
+      <p><strong>User email</strong> <%= where_is_email %></p>-->
+      <form>
+        <div class="control-group">
+          <!--<label for="book-where-is" class="control-label">Where is:</label>-->
+          <input id="book-where-is" name="user" type="hidden" value="<%= taker %>"/>
+        </div>
+
+        <button class="btn btn-default js-submit">Procedi ugualmente</button>
+      </form>
+      <div class="book-where-is-form-msg"></div>
+    </script>
+    
+        <script type="text/template" id="about-message">
+      <h1>About CoLibri</h1>
+      
+    </script>
+        
+    <script type="text/template" id="login-form">
+      
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label for="username" class="control-label">Username </label>
+          
+          <input id="login-username" class="form-control"  name="username" type="text" value="<%= user %>"/>
+         
+        </div>
+        <div class="form-group">
+          <label for="password" class=" control-label">Password </label>
+          
+          <input id="login-password" class="form-control"  name="password" type="password" value="<%= password %>"/>
+         
+        </div>
+        <div class="form-group">
+            <button id="login-non_field_errors" class="btn js-submit">Login</button>
+        </div>
+        
+      </form>
+      
+    </script>
+    
+      <script type="text/template" id="signin-form">
+      
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label for="username" class="col-sm-4 control-label">Username </label>
+          <div class="col-sm-8">
+          <input id="signin-username" class="form-control"  name="username" type="text" placeholder="username" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email" class="col-sm-4 control-label" placeholder="email">Email </label>
+          <div class="col-sm-8">
+          <input id="signin-email" class="form-control"  name="email" type="text" "/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="signin-password" class="col-sm-4 control-label" placeholder="password">Password </label>
+          <div class="col-sm-8">
+          <input id="signin-password" class="form-control"  name="password" type="password" "/>
+          </div>  
+        </div>
+        <div class="form-group">
+          <label for="password_confirmation" class="col-sm-4 control-label">Repeat Password </label>
+          <div class="col-sm-8">
+          <input id="signin-password_confirmation" class="form-control"  name="password_confirmation" type="password"  />
+        </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-4 col-sm-8">
+            <button id="login-non_field_errors" class="btn js-submit">Sign in</button>
+           </div>
+        </div>        
+      </form>
+      
+    </script>
+    
+    <script>
+      {% if request.user.is_authenticated %}
+            var user="{{user.id}}";
+            var username="{{user}}";
+            var isAuthenticated=function(){
+              return true;
+            }
+        {% else %}
+            var isAuthenticated=function(){
+              return false;
+            }
+        {% endif %}
+    </script>
+    
+    <script src="{% static "assets/js/vendor/jquery.js" %}"></script>
+    <script src="{% static "assets/css/js/bootstrap.min.js" %}"></script>
+    <!--<script src="{% static "assets/js/vendor/jquery-ui-1.10.3.js" %}"></script>-->
+      <script src="{% static "assets/js/vendor/jquery.bootstrap.min.js" %}"></script>
+    <script src="{% static "assets/js/vendor/jquery.cookie.js" %}"></script>
+    <script src="{% static "assets/js/vendor/json2.js" %}"></script>
+    <script src="{% static "assets/js/vendor/underscore.js" %}"></script>
+    <script src="{% static "assets/js/vendor/backbone.js" %}"></script>
+    <script src="{% static "assets/js/vendor/backbone.paginator.js" %}"></script>
+    <script src="{% static "assets/js/vendor/backbone.picky.js" %}"></script>
+    <script src="{% static "assets/js/vendor/backbone.syphon.js" %}"></script>
+ <!--   <script src="{% static "assets/js/vendor/backbone.localstorage.js" %}"></script>-->
+    <script src="{% static "assets/js/vendor/backbone.marionette.js" %}"></script>
+    <script src="{% static "assets/js/vendor/spin.js" %}"></script>
+    <script src="{% static "assets/js/vendor/spin.jquery.js" %}"></script>
+    
+    <script src="{% static "assets/js/apps/config/marionette/regions/dialog.js" %}"></script>
+    <script src="{% static "assets/js/app.js" %}"></script>
+    <script src="{% static "assets/js/apps/config/storage/localstorage.js" %}"></script>
+    <script src="{% static "assets/js/entities/header.js" %}"></script>
+    <script src="{% static "assets/js/entities/login.js" %}"></script>
+    <script src="{% static "assets/js/entities/signin.js" %}"></script>
+    <script src="{% static "assets/js/entities/book.js" %}"></script>
+    <script src="{% static "assets/js/entities/book_all.js" %}"></script>
+    <script src="{% static "assets/js/entities/book_history.js" %}"></script>
+    <script src="{% static "assets/js/entities/book_where_is.js" %}"></script>
+    <script src="{% static "assets/js/entities/book_borrowed.js" %}"></script>
+    <script src="{% static "assets/js/common/views.js" %}"></script>
+
+    <script src="{% static "assets/js/apps/books/books_app.js" %}"></script>
+    <script src="{% static "assets/js/apps/books/common/views.js" %}"></script>
+    <script src="{% static "assets/js/apps/books/list/list_view.js "%}"></script>
+    <script src="{% static "assets/js/apps/books/list/list_controller.js" %}"></script>
+    <script src="{% static "assets/js/apps/books/take/take_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/books/take/take_controller.js" %}"></script>
+    <script src="{% static "assets/js/apps/books/sendmail/sendmail_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/books/sendmail/sendmail_controller.js" %}"></script>
+    
+    <script src="{% static "assets/js/apps/mybooks/mybooks_app.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/common/views.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/list_borrowed/list_view.js "%}"></script>
+    <script src="{% static "assets/js/apps/mybooks/list_borrowed/list_controller.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/list/list_view.js "%}"></script>
+    <script src="{% static "assets/js/apps/mybooks/list/list_controller.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/show/show_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/show/show_controller.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/take/take_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/take/take_controller.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/edit/edit_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/edit/edit_controller.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/delete/delete_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/delete/delete_controller.js" %}"></script>
+    <script src="{% static "assets/js/apps/mybooks/new/new_view.js" %}"></script>
+    
+    <script src="{% static "assets/js/apps/about/about_app.js" %}"></script>
+    <script src="{% static "assets/js/apps/about/show/show_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/about/show/show_controller.js" %}"></script>
+
+    <script src="{% static "assets/js/apps/header/header_app.js" %}"></script>
+    <script src="{% static "assets/js/apps/header/list/list_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/header/list/list_controller.js" %}"></script>
+    <script src="{% static "assets/js/apps/header/login/login_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/header/login/login_controller.js" %}"></script>
+    <script src="{% static "assets/js/apps/header/signin/signin_view.js" %}"></script>
+    <script src="{% static "assets/js/apps/header/signin/signin_controller.js" %}"></script>
+
+    <script type="text/javascript">
+
+//      $( document ).ready(function() {
+//console.log( "ready!" );
+//$('.nav  a').on("click",function(){
+//        console.log("collapsing");
+//    
+//});
+//});
+
+      
+      ColibriApp.start();
+    </script>
+  </body>
+{% endblock %}
