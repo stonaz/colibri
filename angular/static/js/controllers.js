@@ -1,9 +1,9 @@
-var cyberFeed = angular.module('cyberFeed', ['cyberFeedServices']);
-
-cyberFeed.controller('cyberFeedController', ['$http', 'sendData', function ($http, sendData) {
+angular.module('colibri')
+.controller('cyberFeedController', ['$http', 'sendData', function ($http, sendData) {
     console.log('controller created');
     var self=this;
-    self.login_data = {username:'admin',password:'stefano'};
+    self.login_data = {};
+    //self.login_data = {username:'admin',password:'stefano'};
     //sendData.list().then(function(response){
     //    //self.books = response.data;
     //    console.log(response);
@@ -32,8 +32,21 @@ cyberFeed.controller('cyberFeedController', ['$http', 'sendData', function ($htt
         console.log(errResponse.data);
     });
     };
-    console.log(self.books);
     
-
+}])
+.controller('booksController', ['$http', 'sendData', function ($http, sendData) {
+    console.log('Books controller created');
+     var self=this;
+    self.getBooks = function(){
+        sendData.getBooks().then(function(response){
+        self.books = response.data;
+        console.log(response);
+        return false;
+        },
+        function(errResponse) {
+        console.log(errResponse.data);
+    });
+    };
+    console.log(self.books);
 }]);
 

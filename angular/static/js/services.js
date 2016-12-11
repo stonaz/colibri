@@ -1,8 +1,6 @@
-var cyberFeedServices = angular.module('cyberFeedServices', []);
-
-cyberFeedServices.factory('sendData', ['$http',
-
+angular.module('colibri').factory('sendData', ['$http',
 function ($http) {
+    console.log('services created');
     var message = '';
     var domains = [];
 

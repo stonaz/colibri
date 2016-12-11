@@ -6,29 +6,22 @@
 
 </head>
 <body >
- <div >
+ 
+
+    <div class="container" ng-app="colibri" ng-controller="booksController as ctrl">
+ <div class="row">
+  <div class="col-md-6">
+   <div >
     User: 
     {{user.username}}
  </div>
-
-    <div class="container" ng-app="cyberFeed" ng-controller="cyberFeedController as ctrl">
- <div class="row">
-  <div class="col-md-6">
+   <ul>
+<li><a href="#/test">test</a></li>
+</ul>
     <div class="content" >
     <div class="panel" ng-repeat="book in ctrl.books">
         <span class="status" ng-bind="book.title"></span>
-        <!--<form name="addForm">
-            <input type="radio"
-name="gender"
-ng-model="data[$index].action"
-value="Deny">Deny
-<input type="radio"
-name="gender"
-ng-model="data[$index].action"
-value="Permit">Permit
-        </form>
-        <button ng-click="sendDataToSocket(domain.name,$index)">click</button>
-         <button ng-click="updateConfig(domain.name,$index)">Update config</button>-->
+       
     </div>
    <button ng-click="ctrl.getBooks()">
 Get books
@@ -42,11 +35,11 @@ Get books
 ng-submit="ctrl.login()">
 <input type="text"
 placeholder="user"
-ng-model="ctrl.username"
+ng-model="ctrl.login_data.username"
 >
 <input type="password"
 placeholder="password"
-ng-model="ctrl.password"
+ng-model="ctrl.login_data.password"
 >
 <input type="submit"
 value="Login"
@@ -58,17 +51,23 @@ ng-disabled="addForm.$invalid">
     </div>
     
   </div>
- </div>  
+ </div>
+ <div ng-view></div>
 </div>
 
 
 
 <!--<script src="{% static "underscore/underscore.js" %}"></script>-->
+ <script>
+ var static_url = '{{STATIC_URL}}';
+ //console.log static_url
+ </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.js"> </script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-route.js"> </script>
 <!--<script src="xml2json/xml2json.js"></script>-->
+<script src="{% static "js/app.js" %}"></script>
 <script src="{% static "js/services.js" %}"></script>
-<script src="{% static "js/script.js" %}"></script>
+<script src="{% static "js/controllers.js" %}"></script>
 <!--<script src="js/services.js"></script>
 <script src="js/script.js"></script>-->
 
