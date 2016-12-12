@@ -2,7 +2,7 @@ import json
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-from django.http import Http404,HttpResponse
+from django.http import Http404,HttpResponse,JsonResponse,HttpResponseBadRequest
 from django.contrib.auth import login, logout
 from django.utils.http import base36_to_int
 from django.utils.translation import ugettext_lazy as _
@@ -22,6 +22,24 @@ from .permissions import IsProfileOwner, IsNotAuthenticated
 
 
 # Create your views here.
+
+
+def SessionCheck(request):
+    
+    
+    if request.user and request.user.is_authenticated():
+         print 'ok'
+         return JsonResponse({'user':request.user.id,'username': request.user.username})
+         # return HttpResponse({
+         #        'detail': _(u'Logged in successfully'),
+         #        'username': request.user.username,
+         #        'user' : request.user.id
+         #    })
+    else:
+        return HttpResponseBadRequest('')
+    
+# session_check = Ses/&sionCheck.as_view()   
+    
 class AccountLogin(generics.GenericAPIView):
     """
     Log in
@@ -39,6 +57,7 @@ class AccountLogin(generics.GenericAPIView):
     def post(self, request, format=None):
         """ authenticate """
         serializer = self.serializer_class(data=request.data)
+        print request.data
         
         if serializer.is_valid():
             login(request, serializer.instance)

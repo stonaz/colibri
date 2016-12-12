@@ -33,6 +33,7 @@ urlpatterns = patterns('books.views',
 )  
 
 urlpatterns += patterns('profiles.views',
+    url(r'^api/v1/account/session/$', 'SessionCheck', name='api_session_check'),
     url(r'^api/v1/account/login/$', 'account_login', name='api_account_login'),
     url(r'^api/v1/account/logout/$', 'account_logout', name='api_account_logout'),
     url(r'^api/v1/account/signin/$', 'account_signin', name='api_account_signin'),

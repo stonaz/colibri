@@ -1,31 +1,31 @@
 angular.module('colibri')
-.controller('cyberFeedController', ['$http', 'sendData', function ($http, sendData) {
-    console.log('controller created');
-    var self=this;
-    self.login_data = {};
-    //self.login_data = {username:'admin',password:'stefano'};
-    //sendData.list().then(function(response){
-    //    //self.books = response.data;
-    //    console.log(response);
-    //    return false;
-    //    },
-    //    function(errResponse) {
-    //    console.error(errResponse);
-    //});
-    self.login = function(){
-        sendData.login(self.login_data).then(function(response){
-        //self.books = response.data;
+.controller('userController', [ 'UserService','$location', function ( UserService,$location) {
+    console.log('User controller created');
+      var self = this;
+      self.userService = UserService;
+      self.user = angular.module('colibri').user;
+
+      // Check if the user is logged in when the application
+      // loads
+      // User Service will automatically update isLoggedIn
+      // after this call finishes
+      UserService.session().then(function(response){
+        self.user = response.data.username;
+        $location.path('/books');
         console.log(response);
         return false;
         },
         function(errResponse) {
         console.log(errResponse.data);
     });
-    };
-    self.getBooks = function(){
-        sendData.getBooks().then(function(response){
-        self.books = response.data;
+    self.login_data = {};
+
+    self.login = function(){
+        UserService.login(self.login_data).then(function(response){
+        self.user = response.data.username;
         console.log(response);
+        console.log(self.user);
+        $location.path('/books');
         return false;
         },
         function(errResponse) {
@@ -33,11 +33,26 @@ angular.module('colibri')
     });
     };
     
+    
+}]) 
+.controller('logoutController', [ 'UserService','$location', function ( UserService,$location) {
+    console.log('Logout controller created');
+    var self=this;
+        UserService.logout().then(function(response){
+        console.log(response);
+        $location.path('/');
+        return false;
+        },
+        function(errResponse) {
+        console.log(errResponse.data);
+    });
+     
 }])
-.controller('booksController', ['$http', 'sendData', function ($http, sendData) {
+.controller('booksController', ['sendData', function ( sendData) {
     console.log('Books controller created');
+    
      var self=this;
-    self.getBooks = function(){
+     self.user = angular.module('colibri').user;
         sendData.getBooks().then(function(response){
         self.books = response.data;
         console.log(response);
@@ -46,7 +61,7 @@ angular.module('colibri')
         function(errResponse) {
         console.log(errResponse.data);
     });
-    };
-    console.log(self.books);
+    
+    console.log(self.user);
 }]);
 

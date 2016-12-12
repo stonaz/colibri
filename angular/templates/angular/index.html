@@ -8,44 +8,28 @@
 <body >
  
 
-    <div class="container" ng-app="colibri" ng-controller="booksController as ctrl">
+    <div class="container" ng-app="colibri" ng-controller="userController as ctrl">
  <div class="row">
   <div class="col-md-6">
    <div >
     User: 
-    {{user.username}}
+    
+    <span ng-bind="ctrl.userService.username"></span> 
  </div>
-   <ul>
-<li><a href="#/test">test</a></li>
-</ul>
-    <div class="content" >
-    <div class="panel" ng-repeat="book in ctrl.books">
-        <span class="status" ng-bind="book.title"></span>
-       
-    </div>
-   <button ng-click="ctrl.getBooks()">
-Get books
-</button>
-
+ <div class="pull-right">
+      <span ng-hide="ctrl.userService.isLoggedIn">
+        <a href="#/login">Login</a>
+      </span>
+      <span ng-show="ctrl.userService.isLoggedIn">
+        <!-- server-side route, not a client-side route -->
+        <a href="#/logout">Logout</a>
+      </span>
 </div>
+
+
   </div>
   <div class="col-md-6">
-    <div>
-<form name="loginForm"
-ng-submit="ctrl.login()">
-<input type="text"
-placeholder="user"
-ng-model="ctrl.login_data.username"
->
-<input type="password"
-placeholder="password"
-ng-model="ctrl.login_data.password"
->
-<input type="submit"
-value="Login"
-ng-disabled="addForm.$invalid">
-</form>
-</div>
+   
     <div style="white-space:pre;">
        <span ng-bind="response"></span> 
     </div>
