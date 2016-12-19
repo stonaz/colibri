@@ -1,0 +1,24 @@
+    <div>
+<form name="loginForm"
+ng-submit="addBookCtrl.addbook()">
+<input type="text"
+placeholder="titolo"
+ng-model="addBookCtrl.book_data.title"
+>
+<input type="text"
+placeholder="autore"
+ng-model="addBookCtrl.book_data.author"
+>
+<input type="text"
+placeholder="commento"
+ng-model="addBookCtrl.book_data.comment"
+>
+<input type="text"
+placeholder="note"
+ng-model="addBookCtrl.book_data.note"
+>
+<input type="submit"
+value="Aggiungi libro"
+ng-disabled="addForm.$invalid">
+</form>
+</div>

@@ -36,7 +36,7 @@ def SessionCheck(request):
          #        'user' : request.user.id
          #    })
     else:
-        return HttpResponseBadRequest('')
+        return HttpResponseBadRequest('Session not active for user')
     
 # session_check = Ses/&sionCheck.as_view()   
     

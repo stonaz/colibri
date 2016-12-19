@@ -15,7 +15,7 @@ class BookListSerializer(serializers.ModelSerializer):
         model = Book
 
         fields= (
-           'id','author', 'title', 'owner', 'owner_username', 'where_is', 'created', 'modified',
+           'id','author', 'title', 'owner', 'owner_username','comment','note', 'where_is', 'created', 'modified',
             )
 
       
@@ -30,7 +30,7 @@ class BookDetailSerializer(serializers.ModelSerializer):
         model = Book
         
         fields= (
-           'id','author', 'title', 'owner', 'owner_username', 'where_is', 'created', 'modified',
+           'id','author', 'title', 'owner', 'owner_username','comment','note', 'where_is', 'created', 'modified',
             )
 
 class BookWhereIsListSerializer(serializers.ModelSerializer):

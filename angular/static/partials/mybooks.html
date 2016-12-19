@@ -1,0 +1,28 @@
+<div class="panel" >
+        <table class="table table-bordered">
+                <thead> <tr> <th>Autore</th> <th>Titolo</th> <th>Commento</th> <th>Note</th> </tr> </thead>
+                <tr ng-repeat="book in myBookCtrl.books">
+                        <td>
+                             <span class="status" ng-bind="book.author"></span>   
+                        </td>
+                        <td>
+                             <span class="status" ng-bind="book.title"></span>   
+                        </td>
+                         <td>
+                             <span class="status" ng-bind="book.comment"></span>   
+                        </td>
+                        <td>
+                             <span class="status" ng-bind="book.note"></span>   
+                        </td>
+                        <td>
+                             <a ng-href="#/updatebook/{{book.id}}">Modifica</a> 
+                        </td>
+                        <td>
+                            <a ng-href="#/deletebook/{{book.id}}">Elimina</a> 
+                        </td>
+                </tr>
+        </table>
+        <!--<span class="status" ng-bind="book.author"></span>
+        <span class="status" ng-bind="book.title"></span>-->
+       
+    </div>

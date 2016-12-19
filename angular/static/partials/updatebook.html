@@ -1,0 +1,24 @@
+    <div>
+<form name="loginForm"
+ng-submit="updateBookCtrl.updatebook()">
+<input type="text"
+placeholder="titolo"
+ng-model="updateBookCtrl.book_data.title"
+>
+<input type="text"
+placeholder="autore"
+ng-model="updateBookCtrl.book_data.author"
+>
+<input type="text"
+placeholder="commento"
+ng-model="updateBookCtrl.book_data.comment"
+>
+<input type="text"
+placeholder="note"
+ng-model="updateBookCtrl.book_data.note"
+>
+<input type="submit"
+value="Modifica libro"
+ng-disabled="addForm.$invalid">
+</form>
+</div>

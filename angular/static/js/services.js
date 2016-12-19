@@ -1,5 +1,5 @@
 angular.module('colibri')
-.factory('sendData', ['$http',
+.factory('bookService', ['$http',
 function ($http) {
     console.log('services created');
 return {
@@ -9,14 +9,34 @@ return {
             return $http.get(url);
             
         },
-        login: function(data){
-            var url = 'http://localhost:9000/api/v1/account/login/';
+        addBook: function(data){
+            var url = '/api/v1/books/';
             return $http.post(url,data) ;           
         },
         
-         getBooks: function() {
+        updateBook: function(user,code,data){
+            var url = '/api/v1/'+user+'/books/'+code;
+            return $http.put(url,data) ;           
+        },
+        
+        deleteBook: function(user,code,data){
+            var url = '/api/v1/'+user+'/books/'+code;
+            return $http.delete(url,data) ;           
+        },
+        
+        getBooks: function() {
             
-            var url = 'http://localhost:9000/api/v1/books/';
+            var url = '/api/v1/books/';
+            return $http.get(url);           
+        },
+        getBookDetails: function(user,code) {
+            
+            var url = '/api/v1/'+user+'/books/'+code;
+            return $http.get(url);           
+        },
+        getMyBooks: function(user) {
+            
+            var url = '/api/v1/'+user+'/books/';
             return $http.get(url);           
         },
     };

@@ -27,6 +27,8 @@ class Book( TimeStamped_Model):
     owner= models.ForeignKey(User,related_name="sharer")
     title = models.CharField( _("Titolo"),max_length=100,help_text=_("Titolo"))
     author = models.CharField( _("Autore"),max_length=100,help_text=_("Autore"))
+    comment = models.CharField( _("Commenti"),max_length=100,help_text=_("Commenti"),blank=True,null=True)
+    note = models.CharField( _("Note"),max_length=100,help_text=_("Note"),blank=True,null=True)
     
     def __unicode__(self):
         return self.title

@@ -5,19 +5,32 @@ angular.module('colibri', ['ngRoute']).config(function($routeProvider) {
      // controller: 'TeamListCtrl as teamListCtrl'
     })
     .when('/login', {
-       // template: '<h5>This is the second route</h5>'
       templateUrl: '/static/partials/login.html',
       controller: 'userController as loginCtrl'
     })
     .when('/logout', {
-       // template: '<h5>This is the second route</h5>'
      templateUrl: '/static/partials/home.html',
       controller: 'logoutController as logoutCtrl'
     })
     .when('/books', {
-       // template: '<h5>This is the second route</h5>'
       templateUrl: '/static/partials/books.html',
       controller: 'booksController as bookCtrl'
+    })
+    .when('/mybooks', {
+      templateUrl: '/static/partials/mybooks.html',
+      controller: 'myBooksController as myBookCtrl'
+    })
+    .when('/addbook', {
+      templateUrl: '/static/partials/addbook.html',
+      controller: 'addBookController as addBookCtrl'
+    })
+    .when('/updatebook/:code', {
+      templateUrl: '/static/partials/updatebook.html',
+      controller: 'updateBookController as updateBookCtrl'
+    })
+    .when('/deletebook/:code', {
+      templateUrl: '/static/partials/deletebook.html',
+      controller: 'deleteBookController as deleteBookCtrl'
     })
     .when('/team/:code', {
       templateUrl: 'views/team_details.html',
