@@ -11,7 +11,7 @@ angular.module('colibri')
       // after this call finishes
       UserService.session().then(function(response){
         self.user = response.data.username;
-        $location.path('/mybooks');
+        $location.path('/books');
         console.log(response);
         return false;
         },
@@ -25,7 +25,7 @@ angular.module('colibri')
         self.user = response.data.username;
         console.log(response);
         console.log(self.user);
-        $location.path('/mybooks');
+        $location.path('/books');
         return false;
         },
         function(errResponse) {
@@ -34,7 +34,25 @@ angular.module('colibri')
     };
     
     
-}]) 
+}])
+.controller('signinController', [ 'UserService','$location', function ( UserService,$location) {
+    console.log('Signin controller created');
+    var self=this;
+    self.signin_data = {};
+    self.signin = function(){
+        
+        console.log('trying to sign in');
+        UserService.signin(self.signin_data).then(function(response){
+        console.log(response);
+        $location.path('/books');
+        return false;
+        },
+        function(errResponse) {
+        console.log(errResponse.data);
+    });
+     };   
+     
+}])
 .controller('logoutController', [ 'UserService','$location', function ( UserService,$location) {
     console.log('Logout controller created');
     var self=this;
@@ -151,7 +169,17 @@ angular.module('colibri')
         function(errResponse) {
         console.log(errResponse.data);
     });
-    
+    self.searchbook = function(){
+        console.log(self.search_data);
+        bookService.searchBook(self.search_data).then(function(response){     
+        console.log(response);
+        self.books = response.data;
+        return false;
+        },
+        function(errResponse) {
+        console.log(errResponse.data);
+    });
+    };
     console.log(self.user);
 }])
 .controller('myBooksController', ['bookService', function ( bookService) {

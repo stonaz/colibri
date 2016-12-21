@@ -3,7 +3,24 @@
 <html>
 <head>
 <link href="{% static "bootstrap-3.3.7/css/bootstrap.css" %}"rel="stylesheet">
-
+<style>
+.titolo.ng-valid {
+border:1px solid green;
+ border-radius: 5px;
+}
+.titolo.ng-invalid-required {
+border:1px solid red;
+ border-radius: 5px;
+}
+.autore.ng-valid {
+border:1px solid green;
+ border-radius: 5px;
+}
+.autore.ng-invalid-required {
+border:1px solid red;
+ border-radius: 5px;
+}
+</style>
 </head>
 <body >
  
@@ -12,7 +29,7 @@
  <div class="row">
   <div class="col-md-6">
    <div >
-    User: 
+     
     
     <span ng-bind="ctrl.userService.username"></span> 
  </div>
@@ -21,7 +38,7 @@
         <a href="#/login">Login</a>
       </span>
       <span ng-show="ctrl.userService.isLoggedIn">
-        <!-- server-side route, not a client-side route -->
+        
         <a href="#/logout">Logout</a>
       </span>
 </div>

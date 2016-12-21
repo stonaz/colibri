@@ -1,5 +1,31 @@
-<div class="panel" ng-repeat="book in bookCtrl.books">
-        <span class="status" ng-bind="book.author"></span>
-        <span class="status" ng-bind="book.title"></span>
+<div>
+        <form name="searchBookForm"
+ng-submit="bookCtrl.searchbook()">
+<input type="text"
+placeholder="Cerca libro per autore o titolo"
+ng-model="bookCtrl.search_data"
+required
+>
+
+<input type="submit"
+value="Cerca"
+ng-disabled="searchBookForm.$invalid">
+</form>
+        <table class="table table-bordered">
+                <thead> <tr> <th>Autore</th> <th>Titolo</th> <th>Commento</th> <th>Note</th> </tr> </thead>
+                <tr ng-repeat="book in bookCtrl.books">
+                        <td>
+                             <span class="status" ng-bind="book.author"></span>   
+                        </td>
+                        <td>
+                             <span class="status" ng-bind="book.title"></span>   
+                        </td>
+                         <td>
+                             <span class="status" ng-bind="book.comment"></span>   
+                        </td>
+                        
+                       
+                </tr>
+        </table>
        
     </div>

@@ -1,8 +1,8 @@
 angular.module('colibri', ['ngRoute']).config(function($routeProvider) {
 
     $routeProvider.when('/', {
-      templateUrl: '/static/partials/home.html'
-     // controller: 'TeamListCtrl as teamListCtrl'
+      templateUrl: '/static/partials/home.html',
+     controller: 'signinController as signinCtrl'
     })
     .when('/login', {
       templateUrl: '/static/partials/login.html',

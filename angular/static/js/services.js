@@ -3,10 +3,10 @@ angular.module('colibri')
 function ($http) {
     console.log('services created');
 return {
-        list: function() {
+        searchBook: function(search) {
             
-            var url = 'http://localhost:8066';
-            return $http.get(url);
+            var url = '/api/v1/books/?search='+search;
+            return $http.get(url) ;
             
         },
         addBook: function(data){
@@ -55,6 +55,17 @@ return {
           angular.module('colibri').user= response.data.user;
           angular.module('colibri').username=response.data.username;
           return response;
+        });
+      },
+      
+      signin: function(user_data) {
+        return $http.post('/api/v1/account/signin/', user_data)
+          .then(function(response) {
+            service.isLoggedIn = true;
+            service.username = response.data.username;
+            angular.module('colibri').user= response.data.user;
+          angular.module('colibri').username=response.data.username;
+            return response;
         });
       },
 

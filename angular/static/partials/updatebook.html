@@ -1,13 +1,17 @@
-    <div>
-<form name="loginForm"
+<div>
+<form name="updateBookForm"
 ng-submit="updateBookCtrl.updatebook()">
 <input type="text"
 placeholder="titolo"
+class="titolo"
 ng-model="updateBookCtrl.book_data.title"
+required
 >
 <input type="text"
 placeholder="autore"
+class="autore"
 ng-model="updateBookCtrl.book_data.author"
+required
 >
 <input type="text"
 placeholder="commento"
@@ -19,6 +23,6 @@ ng-model="updateBookCtrl.book_data.note"
 >
 <input type="submit"
 value="Modifica libro"
-ng-disabled="addForm.$invalid">
+ng-disabled="updateBookForm.$invalid">
 </form>
 </div>
