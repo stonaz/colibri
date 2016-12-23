@@ -12,7 +12,7 @@ value="Cerca"
 ng-disabled="searchBookForm.$invalid">
 </form>
         <table class="table table-bordered">
-                <thead> <tr> <th>Autore</th> <th>Titolo</th> <th>Commento</th> <th>Note</th> </tr> </thead>
+                <thead> <tr> <th>Autore</th> <th>Titolo</th> <th>User</th><th>Commento</th> </tr> </thead>
                 <tr ng-repeat="book in bookCtrl.books">
                         <td>
                              <span class="status" ng-bind="book.author"></span>   
@@ -21,6 +21,8 @@ ng-disabled="searchBookForm.$invalid">
                              <span class="status" ng-bind="book.title"></span>   
                         </td>
                          <td>
+                             <span class="status" ng-bind="book.owner_username"></span>   
+                        </td><td>
                              <span class="status" ng-bind="book.comment"></span>   
                         </td>
                         

@@ -3,6 +3,7 @@
 <html>
 <head>
 <link href="{% static "bootstrap-3.3.7/css/bootstrap.css" %}"rel="stylesheet">
+
 <style>
 .titolo.ng-valid {
 border:1px solid green;
@@ -27,13 +28,28 @@ border:1px solid red;
 
     <div class="container" ng-app="colibri" ng-controller="userController as ctrl">
  <div class="row">
-  <div class="col-md-6">
-   <div >
+  <div class="col-md-12">
      
+ <div class="pull-left">    
     
-    <span ng-bind="ctrl.userService.username"></span> 
- </div>
- <div class="pull-right">
+    
+ <img src="{% static "img/logo.png" %}"></img>
+
+     
+</div> 
+  <div class="pull-right">    
+<span ng-show="ctrl.userService.isLoggedIn">
+    <strong><span ng-bind="ctrl.userService.username"></span> </strong>
+<div class="btn-group" role="group" aria-label="...">
+<a class="btn btn-default" href="#/books" role="button">Ricerca libri</a>
+<a class="btn btn-default" href="#/mybooks" role="button">Gestione libri</a>
+<a class="btn btn-default" href="#/myprofile" role="button">Gestione profilo</a>
+  
+</div>
+    </span>    
+    
+
+
       <span ng-hide="ctrl.userService.isLoggedIn">
         <a href="#/login">Login</a>
       </span>
@@ -45,13 +61,7 @@ border:1px solid red;
 
 
   </div>
-  <div class="col-md-6">
-   
-    <div style="white-space:pre;">
-       <span ng-bind="response"></span> 
-    </div>
-    
-  </div>
+
  </div>
  <div ng-view></div>
 </div>
@@ -63,9 +73,12 @@ border:1px solid red;
  var static_url = '{{STATIC_URL}}';
  //console.log static_url
  </script>
+ <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+ <script src="{% static "bootstrap-3.3.7/js/bootstrap.min.js" %}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.js"> </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-route.js"> </script>
 <!--<script src="xml2json/xml2json.js"></script>-->
+
 <script src="{% static "js/app.js" %}"></script>
 <script src="{% static "js/services.js" %}"></script>
 <script src="{% static "js/controllers.js" %}"></script>
