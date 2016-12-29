@@ -76,6 +76,8 @@ angular.module('colibri')
         
         console.log('trying to sign in');
         UserService.signin(self.signin_data).then(function(response){
+            self.user = response.data.username;
+            console.log(self.user);
         console.log(response);
         $location.path('/books');
         return false;
@@ -223,8 +225,24 @@ angular.module('colibri')
         console.log(user);
         profileService.getProfileDetails(user).then(function(response){     
         console.log(response);
-        self.viewOwnerDetails[id] = {'email':response.data.email,'tel':response.data.phone};
-        //self.profile_data=response.data;
+     
+        //console.log(response.data.email);
+        //console.log(response.data.publish_email);
+        //console.log(response.data.publish_phone);
+        //console.log(response.data.phone);
+        self.viewOwnerDetails[id] ={};
+        if (response.data.publish_email === false){
+            self.viewOwnerDetails[id].email = 'Non disponibile';
+        }
+        else{
+            self.viewOwnerDetails[id].email = response.data.email;
+        }
+        if (response.data.publish_phone === false|| response.data.phone === ''){
+            self.viewOwnerDetails[id].phone = 'Non disponibile';
+        }
+        else{
+            self.viewOwnerDetails[id].phone = response.data.phone;
+        }
         return false;
         },
         function(errResponse) {

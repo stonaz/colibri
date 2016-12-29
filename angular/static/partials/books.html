@@ -11,6 +11,7 @@ required
 value="Cerca"
 ng-disabled="searchBookForm.$invalid">
 </form>
+        <br>
         <table class="table table-bordered">
                 <thead> <tr> <th>Autore</th> <th>Titolo</th> <th>User</th><th>Commento</th> </tr> </thead>
                 <tr ng-repeat="book in bookCtrl.books">
@@ -25,7 +26,7 @@ ng-disabled="searchBookForm.$invalid">
                               <div class="showOwner" ng-show="bookCtrl.viewuser[book.id]">
                         
                                 Email:<span  ng-bind="bookCtrl.viewOwnerDetails[book.id].email"></span> <br>
-                                Telefono:<span  ng-bind="bookCtrl.viewOwnerDetails[book.id].tel"></span> <br>
+                                Telefono:<span  ng-bind="bookCtrl.viewOwnerDetails[book.id].phone"></span> <br>
                                 <button ng-click="bookCtrl.hideOwner(book.id)">Chiudi</button>
                               </div>
                         </td><td>
