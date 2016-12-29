@@ -1,0 +1,9 @@
+.content{
+    margin-top: 15px;
+    background-color: #f6f0f0;
+    border-radius: 5px;
+    -webkit-box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);
+-moz-box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);
+box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);
+padding:10px;
+}

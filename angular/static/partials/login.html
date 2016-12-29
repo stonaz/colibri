@@ -1,4 +1,4 @@
-    <div>
+    <div class="content">
 <form class="form-horizontal" name="loginForm" ng-submit="loginCtrl.login()">
       <div class="form-group">
     <label for="user" class="col-sm-1 control-label">Username</label>
@@ -33,7 +33,8 @@ required
 value="Login"
 ng-disabled="loginForm.$invalid">-->
 </form>
-</div>
+
     <div>
         <span ng-bind="loginCtrl.error"></span>
+    </div>
     </div>

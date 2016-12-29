@@ -34,7 +34,7 @@ angular.module('colibri')
     });
     };    
 }])
-.controller('profileController', ['profileService','$routeParams','$location', function ( profileService,$routeParams,$location) {
+.controller('profileController', ['profileService','$location', function ( profileService,$location) {
     console.log('Profile controller created');
     
      var self=this;
@@ -43,7 +43,7 @@ angular.module('colibri')
      self.profile_data = {};
      
     
-        profileService.getProfileDetails(self.username,$routeParams.code).then(function(response){     
+        profileService.getProfileDetails(self.username).then(function(response){     
         console.log(response);
         self.profile_data=response.data;
         return false;
