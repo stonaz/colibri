@@ -190,10 +190,13 @@ angular.module('colibri')
     
     console.log(self.user);
 }])
-.controller('booksController', ['bookService', function ( bookService) {
+.controller('booksController', ['bookService','profileService', function ( bookService, profileService) {
     console.log('Books controller created');
     
      var self=this;
+     self.viewuser=[];
+     self.viewOwnerDetails = [];
+     
      self.user = angular.module('colibri').user;
      self.username = angular.module('colibri').username;
         bookService.getBooks().then(function(response){
@@ -214,6 +217,24 @@ angular.module('colibri')
         function(errResponse) {
         console.log(errResponse.data);
     });
+    };
+    self.showOwner = function(id,user){
+        console.log(id);
+        console.log(user);
+        profileService.getProfileDetails(user).then(function(response){     
+        console.log(response);
+        self.viewOwnerDetails[id] = {'email':response.data.email,'tel':response.data.phone};
+        //self.profile_data=response.data;
+        return false;
+        },
+        function(errResponse) {
+        console.log(errResponse.data);
+    });
+        self.viewuser[id]=true;
+    };
+    self.hideOwner = function(id){
+        console.log(id);
+        self.viewuser[id]=false;
     };
     console.log(self.user);
 }])

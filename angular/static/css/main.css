@@ -7,3 +7,10 @@
 box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);
 padding:10px;
 }
+
+.showOwner{
+    background-color: #ffffff;
+    border: thin solid;
+    border-radius: 5px;
+    padding:5px;
+}

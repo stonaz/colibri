@@ -21,7 +21,13 @@ ng-disabled="searchBookForm.$invalid">
                              <span class="status" ng-bind="book.title"></span>   
                         </td>
                          <td>
-                             <span class="status" ng-bind="book.owner_username"></span>   
+                              <a ng-bind="book.owner_username" ng-mouseover="bookCtrl.showOwner(book.id,book.owner_username)"></a>
+                              <div class="showOwner" ng-show="bookCtrl.viewuser[book.id]">
+                        
+                                Email:<span  ng-bind="bookCtrl.viewOwnerDetails[book.id].email"></span> <br>
+                                Telefono:<span  ng-bind="bookCtrl.viewOwnerDetails[book.id].tel"></span> <br>
+                                <button ng-click="bookCtrl.hideOwner(book.id)">Chiudi</button>
+                              </div>
                         </td><td>
                              <span class="status" ng-bind="book.comment"></span>   
                         </td>
