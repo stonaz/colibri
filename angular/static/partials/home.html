@@ -1,15 +1,50 @@
-<h4>Home</h4>
-<form name="signinForm"
-ng-submit="signinCtrl.signin()">
-<input type="text"
+<h4>Iscriviti a Colibri</h4>
+<form class="form-horizontal" name="signinForm" ng-submit="signinCtrl.signin()">
+    <div class="form-group">
+    <label for="user" class="col-sm-1 control-label">Username</label>
+    <div class="col-sm-4">
+      <input type="text" class="input-mandatory" placeholder="Username" ng-model="signinCtrl.signin_data.username"
+required>
+    </div>
+    </div>
+    
+        <div class="form-group">
+    <label for="email" class="col-sm-1 control-label">Email</label>
+    <div class="col-sm-4">
+      <input type="email" class="input-mandatory" placeholder="email" ng-model="signinCtrl.signin_data.email"
+required>
+    </div>
+    </div>
+    
+  <div class="form-group">
+    <label for="Password" class="col-sm-1 control-label">Password</label>
+    <div class="col-sm-4">
+      <input type="password" class="input-mandatory"  placeholder="Password" ng-model="signinCtrl.signin_data.password"
+required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="Password" class="col-sm-1 control-label">Conferma Password</label>
+    <div class="col-sm-4">
+      <input type="password" class="input-mandatory"  placeholder="Conferma Password" ng-model="signinCtrl.signin_data.password_confirmation"
+required>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-10">
+      <button type="submit" class="btn btn-default" ng-disabled="signinForm.$invalid">Sign in</button>
+    </div>
+  </div>
+    
+<!--<input type="text"
        name="username"
        class="autore"
 placeholder="username"
 ng-model="signinCtrl.signin_data.username"
 required
->
+>-->
 
-<input type="text"
+<!--<input type="text"
 placeholder="email"
 class="email"
 name="email"
@@ -30,5 +65,5 @@ required
 >
 <input type="submit"
 value="Sign in"
-ng-disabled="signinForm.$invalid">
+ng-disabled="signinForm.$invalid">-->
 </form>

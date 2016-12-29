@@ -28,6 +28,9 @@ class UserProfile(models.Model):
 
     # The additional attributes we wish to include.
     profile_email = models.EmailField(blank=True, unique=True)
+    phone = models.CharField( _("Telefono"),max_length=20,help_text=_("Telefono"),blank=True,null=True)
+    publish_phone = models.BooleanField(default=False)
+    publish_email = models.BooleanField(default=True)
     notify_wishlist = models.BooleanField(default=False)
     notify_added_books = models.BooleanField(default=False)
     # Override the __unicode__() method to return out something meaningful!

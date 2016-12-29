@@ -41,6 +41,26 @@ return {
         },
     };
 }])
+.factory('profileService', ['$http',
+function ($http) {
+    console.log('profile services created');
+return {
+        
+        
+        updateProfile: function(user,data){
+            var url = '/api/v1/'+user+'/user_profile/';
+            return $http.put(url,data) ;           
+        },
+        
+        
+        getProfileDetails: function(user) {
+            
+            var url = '/api/v1/'+user+'/user_profile/';
+            return $http.get(url);           
+        },
+        
+    };
+}])
 .factory('UserService', ['$http', function($http) {
     var service = {
       isLoggedIn: false,

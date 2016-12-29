@@ -29,11 +29,44 @@ angular.module('colibri')
         return false;
         },
         function(errResponse) {
+             self.error = errResponse.data['non_field_errors'];
+        console.log(errResponse.data);
+    });
+    };    
+}])
+.controller('profileController', ['profileService','$routeParams','$location', function ( profileService,$routeParams,$location) {
+    console.log('Profile controller created');
+    
+     var self=this;
+     self.user = angular.module('colibri').user;
+     self.username = angular.module('colibri').username;
+     self.profile_data = {};
+     
+    
+        profileService.getProfileDetails(self.username,$routeParams.code).then(function(response){     
+        console.log(response);
+        self.profile_data=response.data;
+        return false;
+        },
+        function(errResponse) {
+        console.log(errResponse.data);
+    });
+    self.updateprofile = function(){
+        console.log(self.profile_data);
+        self.profile_data.owner = self.user;
+        profileService.updateProfile(self.username,self.profile_data).then(function(response){     
+        console.log(response);
+        self.response="Modifica profilo effettuata";
+       // $location.path('/mybooks');
+        return false;
+        },
+        function(errResponse) {
         console.log(errResponse.data);
     });
     };
     
     
+    console.log(self.user);
 }])
 .controller('signinController', [ 'UserService','$location', function ( UserService,$location) {
     console.log('Signin controller created');
@@ -48,6 +81,7 @@ angular.module('colibri')
         return false;
         },
         function(errResponse) {
+           
         console.log(errResponse.data);
     });
      };   
@@ -111,7 +145,8 @@ angular.module('colibri')
         self.book_data.owner = self.user;
         bookService.updateBook(self.username,$routeParams.code,self.book_data).then(function(response){     
         console.log(response);
-        $location.path('/mybooks');
+        self.response="Modifica effettuata";
+       // $location.path('/mybooks');
         return false;
         },
         function(errResponse) {

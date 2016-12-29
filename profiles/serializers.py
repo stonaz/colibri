@@ -131,5 +131,5 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = UserProfile
         
         fields= (
-           'username','email','notify_wishlist','notify_added_books'
+           'username','email','notify_wishlist','notify_added_books','phone','publish_phone','publish_email'
             )

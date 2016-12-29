@@ -12,6 +12,10 @@ angular.module('colibri', ['ngRoute']).config(function($routeProvider) {
      templateUrl: '/static/partials/home.html',
       controller: 'logoutController as logoutCtrl'
     })
+    .when('/myprofile', {
+      templateUrl: '/static/partials/myprofile.html',
+      controller: 'profileController as profileCtrl'
+    })
     .when('/books', {
       templateUrl: '/static/partials/books.html',
       controller: 'booksController as bookCtrl'
