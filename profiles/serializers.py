@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from django.core.mail import send_mail
 
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
@@ -64,6 +65,11 @@ class UserCreateSerializer(serializers.ModelSerializer):
         
         user = User.objects.create_user(username=attrs.get('username'), password=attrs.get('password'))
         u = UserProfile.objects.create(user=user,profile_email=attrs.get('profile_email'))
+        message = "Benvenuto su Colibri\n"
+        message += "Username: %s  \n" % attrs.get('username')
+        message += "Password: %s  " % password
+        print message
+        send_mail("Registrazione a CoLibri", message, 'colibribooksharing@gmail.com',[attrs.get('profile_email')])
         print u
         return user
 
