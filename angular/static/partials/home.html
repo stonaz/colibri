@@ -1,4 +1,6 @@
-<div class="content"><h4>Iscriviti a Colibri</h4>
+
+    <div class="content"><h4>Iscriviti a Colibri</h4>
+    <span ng-hide="signinCtrl.showLogin">
 <form class="form-horizontal" name="signinForm" ng-submit="signinCtrl.signin()">
     <div class="form-group">
     <label for="user" class="col-sm-1 control-label">Username</label>
@@ -23,7 +25,7 @@ required>
 Campo obbligatorio
 </span>
 <span ng-show="signinForm.email.$error.email">
-This field is invalid
+Inserire un indirizzo email valido
 </span>
     </div>
     </div>
@@ -57,6 +59,35 @@ Campo obbligatorio
       <button type="submit" class="btn btn-default" ng-disabled="signinForm.$invalid">Sign in</button>
     </div>
   </div>
- </div>   
+  
+</form>
+</span>
+<span ng-show="signinCtrl.showLogin">
+    <div ng-controller="userController as loginCtrl">
+<form class="form-horizontal" name="loginForm" ng-submit="loginCtrl.login()">
+      <div class="form-group">
+    <label for="user" class="col-sm-1 control-label">Username</label>
+    <div class="col-sm-4">
+      <input type="text" class="input-mandatory" placeholder="Username" ng-model="loginCtrl.login_data.username"
+required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="Password" class="col-sm-1 control-label">Password</label>
+    <div class="col-sm-4">
+      <input type="password" class="input-mandatory"  placeholder="Password" ng-model="loginCtrl.login_data.password"
+required>
+    </div>
+  </div>
+
+<div class="form-group">
+    <div class="col-sm-offset-1 col-sm-10">
+      <button type="submit" class="btn btn-default" ng-disabled="loginForm.$invalid">Login</button>
+    </div>
+  </div>
 
 </form>
+</div>
+</span>
+ </div>   
+

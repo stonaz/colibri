@@ -71,15 +71,18 @@ angular.module('colibri')
 .controller('signinController', [ 'UserService','$location', function ( UserService,$location) {
     console.log('Signin controller created');
     var self=this;
+    
     self.signin_data = {};
     self.signin = function(){
-        
+        self.showLogin=false;
         console.log('trying to sign in');
         UserService.signin(self.signin_data).then(function(response){
             self.user = response.data.username;
             console.log(self.user);
         console.log(response);
-        $location.path('/books');
+        self.showLogin=true;
+        console.log(self.showLogin);
+       // $location.path('/books');
         return false;
         },
         function(errResponse) {

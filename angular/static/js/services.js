@@ -81,10 +81,10 @@ return {
       signin: function(user_data) {
         return $http.post('/api/v1/account/signin/', user_data)
           .then(function(response) {
-            service.isLoggedIn = true;
-            service.username = response.data.username;
-            angular.module('colibri').user= response.data.user;
-          angular.module('colibri').username=response.data.username;
+          //  service.isLoggedIn = true;
+          //  service.username = response.data.username;
+          //  angular.module('colibri').user= response.data.user;
+          //angular.module('colibri').username=response.data.username;
             return response;
         });
       },

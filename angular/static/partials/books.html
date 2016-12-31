@@ -21,7 +21,7 @@ ng-disabled="searchBookForm.$invalid">
                         <td>
                              <span class="status" ng-bind="book.title"></span>   
                         </td>
-                         <td>
+                         <td width="200px";>
                               <a ng-bind="book.owner_username" ng-mouseover="bookCtrl.showOwner(book.id,book.owner_username)"></a>
                               <div class="showOwner" ng-show="bookCtrl.viewuser[book.id]">
                         
