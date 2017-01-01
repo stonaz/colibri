@@ -62,6 +62,12 @@ Campo obbligatorio
   
 </form>
 </span>
+    <p  style="white-space: pre;color: red;">
+        <strong>
+ <span ng-bind="signinCtrl.errResponse">
+    </strong>
+</p>
+    
 <span ng-show="signinCtrl.showLogin">
     <span ng-bind="signinCtrl.signin_data.email"></span>
     <div ng-controller="userController as loginCtrl">

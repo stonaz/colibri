@@ -73,10 +73,13 @@ angular.module('colibri')
     var self=this;
     
     self.signin_data = {};
+    self.errResponse = '';
     self.signin = function(){
         self.showLogin=false;
+        
         console.log('trying to sign in');
         UserService.signin(self.signin_data).then(function(response){
+            self.errResponse = '';
             self.user = response.data.username;
             console.log(self.user);
         console.log(response);
@@ -88,6 +91,13 @@ angular.module('colibri')
         function(errResponse) {
            
         console.log(errResponse.data);
+        var keys = Object.keys(errResponse.data);
+
+for (var i = 0; i < keys.length; i++) {
+    var val = errResponse.data[keys[i]];
+    console.log(val[0]);
+    self.errResponse += val[0] + '\n';
+}
     });
      };   
      
