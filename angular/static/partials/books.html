@@ -14,7 +14,7 @@ ng-disabled="searchBookForm.$invalid">
         <br>
         <table class="table table-bordered">
                 <thead> <tr> <th>Autore</th> <th>Titolo</th> <th>User</th><th>Commento</th> </tr> </thead>
-                <tr ng-repeat="book in bookCtrl.books">
+                <tr dir-paginate="book in bookCtrl.books | itemsPerPage: 10" >
                         <td>
                              <span class="status" ng-bind="book.author"></span>   
                         </td>
@@ -36,5 +36,5 @@ ng-disabled="searchBookForm.$invalid">
                        
                 </tr>
         </table>
-       
+       <dir-pagination-controls></dir-pagination-controls>
     </div>

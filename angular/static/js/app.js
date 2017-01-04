@@ -1,4 +1,4 @@
-angular.module('colibri', ['ngRoute']).config(function($routeProvider) {
+angular.module('colibri', ['ngRoute','angularUtils.directives.dirPagination']).config(function($routeProvider) {
 
     $routeProvider.when('/', {
       templateUrl: '/static/partials/home.html',
