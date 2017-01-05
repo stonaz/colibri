@@ -1,31 +1,48 @@
-    <div class="content">
-<form name="addBookForm"
+    <div class="row content">
+        <div class="col-md-5">
+            
+<form class="form-horizontal" name="addBookForm"
 ng-submit="addBookCtrl.addbook()">
-<input type="text"
-       name="titolo"
-       class="titolo"
-placeholder="titolo"
-ng-model="addBookCtrl.book_data.title"
-required
->
-
-<input type="text"
-placeholder="autore"
-name="autore"
-class="autore"
-ng-model="addBookCtrl.book_data.author"
-required
->
-<input type="text"
-placeholder="commento"
-ng-model="addBookCtrl.book_data.comment"
->
-<input type="text"
-placeholder="note"
-ng-model="addBookCtrl.book_data.note"
->
-<input type="submit"
-value="Aggiungi libro"
-ng-disabled="addBookForm.$invalid">
-</form>
+<div class="form-group">
+    <label for="autore" class="col-sm-3 control-label">Autore</label>
+    <div class="col-sm-4">
+<input type="text" placeholder="autore" class="input-mandatory" ng-model="addBookCtrl.book_data.author" required>
+    </div>
 </div>
+<div class="form-group">
+    <label for="titolo" class="col-sm-3 control-label">Titolo</label>
+    <div class="col-sm-4">
+<input type="text" placeholder="titolo" class="input-mandatory" ng-model="addBookCtrl.book_data.title" required>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label for="commento" class="col-sm-3 control-label">Commento</label>
+    <div class="col-sm-4">
+<input type="text" placeholder="commento" class="input-mandatory" ng-model="addBookCtrl.book_data.comment" >
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="note" class="col-sm-3 control-label">Note</label>
+    <div class="col-sm-4">
+<input type="text" placeholder="note" class="input-mandatory" ng-model="addBookCtrl.book_data.note" >
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-3 col-sm-10">
+      <button type="submit" class="btn btn-default" ng-disabled="addBookForm.$invalid">Aggiungi libro</button>
+    </div>
+  </div>
+</form>
+
+<button back>Torna alla lista</button>
+</div>
+   
+  <div class="col-md-7">   
+<div>
+    <span class="text-success" ng-bind="addBookCtrl.response"></span>
+</div>
+  </div>
+   </div>

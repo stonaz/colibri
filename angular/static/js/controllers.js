@@ -128,7 +128,9 @@ for (var i = 0; i < keys.length; i++) {
         self.book_data.owner = self.user;
         bookService.addBook(self.book_data).then(function(response){     
         console.log(response);
-        $location.path('/mybooks');
+        self.response="Il libro '" + self.book_data.title +"' è stato aggiunto ai tuoi libri";
+        self.book_data = {};
+       // $location.path('/mybooks');
         return false;
         },
         function(errResponse) {

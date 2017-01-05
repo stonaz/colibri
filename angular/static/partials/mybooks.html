@@ -12,16 +12,16 @@
                 <!--<tr ng-repeat="book in myBookCtrl.books">-->
                 <tr dir-paginate="book in myBookCtrl.books | itemsPerPage: 10" >
                         <td>
-                             <span class="status" ng-bind="book.author"></span>   
+                             <span class="capitalize" ng-bind="book.author"></span>   
                         </td>
                         <td>
-                             <span class="status" ng-bind="book.title"></span>   
+                             <span  ng-bind="book.title"></span>   
                         </td>
                          <td>
-                             <span class="status" ng-bind="book.comment"></span>   
+                             <span  ng-bind="book.comment"></span>   
                         </td>
                         <td>
-                             <span class="status" ng-bind="book.note"></span>   
+                             <span  ng-bind="book.note"></span>   
                         </td>
                         <td>
                              <a ng-href="#/updatebook/{{book.id}}">Modifica</a> 
