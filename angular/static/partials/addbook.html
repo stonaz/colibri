@@ -1,6 +1,23 @@
-    <div class="row content">
-        <div class="col-md-5">
-            
+   
+    <div class=" content">
+      <div class="login_logo pull-left">
+         
+      </div>
+<div class="pull-right">    
+
+<div class="btn-group" role="group" aria-label="...">
+<a class="btn btn-default" href="#/books" role="button">Ricerca libri</a>
+<a class="btn btn-default active" href="#/mybooks" role="button">Gestione libri</a>
+<a class="btn btn-default" href="#/myprofile" role="button">Gestione profilo</a>
+  
+</div>
+</div>
+
+       <div class="row">
+      <div class="col-md-12">
+     <div class="row">
+             <div class="col-md-9">
+                <div class=formBox>
 <form class="form-horizontal" name="addBookForm"
 ng-submit="addBookCtrl.addbook()">
 <div class="form-group">
@@ -15,8 +32,6 @@ ng-submit="addBookCtrl.addbook()">
 <input type="text" placeholder="titolo" class="input-mandatory" ng-model="addBookCtrl.book_data.title" required>
     </div>
 </div>
-
-
 <div class="form-group">
     <label for="commento" class="col-sm-3 control-label">Commento</label>
     <div class="col-sm-4">
@@ -30,19 +45,23 @@ ng-submit="addBookCtrl.addbook()">
 <input type="text" placeholder="note" class="input-mandatory" ng-model="addBookCtrl.book_data.note" >
     </div>
 </div>
+
+
 <div class="form-group">
     <div class="col-sm-offset-3 col-sm-10">
       <button type="submit" class="btn btn-default" ng-disabled="addBookForm.$invalid">Aggiungi libro</button>
     </div>
   </div>
 </form>
-
-<button back>Torna alla lista</button>
+</div>
 </div>
    
-  <div class="col-md-7">   
+  <div class="col-md-3">   
 <div>
     <span class="text-success" ng-bind="addBookCtrl.response"></span>
 </div>
   </div>
    </div>
+       </div>
+        </div>
+       </div>

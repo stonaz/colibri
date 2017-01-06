@@ -1,4 +1,17 @@
 <div class="content">
+        
+<div class="login_logo pull-left"></div>
+<div class="pull-right">    
+
+<div class="btn-group" role="group" aria-label="...">
+<a class="btn btn-default active" href="#/books" role="button">Ricerca libri</a>
+<a class="btn btn-default" href="#/mybooks" role="button">Gestione libri</a>
+<a class="btn btn-default" href="#/myprofile" role="button">Gestione profilo</a>
+  
+</div>
+</div>
+  <div class="row">
+  <div class="col-md-12">          
         <form name="searchBookForm"
 ng-submit="bookCtrl.searchbook()">
 <input type="text"
@@ -38,3 +51,5 @@ ng-disabled="searchBookForm.$invalid">
         </table>
        <dir-pagination-controls></dir-pagination-controls>
     </div>
+  </div>
+  </div>
