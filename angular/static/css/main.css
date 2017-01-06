@@ -24,11 +24,28 @@ width:40%
     width   : 100%;
     position:relative;
     background-color: #ffffff;
-    border: thin solid;
+    -webkit-box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);
+-moz-box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);
+box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);
     border-radius: 5px;
     padding:5px;
 }
 
+.showOwnerClose {
+    float:right;
+    display:inline-block;
+    padding:2px 5px;
+    background:#ccc;
+}
+
+.showOwnerClose:hover {
+        float:right;
+        display:inline-block;
+        padding:2px 5px;
+        background:#ccc;
+    color:#fff;
+    }
+    
 .capitalize {
    text-transform: capitalize;
 }

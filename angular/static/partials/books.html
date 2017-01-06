@@ -15,7 +15,7 @@
         <form name="searchBookForm"
 ng-submit="bookCtrl.searchbook()">
 <input type="text"
-placeholder="Cerca libro per autore o titolo"
+placeholder="Ricerca per autore o titolo"
 ng-model="bookCtrl.search_data"
 required
 >
@@ -37,11 +37,11 @@ ng-disabled="searchBookForm.$invalid">
                          <td width="200px";>
                               <a ng-bind="book.owner_username" ng-mouseover="bookCtrl.showOwner(book.id,book.owner_username)"></a>
                               <div class="showOwner" ng-show="bookCtrl.viewuser[book.id]">
-                        
-                                Email:<span  ng-bind="bookCtrl.viewOwnerDetails[book.id].email"></span> <br>
-                                Telefono:<span  ng-bind="bookCtrl.viewOwnerDetails[book.id].phone"></span> <br>
-                                <button ng-click="bookCtrl.hideOwner(book.id)">Chiudi</button>
-                              </div>
+                                <span ng-click="bookCtrl.hideOwner(book.id)" class='showOwnerClose'>x</span>
+                                <strong>Email: </strong><span  ng-bind="bookCtrl.viewOwnerDetails[book.id].email"></span> <br>
+                                <strong>Telefono: </strong><span  ng-bind="bookCtrl.viewOwnerDetails[book.id].phone"></span> <br>
+<!--                                <button ng-click="bookCtrl.hideOwner(book.id)">Chiudi</button>
+-->                              </div>
                         </td><td>
                              <span class="status" ng-bind="book.comment"></span>   
                         </td>

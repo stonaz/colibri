@@ -12,42 +12,49 @@
 </div>
 </div>
   <div class="row">
-  <div class="col-md-12"> 
+  <div class="col-md-12">
+     <div class="row">
+             <div class="col-md-10">
       <div class=formBox>
 <form class="form-horizontal" name="profileForm" ng-submit="profileCtrl.updateprofile()">
       <div class="form-group">
-    <label for="user" class="col-sm-2 control-label">Email</label>
+    <label for="user" class="col-sm-3 control-label">Email</label>
     <div class="col-sm-4">
       <input type="email" class="input-mandatory" placeholder="Email" ng-model="profileCtrl.profile_data.email"
 required>
     </div>
   </div>
   <div class="form-group">
-    <label for="publish_email" class="col-sm-2 control-label">Email visibile</label>
+    <label for="publish_email" class="col-sm-3 control-label">Email visibile</label>
     <div class="col-sm-4">
       <input type="checkbox"  ng-model="profileCtrl.profile_data.publish_email">
     </div>
   </div>
         <div class="form-group">
-    <label for="phone" class="col-sm-2 control-label">Telefono</label>
+    <label for="phone" class="col-sm-3 control-label">Telefono</label>
     <div class="col-sm-4">
       <input type="text" placeholder="telefono" ng-model="profileCtrl.profile_data.phone">
     </div>
   </div>
   <div class="form-group">
-    <label for="publish_email" class="col-sm-2 control-label">Telefono visibile </label>
+    <label for="publish_email" class="col-sm-3 control-label">Telefono visibile </label>
     <div class="col-sm-4">
       <input type="checkbox"  ng-model="profileCtrl.profile_data.publish_phone">
     </div>
   </div>
 
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-offset-3 col-sm-10">
       <button type="submit" class="btn btn-default" ng-disabled="profileForm.$invalid">Modifica</button>
     </div>
   </div>
 
 </form>
+</div>
+             </div>
+      <div class="col-md-2">   
+<div>
+    <span class="text-success" ng-bind="profileCtrl.response"></span>
 </div>
     <div>
         <span ng-bind="profileCtrl.error"></span>
@@ -55,3 +62,5 @@ required>
   </div>
   </div>
   </div>
+  </div>
+   </div>

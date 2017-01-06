@@ -52,6 +52,7 @@ angular.module('colibri')
         console.log(errResponse.data);
     });
     self.updateprofile = function(){
+        self.response="";
         console.log(self.profile_data);
         self.profile_data.owner = self.user;
         profileService.updateProfile(self.username,self.profile_data).then(function(response){     
