@@ -12,6 +12,10 @@ angular.module('colibri', ['ngRoute','angularUtils.directives.dirPagination']).c
      templateUrl: '/static/partials/home.html',
       controller: 'logoutController as logoutCtrl'
     })
+    .when('/lostpassword', {
+     templateUrl: '/static/partials/lostpassword.html',
+      controller: 'lostPasswordController as lostpasswordCtrl'
+    })
     .when('/myprofile', {
       templateUrl: '/static/partials/myprofile.html',
       controller: 'profileController as profileCtrl'

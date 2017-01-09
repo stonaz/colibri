@@ -108,6 +108,13 @@ return {
             service.username = '';
             return response;
         });
+      },
+      resetPassword: function(email) {
+        console.log('reset password');
+        return $http.post('api/v1/account/password/reset/', email)
+          .then(function(response) {
+            return response;
+        });
       }
     };
     return service;

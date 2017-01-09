@@ -128,7 +128,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     """
     User profiles details
     """
-    email = serializers.CharField(source='profile_email')
+    email = serializers.EmailField(source='profile_email',validators=[UniqueValidator(queryset=UserProfile.objects.all(),message="Email gia' presente")])
     username = serializers.CharField(source='user.username',read_only=True)
 
     #dove_sta = serializers.Field(source='where_is.username')

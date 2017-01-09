@@ -34,6 +34,34 @@ angular.module('colibri')
     });
     };    
 }])
+.controller('lostPasswordController', ['UserService',function ( UserService) {
+    console.log('lost controller created');
+    
+     var self=this;
+    self.request = {}; 
+    self.resetPassword = function(){
+        console.log(self.request);
+        self.errResponse = '';
+        self.response="";
+        UserService.resetPassword(self.request).then(function(response){     
+        console.log(response);
+        self.response="richiesta fatta";
+       // $location.path('/mybooks');
+        return false;
+        },
+        function(errResponse) {
+        console.log(errResponse.data);
+                var keys = Object.keys(errResponse.data);
+
+for (var i = 0; i < keys.length; i++) {
+    var val = errResponse.data[keys[i]];
+    console.log(val[0]);
+    self.errResponse += val[0] + '\n';
+}
+        
+    });
+    };
+}])
 .controller('profileController', ['profileService','$location', function ( profileService,$location) {
     console.log('Profile controller created');
     
@@ -52,6 +80,7 @@ angular.module('colibri')
         console.log(errResponse.data);
     });
     self.updateprofile = function(){
+        self.errResponse = '';
         self.response="";
         console.log(self.profile_data);
         self.profile_data.owner = self.user;
@@ -63,11 +92,16 @@ angular.module('colibri')
         },
         function(errResponse) {
         console.log(errResponse.data);
+                var keys = Object.keys(errResponse.data);
+
+for (var i = 0; i < keys.length; i++) {
+    var val = errResponse.data[keys[i]];
+    console.log(val[0]);
+    self.errResponse += val[0] + '\n';
+}
+        
     });
     };
-    
-    
-    console.log(self.user);
 }])
 .controller('signinController', [ 'UserService','$location', function ( UserService,$location) {
     console.log('Signin controller created');

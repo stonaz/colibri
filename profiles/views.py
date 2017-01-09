@@ -57,7 +57,7 @@ class AccountLogin(generics.GenericAPIView):
     def post(self, request, format=None):
         """ authenticate """
         serializer = self.serializer_class(data=request.data)
-        print request.data
+        
         
         if serializer.is_valid():
             login(request, serializer.instance)
@@ -207,6 +207,7 @@ class PasswordResetRequestKey(generics.GenericAPIView):
 
     def post(self, request, format=None):
         # init form with POST data
+        print request.data
         serializer = self.serializer_class(data=request.data)
         # validate
         if serializer.is_valid():
