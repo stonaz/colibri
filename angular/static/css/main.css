@@ -32,27 +32,48 @@ box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);
 }
 
 .showOwnerClose {
+    position:relative;
+    top:-12px;
+    right: -12px;
+    width: 25px;
+    height:25px;
     float:right;
     display:inline-block;
     padding:2px 5px;
-    background:#ccc;
+    /*background:#ccc;*/
+    background-image: url('img/close.png') ;
+    background-repeat: no-repeat;
 }
 
-.showOwnerClose:hover {
+/*.showOwnerClose:hover {
         float:right;
         display:inline-block;
         padding:2px 5px;
         background:#ccc;
     color:#fff;
-    }
+    }*/
     
 .capitalize {
    text-transform: capitalize;
 }
 
-.login_logo{
+.search_logo{
     width: 80px;
     height: 90px;
-    background-image: url('img/login.png') ;
+    background-image: url('img/search.png') ;
+    background-repeat: no-repeat;
+}
+
+.profile_logo{
+    width: 80px;
+    height: 90px;
+    background-image: url('img/profile.png') ;
+    background-repeat: no-repeat;
+}
+
+.mybooks_logo{
+    width: 80px;
+    height: 90px;
+    background-image: url('img/mybooks.png') ;
     background-repeat: no-repeat;
 }

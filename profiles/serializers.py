@@ -92,7 +92,7 @@ class ResetPasswordSerializer(serializers.Serializer):
         queryset = UserProfile.objects.filter(profile_email__iexact=value)
         print queryset
         if queryset.count() < 1:
-            raise serializers.ValidationError(_("Email address not found"))
+            raise serializers.ValidationError(_("Email non trovata"))
         return queryset.first().profile_email
 
     def create(self, validated_data):

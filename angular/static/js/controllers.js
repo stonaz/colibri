@@ -45,7 +45,7 @@ angular.module('colibri')
         self.response="";
         UserService.resetPassword(self.request).then(function(response){     
         console.log(response);
-        self.response="richiesta fatta";
+        self.response="Ti è stata spedita una mail con le istruzioni per il reset della password";
        // $location.path('/mybooks');
         return false;
         },
@@ -108,13 +108,12 @@ for (var i = 0; i < keys.length; i++) {
     var self=this;
     
     self.signin_data = {};
-    self.errResponse = '';
     self.signin = function(){
         self.showLogin=false;
         
         console.log('trying to sign in');
         UserService.signin(self.signin_data).then(function(response){
-            self.errResponse = '';
+            
             self.user = response.data.username;
             console.log(self.user);
         console.log(response);
@@ -124,7 +123,7 @@ for (var i = 0; i < keys.length; i++) {
         return false;
         },
         function(errResponse) {
-           
+        self.errResponse = '';   
         console.log(errResponse.data);
         var keys = Object.keys(errResponse.data);
 

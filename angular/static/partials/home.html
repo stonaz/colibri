@@ -1,9 +1,16 @@
 
-    <div class="content"><h4>Registrazione</h4>
+    <div class="content">
+         <div class="row">
+  <div class="col-md-6">
+  </div>
+    <div class="col-md-6">
+
+        <h4>Registrazione</h4>
     <span ng-hide="signinCtrl.showLogin">
+        
 <form class="form-horizontal" name="signinForm" ng-submit="signinCtrl.signin()">
     <div class="form-group">
-    <label for="user" class="col-sm-1 control-label">Username</label>
+    <label for="user" class="col-sm-3 control-label">Username</label>
     <div class="col-sm-4">
       <input type="text" name="username" class="input-mandatory" placeholder="Username" ng-model="signinCtrl.signin_data.username" 
 required ng-minlength="4">
@@ -15,7 +22,7 @@ Lunghezza minima 4 caratteri
     </div>
     
         <div class="form-group">
-    <label for="email" class="col-sm-1 control-label">Email</label>
+    <label for="email" class="col-sm-3 control-label">Email</label>
     <div class="col-sm-4">
       <input type="email" name="email" class="input-mandatory" placeholder="email" ng-model="signinCtrl.signin_data.email"
 required>
@@ -27,7 +34,7 @@ Inserire un indirizzo email valido
     </div>
     
   <div class="form-group">
-    <label for="Password" class="col-sm-1 control-label">Password</label>
+    <label for="Password" class="col-sm-3 control-label">Password</label>
     <div class="col-sm-4">
       <input type="password" name="password" class="input-mandatory"  placeholder="Password" ng-model="signinCtrl.signin_data.password"
 required>
@@ -36,7 +43,7 @@ required>
     
   </div>
   <div class="form-group">
-    <label for="Password" class="col-sm-1 control-label">Conferma Password</label>
+    <label for="Password" class="col-sm-3 control-label">Conferma Password</label>
     <div class="col-sm-4">
       <input type="password" name="password_confirmation" class="input-mandatory"  placeholder="Conferma Password" ng-model="signinCtrl.signin_data.password_confirmation" password-match="signinCtrl.signin_data.password"
 required>
@@ -47,7 +54,7 @@ required>
     </div>
   </div>
   <div class="form-group">
-    <div class="col-sm-offset-1 col-sm-10">
+    <div class="col-sm-offset-3 col-sm-10">
       <button type="submit" class="btn btn-default" ng-disabled="signinForm.$invalid">Sign in</button>
     </div>
   </div>
@@ -55,8 +62,7 @@ required>
 </form>
 </span>
     <p  style="white-space: pre;color: red;">
-        <strong>
- <span ng-bind="signinCtrl.errResponse">
+<strong><span ng-bind="signinCtrl.errResponse">
     </strong>
 </p>
     
@@ -65,14 +71,14 @@ required>
     <div ng-controller="userController as loginCtrl">
 <form class="form-horizontal" name="loginForm" ng-submit="loginCtrl.login()">
       <div class="form-group">
-    <label for="user" class="col-sm-1 control-label">Username</label>
+    <label for="user" class="col-sm-3 control-label">Username</label>
     <div class="col-sm-4">
       <input type="text" class="input-mandatory" placeholder="Username" ng-model="loginCtrl.login_data.username"
 required>
     </div>
   </div>
   <div class="form-group">
-    <label for="Password" class="col-sm-1 control-label">Password</label>
+    <label for="Password" class="col-sm-3 control-label">Password</label>
     <div class="col-sm-4">
       <input type="password" class="input-mandatory"  placeholder="Password" ng-model="loginCtrl.login_data.password"
 required>
@@ -89,4 +95,4 @@ required>
 </div>
 </span>
  </div>   
-
+  </div>

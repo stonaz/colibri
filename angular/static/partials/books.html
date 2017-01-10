@@ -1,6 +1,6 @@
 <div class="content">
         
-<div class="login_logo pull-left"></div>
+<div class="search_logo pull-left"></div>
 <div class="pull-right">    
 
 <div class="btn-group" role="group" aria-label="...">
@@ -37,9 +37,9 @@ ng-disabled="searchBookForm.$invalid">
                          <td width="200px";>
                               <a ng-bind="book.owner_username" ng-mouseover="bookCtrl.showOwner(book.id,book.owner_username)"></a>
                               <div class="showOwner" ng-show="bookCtrl.viewuser[book.id]">
-                                <span ng-click="bookCtrl.hideOwner(book.id)" class='showOwnerClose'>x</span>
+                                <div ng-click="bookCtrl.hideOwner(book.id)" class='showOwnerClose'></div>
+                                <strong>Tel: </strong><span  ng-bind="bookCtrl.viewOwnerDetails[book.id].phone"></span> <br>
                                 <strong>Email: </strong><span  ng-bind="bookCtrl.viewOwnerDetails[book.id].email"></span> <br>
-                                <strong>Telefono: </strong><span  ng-bind="bookCtrl.viewOwnerDetails[book.id].phone"></span> <br>
 <!--                                <button ng-click="bookCtrl.hideOwner(book.id)">Chiudi</button>
 -->                              </div>
                         </td><td>
