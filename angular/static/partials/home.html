@@ -1,13 +1,14 @@
 
     <div class="content">
          <div class="row">
-  <div class="col-md-6">
+
+      <div class="col-md-6">
   </div>
     <div class="col-md-6">
 
         <h4>Registrazione</h4>
     <span ng-hide="signinCtrl.showLogin">
-        
+        <div class="formBox" style="width: 80%">
 <form class="form-horizontal" name="signinForm" ng-submit="signinCtrl.signin()">
     <div class="form-group">
     <label for="user" class="col-sm-3 control-label">Username</label>
@@ -55,20 +56,26 @@ required>
   </div>
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-10">
-      <button type="submit" class="btn btn-default" ng-disabled="signinForm.$invalid">Sign in</button>
+      <button type="submit" class="btn btn-default" ng-disabled="signinForm.$invalid">Registrati</button>
     </div>
   </div>
   
 </form>
-</span>
+
     <p  style="white-space: pre;color: red;">
 <strong><span ng-bind="signinCtrl.errResponse">
     </strong>
 </p>
-    
+        </div>
+</span>
+
 <span ng-show="signinCtrl.showLogin">
+    Una mail con le credenziali inserite è stata inviata a:<strong>
     <span ng-bind="signinCtrl.signin_data.email"></span>
+    </strong><br>
+    Puoi accedere da subito a CoLibri !
     <div ng-controller="userController as loginCtrl">
+       <div class="formBox" style="width: 80%"> 
 <form class="form-horizontal" name="loginForm" ng-submit="loginCtrl.login()">
       <div class="form-group">
     <label for="user" class="col-sm-3 control-label">Username</label>
@@ -86,13 +93,15 @@ required>
   </div>
 
 <div class="form-group">
-    <div class="col-sm-offset-1 col-sm-10">
-      <button type="submit" class="btn btn-default" ng-disabled="loginForm.$invalid">Login</button>
+    <div class="col-sm-offset-3 col-sm-10">
+      <button type="submit" class="btn btn-default" ng-disabled="loginForm.$invalid">Accedi</button>
     </div>
   </div>
 
 </form>
 </div>
+       </div>
 </span>
- </div>   
+ </div>
   </div>
+          </div>

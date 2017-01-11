@@ -110,7 +110,7 @@ for (var i = 0; i < keys.length; i++) {
     self.signin_data = {};
     self.signin = function(){
         self.showLogin=false;
-        
+        self.errResponse = '';
         console.log('trying to sign in');
         UserService.signin(self.signin_data).then(function(response){
             
