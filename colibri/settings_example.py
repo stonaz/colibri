@@ -65,6 +65,7 @@ INSTALLED_APPS = (
     'profiles',
     'books',
     'ui',
+    'angular',
     'django_extensions',
     'social.apps.django_app.default',
 )
@@ -149,4 +150,21 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'zeOwpwpdsvoTJ5fYu7QYIxV8'
 SOCIAL_AUTH_FACEBOOK_KEY = '1100541430066109'
 SOCIAL_AUTH_FACEBOOK_SECRET = '037022c4c90fac7d293d05e6758d38d3'
 
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id,name,email', 
+}
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+    'profiles.utils.create_profile'  #Custom pipeline
+)
 LOGIN_REDIRECT_URL = '/'
