@@ -129,7 +129,7 @@ for (var i = 0; i < keys.length; i++) {
 
 for (var i = 0; i < keys.length; i++) {
     var val = errResponse.data[keys[i]];
-    console.log(val[0]);
+  //  console.log(val[0]);
     self.errResponse += val[0] + '\n';
 }
     });
