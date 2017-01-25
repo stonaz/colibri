@@ -45,13 +45,13 @@ urlpatterns += patterns('profiles.views',
 
 )
 
-urlpatterns += patterns('ui.views',
-    url(r'^$', 'ui_index',name='ui-index'),
-
-)
+# urlpatterns += patterns('ui.views',
+#     url(r'^$', 'ui_index',name='ui-index'),
+# 
+# )
 
 urlpatterns += patterns('angular.views',
-    url(r'^angular', 'angular_index',name='angular_index'),
+    url(r'^$', 'angular_index',name='angular_index'),
 
 )
 
