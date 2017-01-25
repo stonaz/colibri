@@ -69,7 +69,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
         message += "Username: %s  \n" % attrs.get('username')
         message += "Password: %s  " % password
         print message
-        send_mail("Registrazione a CoLibri", message, 'colibribooksharing@gmail.com',[attrs.get('profile_email')])
+        send_mail("Registrazione a CoLibri", message, 'register@colibrisharing.net',[attrs.get('profile_email')])
         print u
         return user
 
