@@ -23,6 +23,11 @@ required>
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-default" ng-disabled="loginForm.$invalid">Login</button>
+      
+        <span  ng-show="loginCtrl.loading">
+        <div class="loading"></div>
+        </span>
+
     </div>
   </div>
 

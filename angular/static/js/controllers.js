@@ -21,10 +21,12 @@ angular.module('colibri')
     self.login_data = {};
 
     self.login = function(){
+        self.loading = true;
         UserService.login(self.login_data).then(function(response){
         self.user = response.data.username;
         console.log(response);
         console.log(self.user);
+        self.loading = false;
         $location.path('/books');
         return false;
         },
@@ -158,7 +160,7 @@ for (var i = 0; i < keys.length; i++) {
      self.book_data = {};
 
     self.addbook = function(){
-        console.log(self.book_data);
+        //console.log(self.book_data);
         self.book_data.owner = self.user;
         bookService.addBook(self.book_data).then(function(response){     
         console.log(response);
@@ -247,22 +249,25 @@ for (var i = 0; i < keys.length; i++) {
      var self=this;
      self.viewuser=[];
      self.viewOwnerDetails = [];
-     
+     self.loading = true;
      self.user = angular.module('colibri').user;
      self.username = angular.module('colibri').username;
         bookService.getBooks().then(function(response){
         self.books = response.data;
         console.log(response);
+        self.loading = false;
         return false;
         },
         function(errResponse) {
         console.log(errResponse.data);
     });
     self.searchbook = function(){
+        self.loading = true;
         console.log(self.search_data);
         bookService.searchBook(self.search_data).then(function(response){     
         console.log(response);
         self.books = response.data;
+        self.loading = false;
         return false;
         },
         function(errResponse) {

@@ -23,6 +23,9 @@ required
 <input type="submit"
 value="Cerca"
 ng-disabled="searchBookForm.$invalid">
+<span  ng-show="bookCtrl.loading">
+        <div class="loading"></div>
+        </span>
 </form>
         <br>
         <table class="table table-bordered">
