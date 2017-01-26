@@ -7,9 +7,7 @@ import profiles.email_null
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('profiles', '0003_auto_20161227_1652'),
-    ]
+
 
     operations = [
         migrations.AlterField(
