@@ -6,12 +6,13 @@ def now():
     return datetime.utcnow().replace(tzinfo=utc)
 
 def create_profile(strategy, details, response, user, *args, **kwargs):
-    print details
+    print details['email']
     # username = kwargs['details']['username']
     # user_object = User.objects.get(username=username)
     if UserProfile.objects.filter(user=user).exists():
         pass
     else:
-        new_profile = UserProfile(user=user)
+        new_profile = UserProfile(user=user,profile_email=details['email'])
         new_profile.save()
     return kwargs
+

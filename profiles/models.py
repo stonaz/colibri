@@ -10,6 +10,7 @@ from django.core.mail import send_mail
 from django.contrib.auth.tokens import default_token_generator as token_generator
 
 from django.conf import settings
+from email_null import EmailNullField
 
 def now():
     """ returns the current date and time in UTC format (datetime object) """
@@ -27,7 +28,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
 
     # The additional attributes we wish to include.
-    profile_email = models.EmailField(blank=True, unique=True)
+    profile_email = EmailNullField(blank=True, null=True,unique=True)
     phone = models.CharField( _("Telefono"),max_length=20,help_text=_("Telefono"),blank=True,null=True)
     publish_phone = models.BooleanField(default=False)
     publish_email = models.BooleanField(default=True)
