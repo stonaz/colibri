@@ -66,10 +66,10 @@ class UserCreateSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(username=attrs.get('username'), password=attrs.get('password'))
         u = UserProfile.objects.create(user=user,profile_email=attrs.get('profile_email'))
         message = "Benvenuto su Colibri\n"
-        message += "Username: %s  \n" % attrs.get('username')
-        message += "Password: %s  " % password
+        message += "Il tuo Username: %s  \n" % attrs.get('username')
+        message += "La tua Password: %s  " % password
         print message
-        send_mail("Registrazione a CoLibri", message, 'register@colibrisharing.net',[attrs.get('profile_email')])
+        send_mail("Benvenuto su CoLibri. I dettagli del tuo account", message, 'register@colibrisharing.net',[attrs.get('profile_email')])
         print u
         return user
 
