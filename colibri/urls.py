@@ -40,9 +40,8 @@ urlpatterns += patterns('profiles.views',
     url(r'^api/v1/account/password/reset/$', 'account_password_reset_request_key', name='api_account_password_reset_request_key'),
     url(r'^api/v1/account/password/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<key>.+)/$', 'account_password_reset_from_key', name='api_account_password_reset_from_key'),
     url(r'^api/v1/user_profile/$', 'user_profile_list' ,name='user_profile_list'),
-    url(r'^api/v1/(?P<user>[-\w]+)/user_profile/$', 'user_profile_detail' ,name='user_profile_detail'),
+    url(r'^api/v1/(?P<user>[-\w.]+)/user_profile/$', 'user_profile_detail' ,name='user_profile_detail'),
     url(r'^sendmail/$', 'send_mail_api', name='api_send_mail'),
-
 )
 
 # urlpatterns += patterns('ui.views',
