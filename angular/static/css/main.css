@@ -60,15 +60,15 @@ box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);
 
 .showOwnerClose {
     position:relative;
-    top:-12px;
-    right: -12px;
+    top:-6px;
+    right: -6px;
     width: 25px;
     height:25px;
     float:right;
     display:inline-block;
     padding:2px 5px;
     /*background:#ccc;*/
-    background-image: url('img/close.png') ;
+    background-image: url('img/close2.png') ;
     background-repeat: no-repeat;
     cursor:pointer;
 }
