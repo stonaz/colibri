@@ -1,6 +1,6 @@
 .content{
     margin-top: 15px;
-    background-color: #f6f0f0;
+    background-color: #efeae6;
     border-radius: 5px;
     -webkit-box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);
 -moz-box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);
@@ -27,6 +27,18 @@ height:auto;
 .formBox{
     margin-top: 5px;
     background-color: #cccccc;
+    border-radius: 5px;
+    -webkit-box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);
+-moz-box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);
+box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);
+padding:10px;
+width:40%
+}
+
+.introBox{
+    margin-top: 5px;
+/*    font-size: larger;
+*/    background-color: #ffffff;
     border-radius: 5px;
     -webkit-box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);
 -moz-box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);

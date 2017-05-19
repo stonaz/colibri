@@ -32,6 +32,7 @@ angular.module('colibri')
         },
         function(errResponse) {
              self.error = errResponse.data['non_field_errors'];
+             self.loading = false;
         console.log(errResponse.data);
     });
     };    

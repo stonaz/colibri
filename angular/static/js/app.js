@@ -22,7 +22,19 @@ angular.module('colibri', ['ngRoute','angularUtils.directives.dirPagination']).c
     })
     .when('/books', {
       templateUrl: '/static/partials/books.html',
-      controller: 'booksController as bookCtrl'
+      controller: 'booksController as bookCtrl',
+      resolve: {
+        auth: ['$q', '$location', 'UserService',
+          function($q, $location, UserService) {
+             return UserService.session().then(
+               function(success) {},
+               function(err) {
+                  $location.path('/login');
+                  $location.replace();
+                  return $q.reject(err);
+             });
+        }]
+      }
     })
     .when('/mybooks', {
       templateUrl: '/static/partials/mybooks.html',

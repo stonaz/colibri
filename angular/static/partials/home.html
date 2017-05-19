@@ -3,12 +3,22 @@
          <div class="row">
 
       <div class="col-md-6">
+          <div class="introBox" style="width: 80%">
+         <p><strong>Colibrì </strong>è un sistema per facilitare la condivisione e lo scambio di libri.</p>
+         <p>Una volta iscritto puoi inserire i libri che vuoi condividere con gli altri, cercare libri che ti interessano e contattare il proprietario per organizzare lo scambio </p>
+         <p>Registrati, utilizzando il form nel box accanto, e inizia a cercare e condividere libri.</p>
+         <p>O accedi utilizzando il tuo account Facebook o Google tramite i pulsanti sotto.</p>
+         <a href="/login/facebook/"><img src="/static/css/img/fb_login.jpeg"></a><br>
+<a href="/login/google-oauth2/"><img src="/static/css/img/google_login.jpeg"></a><br>
+          </div>
   </div>
     <div class="col-md-6">
 
-        <h4>Registrazione</h4>
+        
     <span ng-hide="signinCtrl.showLogin">
+     
         <div class="formBox" style="width: 80%">
+          <h4><strong>Registrazione</strong></h4>
 <form class="form-horizontal" name="signinForm" ng-submit="signinCtrl.signin()">
     <div class="form-group">
     <label for="user" class="col-sm-3 control-label">Username</label>
