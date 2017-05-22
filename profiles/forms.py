@@ -10,12 +10,13 @@ __all__ = [
 ]
 
 class ResetPasswordKeyForm(forms.Form):
+    error_css_class = 'errorlist'
     password1 = forms.CharField(
-        label=_("New Password"),
+        label=_("Nuova Password"),
         widget=forms.PasswordInput(render_value=False)
     )
     password2 = forms.CharField(
-        label=_("New Password (again)"),
+        label=_("Nuova Password (ripeti)"),
         widget=forms.PasswordInput(render_value=False)
     )
 
@@ -27,7 +28,7 @@ class ResetPasswordKeyForm(forms.Form):
     def clean_password2(self):
         if "password1" in self.cleaned_data and "password2" in self.cleaned_data:
             if self.cleaned_data["password1"] != self.cleaned_data["password2"]:
-                raise forms.ValidationError(_("Password confirmation mismatch."))
+                raise forms.ValidationError(_("Le passwords inserite non sono uguali"))
         return self.cleaned_data["password2"]
 
     def save(self):

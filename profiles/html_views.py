@@ -63,7 +63,7 @@ def password_reset_from_key(request, uidb36, key, **kwargs):
                 messages.add_message(
                     request,
                     messages.SUCCESS,
-                    ugettext(u"Password successfully changed.")
+                    ugettext(u"Password modificata.")
                 )
                 password_reset_key_form = None
         else:

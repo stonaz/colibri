@@ -82,8 +82,10 @@ required>
 <span ng-show="signinCtrl.showLogin">
     Una mail con le credenziali inserite è stata inviata a:<strong>
     <span ng-bind="signinCtrl.signin_data.email"></span>
-    </strong><br>
-    Puoi accedere da subito a CoLibri !
+    </strong>.<br>
+    Se non la trovi, controlla che non sia finita tra lo spam.<br><br>
+    <h3>Accedi a CoLibri !</h3>
+    
     <div ng-controller="userController as loginCtrl">
        <div class="formBox" style="width: 80%"> 
 <form class="form-horizontal" name="loginForm" ng-submit="loginCtrl.login()">

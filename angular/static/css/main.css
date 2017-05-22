@@ -105,3 +105,10 @@ box-shadow: -3px -1px 5px 0px rgba(171,161,159,1);
     background-image: url('img/mybooks.png') ;
     background-repeat: no-repeat;
 }
+
+.errorlist
+    {
+        color: red;
+        position:absolute;
+        top: 150px;
+    }
