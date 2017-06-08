@@ -16,6 +16,8 @@ angular.module('colibri')
         return false;
         },
         function(errResponse) {
+        //self.count = $window.book_count;
+        //console.log('count :' + self.count);
         console.log(errResponse);
     });
     self.login_data = {};
@@ -106,10 +108,11 @@ for (var i = 0; i < keys.length; i++) {
     });
     };
 }])
-.controller('signinController', [ 'UserService','$location', function ( UserService,$location) {
+.controller('signinController', [ 'UserService','$window', function ( UserService,$window) {
     console.log('Signin controller created');
     var self=this;
-    
+    self.count = $window.book_count;
+    console.log('count :' + self.count);
     self.signin_data = {};
     self.signin = function(){
         self.showLogin=false;
@@ -126,6 +129,7 @@ for (var i = 0; i < keys.length; i++) {
         return false;
         },
         function(errResponse) {
+        
         self.errResponse = '';   
         console.log(errResponse.data);
         var keys = Object.keys(errResponse.data);

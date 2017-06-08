@@ -6,10 +6,13 @@
           <div class="introBox" style="width: 80%">
          <p><strong>Colibrì </strong>è un sistema per facilitare la condivisione e lo scambio di libri.</p>
          <p>Una volta iscritto puoi inserire i libri che vuoi condividere con gli altri, cercare libri che ti interessano e contattare il proprietario per organizzare lo scambio </p>
+         <p>In questo momento puoi cercare tra {{count}}
+         <strong><span  ng-bind="signinCtrl.count"></span></strong>
+         libri.</p>
          <p>Registrati, utilizzando il form nel box accanto, e inizia a cercare e condividere libri.</p>
          <p>O accedi utilizzando il tuo account Facebook o Google tramite i pulsanti sotto.</p>
          <a href="/login/facebook/"><img src="/static/css/img/fb_login.jpeg"></a><br>
-<a href="/login/google-oauth2/"><img src="/static/css/img/google_login.jpeg"></a><br>
+          <a href="/login/google-oauth2/"><img src="/static/css/img/google_login.jpeg"></a><br>
           </div>
   </div>
     <div class="col-md-6">

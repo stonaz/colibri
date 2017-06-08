@@ -3,6 +3,8 @@
 # vim: set fileencoding=utf8 :
 from .models import UserProfile
 from django.http import HttpResponse
+from django.shortcuts import render,render_to_response
+from django.conf import settings
 
 def now():
     """ returns the current date and time in UTC format (datetime object) """
@@ -19,8 +21,9 @@ def create_profile(strategy, details, response, user, *args, **kwargs):
         try:
             new_profile.save()
         except Exception:
-            response = HttpResponse("Esiste già un utente con questa e-mail")
-            return(response)
+                SITE_URL = settings.SITE_URL
+                return render_to_response(
+            'angular/index.html', {'SITE_URL':SITE_URL})
       
     return kwargs
 
