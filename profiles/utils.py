@@ -23,7 +23,7 @@ def create_profile(strategy, details, response, user, *args, **kwargs):
         except Exception:
                 SITE_URL = settings.SITE_URL
                 return render_to_response(
-            'angular/index.html', {'SITE_URL':SITE_URL})
+            'angular/duplicate_mail.html', {'SITE_URL':SITE_URL})
       
     return kwargs
 
