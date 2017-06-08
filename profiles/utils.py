@@ -1,5 +1,5 @@
 from .models import UserProfile
-
+from django.http import HttpResponse
 
 def now():
     """ returns the current date and time in UTC format (datetime object) """
@@ -12,7 +12,10 @@ def create_profile(strategy, details, response, user, *args, **kwargs):
     if UserProfile.objects.filter(user=user).exists():
         pass
     else:
-        new_profile = UserProfile(user=user,profile_email=details['email'])
+        try:
+            new_profile = UserProfile(user=user,profile_email=details['email'])
+        except Exception:
+            response = HttpResponse("Esiste già un utente con questa e-mail")
         new_profile.save()
     return kwargs
 
