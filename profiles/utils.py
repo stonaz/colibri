@@ -19,6 +19,7 @@ def create_profile(strategy, details, response, user, *args, **kwargs):
             new_profile = UserProfile(user=user,profile_email=details['email'])
         except Exception:
             response = HttpResponse("Esiste già un utente con questa e-mail")
+            return(response)
         new_profile.save()
     return kwargs
 
