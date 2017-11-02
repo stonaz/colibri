@@ -51,11 +51,11 @@ border:1px solid red;
 
 
       <span ng-hide="ctrl.userService.isLoggedIn">
-        <a href="#/login">Accedi</a>
+        <a class="btn btn-primary" href="#/login" role="button">Accedi</a>
+        
       </span>
       <span ng-show="ctrl.userService.isLoggedIn">
-        
-        <a href="#/logout">Logout</a>
+        <a class="btn btn-primary" href="#/logout" role="button">Logout</a>
       </span>
 </div>
 
