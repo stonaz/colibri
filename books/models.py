@@ -36,69 +36,7 @@ class Book( TimeStamped_Model):
     class Meta:
         ordering = ['author']
         
-    def save(self,*args, **kwargs):
-        #print self.title
-        # Place code here, which is excecuted the same
-    
-        # Call parent's ``save`` function
-        super(Book, self).save(*args, **kwargs)
-    
-        # Place code here, which is excecuted the same
-        # time the ``post_save``-signal would be
-        try:
-            book_where_is = BookWhereIs.objects.get(book=self)
-        except BookWhereIs.DoesNotExist:
-            book_where_is = BookWhereIs(book=self,user=self.owner)
-            book_where_is.save()
 
-
-class BookWhereIs( TimeStamped_Model):
-    book= models.OneToOneField(Book,related_name="where_is",help_text=_("Da chi sta"))
-    user = models.ForeignKey(User)
-    
-    #def __unicode__(self):
-    #    return self.user
-    
-    class Meta:
-        ordering = ['-modified']
-
-    def save(self,*args, **kwargs):
-        #print self.user
-    # Place code here, which is excecuted the same
-        # time the ``pre_save``-signal would be
-        if self.pk:
-            update = True
-            old_obj = BookWhereIs.objects.get(pk=self.pk)
-        # Call parent's ``save`` function
-        super(BookWhereIs, self).save(*args, **kwargs)
-        try:
-            update
-        except NameError:
-            update = None
-        if update :
-            if old_obj.user != self.user:
-                new_entry = BookHistory(book=self.book,took_from=old_obj.user,given_to=self.user)
-                new_entry.save()
-                #print self.book.owner
-                mail_to=old_obj.user.email
-                subject = "Colibri notification - %s %s " % (self.book.title, self.book.author)
-                message = "%s ha preso in prestito il libro " % self.user.username
-                message += "Puoi contattarlo all'indirizzo email: %s " % self.user.email
-                if self.book.owner != self.user:
-                    send_mail(subject, message, 'colibribooksharing@gmail.com',[mail_to], fail_silently=False)
-                
-
-        
-class BookHistory( TimeStamped_Model):
-    book= models.ForeignKey(Book)
-    took_from = models.ForeignKey(User,related_name="took_from",help_text=_("Preso da"))
-    given_to = models.ForeignKey(User,related_name="given_to",help_text=_("Dato a"))
-    
-    #def __unicode__(self):
-    #    return self.book
-    
-    class Meta:
-        ordering = ['-modified']
         
 
             
