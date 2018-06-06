@@ -59,7 +59,7 @@ class BookList(generics.ListCreateAPIView):
         #print self.request.user
         current_user = self.request.user
         
-        queryset = Book.objects.all().exclude(owner=self.request.user)
+        queryset = Book.objects.all()
         # retrieve value of querystring parameter "search"
         search = self.request.query_params.get('search', None)
         
